@@ -150,6 +150,7 @@ mail-mta/courier:fax - Enables fax support in the courier mail server
 mail-mta/courier:norewrite - Prevents courier mail server from mangling virtual user addresses when sending
 mail-mta/courier:web - Enable the web interface
 mail-mta/courier:webmail - Enable the webmail interface
+mail-mta/exim:auth_tls - Adds support for the tls authenticator, which provides server support for authentication based on client certificates
 mail-mta/exim:dane - Adds support for DNS-based Authentication of Named Entities
 mail-mta/exim:dcc - Adds support for Distributed Checksum Clearinghouse (DCC)
 mail-mta/exim:dkim - Adds support for DomainKeys Identified Mail (DKIM)
@@ -165,6 +166,7 @@ mail-mta/exim:pkcs11 - Require pkcs11 support in net-libs/gnutls with USE=gnutls
 mail-mta/exim:prdr - Adds support for Per-Recipient Data Response
 mail-mta/exim:proxy - Add support for being behind a proxy, such as HAProxy
 mail-mta/exim:redis - Adds support for querying dev-db/redis
+mail-mta/exim:socks - Adds support for sending outbound SMTP via a proxy using a protocol called SOCKS5 (defined by RFC1928).
 mail-mta/exim:spf - Adds support for Sender Policy Framework
 mail-mta/exim:srs - Adds support for Sender Rewriting Scheme
 mail-mta/exim:tpda - Adds support for Transport Post-Delivery Actions
@@ -448,9 +450,6 @@ net-analyzer/zmap:redis - Add support for storing in a redis DB via dev-libs/hir
 net-dialup/accel-ppp:ipoe - Build IPoE kernel module
 net-dialup/accel-ppp:shaper - Support for traffic shaping
 net-dialup/accel-ppp:valgrind - Compile in valgrind hints
-net-dialup/capi4k-utils:fax - Install capi-fax demo programs
-net-dialup/capi4k-utils:pppd - Installs pppdcapiplugin modules
-net-dialup/capi4k-utils:rcapid - Installs rcapid daemon
 net-dialup/freeradius:pcap - Build the RADIUS sniffer which requires net-libs/libpcap.
 net-dialup/freeradius-client:scp - Add service type hints derived from username prefix
 net-dialup/freeradius-client:shadow - Enable shadow password support
@@ -716,7 +715,6 @@ net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
 net-im/pidgin:gstreamer - Enables voice and video sessions
 net-im/pidgin:gtk - Builds Pidgin, the GTK+ interface
 net-im/pidgin:meanwhile - Enable meanwhile support for Sametime protocol
-net-im/pidgin:mxit - Enable mxit protocol support
 net-im/pidgin:ncurses - Build finch, console interface
 net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
@@ -826,7 +824,6 @@ net-irc/atheme-services:perl - Install a perl module which wraps around the serv
 net-irc/bip:freenode - Enables freenode-specific functionality. Currently that is only support for mute lists (MODE #channel +q).
 net-irc/bip:noctcp - Disable the automatic CTCP VERSION reply which is often exploited by malicious people to cause a DoS (reconnect due to flooding).
 net-irc/bip:oidentd - Enable oidentd support
-net-irc/charybdis:largenet - Enable support/tweaks for large networks
 net-irc/epic5:archive - Use app-arch/libarchive to use zip and tar archives from scripts.
 net-irc/epic5:valgrind - Compile against dev-util/valgrind headers to improve memory-leak checking when running epic5 under valgrind.
 net-irc/hexchat:libcanberra - Enable sound event support using media-libs/libcanberra
@@ -1608,7 +1605,6 @@ net-p2p/mldonkey:fasttrack - enable fasttrack support
 net-p2p/mldonkey:gnutella - enable gnutella and gnutella2 support
 net-p2p/mldonkey:guionly - enable client build only
 net-p2p/mldonkey:magic - enable use of libmagic
-net-p2p/ppcoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/ppcoind:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/primecoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/primecoind:logrotate - Use app-admin/logrotate for rotating logs
@@ -1894,8 +1890,6 @@ www-apps/cgit:jit - If the lua flag is enabled, jit uses LuaJIT instead of vanil
 www-apps/cgit:lua - Enable support for Lua scripting
 www-apps/drupal:accelerator - Add dependency on a php accelerator
 www-apps/drupal:uploadprogress - Install dev-php/pecl-uploadprogress package
-www-apps/egroupware:gallery - Install gallery2 port for eGW
-www-apps/egroupware:jpgraph - Add dev-php/jpgraph support
 www-apps/gitit:network-uri - Get Network.URI from the network-uri package.
 www-apps/gitit:plugins - enables optional plugin runtime loader
 www-apps/guacamole:noauth - enable support for leaving out any authentication on the webinterface

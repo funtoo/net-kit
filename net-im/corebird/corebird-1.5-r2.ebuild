@@ -1,9 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-VALA_MIN_API_VERSION=0.34
+VALA_MIN_API_VERSION=0.32
 
 inherit autotools gnome2 vala virtualx
 
@@ -13,7 +12,7 @@ SRC_URI="https://github.com/baedert/corebird/archive/${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
 IUSE="debug gstreamer spellcheck"
 
 RDEPEND="dev-db/sqlite:3

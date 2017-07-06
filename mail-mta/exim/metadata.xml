@@ -19,6 +19,7 @@
 		quite different to that of sendmail.
 	</longdescription>
 	<use>
+		<flag name="auth_tls"> Adds support for the tls authenticator, which provides server support for authentication based on client certificates</flag>
 		<flag name="dcc">Adds support for Distributed Checksum Clearinghouse
 			(DCC)</flag>
 		<flag name="dane">Adds support for DNS-based Authentication of Named Entities</flag>
@@ -43,6 +44,7 @@
 		<flag name="pkcs11">Require pkcs11 support in <pkg>net-libs/gnutls</pkg> with USE=gnutls</flag>
 		<flag name="redis">Adds support for querying <pkg>dev-db/redis</pkg></flag>
 		<flag name="prdr">Adds support for Per-Recipient Data Response</flag>
+		<flag name="socks">Adds support for sending outbound SMTP via a proxy using a protocol called SOCKS5 (defined by RFC1928).</flag>
 		<flag name="tpda">Adds support for Transport Post-Delivery Actions</flag>
 	</use>
 	<upstream>

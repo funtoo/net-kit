@@ -1,31 +1,34 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI="6"
+EAPI="4"
 
-[[ ${PV} = *9999* ]] && VCS_ECLASS="git-r3" || VCS_ECLASS=""
-inherit autotools systemd toolchain-funcs ${VCS_ECLASS}
+[[ ${PV} = *9999* ]] && VCS_ECLASS="git-2" || VCS_ECLASS=""
+inherit autotools ${VCS_ECLASS}
 
 DESCRIPTION="Simple FastCGI wrapper for CGI scripts (CGI support for nginx)"
-HOMEPAGE="https://github.com/gnosek/fcgiwrap"
+HOMEPAGE="http://nginx.localdomain.pl/wiki/FcgiWrap"
 
 LICENSE="BSD"
 SLOT="0"
-IUSE="systemd"
+IUSE=""
 
 if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="git://github.com/gnosek/${PN}.git"
+
+	KEYWORDS=""
 else
-	SRC_URI="https://github.com/gnosek/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~x86"
+	MY_REV="58ec209"
+	#SRC_URI="https://download.github.com/gnosek-${P}-4-g${MY_REV}.tar.gz"
+	SRC_URI="mirror://gentoo/${P}.tar.gz"
+	S="${WORKDIR}/gnosek-${PN}-${MY_REV}"
+
+	KEYWORDS="~amd64 ~x86"
 fi
 
-RDEPEND="
-	dev-libs/fcgi
-	systemd? ( sys-apps/systemd )
-"
-DEPEND="${RDEPEND}
-	virtual/pkgconfig"
+DEPEND="dev-libs/fcgi"
+RDEPEND="${DEPEND}"
 
 DOCS=( README.rst )
 
@@ -36,22 +39,7 @@ src_prepare() {
 	sed -e '/man8dir = $(DESTDIR)/s/@prefix@//' \
 		-i Makefile.in || die "sed failed"
 
-	sed -e "s/libsystemd-daemon/libsystemd/" \
-		-i configure.ac || die "sed failed"
-	tc-export CC
-
-	# Fix systemd units for Gentoo
-	sed -i -e '/User/d' systemd/fcgiwrap.service || die
-	sed -i -e '/Group/d' systemd/fcgiwrap.service || die
-
-	eapply_user
 	eautoreconf
-}
-
-src_configure() {
-	econf \
-		$(use_with systemd) \
-		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)"
 }
 
 pkg_postinst() {

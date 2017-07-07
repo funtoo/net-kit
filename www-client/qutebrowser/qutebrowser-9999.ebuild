@@ -1,8 +1,9 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
-PYTHON_COMPAT=( python{3_4,3_5,3_6} )
+PYTHON_COMPAT=( python{3_4,3_5} )
 
 inherit gnome2-utils distutils-r1 eutils fdo-mime
 
@@ -15,7 +16,7 @@ else
 fi
 
 DESCRIPTION="A keyboard-driven, vim-like browser based on PyQt5 and QtWebKit"
-HOMEPAGE="http://www.qutebrowser.org/ https://github.com/qutebrowser/qutebrowser"
+HOMEPAGE="http://www.qutebrowser.org/ https://github.com/The-Compiler/qutebrowser"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -30,9 +31,9 @@ RDEPEND="${COMMON_DEPEND}
 	>=dev-python/jinja-2.8[${PYTHON_USEDEP}]
 	>=dev-python/pygments-2.1.3[${PYTHON_USEDEP}]
 	>=dev-python/pypeg2-2.15.2[${PYTHON_USEDEP}]
-	dev-python/PyQt5[${PYTHON_USEDEP},declarative,gui,network,printsupport,webkit,widgets]
+	dev-python/PyQt5[${PYTHON_USEDEP},gui,network,printsupport,webkit,widgets]
 	dev-python/sip[${PYTHON_USEDEP}]
-	>=dev-python/pyyaml-3.12[${PYTHON_USEDEP}]
+	>=dev-python/pyyaml-3.11[${PYTHON_USEDEP}]
 	gstreamer? ( dev-qt/qtwebkit:5[gstreamer] )
 "
 
@@ -65,7 +66,6 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	optfeature "PDF display support" www-plugins/pdfjs
 	fdo-mime_desktop_database_update
 	gnome2_icon_cache_update
 }

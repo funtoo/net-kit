@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -35,7 +36,7 @@ http://www.junghanns.net/downloads/jnet-dahdi-drivers-${JNET}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="flash"
 RESTRICT="test"
 
@@ -70,11 +71,11 @@ src_prepare() {
 
 src_compile() {
 	unset ARCH
-	emake V=1 CC=$(tc-getCC) LD=$(tc-getLD) KSRC="${KV_OUT_DIR}" DESTDIR="${D}" DAHDI_MODULES_EXTRA="cwain.o qozap.o ztgsm.o" LDFLAGS="$(raw-ldflags)" all
+	emake V=1 CC=$(tc-getCC) LD=$(tc-getLD) KSRC="${KV_OUT_DIR}" DESTDIR="${D}" DAHDI_MODULES_EXTRA="cwain.o qozap.o ztgsm.o" all
 }
 
 src_install() {
 	einfo "Installing kernel module"
-	emake V=1 CC=$(tc-getCC) LD=$(tc-getLD) KSRC="${KV_OUT_DIR}" DESTDIR="${D}" DAHDI_MODULES_EXTRA="cwain.o qozap.o ztgsm.o" LDFLAGS="$(raw-ldflags)" install
+	emake V=1 CC=$(tc-getCC) LD=$(tc-getLD) KSRC="${KV_OUT_DIR}" DESTDIR="${D}" DAHDI_MODULES_EXTRA="cwain.o qozap.o ztgsm.o" install
 	rm -rf "$D"/lib/modules/*/modules.*
 }

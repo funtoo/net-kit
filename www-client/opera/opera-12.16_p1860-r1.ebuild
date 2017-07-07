@@ -1,7 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=4
 inherit eutils fdo-mime gnome2-utils multilib pax-utils versionator
 
 DESCRIPTION="A fast and secure web browser and Internet suite"
@@ -101,11 +102,8 @@ RDEPEND="
 	gstreamer? ( ${GSTRDEPEND} )
 "
 
+OPREFIX="/usr/$(get_libdir)"
 QA_PREBUILT="*"
-
-pkg_setup() {
-	OPREFIX="/usr/$(get_abi_LIBDIR)"
-}
 
 src_unpack() {
 	unpack ${A}
@@ -113,8 +111,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	default
-
 	local LNGDIR="share/${PN}/locale"
 
 	# Count linguas

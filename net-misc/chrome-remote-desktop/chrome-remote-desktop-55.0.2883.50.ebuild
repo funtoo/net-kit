@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 # Base URL: https://dl.google.com/linux/chrome-remote-desktop/deb/
@@ -27,9 +27,8 @@ SRC_URI="amd64? ( ${BASE_URI}_amd64.deb )"
 
 LICENSE="google-chrome"
 SLOT="0"
-KEYWORDS="-* amd64"
+KEYWORDS="-* ~amd64"
 IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # All the libs this package links against.
 RDEPEND="app-admin/sudo

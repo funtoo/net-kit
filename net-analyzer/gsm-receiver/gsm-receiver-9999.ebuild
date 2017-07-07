@@ -1,8 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
-
 PYTHON_COMPAT=( python2_7 )
 
 inherit autotools git-2 python-single-r1
@@ -15,10 +15,8 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="${PYTHON_DEPS}
-	net-libs/libosmocore
+RDEPEND="net-libs/libosmocore
 	>=net-wireless/gnuradio-3.7_rc:0="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"

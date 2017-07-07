@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -24,12 +25,9 @@ HOMEPAGE="http://www.kismetwireless.net/"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
-#IUSE="+client +pcre speech +plugin-autowep +plugin-btscan plugin-dot15d4 +plugin-ptw +plugin-spectools +plugin-syslog +ruby selinux +suid"
-IUSE="+client +pcre speech +ruby selinux +suid"
+IUSE="+client +pcre speech +plugin-autowep +plugin-btscan plugin-dot15d4 +plugin-ptw +plugin-spectools +plugin-syslog +ruby selinux +suid"
 
 CDEPEND="net-wireless/wireless-tools
-	dev-libs/msgpack
-	net-libs/libmicrohttpd
 	kernel_linux? ( sys-libs/libcap
 			dev-libs/libnl:3
 			net-libs/libpcap
@@ -38,10 +36,10 @@ CDEPEND="net-wireless/wireless-tools
 	suid? ( sys-libs/libcap )
 	client? ( sys-libs/ncurses:0= )
 	!arm? ( speech? ( app-accessibility/flite ) )
-	"
-	#plugin-btscan? ( net-wireless/bluez )
-	#plugin-dot15d4? ( virtual/libusb:0 )
-	#plugin-spectools? ( net-wireless/spectools )
+	plugin-btscan? ( net-wireless/bluez )
+	plugin-dot15d4? ( virtual/libusb:0 )
+	plugin-spectools? ( net-wireless/spectools )
+"
 
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
@@ -73,57 +71,57 @@ src_configure() {
 src_compile() {
 	emake
 
-	#if use plugin-autowep; then
-	#	cd "${S}"/restricted-plugin-autowep
-	#	KIS_SRC_DIR="${S}" emake
-	#fi
-	#if use plugin-btscan; then
-	#	cd "${S}"/plugin-btscan
-	#	KIS_SRC_DIR="${S}" emake
-	#fi
-	#if use plugin-dot15d4; then
-	#	cd "${S}"/plugin-dot15d4
-	#	KIS_SRC_DIR="${S}" emake
-	#fi
-	#if use plugin-ptw; then
-	#	cd "${S}"/restricted-plugin-ptw
-	#	KIS_SRC_DIR="${S}" emake
-	#fi
-	#if use plugin-spectools; then
-	#	cd "${S}"/plugin-spectools
-	#	KIS_SRC_DIR="${S}" emake
-	#fi
-	#if use plugin-syslog; then
-	#	cd "${S}"/plugin-syslog
-	#	KIS_SRC_DIR="${S}" emake
-	#fi
+	if use plugin-autowep; then
+		cd "${S}"/restricted-plugin-autowep
+		KIS_SRC_DIR="${S}" emake
+	fi
+	if use plugin-btscan; then
+		cd "${S}"/plugin-btscan
+		KIS_SRC_DIR="${S}" emake
+	fi
+	if use plugin-dot15d4; then
+		cd "${S}"/plugin-dot15d4
+		KIS_SRC_DIR="${S}" emake
+	fi
+	if use plugin-ptw; then
+		cd "${S}"/restricted-plugin-ptw
+		KIS_SRC_DIR="${S}" emake
+	fi
+	if use plugin-spectools; then
+		cd "${S}"/plugin-spectools
+		KIS_SRC_DIR="${S}" emake
+	fi
+	if use plugin-syslog; then
+		cd "${S}"/plugin-syslog
+		KIS_SRC_DIR="${S}" emake
+	fi
 }
 
 src_install() {
-	#if use plugin-autowep; then
-	#	cd "${S}"/restricted-plugin-autowep
-	#	KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
-	#fi
-	#if use plugin-btscan; then
-	#	cd "${S}"/plugin-btscan
-	#	KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
-	#fi
-	#if use plugin-dot15d4; then
-	#	cd "${S}"/plugin-dot15d4
-	#	KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
-	#fi
-	#if use plugin-ptw; then
-	#	cd "${S}"/restricted-plugin-ptw
-	#	KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
-	#fi
-	#if use plugin-spectools; then
-	#	cd "${S}"/plugin-spectools
-	#	KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
-	#fi
-	#if use plugin-syslog; then
-	#	cd "${S}"/plugin-syslog
-	#	KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
-	#fi
+	if use plugin-autowep; then
+		cd "${S}"/restricted-plugin-autowep
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
+	if use plugin-btscan; then
+		cd "${S}"/plugin-btscan
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
+	if use plugin-dot15d4; then
+		cd "${S}"/plugin-dot15d4
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
+	if use plugin-ptw; then
+		cd "${S}"/restricted-plugin-ptw
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
+	if use plugin-spectools; then
+		cd "${S}"/plugin-spectools
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
+	if use plugin-syslog; then
+		cd "${S}"/plugin-syslog
+		KIS_SRC_DIR="${S}" emake DESTDIR="${ED}" LIBDIR="$(get_libdir)" install
+	fi
 	if use ruby; then
 		cd "${S}"/ruby
 		dobin *.rb
@@ -141,8 +139,7 @@ src_install() {
 	doins Makefile.inc
 	#todo write a plugin finder that tells you what needs to be rebuilt when kismet is updated, etc
 
-	#dodoc CHANGELOG RELEASENOTES.txt README* docs/DEVEL.client docs/README.newcore
-	dodoc CHANGELOG README*
+	dodoc CHANGELOG RELEASENOTES.txt README* docs/DEVEL.client docs/README.newcore
 	newinitd "${FILESDIR}"/${PN}.initd kismet
 	newconfd "${FILESDIR}"/${PN}.confd kismet
 

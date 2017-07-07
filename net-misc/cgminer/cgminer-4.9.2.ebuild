@@ -1,9 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=5
 
-inherit eutils flag-o-matic
+inherit autotools eutils flag-o-matic
 
 DESCRIPTION="Bitcoin CPU/GPU/FPGA/ASIC miner in C"
 HOMEPAGE="http://bitcointalk.org/?topic=28402.msg357369 https://github.com/ckolivas/cgminer"
@@ -22,7 +23,7 @@ REQUIRED_USE="|| ( ${HARDWARE} )"
 RDEPEND="net-misc/curl
 	>=dev-libs/jansson-2.6
 	virtual/libusb:1[udev]
-	ncurses? ( sys-libs/ncurses:0= )
+	ncurses? ( sys-libs/ncurses )
 	udev? ( virtual/libudev )"
 DEPEND="virtual/pkgconfig
 	${RDEPEND}"

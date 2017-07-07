@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -27,7 +28,7 @@ QA_PREBUILT="
 	usr/$(get_libdir)/${PN}/plugins/attack/db/sqlmap/udf/postgresql/linux/*/8.4/lib_postgresqludf_sys.so
 	usr/$(get_libdir)/${PN}/plugins/attack/db/sqlmap/udf/postgresql/linux/*/9.0/lib_postgresqludf_sys.so"
 
-RDEPEND="${PYTHON_DEPS}
+RDEPEND="
 	>=dev-python/fpconst-0.7.2[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/nltk[${PYTHON_USEDEP}]

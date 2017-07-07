@@ -1,5 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 PYTHON_COMPAT=(python{2_7,3_4})
@@ -16,10 +17,10 @@ KEYWORDS="~amd64 ~arm ~mips ~ppc ~ppc64 ~x86 ~x86-fbsd"
 IUSE="test"
 
 DEPEND="test? ( dev-python/mock[${PYTHON_USEDEP}]
-	net-vpn/tor )
+	net-misc/tor )
 	dev-python/setuptools[${PYTHON_USEDEP}]"
 
-RDEPEND="net-vpn/tor"
+RDEPEND="net-misc/tor"
 
 DOCS=( docs/{_static,_templates,api,tutorials,{change_log,api,contents,download,faq,index,tutorials}.rst} )
 

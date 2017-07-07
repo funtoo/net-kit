@@ -1,5 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="5"
 inherit base systemd
@@ -19,11 +20,11 @@ RDEPEND=">=dev-libs/glib-2.16
 	bluetooth? ( net-wireless/bluez )
 	l2tp? ( net-dialup/xl2tpd )
 	ofono? ( net-misc/ofono )
-	openconnect? ( net-vpn/openconnect )
-	openvpn? ( net-vpn/openvpn )
+	openconnect? ( net-misc/openconnect )
+	openvpn? ( net-misc/openvpn )
 	policykit? ( sys-auth/polkit )
 	pptp? ( net-dialup/pptpclient )
-	vpnc? ( net-vpn/vpnc )
+	vpnc? ( net-misc/vpnc )
 	wifi? ( >=net-wireless/wpa_supplicant-2.0[dbus] )
 	wispr? ( net-libs/gnutls )"
 

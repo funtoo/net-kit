@@ -1,7 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI="6"
+EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_OPTIONAL=1
@@ -12,10 +13,11 @@ HOMEPAGE="http://ubertooth.sourceforge.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+bluez +specan static-libs +ubertooth1-firmware +udev"
+IUSE="+bluez +specan static-libs +pcap +ubertooth1-firmware +udev"
 REQUIRED_USE="specan? ( ${PYTHON_REQUIRED_USE} )"
 DEPEND="bluez? ( net-wireless/bluez:= )
 	>=net-libs/libbtbb-${PV}:=[static-libs?]
+	pcap? ( net-libs/libbtbb[pcap] )
 	specan? ( ${PYTHON_DEPS} )
 	static-libs? ( dev-libs/libusb[static-libs] )
 	virtual/libusb:1="
@@ -53,9 +55,10 @@ src_prepare() {
 
 src_configure() {
 	mycmakeargs=(
-		-DUSE_BLUEZ=$(usex bluez)
-		-DBUILD_STATIC_LIB=$(usex static-libs)
-		-DINSTALL_UDEV_RULES=$(usex udev)
+		$(cmake-utils_use_enable bluez USE_BLUEZ)
+		$(cmake-utils_use pcap USE_PCAP)
+		$(cmake-utils_use static-libs BUILD_STATIC_LIB)
+		$(cmake-utils_use_enable udev INSTALL_UDEV_RULES)
 		-DENABLE_PYTHON=false
 	)
 	if use udev; then

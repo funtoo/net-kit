@@ -1,12 +1,14 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=5
 GCONF_DEBUG="no"
+WANT_AUTOMAKE="1.12"
 VALA_MIN_API_VERSION="0.14"
 VALA_USE_DEPEND="vapigen"
 
-inherit autotools eutils xdg-utils vala readme.gentoo-r1
+inherit autotools eutils vala git-r3 readme.gentoo-r1
 
 DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and a client GUI"
 HOMEPAGE="http://spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
@@ -18,7 +20,6 @@ KEYWORDS=""
 IUSE="dbus gstaudio gstvideo gtk3 +introspection lz4 mjpeg policykit pulseaudio sasl smartcard static-libs usbredir vala webdav libressl"
 
 REQUIRED_USE="?? ( pulseaudio gstaudio )"
-
 # TODO:
 # * check if sys-freebsd/freebsd-lib (from virtual/acl) provides acl/libacl.h
 # * use external pnp.ids as soon as that means not pulling in gnome-desktop
@@ -73,8 +74,12 @@ DEPEND="${RDEPEND}
 	vala? ( $(vala_depend) )
 "
 
+# Hard-deps while building from git:
+# dev-lang/vala:0.14
+# dev-lang/perl
+
 src_prepare() {
-	default
+	epatch_user
 
 	eautoreconf
 
@@ -86,9 +91,6 @@ src_configure() {
 	# https://bugzilla.gnome.org/show_bug.cgi?id=744134
 	# https://bugzilla.gnome.org/show_bug.cgi?id=744135
 	addpredict /dev
-
-	# Clean up environment, bug #586642
-	xdg_environment_reset
 
 	local myconf
 

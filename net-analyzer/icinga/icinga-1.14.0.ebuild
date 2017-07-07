@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -17,7 +18,7 @@ S="${WORKDIR}/${PN}-core-${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~hppa ~ppc ~ppc64 x86"
+KEYWORDS="amd64 ~arm ~hppa x86"
 IUSE="+apache2 contrib eventhandler +idoutils lighttpd +mysql perl +plugins postgres ssl +vim-syntax +web"
 DEPEND="idoutils? ( dev-db/libdbi-drivers[mysql?,postgres?] )
 	perl? ( dev-lang/perl:= )

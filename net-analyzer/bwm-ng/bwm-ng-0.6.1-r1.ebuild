@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -9,23 +10,24 @@ DESCRIPTION="Bandwidth Monitor NG is a small and simple console-based bandwidth 
 SRC_URI="http://www.gropp.org/bwm-ng/${P}.tar.gz"
 HOMEPAGE="http://www.gropp.org/"
 
-KEYWORDS="amd64 ~arm ppc x86"
+KEYWORDS="~amd64 ~arm ~ppc ~x86"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="csv html"
+IUSE="html csv"
 
-RDEPEND="sys-libs/ncurses:0=
-	>=sys-apps/net-tools-1.60-r1"
-DEPEND="${RDEPEND}"
+DEPEND="
+	sys-libs/ncurses:0=
+	>=sys-apps/net-tools-1.60-r1
+"
+RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-fix-buildsystem.patch
-	"${FILESDIR}"/${P}-static-inline.patch
+	"${FILESDIR}/${P}-fix-buildsystem.patch"
 )
 
 src_prepare() {
-	default
 	mv configure.{in,ac} || die
+	default
 	eautoreconf
 }
 

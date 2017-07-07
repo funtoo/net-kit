@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -11,7 +12,7 @@ SRC_URI="mirror://apache/perl/${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="1"
-KEYWORDS="alpha amd64 ~arm ppc ppc64 x86"
+KEYWORDS="alpha amd64 x86"
 IUSE="debug ithreads test"
 
 SRC_TEST=do
@@ -28,7 +29,6 @@ RDEPEND="
 	dev-lang/perl[ithreads=]
 	>=dev-perl/Apache-Test-1.400.0
 	>=www-servers/apache-2.0.47
-	>=dev-libs/apr-util-1.4
 	!ithreads? ( www-servers/apache[-apache2_mpms_event,-apache2_mpms_worker,apache2_mpms_prefork] )
 "
 DEPEND="${RDEPEND}
@@ -41,7 +41,6 @@ DEPEND="${RDEPEND}
 		dev-perl/IPC-Run3
 		dev-perl/libwww-perl
 		www-servers/apache[apache2_modules_version,-apache2_modules_unique_id]
-		!www-apache/mpm_itk
 	)
 "
 PDEPEND="

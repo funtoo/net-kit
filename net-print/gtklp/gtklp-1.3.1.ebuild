@@ -1,7 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=5
 
 inherit autotools eutils
 
@@ -16,18 +17,15 @@ KEYWORDS="amd64 ppc ~sparc x86"
 IUSE="nls ssl"
 
 RDEPEND="x11-libs/gtk+:2
-	net-print/cups
+	>=net-print/cups-1.6
 	nls? ( sys-devel/gettext )
-	ssl? ( dev-libs/openssl:0= )"
+	ssl? ( dev-libs/openssl )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 DOCS="AUTHORS BUGS ChangeLog README TODO USAGE"
 
-PATCHES=( "${FILESDIR}/${P}-formatsec.patch" )
-
 src_prepare() {
-	default
 	sed -e '/DEF_BROWSER_CMD/{s:netscape:firefox:}' \
 		-e '/DEF_HELP_HOME/{s:631/sum.html#STANDARD_OPTIONS:631/help/:}' \
 		-i include/defaults.h || die

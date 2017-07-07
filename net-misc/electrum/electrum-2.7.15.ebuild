@@ -1,12 +1,13 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="5"
 
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="ncurses?"
 
-inherit distutils-r1 gnome2-utils
+inherit eutils distutils-r1 gnome2-utils
 
 MY_P="Electrum-${PV}"
 DESCRIPTION="User friendly Bitcoin client"
@@ -15,7 +16,7 @@ SRC_URI="https://download.electrum.org/${PV}/${MY_P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 LINGUAS="ar_SA bg_BG cs_CZ da_DK de_DE el_GR eo_UY es_ES fr_FR hu_HU hy_AM id_ID it_IT ja_JP ko_KR ky_KG lv_LV nb_NO nl_NL no_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI ta_IN th_TH tr_TR vi_VN zh_CN"
 
 IUSE="cli cosign email greenaddress_it ncurses qrcode +qt4 sync trustedcoin_com vkb"
@@ -67,6 +68,8 @@ src_prepare() {
 
 	# Prevent icon from being installed in the wrong location
 	sed -i '/icons/d' setup.py || die
+
+	validate_desktop_entries
 
 	# Remove unrequested localization files:
 	for lang in ${LINGUAS}; do

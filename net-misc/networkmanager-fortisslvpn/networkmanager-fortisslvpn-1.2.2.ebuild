@@ -1,5 +1,6 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 GNOME_ORG_MODULE="NetworkManager-${PN##*-}"
@@ -18,7 +19,7 @@ RDEPEND="
 	>=net-misc/networkmanager-1.1:=
 	>=dev-libs/glib-2.32:2
 	net-dialup/ppp:=
-	>=net-vpn/openfortivpn-1.2.0
+	>=net-misc/openfortivpn-1.2.0
 	gtk? (
 		>=app-crypt/libsecret-0.18
 		>=gnome-extra/nm-applet-1.2.0

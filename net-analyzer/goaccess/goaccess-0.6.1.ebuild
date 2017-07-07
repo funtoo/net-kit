@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -17,7 +18,7 @@ IUSE="geoip unicode"
 
 RDEPEND="
 	dev-libs/glib:2
-	sys-libs/ncurses:0=[unicode?]
+	sys-libs/ncurses[unicode?]
 	geoip? ( dev-libs/geoip )
 "
 DEPEND="${RDEPEND}

@@ -1,9 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=5
 
-inherit cmake-utils
+inherit qt4-r2
 
 DESCRIPTION="Software defined radio receiver powered by GNU Radio and Qt"
 HOMEPAGE="http://gqrx.dk/"
@@ -19,43 +20,24 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="gr-audio portaudio pulseaudio"
-REQUIRED_USE="^^ ( pulseaudio portaudio gr-audio )"
+IUSE="pulseaudio"
 
 DEPEND=">=net-wireless/gnuradio-3.7_rc:=[audio,analog,filter]
 	>=net-wireless/gr-osmosdr-0.1.0:=
 	dev-libs/boost:=
-	dev-qt/qtcore:5
-	dev-qt/qtgui:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtwidgets:5
-	pulseaudio? ( media-sound/pulseaudio:= )
-	portaudio? ( media-libs/portaudio:= )"
+	dev-qt/qtcore:4
+	dev-qt/qtgui:4
+	pulseaudio? ( media-sound/pulseaudio:= )"
 RDEPEND="${DEPEND}
-	dev-qt/qtsvg:5"
-
-src_configure() {
-	if use pulseaudio; then
-		LINUX_AUDIO_BACKEND=Pulseaudio
-	elif use portaudio; then
-		LINUX_AUDIO_BACKEND=Portaudio
-	elif use gr-audio; then
-		LINUX_AUDIO_BACKEND=Gr-audio
-	fi
-
-	local mycmakeargs=(
-		"-DLINUX_AUDIO_BACKEND=${LINUX_AUDIO_BACKEND}"
-	)
-	cmake-utils_src_configure
-}
+	dev-qt/qtsvg:4"
 
 src_prepare() {
 	if use !pulseaudio; then
 		sed -i 's/AUDIO_BACKEND = pulse/#AUDIO_BACKEND = pulse/' gqrx.pro || die
 	fi
-	eapply_user
+	qt4-r2_src_prepare
 }
 
 src_install() {
-	dobin "${BUILD_DIR}"/src/gqrx
+	dobin gqrx
 }

@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -20,7 +21,7 @@ SRC_URI="
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 sparc x86"
+KEYWORDS="alpha amd64 arm hppa ~ia64 ~mips ~ppc ppc64 sparc x86"
 IUSE="-dmalloc hesiod ldap libtirpc mount-locking sasl"
 
 # USE="sasl" adds SASL support to the LDAP module which will not be build. If

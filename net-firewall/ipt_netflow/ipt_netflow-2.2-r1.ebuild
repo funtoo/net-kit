@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 MY_PN="${PN/_/-}"
@@ -52,9 +53,6 @@ src_prepare() {
 
 	# Compatibility with kernel 4.6
 	eapply "${FILESDIR}/${P}-linux-4.6.patch"
-
-	# Compatibility with kernel 4.10, bug #617484
-	eapply "${FILESDIR}/${P}-linux-4.10.patch"
 
 	eapply_user
 }

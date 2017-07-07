@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -8,7 +9,8 @@ PYTHON_REQ_USE="ncurses"
 
 inherit python-r1
 
-DESCRIPTION="Ncurses client and real-time monitoring and displaying of HAProxy status"
+DESCRIPTION="interactive ncurses client and real-time monitoring,
+statistics displaying tool for the HAProxy"
 HOMEPAGE="http://feurix.org/projects/hatop/"
 SRC_URI="https://hatop.googlecode.com/files/${P}.tar.gz"
 
@@ -16,9 +18,8 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="${PYTHON_DEPS}"
+DEPEND=""
 RDEPEND="${DEPEND}
 	net-proxy/haproxy"
 

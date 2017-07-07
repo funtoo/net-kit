@@ -5,4 +5,5 @@
 	<email>netmon@gentoo.org</email>
 	<name>Gentoo network monitoring and analysis project</name>
 </maintainer>
+<longdescription>p0f performs passive OS detection based on SYN packets.</longdescription>
 </pkgmetadata>

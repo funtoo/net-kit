@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -27,7 +28,7 @@ SRC_URI="${SRC_URI}
 HOMEPAGE="http://www.seamonkey-project.org/"
 RESTRICT="strip mirror"
 
-KEYWORDS="-* amd64 x86"
+KEYWORDS="-* amd64 ~x86"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="startup-notification"

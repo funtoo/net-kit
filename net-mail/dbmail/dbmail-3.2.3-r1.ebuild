@@ -1,5 +1,6 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -35,12 +36,15 @@ pkg_setup() {
 }
 
 src_configure() {
+	local myconf=""
+	use ldap && myconf=${myconf}" --with-auth-ldap"
+
 	econf \
 		--enable-manpages \
 		--sysconfdir=/etc/dbmail \
 		$(use_enable static) \
 		$(use_with sieve) \
-		$(use_with ldap auth-ldap)
+		${myconf}
 }
 
 src_install() {

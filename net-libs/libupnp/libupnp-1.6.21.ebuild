@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -11,14 +12,13 @@ SRC_URI="mirror://sourceforge/pupnp/${P}.tar.bz2"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ppc ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux"
+KEYWORDS="~alpha amd64 ~arm ~hppa ~ppc ~ppc64 sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux"
 IUSE="debug doc ipv6 static-libs"
 
 DOCS="NEWS README ChangeLog"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.6.19-docs-install.patch
-	"${FILESDIR}"/${PN}-1.6.21-cflags.patch
 )
 
 src_prepare() {

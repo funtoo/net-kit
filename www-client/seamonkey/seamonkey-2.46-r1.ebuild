@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 WANT_AUTOCONF="2.1"
@@ -60,13 +61,13 @@ MOZCONFIG_OPTIONAL_WIFI=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
 inherit check-reqs flag-o-matic toolchain-funcs eutils mozconfig-v6.49 multilib pax-utils fdo-mime autotools mozextension nsplugins mozlinguas-v2
 
-PATCHFF="firefox-49.0-patches-04"
-PATCH="${PN}-2.46-patches-02"
+PATCHFF="firefox-49.0-patches-03"
+PATCH="${PN}-2.46-patches-01"
 EMVER="1.9.6.1"
 
 DESCRIPTION="Seamonkey Web Browser"
 HOMEPAGE="http://www.seamonkey-project.org"
-KEYWORDS="~alpha amd64 ~arm ~ppc ~ppc64 x86"
+KEYWORDS="~alpha amd64 ~arm ~ppc ~ppc64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
@@ -95,7 +96,7 @@ RDEPEND=">=dev-libs/nss-3.25
 		=app-crypt/gnupg-1.4* ) )"
 
 DEPEND="${RDEPEND}
-	!elibc_glibc? ( !elibc_uclibc? ( !elibc_musl? ( dev-libs/libexecinfo ) ) )
+	!elibc_glibc? ( !elibc_uclibc?  ( dev-libs/libexecinfo ) )
 	crypt? ( dev-lang/perl )
 	amd64? ( ${ASM_DEPEND}
 		virtual/opengl )
@@ -134,11 +135,13 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}"/seamonkey
+	eapply "${FILESDIR}"/${PN}-2.46-configure_regexp.patch
 
 	# browser patches go here
 	pushd "${S}"/mozilla &>/dev/null || die
 	rm -f "${WORKDIR}"/firefox/2000-firefox_gentoo_install_dirs.patch
 	eapply "${WORKDIR}"/firefox
+	eapply	"${FILESDIR}"/firefox-52-curve.patch
 	popd &>/dev/null || die
 
 	# Shell scripts sometimes contain DOS line endings; bug 391889

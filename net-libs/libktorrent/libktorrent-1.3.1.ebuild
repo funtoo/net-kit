@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -27,7 +28,7 @@ VIRTUALX_REQUIRED="test"
 inherit kde4-base
 
 DESCRIPTION="A BitTorrent library based on KDE Platform"
-HOMEPAGE="https://www.kde.org/applications/internet/ktorrent/"
+HOMEPAGE="http://ktorrent.pwsp.net/"
 
 LICENSE="GPL-2"
 SLOT="4"

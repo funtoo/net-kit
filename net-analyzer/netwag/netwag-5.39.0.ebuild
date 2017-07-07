@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 # NOTE: netwib, netwox and netwag go together, bump all or bump none
 
@@ -26,6 +27,7 @@ DEPEND="
 		kde-apps/konsole
 		x11-terms/eterm
 		x11-terms/gnome-terminal
+		x11-terms/rxvt
 	)
 "
 RDEPEND="${DEPEND}"

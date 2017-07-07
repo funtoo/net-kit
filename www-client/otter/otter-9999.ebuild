@@ -1,8 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
-
+EAPI=5
+WANT_CMAKE="always"
 inherit eutils cmake-utils git-r3
 
 DESCRIPTION="Project aiming to recreate classic Opera (12.x) UI using Qt5"
@@ -32,8 +33,6 @@ RDEPEND="
 DOCS=( CHANGELOG CONTRIBUTING.md TODO )
 
 src_prepare() {
-	default
-
 	if [[ -n ${LINGUAS} ]]; then
 		local lingua
 		for lingua in resources/translations/*.qm; do

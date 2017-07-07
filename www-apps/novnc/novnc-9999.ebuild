@@ -1,9 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_4 )
 
 inherit distutils-r1 git-2
 
@@ -47,7 +48,7 @@ src_install() {
 	cp -pPR *.html "${D}/usr/share/novnc/"
 	cp -pPR include/* "${D}/usr/share/novnc/include/"
 	cp -pPR images/* "${D}/usr/share/novnc/images/"
-	dosym images/favicon.ico /usr/share/novnc/favicon.ico
+	dosym /usr/share/novnc/images/favicon.ico /usr/share/novnc/
 
 	newconfd "${FILESDIR}/noVNC.confd" noVNC
 	newinitd "${FILESDIR}/noVNC.initd" noVNC

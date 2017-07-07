@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 inherit gnome2 multilib-minimal
@@ -12,7 +13,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE=""
 
-KEYWORDS="~alpha amd64 arm ~arm64 ~ia64 ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha amd64 arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc x86"
 
 DEPEND=""
 RDEPEND=""

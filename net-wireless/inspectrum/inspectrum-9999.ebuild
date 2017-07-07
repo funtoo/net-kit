@@ -1,7 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=5
 
 inherit cmake-utils
 
@@ -21,10 +22,11 @@ SLOT="0"
 IUSE=""
 
 RDEPEND="sci-libs/fftw:3.0=
+	dev-libs/boost:=
 	dev-qt/qtwidgets:5
 	dev-qt/qtgui:5
 	dev-qt/qtcore:5
-	net-libs/liquid-dsp"
-DEPEND="virtual/pkgconfig
 	dev-qt/qtconcurrent:5
+	net-wireless/gnuradio:="
+DEPEND="virtual/pkgconfig
 	${RDEPEND}"

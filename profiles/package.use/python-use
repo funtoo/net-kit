@@ -18,9 +18,9 @@ net-im/pyaim-t python_single_target_python2_7
 net-im/pyicq-t python_single_target_python2_7
 =net-irc/irker-2.13 python_single_target_python2_7
 =net-irc/irker-2.11 python_single_target_python2_7
+=net-irc/irker-2.15 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
 =net-irc/irker-2.12 python_single_target_python2_7
-=net-irc/irker-2.15 python_single_target_python2_7
 net-libs/ldns python_single_target_python2_7
 net-libs/libgmail python_single_target_python2_7
 net-libs/nfqueue-bindings python_single_target_python2_7
@@ -30,8 +30,8 @@ net-mail/automx python_single_target_python2_7
 net-mail/fetchmail python_single_target_python2_7
 net-mail/mailman python_single_target_python2_7
 net-mail/mailutils python_single_target_python2_7
-=net-mail/offlineimap-6.7.0.3 python_single_target_python2_7
 =net-mail/offlineimap-6.5.6 python_single_target_python2_7
+=net-mail/offlineimap-6.7.0.3 python_single_target_python2_7
 net-mail/queue-repair python_single_target_python2_7
 net-misc/arm python_single_target_python2_7
 net-misc/charm python_single_target_python2_7

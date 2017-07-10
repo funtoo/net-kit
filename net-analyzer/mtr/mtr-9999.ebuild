@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit autotools eutils fcaps flag-o-matic git-r3
@@ -13,14 +12,14 @@ SRC_URI="mirror://gentoo/gtk-2.0-for-mtr.m4.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="gtk ipv6"
+IUSE="gtk ipv6 ncurses"
 
 RDEPEND="
-	sys-libs/ncurses:0=
 	gtk? (
 		dev-libs/glib:2
 		x11-libs/gtk+:2
 	)
+	ncurses? ( sys-libs/ncurses:0= )
 "
 DEPEND="
 	${RDEPEND}
@@ -29,9 +28,9 @@ DEPEND="
 "
 
 DOCS=( AUTHORS FORMATS NEWS README SECURITY TODO )
-FILECAPS=( cap_net_raw /usr/sbin/mtr )
+FILECAPS=( cap_net_raw usr/sbin/mtr-packet )
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.80-impl-dec.patch
+	"${FILESDIR}"/${PN}-0.88-tinfo.patch
 )
 
 src_unpack() {
@@ -40,22 +39,31 @@ src_unpack() {
 }
 
 src_prepare() {
-	default
-
 	# Keep this comment and following mv, even in case ebuild does not need
 	# it: kept gtk-2.0.m4 in SRC_URI but you'll have to mv it before autoreconf
 	mv "${WORKDIR}"/gtk-2.0-for-mtr.m4 gtk-2.0.m4 || die #222909
 
-	eapply_user
+	default
 
 	AT_M4DIR="." eautoreconf
 }
 
 src_configure() {
 	# In the source's configure script -lresolv is commented out. Apparently it
-	# is needed for 64bit macos still.
+	# is still needed for 64-bit MacOS.
 	[[ ${CHOST} == *-darwin* ]] && append-libs -lresolv
 	econf \
 		$(use_enable ipv6) \
-		$(use_with gtk)
+		$(use_with gtk) \
+		$(use_with ncurses)
+}
+
+pkg_postinst() {
+	fcaps_pkg_postinst
+
+	if use prefix && [[ ${CHOST} == *-darwin* ]] ; then
+		ewarn "mtr needs root privileges to run.  To grant them:"
+		ewarn " % sudo chown root ${EPREFIX}/usr/sbin/mtr"
+		ewarn " % sudo chmod u+s ${EPREFIX}/usr/sbin/mtr"
+	fi
 }

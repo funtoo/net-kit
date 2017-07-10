@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -48,6 +47,8 @@ DEPEND="${RDEPEND}
 	test? ( net-misc/curl )
 "
 REQUIRED_USE="test? ( examples )"
+
+PATCHES=( "${FILESDIR}/protos.patch" )
 
 src_configure() {
 	use test || echo '' > tests/CMakeLists.txt

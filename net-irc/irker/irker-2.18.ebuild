@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
@@ -14,10 +13,13 @@ SRC_URI="http://www.catb.org/esr/${PN}/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="socks5"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-DEPEND="app-text/docbook-xml-dtd:4.1.2
+RDEPEND="${PYTHON_DEPS}"
+DEPEND="${RDEPEND}
+	app-text/docbook-xml-dtd:4.1.2
 	app-text/xmlto
 	socks5? ( dev-python/PySocks[${PYTHON_USEDEP}] )"
 

@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit eutils toolchain-funcs
@@ -11,7 +10,7 @@ SRC_URI="http://www.vanheusden.com/${PN}/${P}.tgz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ~hppa ~mips ~ppc ppc64 ~sparc x86"
+KEYWORDS="amd64 hppa ~mips ~ppc ppc64 ~sparc x86"
 IUSE="debug fftw libressl l10n_nl ncurses ssl tfo"
 
 RDEPEND="

@@ -1,6 +1,5 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -30,7 +29,7 @@ RDEPEND="
 	dev-python/twisted-core
 	dev-python/wxpython
 	dev-libs/openssl:0[-bindist]
-	net-libs/rb_libtorrent[python]
+	net-libs/libtorrent-rasterbar[python]
 	vlc? (
 			media-video/vlc
 			media-video/ffmpeg:0

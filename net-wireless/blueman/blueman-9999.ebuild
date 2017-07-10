@@ -1,10 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python{3_4,3_5,3_6} )
 inherit gnome2-utils linux-info python-single-r1 systemd
 
 DESCRIPTION="Simple and intuitive GTK+ Bluetooth Manager"
@@ -16,12 +15,12 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/blueman-project/${PN}/releases/download/${PV}/${P}.tar.xz"
-	KEYWORDS="~amd64 ~ppc ~x86"
+	KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
 fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="appindicator network nls policykit pulseaudio thunar"
+IUSE="appindicator network nls policykit pulseaudio"
 
 COMMON_DEPEND="
 	dev-python/pygobject:3
@@ -38,6 +37,7 @@ RDEPEND="${COMMON_DEPEND}
 	x11-libs/gtk+:3[introspection]
 	x11-libs/libnotify[introspection]
 	|| (
+		x11-themes/adwaita-icon-theme
 		x11-themes/faenza-icon-theme
 		x11-themes/gnome-icon-theme
 		x11-themes/mate-icon-theme
@@ -54,7 +54,6 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	policykit? ( sys-auth/polkit )
 	pulseaudio? ( media-sound/pulseaudio[bluetooth] )
-	thunar? ( xfce-base/thunar )
 	!net-wireless/gnome-bluetooth
 "
 
@@ -89,7 +88,9 @@ src_configure() {
 		$(use_enable policykit polkit)
 		$(use_enable nls)
 		$(use_enable pulseaudio)
-		$(use_enable thunar thunar-sendto)
+		# thunar integration is a single data file with no extra deps
+		# so install it unconditionally
+		--enable-thunar-sendto
 	)
 	econf "${myconf[@]}"
 }

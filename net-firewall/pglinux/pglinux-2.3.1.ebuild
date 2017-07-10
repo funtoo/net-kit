@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit eutils gnome2-utils linux-info systemd
@@ -26,7 +25,7 @@ COMMON_DEPEND="
 		dev-qt/qtcore:4
 		dev-qt/qtdbus:4
 		dev-qt/qtgui:4
-		|| ( kde-apps/kdesu x11-misc/ktsuss )
+		|| ( kde-plasma/kde-cli-tools[kdesu] kde-apps/kdesu x11-misc/ktsuss )
 	)
 "
 DEPEND="${COMMON_DEPEND}

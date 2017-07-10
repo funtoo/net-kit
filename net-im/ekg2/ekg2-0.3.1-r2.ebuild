@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -16,6 +15,7 @@ KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="gadu gif gnutls gpg gpm gsm gtk idn jpeg ncurses nls
 	oracle perl python readline rss spell sqlite ssl threads unicode
 	xmpp xosd zlib"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="
 	gpg? ( app-crypt/gpgme:= )

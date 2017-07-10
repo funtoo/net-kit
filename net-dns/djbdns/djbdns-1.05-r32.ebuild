@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 inherit flag-o-matic readme.gentoo-r1 toolchain-funcs user
@@ -15,7 +14,7 @@ SRC_URI="http://cr.yp.to/djbdns/${P}.tar.gz
 
 SLOT="0"
 LICENSE="public-domain"
-KEYWORDS="alpha amd64 hppa ~mips ~ppc ~ppc64 sparc x86"
+KEYWORDS="alpha amd64 hppa ~mips ppc ppc64 sparc x86"
 IUSE="ipv6 selinux"
 
 DEPEND=""

@@ -1,6 +1,5 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit eutils perl-module toolchain-funcs
@@ -17,7 +16,7 @@ IUSE="perl +symon symux"
 RDEPEND="perl? ( dev-lang/perl )
 	symux? ( net-analyzer/rrdtool )"
 DEPEND="${RDEPEND}
-	virtual/pmake"
+	sys-devel/pmake"
 
 S=${WORKDIR}/${PN}
 

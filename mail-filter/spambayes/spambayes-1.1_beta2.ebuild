@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -24,7 +23,7 @@ IUSE=""
 DEPEND="
 	dev-python/bsddb3[${PYTHON_USEDEP}]
 	dev-python/lockfile[${PYTHON_USEDEP}]
-	dev-python/setuptools"
+	dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"

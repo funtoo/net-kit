@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -20,7 +19,7 @@ SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE="doc gtk"
 
-RDEPEND="
+RDEPEND="${PYTHON_DEPS}
 	>=dev-python/fpconst-0.7.2[${PYTHON_USEDEP}]
 	dev-python/lxml[${PYTHON_USEDEP}]
 	dev-python/nltk[${PYTHON_USEDEP}]

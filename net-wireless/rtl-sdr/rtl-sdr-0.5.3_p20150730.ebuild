@@ -1,6 +1,5 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -25,6 +24,10 @@ IUSE=""
 
 DEPEND="virtual/libusb:1"
 RDEPEND="${DEPEND}"
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-0.5.3-static-inline.patch
+)
 
 src_unpack() {
 	if [[ ${PV} == 9999* ]]; then

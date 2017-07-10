@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -15,11 +14,9 @@ LICENSE="GPL-2 GPL-3 Apache-2.0 LGPL-2.1"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="cli feedreader +gui qt4 +qt5 voip"
+IUSE="cli feedreader +gui voip"
 REQUIRED_USE="
 	|| ( cli gui )
-	gui? ( ^^ ( qt4 qt5 ) )
-	cli? ( ^^ ( qt4 qt5 ) )
 	feedreader? ( gui )
 	voip? ( gui )"
 
@@ -27,48 +24,31 @@ RDEPEND="
 	app-arch/bzip2
 	dev-db/sqlcipher
 	dev-libs/openssl:0
+	dev-qt/qtcore:5
+	dev-qt/qtmultimedia:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtprintsupport:5
+	dev-qt/qtscript:5
+	dev-qt/qtxml:5
 	gnome-base/libgnome-keyring
 	net-libs/libmicrohttpd
-	net-libs/libupnp
+	net-libs/libupnp:0
 	sys-libs/zlib
 	feedreader? (
 		dev-libs/libxml2
 		dev-libs/libxslt
 		net-misc/curl
 	)
-	qt4? (
-		gui? (
-			dev-qt/designer:4
-			dev-qt/qtgui:4
-			x11-libs/libX11
-			x11-libs/libXScrnSaver
-		)
-		dev-qt/qtcore:4
-	)
-	qt5? (
-		gui? (
-			dev-qt/designer:5
-			dev-qt/qtwidgets:5
-			x11-libs/libX11
-			x11-libs/libXScrnSaver
-		)
-		dev-qt/qtcore:5
+	gui? (
+		dev-qt/designer:5
 		dev-qt/qtgui:5
-		dev-qt/qtmultimedia:5
-		dev-qt/qtnetwork:5
-		dev-qt/qtprintsupport:5
-		dev-qt/qtscript:5
+		dev-qt/qtwidgets:5
 		dev-qt/qtx11extras:5
-		dev-qt/qtxml:5
+		x11-libs/libX11
+		x11-libs/libXScrnSaver
 	)
 	voip? (
-		qt5? (
-			<media-libs/opencv-3.0.0[-qt4]
-		)
-		qt4? (
-			<media-libs/opencv-3.0.0
-			dev-qt/qt-mobility[multimedia]
-		)
+		media-libs/opencv[-qt4(-)]
 		media-libs/speex
 		virtual/ffmpeg[encode]
 	)"
@@ -104,8 +84,7 @@ src_prepare() {
 src_configure() {
 	for dir in ${rs_src_dirs} ; do
 		pushd "${S}/${dir}" >/dev/null || die
-		use qt4 && eqmake4
-		use qt5 && eqmake5
+		eqmake5
 		popd >/dev/null || die
 	done
 }

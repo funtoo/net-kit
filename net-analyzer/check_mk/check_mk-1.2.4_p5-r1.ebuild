@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -20,14 +19,17 @@ KEYWORDS="~amd64 ~x86"
 IUSE="agent-only apache_status dmi_sysinfo livestatus logwatch mysql
 	nfsexports oracle postgres smart wato xinetd zypper"
 
-DEPEND="wato? ( app-admin/sudo )
+DEPEND="${PYTHON_DEPS}
+	wato? ( app-admin/sudo )
 	xinetd? ( sys-apps/xinetd )
 	!agent-only? ( || ( net-analyzer/nagios-core net-analyzer/icinga ) )
 	!agent-only? ( www-servers/apache www-apache/mod_python )
-	media-libs/libpng:0"
+	media-libs/libpng:0
+	!!net-analyzer/check_mk_agent"
 RDEPEND="${DEPEND}"
 
 REQUIRED_USE="
+	${PYTHON_REQUIRED_USE}
 	livestatus? ( !agent-only )
 	wato? ( !agent-only )"
 

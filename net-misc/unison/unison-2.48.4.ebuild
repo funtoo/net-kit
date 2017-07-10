@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -66,6 +65,7 @@ src_install () {
 	# install manually, since it's just too much
 	# work to force the Makefile to do the right thing.
 	newbin unison unison-${SLOT}
+	dobin unison-fsmonitor
 	dodoc BUGS.txt CONTRIB INSTALL NEWS \
 		  README ROADMAP.txt TODO.txt
 

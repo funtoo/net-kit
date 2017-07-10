@@ -1,6 +1,5 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="2"
 
@@ -9,10 +8,13 @@ MY_PN="LinuxCupsPrinterPkg"
 DESCRIPTION="PPD files of XEROX printers (CopyCentre, DocuPrint, Phaser, WorkCentre) for CUPS printing system"
 HOMEPAGE="http://www.support.xerox.com/go/getfile.asp?objid=61334&prodID=6180"
 SRC_URI="http://download.support.xerox.com/pub/drivers/DocuColor_2006/drivers/unix/en/${MY_PN}.tar.gz"
-LICENSE="public-domain"
+
+LICENSE="Xerox"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
+
+RESTRICT="bindist fetch"
 
 DEPEND=""
 RDEPEND="net-print/cups"

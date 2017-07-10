@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 inherit eutils flag-o-matic toolchain-funcs prefix
 
@@ -9,7 +10,7 @@ SRC_URI="http://www.procmail.org/${P}.tar.gz"
 
 LICENSE="|| ( Artistic GPL-2 )"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~x64-freebsd ~x86-interix ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
 IUSE="mbox selinux"
 
 DEPEND="virtual/mta"
@@ -36,7 +37,7 @@ src_unpack() {
 	fi
 
 	# Do not use lazy bindings on lockfile and procmail
-	if [[ ${CHOST} != *-darwin* ]]; then
+	if [[ ${CHOST} != *-darwin* && ${CHOST} != *-interix* ]]; then
 		epatch "${FILESDIR}/${PN}-lazy-bindings.diff"
 	fi
 
@@ -55,6 +56,9 @@ src_unpack() {
 
 	# Fix for bug #270551
 	epatch "${FILESDIR}/${PN}-3.22-glibc-2.10.patch"
+
+	# Fix for x86-interix - doesn't have initgroups
+	epatch "${FILESDIR}"/${P}-interix.patch
 }
 
 src_compile() {

@@ -1,14 +1,15 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
 inherit perl-module
 
 DESCRIPTION="Perl Mail-to-HTML Converter, Gentoo fork"
-HOMEPAGE="https://www.mhonarc.org/"
+HOMEPAGE="http://www.mhonarc.org/"
 LICENSE="GPL-2"
-SRC_URI="https://www.mhonarc.org/release/MHonArc/tar/MHonArc-${PV}.tar.bz2"
+SRC_URI="http://www.mhonarc.org/release/MHonArc/tar/MHonArc-${PV}.tar.bz2"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"

@@ -4,6 +4,7 @@
 	<maintainer type="person">
 		<email>marc.popp@sunny-computing.de</email>
 		<name>Marc Popp</name>
+		<description>Maintainer. Assign bugs to him</description>
 	</maintainer>
 	<maintainer type="project">
 		<email>proxy-maint@gentoo.org</email>

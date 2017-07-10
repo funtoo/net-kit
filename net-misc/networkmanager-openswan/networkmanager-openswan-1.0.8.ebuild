@@ -1,5 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="5"
 GCONF_DEBUG="no"
@@ -20,7 +21,7 @@ RDEPEND="
 	>=dev-libs/libnl-3.2.8:3
 	>=net-misc/networkmanager-0.9.10:=
 	>=dev-libs/dbus-glib-0.74
-	|| ( net-misc/openswan net-vpn/libreswan )
+	|| ( net-misc/openswan net-misc/libreswan )
 	gtk? (
 		app-crypt/libsecret
 		>=gnome-extra/nm-applet-0.9.10

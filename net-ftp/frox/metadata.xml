@@ -4,6 +4,7 @@
     <maintainer type="person">
         <email>kabel@blackhole.sk</email>
         <name>Marek Behun</name>
+        <description>Proxied maintainer.</description>
     </maintainer>
     <maintainer type="project">
         <email>proxy-maint@gentoo.org</email>

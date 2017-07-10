@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -13,9 +14,8 @@ SRC_URI="http://openvswitch.org/releases/${P}.tar.gz"
 
 LICENSE="Apache-2.0 GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="debug modules monitor +ssl"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
 	|| (
@@ -28,6 +28,7 @@ RDEPEND="
 	dev-python/twisted-core
 	dev-python/twisted-conch
 	dev-python/twisted-web
+	dev-python/PyQt4[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]
 	debug? ( dev-lang/perl )"
 DEPEND="${RDEPEND}

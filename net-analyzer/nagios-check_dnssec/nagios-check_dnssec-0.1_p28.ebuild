@@ -1,5 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=4
 
@@ -17,7 +18,7 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="|| ( net-analyzer/nagios-plugins net-analyzer/monitoring-plugins )
+DEPEND="net-analyzer/nagios-plugins
 		net-libs/ldns"
 RDEPEND="${DEPEND}"
 

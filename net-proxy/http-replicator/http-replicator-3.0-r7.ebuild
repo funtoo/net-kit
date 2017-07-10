@@ -1,10 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
-
 PYTHON_COMPAT=( python2_7 ) # not 2.6 bug #33907, not 3.0 bug #411083
-
 inherit eutils python-single-r1 systemd
 
 MY_P="${PN}_${PV}"
@@ -12,16 +11,11 @@ MY_P="${PN}_${PV}"
 DESCRIPTION="Proxy cache for Gentoo packages"
 HOMEPAGE="https://sourceforge.net/projects/http-replicator"
 SRC_URI="mirror://sourceforge/http-replicator/${MY_P}.tar.gz"
+S="${WORKDIR}/${MY_P}"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha amd64 hppa ppc ~sparc x86"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
-
-RDEPEND="${PYTHON_DEPS}"
-DEPEND="${RDEPEND}"
-
-S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
 	"${FILESDIR}/http-replicator-3.0-sighup.patch"
@@ -29,11 +23,9 @@ PATCHES=(
 	"${FILESDIR}/http-replicator-3-missing-directory.patch"
 )
 
-pkg_setup() {
+src_install(){
 	python-single-r1_pkg_setup
-}
 
-src_install() {
 	# Daemon and repcacheman into /usr/bin
 	python_scriptinto /usr/bin
 	python_doscript http-replicator

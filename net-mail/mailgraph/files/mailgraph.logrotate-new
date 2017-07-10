@@ -1,3 +1,4 @@
+# $Id$
 # logrotate config for mailgraph log
 
 /var/log/mailgraph/mailgraph.log {

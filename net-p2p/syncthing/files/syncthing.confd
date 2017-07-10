@@ -5,7 +5,7 @@
 #SYNCTHING_GROUP="syncthing"
 
 # Configuration directory
-#SYNCTHING_HOMEDIR="/var/lib/syncthing/.config/syncthing"
+#SYNCTHING_HOMEDIR="/var/lib/syncthing"
 
 # Log file location
 #SYNCTHING_LOGFILE="/var/log/syncthing/syncthing.log"

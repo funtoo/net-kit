@@ -1,8 +1,8 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
-
 PYTHON_COMPAT=( python2_7 )
 
 inherit eutils gnome2-utils python-single-r1
@@ -15,7 +15,6 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/pygobject:3[${PYTHON_USEDEP}]

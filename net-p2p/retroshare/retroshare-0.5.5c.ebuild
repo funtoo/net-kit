@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -26,7 +27,7 @@ RDEPEND="
 	app-arch/bzip2
 	dev-libs/openssl:0
 	gnome-base/libgnome-keyring
-	net-libs/libupnp:0
+	net-libs/libupnp
 	sys-libs/zlib
 	cli? (
 		dev-libs/protobuf

@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -22,7 +23,12 @@ RDEPEND="
 	pyx? ( dev-python/pyx[${PYTHON_USEDEP}] )
 	crypt? ( dev-python/pycrypto[${PYTHON_USEDEP}] )
 	graphviz? ( media-gfx/graphviz )
-	imagemagick? ( virtual/imagemagick-tools )
+	imagemagick? (
+		|| (
+			media-gfx/imagemagick
+			media-gfx/graphicsmagick[imagemagick]
+		)
+	)
 	visual? ( dev-python/visual )
 	tcpreplay? ( net-analyzer/tcpreplay )
 "

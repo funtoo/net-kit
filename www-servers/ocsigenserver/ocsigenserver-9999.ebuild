@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -24,9 +25,7 @@ IUSE="debug doc dbm +ocamlopt +sqlite zlib postgres"
 REQUIRED_USE="|| ( sqlite dbm postgres )"
 RESTRICT="strip installsources"
 
-DEPEND=">=dev-ml/lwt-2.5.0:=[camlp4(+)]
-		dev-ml/lwt_react:=
-		dev-ml/lwt_ssl:=
+DEPEND=">=dev-ml/lwt-2.5.0:=[react,ssl,camlp4(+)]
 		>=dev-ml/react-0.9.3:=
 		zlib? ( >=dev-ml/camlzip-1.03-r1:= )
 		dev-ml/cryptokit:=
@@ -43,10 +42,6 @@ RDEPEND="${DEPEND}"
 pkg_setup() {
 	enewgroup ocsigenserver
 	enewuser ocsigenserver -1 -1 /var/www ocsigenserver
-}
-
-src_prepare() {
-	epatch "${FILESDIR}/lwt3.patch"
 }
 
 src_configure() {

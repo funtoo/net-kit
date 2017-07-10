@@ -1,4 +1,5 @@
 # -*- sh -*-
+# $Id$
 
 # Tables to re-generate when starting or reloading ufdbguard
 UFDB_GT="alwaysallow alwaysdeny"

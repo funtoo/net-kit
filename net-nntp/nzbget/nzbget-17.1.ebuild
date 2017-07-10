@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -9,7 +10,7 @@ MY_PV=${PV/_pre/-r}
 MY_P=${PN}-${PV/_pre/-testing-r}
 
 DESCRIPTION="A command-line based binary newsgrabber supporting .nzb files"
-HOMEPAGE="https://nzbget.net/"
+HOMEPAGE="http://nzbget.net/"
 SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${MY_PV}/${MY_P}-src.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"

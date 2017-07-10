@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 inherit gnome2
@@ -10,7 +11,7 @@ HOMEPAGE="http://www.gftp.org"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 ppc ppc64 sparc x86 ~x86-fbsd"
+KEYWORDS="~alpha amd64 ~ppc ~ppc64 ~sparc x86 ~x86-fbsd"
 IUSE="gtk libressl ssl"
 
 RDEPEND="

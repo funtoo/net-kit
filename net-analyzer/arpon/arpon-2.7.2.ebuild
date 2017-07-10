@@ -1,8 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
-inherit cmake-utils readme.gentoo-r1
+EAPI="4"
+inherit cmake-utils readme.gentoo
 
 DESCRIPTION="ArpON (Arp handler inspectiON) is a portable Arp handler"
 
@@ -13,7 +14,7 @@ SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-libs/libdnet
@@ -29,8 +30,6 @@ src_prepare() {
 
 	DOC_CONTENTS="${PN} now installs an init script. Please edit
 		the /etc/conf.d/arpon file to match your needs"
-
-	cmake-utils_src_prepare
 }
 
 src_install() {

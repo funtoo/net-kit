@@ -1,10 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
-
 PYTHON_COMPAT=( python2_7 )
-
 inherit cmake-utils perl-module linux-info python-single-r1
 
 DESCRIPTION="High-level language bindings for libnetfilter_queue"
@@ -15,14 +14,12 @@ KEYWORDS="~x86 ~amd64"
 SLOT="0"
 LICENSE="GPL-3"
 IUSE="perl python examples"
-REQUIRED_USE="|| ( perl python ) python? ( ${PYTHON_REQUIRED_USE} )"
+REQUIRED_USE="|| ( perl python )"
 
-RDEPEND="
-	python? (
+DEPEND="python? (
 		dev-python/dpkt[${PYTHON_USEDEP}]
 		${PYTHON_DEPS}
-	)"
-DEPEND="${RDEPEND}
+	)
 	perl? ( dev-lang/perl )
 	net-libs/libnetfilter_queue
 	dev-lang/swig"

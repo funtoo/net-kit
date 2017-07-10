@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 inherit eutils
@@ -8,15 +9,14 @@ DESCRIPTION="A library that performs application layer protocol identification f
 HOMEPAGE="http://research.wand.net.nz/software/libprotoident.php"
 SRC_URI="http://research.wand.net.nz/software/${PN}/${P}.tar.gz"
 
-LICENSE="LGPL-3+"
+LICENSE="GPL-2"
 SLOT="0/2"
 KEYWORDS="~amd64 ~x86"
-IUSE="static-libs tools"
+IUSE="static-libs +tools"
 
 DEPEND="
 	>=net-libs/libtrace-3.0.9
-	net-libs/libflowmanager
-	tools? ( <net-libs/libflowmanager-3 )
+	tools? ( net-libs/libflowmanager )
 "
 RDEPEND="
 	${DEPEND}

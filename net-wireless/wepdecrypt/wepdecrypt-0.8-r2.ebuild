@@ -1,7 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
-EAPI=6
+EAPI=4
+
+inherit eutils
 
 DESCRIPTION="Enhanced version of WepAttack a tool for breaking 802.11 WEP keys"
 HOMEPAGE="http://wepdecrypt.sourceforge.net/"
@@ -12,26 +15,30 @@ SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="X"
 RDEPEND="
-	dev-libs/openssl:=
+	dev-libs/openssl
 	net-libs/libpcap
 	sys-libs/zlib
 	X? ( x11-libs/fltk:1 )"
 DEPEND="${RDEPEND}"
 
-PATCHES=(
-	"${FILESDIR}/${P}-build.patch"
-	"${FILESDIR}/${P}-fltk.patch"
-	"${FILESDIR}/${P}-buffer.patch" # bug#340148.
-	"${FILESDIR}/${P}-dyn.patch"
-)
-
 src_prepare() {
-	default
+	epatch \
+		"${FILESDIR}"/${P}-build.patch \
+		"${FILESDIR}"/${P}-fltk.patch
 
+	#Fix buffer size wrt bug 340148.
+	epatch "${FILESDIR}/${P}-buffer.patch"
+
+	epatch "${FILESDIR}/${P}-dyn.patch"
+
+	#Fix respect for jobserver
 	sed -i 's/make/$(MAKE)/g' Makefile || die "Sed failed"
 }
 
 src_configure() {
-	econf \
-		$(use X || echo --disable-gui)
+	# build system is broken and --enabled-gui doesn't work
+	local myconf=""
+	! use X && myconf="--disable-gui"
+
+	econf ${myconf}
 }

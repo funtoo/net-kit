@@ -7,4 +7,4 @@ LICENSE=BSD
 SLOT=0
 SRC_URI=ftp://ftp.uk.linux.org/pub/linux/Networking/netkit/netkit-rwall-0.17.tar.gz
 _eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=43672eea7e74ac309777f2cee52c8c02
+_md5_=5fe0aefc7093ecef590b606c6c6bd9a7

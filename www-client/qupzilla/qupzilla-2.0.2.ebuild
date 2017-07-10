@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -14,7 +15,7 @@ if [[ ${PV} == *9999 ]]; then
 else
 	MY_P=QupZilla-${PV}
 	SRC_URI="https://github.com/QupZilla/${PN}/releases/download/v${PV}/${MY_P}.tar.xz"
-	KEYWORDS="amd64 x86"
+	KEYWORDS="~amd64 ~x86"
 	S=${WORKDIR}/${MY_P}
 fi
 
@@ -24,7 +25,7 @@ SRC_URI+=" https://github.com/QupZilla/${PN}-plugins/archive/${PLUGINS_HASH}.tar
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="dbus debug gnome-keyring kwallet libressl nonblockdialogs"
+IUSE="dbus debug gnome-keyring kde libressl nonblockdialogs"
 
 RDEPEND="
 	>=dev-qt/qtconcurrent-5.6:5
@@ -41,7 +42,7 @@ RDEPEND="
 	x11-libs/libxcb:=
 	dbus? ( >=dev-qt/qtdbus-5.6:5 )
 	gnome-keyring? ( gnome-base/gnome-keyring )
-	kwallet? ( kde-frameworks/kwallet:5 )
+	kde? ( kde-frameworks/kwallet:5 )
 	libressl? ( dev-libs/libressl:= )
 	!libressl? ( dev-libs/openssl:0 )
 "
@@ -80,7 +81,7 @@ src_configure() {
 		DEBUG_BUILD=$(usex debug true '') \
 		DISABLE_DBUS=$(usex dbus '' true) \
 		GNOME_INTEGRATION=$(usex gnome-keyring true '') \
-		KDE_INTEGRATION=$(usex kwallet true '') \
+		KDE_INTEGRATION=$(usex kde true '') \
 		NONBLOCK_JS_DIALOGS=$(usex nonblockdialogs true '')
 
 	eqmake5

@@ -7,6 +7,7 @@ mail-client/alpine:chappa - enhance alpine by applying Eduardo Chappa's patches
 mail-client/alpine:onlyalpine - installs only the alpine binary, so it does not collied with pico and/or pine
 mail-client/alpine:passfile - Adds support for caching passwords into a file between sessions
 mail-client/alpine:smime - Enable support for S/MIME
+mail-client/alpine:topal - Enable support for net-mail/topal
 mail-client/balsa:crypt - Adds support for GnuPG encryption
 mail-client/balsa:gtkhtml - Use gtkhtml for HTML rendering
 mail-client/balsa:gtkspell - Use gtkspell for dictionary support
@@ -25,34 +26,30 @@ mail-client/claws-mail:smime - Build plugin for S/MIME support
 mail-client/claws-mail:spam-report - Enable plugin for spam reporting to various services
 mail-client/claws-mail:spamassassin - Build mail-filter/spamassassin plugin
 mail-client/claws-mail:valgrind - Add support for memory debugging using valgrind
-mail-client/claws-mail:webkit - Enables HTML e-mail rendering by using the net-libs/webkit-gtk library.
 mail-client/mail-notification:sylpheed - Enable support for MH mailboxes used by mail-client/sylpheed
 mail-client/mutt:gpg - Enable support for app-crypt/gpgme
-mail-client/mutt:hcache - Enable header cache
-mail-client/mutt:lmdb - Enable dev-db/lmdb database backend for header caching
 mail-client/mutt:notmuch - Enable support for net-mail/notmuch
 mail-client/mutt:pop - Enable support for POP3
 mail-client/mutt:sidebar - Enable the sidebar feature
 mail-client/mutt:smime - Enable support for S/MIME
 mail-client/mutt:smtp - Enable support for smtp
-mail-client/mutt:tokyocabinet - Enable dev-db/tokyocabinet database backend for header caching
+mail-client/mutt:tokyocabinet - Enable tokyocabinet database backend for header caching
 mail-client/nail:kerberos - If network is enabled, this adds support for GSSAPI login on IMAP through virtual/krb5.
 mail-client/nail:net - Enable support for network protocols (POP, IMAP and SMTP). If you only need to send mail with the local Transport Agent, disabling this will get you support for only /usr/sbin/sendmail call.
 mail-client/nail:ssl - If network is enabled, this adds support for S/MIME and SSL/TLS-powered protocols through dev-libs/openssl.
 mail-client/roundcube:enigma - Add dependencies to support server-side GnuPG signing and/or encryption through the enigma plugin
 mail-client/roundcube:ldap - Add dependencies to support connecting to an LDAP address book server
 mail-client/roundcube:managesieve - Add dependencies to support the sieverules plugin
+mail-client/squirrelmail:filter - Enable mail-filter/amavisd-new filtering
 mail-client/sylpheed:oniguruma - Use dev-libs/oniguruma for regular expression
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
 mail-client/thunderbird:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
-mail-client/thunderbird:gtk2 - Use the cairo-gtk2 rendering engine instead of the default cairo-gtk3
-mail-client/thunderbird:jemalloc - Enable or disable jemalloc
+mail-client/thunderbird:gstreamer-0 - Use gstreamer:0.10 instead of gstreamer:1 for media support
 mail-client/thunderbird:jemalloc3 - Enable or disable jemalloc3 (forced-on when supported prior to 38.0)
 mail-client/thunderbird:lightning - Enable app-global calendar support (note 38.0 and above bundles calendar support when this flag is off)
 mail-client/thunderbird:minimal - Remove the software development kit and headers
 mail-client/thunderbird:mozdom - Enable Mozilla's DOM inspector
-mail-client/thunderbird:rust - Enable support for using rust compiler (experimental)
 mail-client/thunderbird:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
 mail-client/thunderbird:system-harfbuzz - Use the system-wide media-libs/harfbuzz and media-gfx/graphite2 instead of bundled.
 mail-client/thunderbird:system-icu - Use the system-wide dev-libs/icu instead of bundled.
@@ -100,7 +97,6 @@ mail-filter/opendkim:opendbx - Use opendbx backend to facilitate dataset driven 
 mail-filter/opendkim:poll - Use poll() instead of select() for the provided asynchronous resolver library.
 mail-filter/opendkim:sasl - Used to authenticate to a LDAP server in various ways if required.
 mail-filter/opendkim:unbound - Use the unbound dnssec library to perform DKIM DNS queries.
-mail-filter/opendmarc:reports - Install the reports binaries: expire, import, reports, params
 mail-filter/opendmarc:spf - Use the mail-filter/libspf2 for Sender Policy Framework checking
 mail-filter/opensmtpd-extras:filter-clamav - filter for scanning with app-antivirus/clamav
 mail-filter/opensmtpd-extras:filter-dkim-signer - filter for adding DKIM signatures to outgoing messages
@@ -140,7 +136,7 @@ mail-filter/rmilter:memcached - Enable support for memcached
 mail-filter/rspamd:fann - Enable neural network plugin (requires sci-mathematics/fann).
 mail-filter/rspamd:jemalloc - Use dev-libs/jemalloc for allocations
 mail-filter/rspamd:pcre2 - Use dev-libs/libpcre2
-mail-filter/spamassassin:bayes - Require a database (MySQL, SQLite, Postgres, or BerkDB) backend to enable the Bayesian filtering database. If you use the Redis backend, you do not need to enable this flag (Redis support is enabled automatically, and has no external dependencies).
+mail-filter/spamassassin:bayes - Require a database (MySQL, SQLite, Postgres, or BerkDB) backend to enable the Bayesian filtering database.
 mail-filter/spamassassin:cron - Install a cron job to update SpamAssassin's rules daily.
 mail-filter/spamassassin:qmail - Build qmail functionality and docs
 mail-filter/spamdyke:ssl - Enables TLS protocol for spamdyke
@@ -208,19 +204,11 @@ net-analyzer/check_mk:dmi_sysinfo - Install check_mk-agent dmi_sysinfo plugin.
 net-analyzer/check_mk:livestatus - Enable livestatus.
 net-analyzer/check_mk:logwatch - Install check_mk-agent logwatch plugin.
 net-analyzer/check_mk:mysql - Install check_mk-agent mysql plugin.
-net-analyzer/check_mk:nagios4 - Depend on net-analyzer/nagios-core-4
 net-analyzer/check_mk:nfsexports - Install check_mk-agent nfsexports plugin.
 net-analyzer/check_mk:postgres - Install check_mk-agent postgres plugin.
 net-analyzer/check_mk:smart - Install check_mk-agent S.M.A.R.T plugin.
 net-analyzer/check_mk:wato - Enable check_mk WATO - check_mk's Web Administration Tool.
 net-analyzer/check_mk:zypper - Install check_mk-agent zypper plugin.
-net-analyzer/check_mk_agent:apache_status - Install check_mk-agent apache-status plugin.
-net-analyzer/check_mk_agent:logwatch - Install check_mk-agent logwatch plugin.
-net-analyzer/check_mk_agent:mysql - Install check_mk-agent mysql plugin.
-net-analyzer/check_mk_agent:nfsexports - Install check_mk-agent nfsexports plugin.
-net-analyzer/check_mk_agent:postgres - Install check_mk-agent postgres plugin.
-net-analyzer/check_mk_agent:smart - Install check_mk-agent S.M.A.R.T plugin.
-net-analyzer/check_mk_agent:zypper - Install check_mk-agent zypper plugin.
 net-analyzer/echoping:http - enable support for http protocol.
 net-analyzer/echoping:icp - enable support for ICP (used to monitor proxies).
 net-analyzer/echoping:priority - enable socket priority support.
@@ -231,7 +219,6 @@ net-analyzer/flent:plots - Enable drawing plots
 net-analyzer/flowgrind:pcap - Enable packet capturing support using net-libs/libpcap
 net-analyzer/fprobe:messages - enable console messages
 net-analyzer/goaccess:btree - Enable Tokyo Cabinet's on-disk B+ Tree database backend
-net-analyzer/goaccess:getline - Use GNU getline() to parse full line requests
 net-analyzer/goaccess:memhash - Enable Tokyo Cabinet's on-memory hash database backend
 net-analyzer/goaccess:tokyocabinet - Enable Tokyo Cabinet's on-memory hash database backend
 net-analyzer/gr-fosphor:glfw - enable GLFW based interface
@@ -259,8 +246,6 @@ net-analyzer/ipsumdump:nanotimestamp - Enable timestamps with nano-second resolu
 net-analyzer/linkchecker:sqlite - Mozilla Bookmark parsing
 net-analyzer/mate-netspeed:gtk3 - Build with GTK+3 instead of GTK+2
 net-analyzer/metasploit:development - Install dependencies needed for metasploit and exploit development
-net-analyzer/metasploit:nexpose - Enable the plugin to integrate with nexpose
-net-analyzer/metasploit:openvas - Enable the plugin to integrate net-analyzer/openvas
 net-analyzer/metasploit:oracle - Enable restricted oracle modules which have additional deps
 net-analyzer/metasploit:pcap - Enable libpcap for packet sniffing
 net-analyzer/mk-livestatus:nagios4 - Generate a net-analyzer/nagios-4 compatible plugin
@@ -312,7 +297,6 @@ net-analyzer/net-snmp:rpm - Enable monitoring of app-arch/rpm. This flag require
 net-analyzer/net-snmp:smux - Enable support for the legacy smux protocol (superseded by agentx)
 net-analyzer/net-snmp:ucd-compat - Build UCD compatibility library. Increases significantly the install size.
 net-analyzer/netdata:compression - Enable compression via zlib
-net-analyzer/netdata:ipmi - Install sys-apps/ipmitool required for monitoring IPMI sensors.
 net-analyzer/netdata:nfacct - Enable the nfacct plugin
 net-analyzer/netdata:nodejs - Enable use of nodejs (which some plugins use)
 net-analyzer/netperf:demo - Emit interim results during the run. May affect results
@@ -322,6 +306,7 @@ net-analyzer/nfdump:nfprofile - Build nfprofile used by NfSen
 net-analyzer/nfdump:nftrack - Build nfprofile used by PortTracker
 net-analyzer/nfdump:readpcap - Build nfcapd collector to read from pcap file instead ofnetwork data
 net-analyzer/nfdump:sflow - Build sflow collector sfcpad
+net-analyzer/nmap:lua - Include support for the Nmap Scripting Engine (NSE)
 net-analyzer/nmap:ncat - Install the ncat utility
 net-analyzer/nmap:ndiff - Install the ndiff utility
 net-analyzer/nmap:nmap-update - Install nmap-update, which uses dev-vcs/subversion to update nmap scripts in your home directory
@@ -339,11 +324,7 @@ net-analyzer/pinger:gtk2 - Install the gtkpinger GUI utility based on x11-libs/g
 net-analyzer/pinger:gtk3 - Install the gtkpinger GUI utility based on x11-libs/gtk+:3
 net-analyzer/pmacct:64bit - Use 64bit counters instead of 32bit ones
 net-analyzer/pmacct:geoipv2 - Add support for GeoIP2 through dev-libs/libmaxminddb
-net-analyzer/pmacct:jansson - Add support for JSON through dev-libs/jansson
-net-analyzer/pmacct:kafka - Add support for Apache Kafka through dev-libs/librdkafka
 net-analyzer/pmacct:mongodb - Add support for mongodb backend
-net-analyzer/pmacct:nflog - Add support for NFLOG through uacctd
-net-analyzer/pmacct:rabbitmq - Add support for RabbitMQ through net-libs/rabbitmq-c
 net-analyzer/pmacct:ulog - Enable support for ULOG in older kernels (deprecated)
 net-analyzer/prelude-lml:tls - Enables Prelude LML support Syslog through TLS using net-libs/gnutls.
 net-analyzer/rrdcollect:exec - Enable exec:/// support
@@ -406,33 +387,19 @@ net-analyzer/tcpreplay:tcpdump - Use net-analyzer/tcpdump for packet decoding fe
 net-analyzer/testssl:bundled-openssl - Install precompiled versions of OpenSSL for greater testing coverage
 net-analyzer/wireshark:adns - Use the GNU net-dns/c-ares library to resolve DNS names
 net-analyzer/wireshark:androiddump - Install androiddump, an extcap interface to capture from Android devices
-net-analyzer/wireshark:capinfos - Install capinfos, to print information about capture files
-net-analyzer/wireshark:captype - Install captype, to print the file types of capture files
 net-analyzer/wireshark:ciscodump - Install ciscodump, extcap interface to capture from a remote Cisco router
 net-analyzer/wireshark:crypt - Use dev-libs/libgcrypt to decrypt traffic
-net-analyzer/wireshark:dftest - Install dftest, to display filter byte-code, for debugging dfilter routines
 net-analyzer/wireshark:doc-pdf - Build documentation in pdf format (US and a4 paper sizes)
-net-analyzer/wireshark:dumpcap - Install dumpcap, to dump network traffic from inside wireshark
-net-analyzer/wireshark:editcap - Install editcap, to edit and/or translate the format of capture files
 net-analyzer/wireshark:libssh - Use net-libs/libssh (for sshdump)
-net-analyzer/wireshark:libxml2 - Use dev-libs/libxml2 for handling XML configuration in dissectors
-net-analyzer/wireshark:mergecap - Install mergecap, to merge two or more capture files into one
 net-analyzer/wireshark:netlink - Use dev-libs/libnl
-net-analyzer/wireshark:nghttp2 - Use net-libs/nghttp2 for HTTP/2 support
 net-analyzer/wireshark:pcap - Use net-libs/libpcap for network packet capturing (build dumpcap, rawshark)
+net-analyzer/wireshark:qt4 - Build the wireshark executable with an experimental Qt UI instead of GTK+.
 net-analyzer/wireshark:randpkt - Install randpkt, a utility for creating pcap trace files full of random packets
 net-analyzer/wireshark:randpktdump - Install randpktdump, an extcap interface to provide access to the random packet generator (randpkt)
-net-analyzer/wireshark:reordercap - Install reordercap, to reorder input file by timestamp into output file
 net-analyzer/wireshark:sbc - Use media-libs/sbc for playing back SBC encoded packets
-net-analyzer/wireshark:sharkd - Install sharkd, the daemon variant of wireshark
 net-analyzer/wireshark:smi - Use net-libs/libsmi to resolve numeric OIDs into human readable format
-net-analyzer/wireshark:snappy - Use app-arch/snappy for snappy compression and decompression
-net-analyzer/wireshark:spandsp - Use media-libs/spandsp for for G.722 and G.726 codec support in the RTP Player
 net-analyzer/wireshark:sshdump - Install sshdump, an extcap interface to capture from a remote host through SSH
-net-analyzer/wireshark:text2pcap - Install text2pcap, to generate a capture file from an ASCII hexdump of packets
 net-analyzer/wireshark:tfshark - Install tfshark, a terminal-based version of the FileShark capability
-net-analyzer/wireshark:tshark - Install tshark, to dump and analyzer network traffic from the command line
-net-analyzer/wireshark:udpdump - Install udpdumpi, to get packets exported from a source (like a network device or a GSMTAP producer) that are dumped to a pcap file
 net-analyzer/zabbix:agent - Enable zabbix agent (for to-be-monitored machines)
 net-analyzer/zabbix:frontend - Enable zabbix web frontend
 net-analyzer/zabbix:ipv6 - Turn on support of IPv6
@@ -450,15 +417,20 @@ net-analyzer/zmap:redis - Add support for storing in a redis DB via dev-libs/hir
 net-dialup/accel-ppp:ipoe - Build IPoE kernel module
 net-dialup/accel-ppp:shaper - Support for traffic shaping
 net-dialup/accel-ppp:valgrind - Compile in valgrind hints
+net-dialup/capi4k-utils:fax - Install capi-fax demo programs
+net-dialup/capi4k-utils:pppd - Installs pppdcapiplugin modules
+net-dialup/capi4k-utils:rcapid - Installs rcapid daemon
 net-dialup/freeradius:pcap - Build the RADIUS sniffer which requires net-libs/libpcap.
 net-dialup/freeradius-client:scp - Add service type hints derived from username prefix
 net-dialup/freeradius-client:shadow - Enable shadow password support
 net-dialup/mgetty:fax - Enables fax support
 net-dialup/mgetty:fidonet - Enables FidoNet support
+net-dialup/pptpd:gre-extreme-debug - Log all GRE accepted packages when in debug mode (required if you want upstream support)
 net-dialup/xl2tpd:dnsretry - Patch for host lookup retries, activated by redial feature
 net-dialup/xl2tpd:kernel - Enable kernel interface for PPPoL2TP
 net-dns/bind:dlz - Enables dynamic loaded zones, 3rd party extension
 net-dns/bind:dnstap - Enables dnstap packet logging
+net-dns/bind:fetchlimit - Recursive fetch limits for DoS attack mitigation
 net-dns/bind:filter-aaaa - Enable filtering of AAAA records over IPv4
 net-dns/bind:fixed-rrset - Enables fixed rrset-order option
 net-dns/bind:gost - Enables gost OpenSSL engine support
@@ -467,23 +439,18 @@ net-dns/bind:json - Enable JSON statistics channel
 net-dns/bind:lmdb - Enable LMDB support to store configuration for 'addzone' zones
 net-dns/bind:nslint - Build and install the nslint util
 net-dns/bind:rpz - Enable response policy rewriting (rpz)
+net-dns/bind:sit - Source Identity Token support (sit)
 net-dns/bind:urandom - Use /dev/urandom instead of /dev/random
 net-dns/ddclient:cloudflare - Enable support for updating IP address via CloudFlare
 net-dns/ddclient:hardened - Use iproute2 instead of ifconfig to grab an IP address
+net-dns/dnscrypt-proxy:ldns - Use net-libs/ldns for DNSSEC/SSHFP validation
 net-dns/dnscrypt-proxy:plugins - Enable plugin support to inspect and modify queries and responses
 net-dns/dnscrypt-proxy:systemd - Use systemd's socket activation instead of creating the sockets itself
-net-dns/dnsdist:dnscrypt - Enable the ability to act as a DNSCrypt server
-net-dns/dnsdist:luajit - Use dev-lang/luajit instead of dev-lang/lua
-net-dns/dnsdist:regex - Enable support for regular expression matching via dev-libs/re2
-net-dns/dnsdist:remote-logging - Enable support for remote logging via dev-libs/protobuf
-net-dns/dnsdist:ssl - Enable support for and encrypted client-server communication via dev-libs/libsodium
 net-dns/dnsmasq:auth-dns - Add support for acting as an authorative DNS server.
 net-dns/dnsmasq:conntrack - Add support for Linux conntrack connection marking.
 net-dns/dnsmasq:dhcp - Enable support for acting as a DHCP server.
 net-dns/dnsmasq:dhcp-tools - Install extra command line tools for manually managing DHCP leases.
 net-dns/dnsmasq:dnssec - Enable support DNSSEC validation and caching.
-net-dns/dnsmasq:id - Whether report *.bind CHAOS info to clients, otherwise forward such requests upstream instead
-net-dns/dnsmasq:libidn2 - Enable support for Internationalized Domain Names, via net-dns/libidn2 rather than net-dns/libidn
 net-dns/dnsmasq:script - Enable support for calling scripts when leases change.
 net-dns/dnsmasq:tftp - Enables built in TFTP server for netbooting.
 net-dns/hash-slinger:ipsec - Enable support for IPSECKEY records (ipseckey)
@@ -505,6 +472,7 @@ net-dns/nsd:nsec3 - Enable NSEC3 support
 net-dns/nsd:ratelimit - Enables ratelimiting, based on query name, type and source
 net-dns/nsd:root-server - Configure NSD as a root server
 net-dns/nsd:runtime-checks - Enable runtime checks, this could lead to a reduced service level
+net-dns/nsd:zone-stats - Enable per-zone statistics logging, this could lead to a reduced service level
 net-dns/opendnssec:auditor - Enables auditing capabilities for OpenDNSSEC
 net-dns/opendnssec:eppclient - Enables support for automatic submission of DNSSEC keys to an upstream epp server
 net-dns/opendnssec:external-hsm - Enables support for storing DNSSEC keys through an arbitrary non-portage PKCS#11 interface, specified through an environment variable
@@ -524,12 +492,10 @@ net-dns/pdns-recursor:protobuf - Enable support for dev-libs/protobuf.
 net-dns/pdnsd:isdn - Linux-only: check status of ippp interfaces with ISDN-specific system calls.
 net-dns/pdnsd:urandom - Linux-only: use /dev/urandom (pseudo-random number generation) instead of the default use of random() PRNG.
 net-dns/resolvconf-symlink:symlink - Actually replace /etc/resolv.conf with a symlink. Without this flag, the ebuild is a no-op.
-net-dns/unbound:dnscrypt - Enable DNSCrypt support
 net-dns/unbound:dnstap - Enable dnstap support
 net-dns/unbound:ecdsa - Enable ECDSA support
 net-dns/unbound:gost - Enable GOST support
 net-firewall/arno-iptables-firewall:plugins - Install optional plugins
-net-firewall/firehol:ipset - Use net-firewall/ipset.
 net-firewall/firewalld:gui - Builds and installs GUI configurator and GTK+ applet
 net-firewall/fwknop:client - Build fwknop client
 net-firewall/fwknop:extras - Install utility scripts and AppArmor policy for fwknopd
@@ -540,6 +506,11 @@ net-firewall/fwknop:iptables - Use net-firewall/iptables as the default server b
 net-firewall/fwknop:nfqueue - Enable UDP-only NFQUEUE server mode (no net-libs/libpcap dependency)
 net-firewall/fwknop:server - Build fwknopd server
 net-firewall/fwknop:udp-server - Enable UDP-only server mode (no net-libs/libpcap dependency)
+net-firewall/ipsec-tools:hybrid - Makes available both mode-cfg and xauth support
+net-firewall/ipsec-tools:idea - Enable support for the IDEA algorithm
+net-firewall/ipsec-tools:nat - Enable NAT-Traversal
+net-firewall/ipsec-tools:rc5 - Enable support for the patented RC5 algorithm
+net-firewall/ipsec-tools:stats - Enable statistics reporting
 net-firewall/nufw:nfconntrack - Use netfilter_conntrack
 net-firewall/nufw:nfqueue - Use NFQUEUE instead of QUEUE
 net-firewall/nufw:pam_nuauth - Add support for pam nufw from PAM
@@ -595,16 +566,15 @@ net-fs/samba:aio - Enable asynchronous IO support
 net-fs/samba:client - Enables the client part
 net-fs/samba:cluster - Enable support for clustering
 net-fs/samba:dmapi - Enable support for DMAPI. This currently works only in combination with XFS.
-net-fs/samba:gpg - Use app-crypt/gpgme for AD DC
 net-fs/samba:iprint - Enabling iPrint technology by Novell
 net-fs/samba:quota - Enables support for user quotas
-net-fs/samba:system-heimdal - Use app-crypt/heimdal instead of bundled heimdal.
 net-fs/samba:system-mitkrb5 - Use app-crypt/mit-krb5 instead of app-crypt/heimdal.
 net-fs/samba:winbind - Enables support for the winbind auth daemon
 net-fs/smbnetfs:gnome - Use the gnome-base/gnome-keyring for password management.
 net-fs/unfs3:cluster - Enable ClusterNFS file naming extensions
 net-ftp/frox:transparent - Enable transparent proxying of data connections
 net-ftp/lftp:convert-mozilla-cookies - Install the convert-mozilla-cookies script and its run-time dependencies
+net-ftp/lftp:openssl - Use dev-libs/openssl for SSL connections
 net-ftp/lftp:verify-file - Install the verify-file script and its run-time dependencies
 net-ftp/proftpd:authfile - Enable support for the auth-file module
 net-ftp/proftpd:ban - Enable support for the mod_ban module
@@ -658,6 +628,7 @@ net-im/bitlbee:nss - Use NSS for SSL support in MSN and Jabber
 net-im/bitlbee:otr - Enable support for encrypted conversations
 net-im/bitlbee:plugins - Enable support for plugins
 net-im/bitlbee:purple - Use libpurple instead of the built-in IM protocol support
+net-im/bitlbee:skype - Enable Skype support
 net-im/bitlbee:twitter - Enable Twitter protocol support
 net-im/centerim:gadu - Enable support for the Gadu-Gadu protocol
 net-im/centerim:irc - Enable support for the IRC protocol
@@ -708,6 +679,7 @@ net-im/kadu:otr - Enable char encryption via OTR library
 net-im/kadu:phonon - Enables phonon audio plugin
 net-im/kadu:sdk - Install Kadu SDK (cmake module, API headers)
 net-im/kadu:speech - Enables speech module
+net-im/licq:aosd - Build the advanced on screen display plugin.
 net-im/mcabber:aspell - Adds support for app-text/aspell spell checker.
 net-im/mcabber:otr - Enable encrypted conversations using Off-The-Records messaging
 net-im/pidgin:gadu - Enable Gadu Gadu protocol support
@@ -715,6 +687,7 @@ net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
 net-im/pidgin:gstreamer - Enables voice and video sessions
 net-im/pidgin:gtk - Builds Pidgin, the GTK+ interface
 net-im/pidgin:meanwhile - Enable meanwhile support for Sametime protocol
+net-im/pidgin:mxit - Enable mxit protocol support
 net-im/pidgin:ncurses - Build finch, console interface
 net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
@@ -729,6 +702,7 @@ net-im/psi:extras - Enables extra non official patches
 net-im/psi:iconsets - Install additional iconsets, some of them has not clear licensing
 net-im/psi:plugins - Enable plugins support
 net-im/psi:powersave - Disable some non critical timers for much less CPU usage
+net-im/psi:webkit - Enable chatlog rendering using webkit
 net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
 net-im/psi:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/psimedia:demo - build simple test application for the PsiMedia system
@@ -816,6 +790,7 @@ net-im/vacuum:shortcutmanager - Allows to setup user defined shortcuts
 net-im/vacuum:socksstreams - Enable initiating SOCKS5 data streams between two XMPP entities
 net-im/vacuum:urlprocessor - Allows other plugins to load data from custom types of URLs
 net-im/vacuum:vcard - Enable obtaining peer's personal contact information
+net-im/vacuum:vcs-revision - Add VCS revision to version number, INSECURE.
 net-im/vacuum:xmppuriqueries - Allow other plugins to handle XMPP URI queries
 net-irc/atheme-services:cracklib - Enable nickserv/cracklib module for enforcing strong account passwords
 net-irc/atheme-services:largenet - Enable support/tweaks for large networks
@@ -824,13 +799,17 @@ net-irc/atheme-services:perl - Install a perl module which wraps around the serv
 net-irc/bip:freenode - Enables freenode-specific functionality. Currently that is only support for mute lists (MODE #channel +q).
 net-irc/bip:noctcp - Disable the automatic CTCP VERSION reply which is often exploited by malicious people to cause a DoS (reconnect due to flooding).
 net-irc/bip:oidentd - Enable oidentd support
+net-irc/charybdis:largenet - Enable support/tweaks for large networks
 net-irc/epic5:archive - Use app-arch/libarchive to use zip and tar archives from scripts.
 net-irc/epic5:valgrind - Compile against dev-util/valgrind headers to improve memory-leak checking when running epic5 under valgrind.
 net-irc/hexchat:libcanberra - Enable sound event support using media-libs/libcanberra
 net-irc/hexchat:libproxy - Enable proxy support.
+net-irc/hexchat:ntlm - Enable NTLM authentication
 net-irc/hexchat:plugin-checksum - Build Checksum plugin (needs plugins)
+net-irc/hexchat:plugin-doat - Build Do At plugin (needs plugins)
 net-irc/hexchat:plugin-fishlim - Build FiSHLiM plugin (needs plugins )
 net-irc/hexchat:plugin-sysinfo - Build SysInfo plugin (needs plugins)
+net-irc/hexchat:plugins - Enable plugin support and installs some built-in plugins
 net-irc/hexchat:theme-manager - Build the theme manager (mono)
 net-irc/inspircd:geoip - Add geoip support for country and city lookup based on IPs
 net-irc/inspircd:gnutls - Enable TLS support
@@ -918,7 +897,9 @@ net-libs/iax:snomhack - Use slower memset for SNOM phoneem
 net-libs/ldns:dane - Enable DNS-based Authentication of Named Entities (DANE) support
 net-libs/ldns:ecdsa - Enable ECDSA support
 net-libs/ldns:gost - Enable GOST support
-net-libs/libbtbb:extras - Install pcapdump and btaptap tools
+net-libs/libbitcoinconsensus:bitcoin_policy_cltv - Check LockTime Verify policy: Your node will recognise and assist OP_CHECKLOCKTIMEVERIFY (BIP65) transactions
+net-libs/libbitcoinconsensus:bitcoin_policy_dcmp - Data Carrier Multi-Push policy: Your node will assist transactions with multiple pushes in their data carrier (if any)
+net-libs/libbitcoinconsensus:ljr - Enable Luke Dashjr's patches
 net-libs/libbtbb:pcap - Add support for network packet capture via net-libs/libpcap
 net-libs/libbtbb:wireshark-plugins - Build the wireshark plugins for bluetooth baseband sniffing
 net-libs/libeXosip:srv - enable support for SRV records DNS queries
@@ -933,10 +914,10 @@ net-libs/libmicrohttpd:messages - enable error messages
 net-libs/libnftnl:json - Supports parsing of JSON
 net-libs/libnids:glib - Use dev-libs/glib for multiprocessing support
 net-libs/libnids:libnet - Include code requiring net-libs/libnet
-net-libs/liboping:filecaps - Allow non-root users to use [n]oping utility.
-net-libs/liboping:ncurses - Build ncurses-based version of oping utility (requires sys-libs/ncurses)
+net-libs/libnm-qt:modemmanager - Enable support for mobile broadband devices
 net-libs/libosmocore:embedded - Build for embedded use and disable unsupported features
 net-libs/libosmocore:pcsc-lite - Enable smartcard support with sys-apps/pcsc-lite
+net-libs/libpcap:canusb - Use virtual/libusb to support Controller Area Network over USB (CAN USB)
 net-libs/libpcap:netlink - Use dev-libs/libnl to put wireless interfaces in monitor mode.
 net-libs/libprotoident:tools - Build and install command-line tools
 net-libs/libqmi:mbim - Support QMI over Mobile Broadband Interface Model (MBIM)
@@ -951,23 +932,13 @@ net-libs/libssh:server - Build with SSH server support
 net-libs/libssh:sftp - Build with SFTP support
 net-libs/libssh:ssh1 - Build with SSH1 support
 net-libs/libssh2:gcrypt - Use dev-libs/libgcrypt instead of dev-libs/openssl
-net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/libtrace:numa - Use sys-process/numactl
-net-libs/libupnp:reuseaddr - Allow clean restarts by binding the socket with SO_REUSEADDR.
 net-libs/libvncserver:24bpp - enable 24bpp support
 net-libs/libvncserver:gcrypt - enable support for gcrypt
-net-libs/libwebsockets:access-log - Support generating Apache-compatible access logs
-net-libs/libwebsockets:cgi - Include CGI (spawn process with network-connected stdin/out/err) APIs
 net-libs/libwebsockets:client - The client part of the library and libwebsockets-test-client
-net-libs/libwebsockets:generic-sessions - With the Generic Sessions plugin
-net-libs/libwebsockets:http-proxy - Support for rewriting HTTP proxying
 net-libs/libwebsockets:http2 - Support the HTTP/2 protocol
-net-libs/libwebsockets:lejp - With the Lightweight JSON Parser
 net-libs/libwebsockets:libev - Support event loops via dev-libs/libev
 net-libs/libwebsockets:libuv - Support asynchronous I/O via dev-libs/libuv
-net-libs/libwebsockets:server-status - Support json + jscript server monitoring
-net-libs/libwebsockets:smtp - Provide SMTP support
-net-libs/libwebsockets:sqlite3 - Require SQLITE3 support
 net-libs/loudmouth:asyncns - Use net-libs/libasyncns for asynchronous name resolution.
 net-libs/loudmouth:openssl - Enable dev-libs/openssl support instead of gnutls (which is the default).
 net-libs/mbedtls:havege - Enable the HAVEGE random generator. Warning: the HAVEGE random generator is not suitable for virtualized environments
@@ -978,8 +949,6 @@ net-libs/nghttp2:utils - Install nghttp, nghttpd and nghttpx
 net-libs/nodejs:npm - Enable NPM package manager
 net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
 net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
-net-libs/ntirpc:gssapi - Include support for RPCSEC GSS
-net-libs/ntirpc:rdma - Include support for RDMA RPC
 net-libs/onion:boehm-gc - Add dev-libs/boehm-gc support for memory allocations.
 net-libs/onion:libev - Use dev-libs/libev as thread poller instead of Linux's epoll.
 net-libs/onion:libevent - Use dev-libs/libevent as thread poller instead of libev or Linux's epoll.
@@ -1010,6 +979,7 @@ net-libs/opal:wav - Enable WAVFILE support
 net-libs/opal:x264-static - Install x264 plugin statically linked with x264
 net-libs/ortp:ntp-timestamp - Turn on NTP timestamping on received packet
 net-libs/ortp:srtp - Add support for Secure RTP
+net-libs/ortp:zrtp - Add support for ZRTP key negotiation
 net-libs/phodav:spice - Install the spice-webdavd guest agent
 net-libs/pjproject:amr - Inlcude AMR codec in the build
 net-libs/pjproject:epoll - Use /dev/epoll ioqueue on Linux (experimental)
@@ -1045,9 +1015,7 @@ net-libs/ptlib:wav - Enable WAVFILE support
 net-libs/qxmpp:opus - Enable Opus codec support via media-libs/opus
 net-libs/qxmpp:vpx - Enable VP8 codec support via media-libs/libvpx
 net-libs/rabbitmq-c:tools - Builds cli tools to interact with brokers
-net-libs/shairplay:alac - Add support for Apple Lossless Audio Codec files
-net-libs/shairplay:static-libs - Build static versions of dynamic libraries as well
-net-libs/shairplay:tools - Build and install a binary shairplay in /usr/bin
+net-libs/rb_libtorrent:dht - Enable DHT (distributed hash table) support
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-libs/tox:av - Adds support for audio and video.
 net-libs/tox:daemon - Enable the DHT Bootstrap Daemon.
@@ -1070,16 +1038,10 @@ net-mail/automx:memcached - Enable memcached support
 net-mail/automx:sql - Enable support for SQL backends
 net-mail/automx:tools - Install additional automx-test tool
 net-mail/courier-imap:trashquota - include deleted messages, and the Trash folder, in the estimated quota usage for maildirs
-net-mail/cyrus-imapd:backup - Enable backup service support
-net-mail/cyrus-imapd:calalarm - Enable CalDAV alarm support
 net-mail/cyrus-imapd:http - Enable http support
-net-mail/cyrus-imapd:jmap - Enable JMAP support
-net-mail/cyrus-imapd:lmdb - Enable support for using dev-db/lmdb
-net-mail/cyrus-imapd:replication - Enable replication support
+net-mail/cyrus-imapd:replication - Enable replication support in the cyrus imap server
 net-mail/cyrus-imapd:server - Enable building server binaries
 net-mail/cyrus-imapd:sieve - Enable sieve support
-net-mail/cyrus-imapd:sphinx - Enable Sphinx search engine support
-net-mail/cyrus-imapd:xapian - Enable Xapian search engine support
 net-mail/dbmail:sieve - Enable sieve filter support
 net-mail/dovecot:cydir - Add cydir storage support
 net-mail/dovecot:imapc - Add imap client storage support
@@ -1181,6 +1143,11 @@ net-misc/asterisk-moh-opsound:siren7 - Install the sounds files for the siren7 c
 net-misc/asterisk-moh-opsound:sln16 - Install the sounds files for the sln16 codec.
 net-misc/asterisk-moh-opsound:ulaw - Install the sounds files for the ulaw codec.
 net-misc/asterisk-moh-opsound:wav - Install the sounds files for the wav codec.
+net-misc/badvpn:client - Build the badvpn-client program, a daemon that runs on endpoints of the VPN.
+net-misc/badvpn:ncd - Build NCD, a lightweight scripting language especially suited for network configurations.
+net-misc/badvpn:server - Build the badvpn-server program, a central server that manages the VPN network.
+net-misc/badvpn:tun2socks - Build tun2socks, a program which implements a TUN device that forwards TCP traffic through a SOCKS5 server.
+net-misc/badvpn:udpgw - Build udpgw, a small daemon which allows tun2socks to forward UDP traffic.
 net-misc/batman-adv:bla - B.A.T.M.A.N. bridge loop avoidance
 net-misc/batman-adv:dat - B.A.T.M.A.N. distributed arp table
 net-misc/batman-adv:mcast - B.A.T.M.A.N. multicast optimizations
@@ -1235,10 +1202,8 @@ net-misc/cgminer:ants1 - Enable support for Antminer S1 Bitmain
 net-misc/cgminer:ants2 - Enable support for Antminer S2 Bitmain
 net-misc/cgminer:ants3 - Enable support for Antminer S3 Bitmain
 net-misc/cgminer:avalon - Enable support for Avalon ASICs
-net-misc/cgminer:avalon-miner - Enable support for Avalon miner ASICs
 net-misc/cgminer:avalon2 - Enable support for Avalon2 ASICs
 net-misc/cgminer:avalon4 - Enable support for Avalon4 ASICs
-net-misc/cgminer:avalon7 - Enable support for Avalon7 ASICs
 net-misc/cgminer:bab - Enable support for BlackArrow Bitfury
 net-misc/cgminer:bflsc - Enable support for BFL ASICs
 net-misc/cgminer:bitforce - Enable support for mining with ButterFly Labs BitFORCE FPGAs
@@ -1256,6 +1221,7 @@ net-misc/cgminer:minion - Enable support for mining with BlackArrow Bitfury
 net-misc/cgminer:modminer - Enable support for mining with ModMiner FPGAs
 net-misc/cgminer:sp10 - Enable support for Spondoolies SP10
 net-misc/cgminer:sp30 - Enable support for Spondoolies SP30
+net-misc/cgminer:spondoolies - Enable support for Spondoolies
 net-misc/chrony:adns - Support for asynchronous DNS
 net-misc/chrony:cmdmon - Support for command and monitoring
 net-misc/chrony:html - Install HTML documentation
@@ -1265,15 +1231,13 @@ net-misc/chrony:pps - Support for the Linux Pulse Per Second (PPS) interface
 net-misc/chrony:refclock - Support for reference clocks
 net-misc/chrony:rtc - Support for the Linux Real Time Clock interface
 net-misc/connman:ethernet - Enable ethernet support.
-net-misc/connman:iptables - Use net-firewall/iptables as firewall.
 net-misc/connman:l2tp - Use net-dialup/xl2tpd for L2TP VPN support.
-net-misc/connman:nftables - Use net-firewall/nftables as firewall.
 net-misc/connman:ofono - Use net-misc/ofono for telephony support.
-net-misc/connman:openconnect - Use net-vpn/openconnect for VPN support.
-net-misc/connman:openvpn - Use net-vpn/openvpn for openvpn support.
+net-misc/connman:openconnect - Use net-misc/openconnect for VPN support.
+net-misc/connman:openvpn - Use net-misc/openvpn for openvpn support.
 net-misc/connman:pptp - Use net-dialup/pptpclient for PPTP VPN support.
 net-misc/connman:tools - Enable testing tools.
-net-misc/connman:vpnc - Use net-vpn/vpnc for cisco VPN support.
+net-misc/connman:vpnc - Use net-misc/vpnc for cisco VPN support.
 net-misc/connman:wispr - Enable support for WISPr hotspot logins.
 net-misc/connman-gtk:openconnect - Support easier authentication to AnyConnect VPNs
 net-misc/csync:sftp - Enable sftp transfer support via net-libs/libssh
@@ -1286,31 +1250,21 @@ net-misc/dropbear:bsdpty - Add support for legacy BSD pty's rather than dynamic 
 net-misc/dropbear:multicall - Build all the programs as one little binary (to save space)
 net-misc/dropbear:shadow - Enable shadow password support
 net-misc/dropbox:librsync-bundled - Use bundled librsync library
-net-misc/electrum:audio_modem - Enable plugin to support Audio Modem
 net-misc/electrum:cli - Enables the CLI interface
 net-misc/electrum:cosign - Enable plugin to support multisig wallets between multiple Electrum clients
-net-misc/electrum:digitalbitbox - Enable plugin to support Digital Bitbox hardware wallet
 net-misc/electrum:email - Enable plugin to support emailing invoices
+net-misc/electrum:fiat - Enable plugin for looking up fiat values of bitcoin
 net-misc/electrum:greenaddress_it - Enable plugin to verify GreenAddress.it instant transactions
+net-misc/electrum:gtk3 - Enable support for gtk+3
 net-misc/electrum:qrcode - Enable QR code scanning with media-gfx/zbar
 net-misc/electrum:sync - Enable plugin to sync wallet metadata across multiple Electrum clients
 net-misc/electrum:trustedcoin_com - Enable plugin to use two-factor service by TrustedCoin.com
 net-misc/electrum:vkb - Enable plugin for virtual keyboard
-net-misc/eventd:libcanberra - Enable plugin for sounds via media-libs/libcanberra
-net-misc/eventd:libnotify - Enable plugin to relay events to notification daemon (Note: not required for local notifications via net-misc/eventd)
-net-misc/eventd:notification - Enable plugin to display on-screen notifications
-net-misc/eventd:purple - Enable plugin for IM notifications via libpurple
-net-misc/eventd:speech - Enable plugin for Text-To-Speech support
-net-misc/eventd:websocket - Enable support for WebSocket protocol
-net-misc/fatrat:bittorrent - Use the bittorrent protocol via net-libs/libtorrent-rasterbar.
+net-misc/fatrat:bittorrent - Use the bittorrent protocol via net-libs/rb_libtorrent.
 net-misc/fatrat:webinterface - Enable builtin webinterface.
+net-misc/flexget:transmission - Support comminucation with net-p2p/transmission
 net-misc/freerdp:client - Build client binaries
 net-misc/freerdp:server - Build server binaries
-net-misc/gerbera:curl - Support YouTube and external media sources (e.g. internet radio)
-net-misc/gerbera:lastfm - Enable last.fm support
-net-misc/gerbera:magic - Use libmagic to determine file types
-net-misc/gerbera:mysql - Use dev-db/mysql as backend rather than SQLite3
-net-misc/gerbera:taglib - Use media-libs/taglib for reading files' metadata rather than id3lib
 net-misc/gsasl:gcrypt - Use dev-libs/libgcrypt for low-level crypto
 net-misc/gsasl:ntlm - Add support for Microsoft's NTLM mechanism using net-libs/libntlm
 net-misc/guacamole-server:ssh - enable support for ssh connections
@@ -1322,14 +1276,11 @@ net-misc/hylafaxplus:html - Convert faxes into html email
 net-misc/hylafaxplus:jbig - JBIG Fax Compression Support
 net-misc/hylafaxplus:mgetty - Receive faxes via serial port connections
 net-misc/hylafaxplus:pam - hfaxd authentication via PAM
-net-misc/icaclient:gstreamer010 - Enable audio support via media-libs/gstreamer using SLOT 0.10
+net-misc/i2pd:i2p-hardening - Compile with hardening on vanilla compilers/linkers
 net-misc/icecast:kate - Add karaoke and text encapsulation support for Ogg files
 net-misc/icecast:logrotate - Install support files for app-admin/logrotate?
 net-misc/icecast:yp - Build support for yp public directory listings
 net-misc/kafka-bin:internal-zookeeper - Use bundled local zookeeper instance
-net-misc/kafkacat:json - Enable json support
-net-misc/kea:openssl - Use dev-libs/openssl instead of Botan
-net-misc/kea:samples - Install sample configuration files
 net-misc/knock:server - Installs the knockd server daemon.
 net-misc/lcr:asterisk - net-misc/asterisk channel driver
 net-misc/lcr:gsm-bs - net-wireless/openbsc driver
@@ -1338,6 +1289,7 @@ net-misc/lcr:gsmhr - Support for GSM HR codec using reference code (very slow)
 net-misc/lcr:misdn - net-misc/misdn driver
 net-misc/lcr:sip - SIP support
 net-misc/lcr:ss5 - CCITT No. 5 support
+net-misc/libreswan:dnssec - Use DNSSEC resolver (requires net-dns/unbound
 net-misc/libteam:zmq - Build witch net-libs/zeromq support
 net-misc/lldpd:cdp - Enable Cisco Discovery Protocol
 net-misc/lldpd:dot1 - Enable Dot1 extension (VLAN stuff)
@@ -1376,7 +1328,6 @@ net-misc/ncp:diet - Compile against dev-libs/dietlibc
 net-misc/nextcloud-client:dolphin - Install the kde-apps/dolphin extension
 net-misc/nextcloud-client:nautilus - Install the gnome-base/nautilus extension
 net-misc/nextcloud-client:sftp - Enable sftp transfer support via net-libs/libssh
-net-misc/nextcloud-client:shibboleth - Build support for Shibboleth single sign-on
 net-misc/ocsync:sftp - Enable sftp transfer support via net-libs/libssh
 net-misc/ofono:atmodem - ETSI AT modem support.
 net-misc/ofono:bluetooth - Enable Bluetooth modem support using net-wireless/bluez.
@@ -1389,13 +1340,24 @@ net-misc/ofono:provision - Enable GPRS provisioning support
 net-misc/ofono:qmimodem - Enable Qualcomm QMI modem support
 net-misc/ofono:tools - Enable testing tools
 net-misc/oidentd:masquerade - Enable support for masqueraded/NAT connections
-net-misc/olsrd:pud - Install the Node Position Update plugin
+net-misc/openconnect:gssapi - Build GSSAPI support
+net-misc/openconnect:java - Build JNI bindings using jni.h
+net-misc/openconnect:libproxy - Enable proxy support
+net-misc/openconnect:lz4 - Enable support for lz4 compression
+net-misc/openconnect:stoken - Enable stoken support
+net-misc/openvpn:down-root - Enable the down-root plugin
+net-misc/openvpn:iproute2 - Enabled iproute2 support instead of net-tools
+net-misc/openvpn:lz4 - Enable LZ4 support
+net-misc/openvpn:mbedtls - Use mbed TLS instead of OpenSSL
+net-misc/openvpn:pkcs11 - Enable PKCS#11 smartcard support
+net-misc/openvpn:plugins - Enable the OpenVPN plugin system
+net-misc/openvpn:polarssl - Use PolarSSL instead of OpenSSL
+net-misc/openvpn:socks - Enable socks support
 net-misc/openvswitch:monitor - Build the Python and GUI dependent monitor applications
 net-misc/openvswitch:pyside - Use dev-python/pyside instead of dev-python/PyQt4 for Python/Qt-bindings when building with USE=monitor.
 net-misc/owncloud-client:dolphin - Install the kde-apps/dolphin extension
 net-misc/owncloud-client:nautilus - Install the gnome-base/nautilus extension
 net-misc/owncloud-client:sftp - Enable sftp transfer support via net-libs/libssh
-net-misc/owncloud-client:shibboleth - Build support for Shibboleth single sign-on
 net-misc/pavuk:hammer - Turn on chunky/hammer mode (DoS) in pavuk: when specified, pavuk will include features to stress test web sites using an ultrahigh performancereplay mechanism
 net-misc/plowshare:view-captcha - View captcha with aview
 net-misc/ps3mediaserver:multiuser - Allow renderer customization per-user.
@@ -1410,9 +1372,7 @@ net-misc/ptpd:snmp - Require net-analyzer/net-snmp to enable SNMP configuration
 net-misc/ptpd:statistics - Enable compution of statistics
 net-misc/putty:gtk - Build the PuTTY client which requires x11-libs/gtk+:2. Otherwise only the CLI tools puttygen, plink, pscp and psftp will be built.
 net-misc/quagga:bgpclassless - Apply unofficial patch to enable classless prefixes for BGP. Patch and information to be found at http://hasso.linux.ee/doku.php/english:network:quagga
-net-misc/quagga:fpm - Enable Forwarding Plane Manager support
 net-misc/quagga:multipath - Enable multipath routes support for any number of routes
-net-misc/quagga:nhrpd - Build Next Hop Resolution Protocol daemon
 net-misc/quagga:ospfapi - Enable OSPFAPI support for client applications accessing the OSPF link state database
 net-misc/quagga:pam - Add support for PAM (via sys-libs/pam) to the Quagga Virtual Terminal Interface Shell (vtysh); if the readline USE flag is disabled, this flag is ignored
 net-misc/quagga:protobuf - Enable support for dev-libs/protobuf
@@ -1437,7 +1397,6 @@ net-misc/scponly:subversion - Enables Subversion compatibility with potential se
 net-misc/scponly:unison - Enables Unison compatibility with potential security risks
 net-misc/scponly:wildcards - Enables wildcard processing with potential security risks
 net-misc/scponly:winscp - Enables WinSCP 2.0 compatibility with potential security risks
-net-misc/seafile-client:shibboleth - Build support for Shibboleth single sign-on
 net-misc/sitecopy:rsh - This allows the use of rsh (remote shell) and rcp (remote copy) for authoring websites. sftp is a much more secure protocol and is preferred.
 net-misc/sitecopy:webdav - Enable WebDav (Web-based Distributed Authoring and Versioning) support. This system allows users to collaborate on websites using a web based interface. See the ebuild for an FAQ page. Enables neon as well to handle webdav support.
 net-misc/sks:optimize - Enables bytecode optimization
@@ -1480,15 +1439,49 @@ net-misc/stargazer:stargazer - Enable build of Stargazer billing system.
 net-misc/stargazer:static-libs - Install static libraries.
 net-misc/streamtuner:shout - Enable shoutcast plug-in.
 net-misc/streamtuner:xiph - Enable xiph.org plug-in.
+net-misc/strongswan:constraints - Enable advanced X.509 constraint checking plugin.
+net-misc/strongswan:dhcp - Enable server support for querying virtual IP addresses for clients from a DHCP server. (IKEv2 only)
+net-misc/strongswan:eap - Enable support for the different EAP modules that is supported.
+net-misc/strongswan:farp - Enable faking of ARP responses for virtual IP addresses assigned to clients. (IKEv2 only)
+net-misc/strongswan:gcrypt - Enable dev-libs/libgcrypt plugin which provides 3DES, AES, Blowfish, Camellia, CAST, DES, Serpent and Twofish ciphers along with MD4, MD5 and SHA1/2 hash algorithms, RSA and DH groups 1,2,5,14-18 and 22-24(4.4+). Also includes a software random number generator.
+net-misc/strongswan:non-root - Force IKEv1/IKEv2 daemons to normal user privileges. This might impose some restrictions mainly to the IKEv1 daemon. Disable only if you really require superuser privileges.
+net-misc/strongswan:openssl - Enable dev-libs/openssl plugin which is required for Elliptic Curve Cryptography (DH groups 19-21,25,26) and ECDSA. Also provides 3DES, AES, Blowfish, Camellia, CAST, DES, IDEA and RC5 ciphers along with MD2, MD4, MD5 and SHA1/2 hash algorithms, RSA and DH groups 1,2,5,14-18 and 22-24(4.4+) dev-libs/openssl has to be compiled with USE="-bindist".
+net-misc/strongswan:pkcs11 - Enable pkcs11 support.
+net-misc/strongswan:strongswan_plugins_blowfish - Enable support for the blowfish plugin.
+net-misc/strongswan:strongswan_plugins_ccm - Enable support for the ccm plugin.
+net-misc/strongswan:strongswan_plugins_ctr - Enable support for the ctr plugin.
+net-misc/strongswan:strongswan_plugins_gcm - Enable support for the gcm plugin.
+net-misc/strongswan:strongswan_plugins_ha - Enable support for the ha plugin.
+net-misc/strongswan:strongswan_plugins_ipseckey - Enable support for the ipseckey plugin.
+net-misc/strongswan:strongswan_plugins_led - Enable support for the led plugin.
+net-misc/strongswan:strongswan_plugins_lookip - Enable support for the lookip plugin.
+net-misc/strongswan:strongswan_plugins_ntru - Enable support for the ntru plugin.
+net-misc/strongswan:strongswan_plugins_padlock - Enable support for the padlock plugin.
+net-misc/strongswan:strongswan_plugins_rdrand - Enable support for the rdrand plugin.
+net-misc/strongswan:strongswan_plugins_systime-fix - Enable support for the systime-fix plugin.
+net-misc/strongswan:strongswan_plugins_unbound - Enable support for the unbound plugin.
+net-misc/strongswan:strongswan_plugins_unity - Enable support for the unity plugin.
+net-misc/strongswan:strongswan_plugins_vici - Enable support for the vici plugin.
+net-misc/strongswan:strongswan_plugins_whitelist - Enable support for the whitelist plugin.
 net-misc/stunnel:stunnel3 - Install the stunnel3 wrapper.
 net-misc/teamviewer:system-wine - Use app-emulation/wine instead of bundled wine.
 net-misc/termpkg:uucp - Adds support for uucp style device locking
 net-misc/tigervnc:drm - build with DRM support
 net-misc/tigervnc:server - Build TigerVNC server
 net-misc/tigervnc:xorgmodule - Build the Xorg module
+net-misc/tinc:gui - Add GUI support, using dev-python/wxpython
+net-misc/tinc:uml - Enable support for User Mode Linux Sockets
+net-misc/tinc:vde - Enable Virtual Distributed Ethernet (VDE) based networking
+net-misc/tor:bufferevents - Use libevent's buffered IO implementation (unstable, buggy)
+net-misc/tor:scrypt - Use app-crypt/libscrypt for the scrypt algorithm
+net-misc/tor:stats - Enable tracking of how much of each kind of resource we download
+net-misc/tor:tor-hardening - Compile tor with hardening on vanilla compilers/linkers
+net-misc/tor:transparent-proxy - Enable transparent proxying
+net-misc/tor:web - Build a tor2web service instead of a tor client
 net-misc/uftp:server - Install uftp server daemon
 net-misc/vde:pcap - Enable the pcap-based plugin that allows creating a switch against a real interface.
 net-misc/vde:ssl - Enable the cryptcab plugin that allows creating an encrypted virtual cable.
+net-misc/vpnc:resolvconf - Enable support for DNS managing framework net-dns/openresolv
 net-misc/wicd:ambiance - Install icons from Ubuntu's ambiance theme
 net-misc/wicd:gnome-shell - Install gnome-shell extension
 net-misc/wicd:gtk - Installs a gtk UI. This is enabled by default because it is intended behavior. Requires dev-python/pygtk
@@ -1496,7 +1489,10 @@ net-misc/wicd:ioctl - Installs additional python libraries to use as a backend. 
 net-misc/wicd:mac4lin - Change default icons to mac4lin icon set
 net-misc/wicd:ncurses - Installs a ncurses UI
 net-misc/wicd:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+net-misc/wireguard:debug - Enable verbose debug reporting in dmesg of various WireGuard peer and device information.
+net-misc/wireguard:kmod-src - Do not compile the kernel module. Instead install the kernel module source code to /usr/src/wireguard.
 net-misc/x2goserver:fuse - Use net-fs/sshfs to allow shared folders
+net-misc/xrdp:fuse - Enable clipboard file / device redirection via sys-fs/fuse
 net-misc/youtube-viewer:gtk - Install the gtk GUI, called gtk-youtube-viewer
 net-nds/389-ds-base:auto-dn-suffix - Enable auto bind with auto dn suffix over unix domain socket (LDAPI) support
 net-nds/389-ds-base:autobind - Enable auto bind over unix domain socket (LDAPI) support
@@ -1515,19 +1511,20 @@ net-nds/openldap:kinit - Enable support for kerberos init
 net-nds/openldap:minimal - Build libraries & userspace tools only. Does not install any server code.
 net-nds/openldap:odbc - Enable ODBC and SQL backend options
 net-nds/openldap:overlays - Enable contributed OpenLDAP overlays
-net-nds/openldap:pbkdf2 - Enable support for pbkdf2 passwords
-net-nds/openldap:sha2 - Enable support for pw-sha2 password hashes.
 net-nds/openldap:smbkrb5passwd - Enable overlay for syncing ldap, unix and lanman passwords
 net-nds/rpcbind:warmstarts - Enables rpcbind to cache configuration for warm restarts
 net-nds/tac_plus:finger - Adds support for checking user counts via fingering the NAS
 net-nds/tac_plus:maxsess - Enforce a limit on maximum sessions per user
+net-news/liferea:libnotify - Enable popup notifications
+net-news/quiterss:phonon - Enable sound support via media-libs/phonon or dev-qt/qtphonon
 net-news/rssguard:webengine - Use dev-qt/qtwebengine for embedded web browser
 net-nntp/inn:innkeywords - Enable automatic keyword generation support
 net-nntp/inn:inntaggedhash - Use tagged hash table for history (disables large file support)
 net-nntp/nzbget:parcheck - Enable support for checking PAR archives
-net-nntp/sabnzbd:7za - Add support for extracting 7za files
 net-nntp/sabnzbd:rar - Add support for extracting rar files
+net-nntp/sabnzbd:ssl - Add support for SSL web interface
 net-nntp/sabnzbd:unzip - Add support for extracting zip files
+net-nntp/sabnzbd:yenc - Use yenc to speed up nntp encoding and decoding
 net-nntp/slrn:canlock - Add support for cancel locks via net-libs/canlock
 net-nntp/slrn:uudeview - Add support for yEnc coding and more using dev-libs/uulib
 net-nntp/tin:cancel-locks - Enable Cancel-Lock header functionality (also enables USE=evil)
@@ -1541,25 +1538,33 @@ net-p2p/airdcpp-webclient:webui - Enable the Web UI
 net-p2p/amule:daemon - Enable amule daemon
 net-p2p/amule:remote - Enable remote controlling of the client
 net-p2p/amule:stats - Enable statistic reporting
-net-p2p/bitcoin-cli:knots - Build enhanced Bitcoin Knots version, rather than Bitcoin Core
 net-p2p/bitcoin-cli:ljr - Enable Luke Dashjr's patches
+net-p2p/bitcoin-qt:1stclassmsg - Enable first-class Bitcoin message tools
+net-p2p/bitcoin-qt:bitcoin_policy_cltv - Check LockTime Verify policy: Your node will recognise and assist OP_CHECKLOCKTIMEVERIFY (BIP65) transactions
+net-p2p/bitcoin-qt:bitcoin_policy_cpfp - Child-Pays-For-Parent policy: If you mine, you will give consideration to child transaction fees to pay for their parents
+net-p2p/bitcoin-qt:bitcoin_policy_dcmp - Data Carrier Multi-Push policy: Your node will assist transactions with multiple pushes in their data carrier (if any)
 net-p2p/bitcoin-qt:bitcoin_policy_rbf - Replace By Fee policy: Your node will preferentially mine and relay transactions paying the highest fee, regardless of receive order
 net-p2p/bitcoin-qt:bitcoin_policy_spamfilter - Enhanced spam filter policy: Notorious spammers will not be assisted by your node
 net-p2p/bitcoin-qt:http - Enable support for the JSON-RPC and REST HTTP server (builtin net-p2p/bitcoind)
-net-p2p/bitcoin-qt:knots - Build enhanced Bitcoin Knots version, rather than Bitcoin Core
 net-p2p/bitcoin-qt:libevent - Use dev-libs/libevent
 net-p2p/bitcoin-qt:ljr - Enable Luke Dashjr's patches
 net-p2p/bitcoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/bitcoin-qt:tor - Enable automatic configuration of a Tor hidden service
 net-p2p/bitcoin-qt:upnp - Enable Universal Plug and Play
 net-p2p/bitcoin-qt:wallet - Enable wallet support
+net-p2p/bitcoin-qt:xt - Enable Mike Hearn's Bitcoin XT patches
 net-p2p/bitcoin-qt:zeromq - Report blocks and transactions via zeromq
+net-p2p/bitcoind:addrindex - Enable BtcDrak's addrindex patch
+net-p2p/bitcoind:bitcoin_policy_cltv - Check LockTime Verify policy: Your node will recognise and assist OP_CHECKLOCKTIMEVERIFY (BIP65) transactions
+net-p2p/bitcoind:bitcoin_policy_cpfp - Child-Pays-For-Parent policy: If you mine, you will give consideration to child transaction fees to pay for their parents
+net-p2p/bitcoind:bitcoin_policy_dcmp - Data Carrier Multi-Push policy: Your node will assist transactions with multiple pushes in their data carrier (if any)
 net-p2p/bitcoind:bitcoin_policy_rbf - Replace By Fee policy: Your node will preferentially mine and relay transactions paying the highest fee, regardless of receive order
 net-p2p/bitcoind:bitcoin_policy_spamfilter - Enhanced spam filter policy: Notorious spammers will not be assisted by your node
-net-p2p/bitcoind:knots - Build enhanced Bitcoin Knots version, rather than Bitcoin Core
 net-p2p/bitcoind:ljr - Enable Luke Dashjr's patches
+net-p2p/bitcoind:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/bitcoind:upnp - Enable Universal Plug and Play
 net-p2p/bitcoind:wallet - Enable wallet support
+net-p2p/bitcoind:xt - Enable Mike Hearn's Bitcoin XT patches
 net-p2p/bitcoind:zeromq - Report blocks and transactions via zeromq
 net-p2p/bitcoinxt-qt:ljr - Enable Luke Dashjr's patches
 net-p2p/bitcoinxt-qt:logrotate - Use app-admin/logrotate for rotating logs
@@ -1575,6 +1580,7 @@ net-p2p/deluge:console - Enable default console UI
 net-p2p/deluge:linguas_iu - Inuktitut locale
 net-p2p/deluge:linguas_nap - Neapolitan locale
 net-p2p/deluge:linguas_pms - Piemontese locale
+net-p2p/deluge:setproctitle - Install dependencies needed for beautifying the process name
 net-p2p/deluge:webinterface - Install dependencies needed for the web interface
 net-p2p/dogecoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/eiskaltdcpp:cli - Enable sample cli based on readline
@@ -1588,6 +1594,8 @@ net-p2p/fms:frost - Add support for frost boards
 net-p2p/go-ethereum:evm - Build Ethereum Virtual Machine (EVM)
 net-p2p/go-ethereum:opencl - Add OpenCL GPU mining support
 net-p2p/go-ipfs-bin:fuse - Enable runtime support for sys-fs/fuse
+net-p2p/i2p:ecdsa - Enables additional checks to make sure a setup is available that is capable of using I2Ps ECDSA provisions. I2P will work without it, but you will likely see warnings.
+net-p2p/i2p:nls - Adds Native Language Support using GNU gettext.
 net-p2p/ktorrent:bwscheduler - Schedule upload and download limits over a period of a week
 net-p2p/ktorrent:downloadorder - Specify the download order of a multi-file torrent
 net-p2p/ktorrent:infowidget - Displays general information about a torrent in several tabs
@@ -1605,10 +1613,10 @@ net-p2p/mldonkey:fasttrack - enable fasttrack support
 net-p2p/mldonkey:gnutella - enable gnutella and gnutella2 support
 net-p2p/mldonkey:guionly - enable client build only
 net-p2p/mldonkey:magic - enable use of libmagic
+net-p2p/ppcoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/ppcoind:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/primecoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/primecoind:logrotate - Use app-admin/logrotate for rotating logs
-net-p2p/pybitmessage:opencl - Uses dev-python/pyopencl for GPU acceleration.
 net-p2p/qbittorrent:webui - Enable the Web UI
 net-p2p/retroshare:cli - Enables the CLI version of RetroShare
 net-p2p/retroshare:feedreader - Enables the Feedreader plugin
@@ -1621,12 +1629,12 @@ net-p2p/transmission:lightweight - Optimize transmission for low-resource system
 net-p2p/transmission:mbedtls - Use mbed TLS instead of OpenSSL
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 net-p2p/transmission-remote-gtk:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration.
+net-p2p/transmission-remote-gtk:unique - Enable single instance support using dev-libs/libunique
 net-p2p/tribler:vlc - Enable vlc support.
 net-print/cups:java - Add support for the Java interpeter in the web server CGIs.
 net-print/cups:lprng-compat - Do not install lp... binaries so cups and lprng can coexist.
 net-print/cups:python - Add support for the Python interpeter in the web server CGIs.
 net-print/cups-filters:foomatic - Build the included foomatic-rip printer driver. Strongly recommended.
-net-print/cups-filters:ipp_autosetup - Let cups-browsed automatically set up IPP network printers by default.
 net-print/fax4cups:efax - Install net-misc/efax backend
 net-print/fax4cups:hylafax - Install net-misc/hylafax backend
 net-print/fax4cups:mgetty-fax - Install net-dialup/mgetty backend
@@ -1643,7 +1651,7 @@ net-print/hplip:snmp - Add support for net-analyzer/net-snmp which enables this 
 net-print/hplip:static-ppds - Use statically-generated PPDs instead of Dynamic PPDs. Although this is deprecated some printers may still need it to work properly. Use this flag if hp-setup fails to find/create a valid PPD file
 net-print/magicfilter:lprng-failsafe - Refuse options for compability with certain LPRng versions.
 net-proxy/haproxy:51degrees - Device Detection using 51 Degrees
-net-proxy/haproxy:device-atlas - Use dev-libs/device-atlas-api-c library
+net-proxy/haproxy:device-atlas - Device Detection using Device Atlas
 net-proxy/haproxy:net_ns - Enable network namespace support (CONFIG_NET_NS)
 net-proxy/haproxy:pcre-jit - Use JIT support for PCRE
 net-proxy/haproxy:slz - Use dev-libs/libslz compression library
@@ -1693,8 +1701,11 @@ net-proxy/tsocks:server-lookups - Allow hostname resolution _for_ SOCKS servers
 net-proxy/tsocks:tordns - Apply tordns patch which allows transparent TORification of the DNS queries
 net-proxy/ufdbguard:doc - Download and install the ufdbguard reference manual in PDF.
 net-proxy/ufdbguard:httpd - Build, install and start the provided mini-http daemon with the redirect CGI integrated. Since there is no way to tell ufdbguard to not start it, this is a build-time option.
+net-voip/ekiga:gconf - Enable GConf support
 net-voip/ekiga:h323 - Enable H.323 protocol
 net-voip/ekiga:shm - Enable the Shared Memory Extension from libXext
+net-voip/ekiga:static - Statically link to opal and ptlib
+net-voip/ekiga:xcap - Enable XML Configuration Access Protocal
 net-voip/gnugk:ssh - Enable support for SSH port forwarding using net-libs/libssh
 net-voip/linphone:assistant - Turn on assistant compiling (needs gtk enabled)
 net-voip/linphone:gsm-nonstandard - Support non-standard GSM frequencies
@@ -1717,68 +1728,6 @@ net-voip/yate:tdmcard - Enable TDMV API card driver
 net-voip/yate:wanpipe - Enable Wanpipe support
 net-voip/yate:wpcard - Enable Wanpipe card driver
 net-voip/yate:zaptel - Enable Zaptel driver
-net-vpn/badvpn:client - Build the badvpn-client program, a daemon that runs on endpoints of the VPN.
-net-vpn/badvpn:ncd - Build NCD, a lightweight scripting language especially suited for network configurations.
-net-vpn/badvpn:server - Build the badvpn-server program, a central server that manages the VPN network.
-net-vpn/badvpn:tun2socks - Build tun2socks, a program which implements a TUN device that forwards TCP traffic through a SOCKS5 server.
-net-vpn/badvpn:udpgw - Build udpgw, a small daemon which allows tun2socks to forward UDP traffic.
-net-vpn/i2p:ecdsa - Enables additional checks to make sure a setup is available that is capable of using I2Ps ECDSA provisions. I2P will work without it, but you will likely see warnings.
-net-vpn/i2p:nls - Adds Native Language Support using GNU gettext.
-net-vpn/i2pd:i2p-hardening - Compile with hardening on vanilla compilers/linkers
-net-vpn/ipsec-tools:hybrid - Makes available both mode-cfg and xauth support
-net-vpn/ipsec-tools:idea - Enable support for the IDEA algorithm
-net-vpn/ipsec-tools:nat - Enable NAT-Traversal
-net-vpn/ipsec-tools:rc5 - Enable support for the patented RC5 algorithm
-net-vpn/ipsec-tools:stats - Enable statistics reporting
-net-vpn/libreswan:dnssec - Use DNSSEC resolver (requires net-dns/unbound
-net-vpn/openconnect:gssapi - Build GSSAPI support
-net-vpn/openconnect:java - Build JNI bindings using jni.h
-net-vpn/openconnect:libproxy - Enable proxy support
-net-vpn/openconnect:lz4 - Enable support for lz4 compression
-net-vpn/openconnect:stoken - Enable stoken support
-net-vpn/openvpn:down-root - Enable the down-root plugin
-net-vpn/openvpn:iproute2 - Enabled iproute2 support instead of net-tools
-net-vpn/openvpn:lz4 - Enable LZ4 support
-net-vpn/openvpn:mbedtls - Use mbed TLS instead of OpenSSL
-net-vpn/openvpn:pkcs11 - Enable PKCS#11 smartcard support
-net-vpn/openvpn:plugins - Enable the OpenVPN plugin system
-net-vpn/pptpd:gre-extreme-debug - Log all GRE accepted packages when in debug mode (required if you want upstream support)
-net-vpn/strongswan:constraints - Enable advanced X.509 constraint checking plugin.
-net-vpn/strongswan:dhcp - Enable server support for querying virtual IP addresses for clients from a DHCP server. (IKEv2 only)
-net-vpn/strongswan:eap - Enable support for the different EAP modules that is supported.
-net-vpn/strongswan:farp - Enable faking of ARP responses for virtual IP addresses assigned to clients. (IKEv2 only)
-net-vpn/strongswan:gcrypt - Enable dev-libs/libgcrypt plugin which provides 3DES, AES, Blowfish, Camellia, CAST, DES, Serpent and Twofish ciphers along with MD4, MD5 and SHA1/2 hash algorithms, RSA and DH groups 1,2,5,14-18 and 22-24(4.4+). Also includes a software random number generator.
-net-vpn/strongswan:non-root - Force IKEv1/IKEv2 daemons to normal user privileges. This might impose some restrictions mainly to the IKEv1 daemon. Disable only if you really require superuser privileges.
-net-vpn/strongswan:openssl - Enable dev-libs/openssl plugin which is required for Elliptic Curve Cryptography (DH groups 19-21,25,26) and ECDSA. Also provides 3DES, AES, Blowfish, Camellia, CAST, DES, IDEA and RC5 ciphers along with MD2, MD4, MD5 and SHA1/2 hash algorithms, RSA and DH groups 1,2,5,14-18 and 22-24(4.4+) dev-libs/openssl has to be compiled with USE="-bindist".
-net-vpn/strongswan:pkcs11 - Enable pkcs11 support.
-net-vpn/strongswan:strongswan_plugins_blowfish - Enable support for the blowfish plugin.
-net-vpn/strongswan:strongswan_plugins_ccm - Enable support for the ccm plugin.
-net-vpn/strongswan:strongswan_plugins_ctr - Enable support for the ctr plugin.
-net-vpn/strongswan:strongswan_plugins_gcm - Enable support for the gcm plugin.
-net-vpn/strongswan:strongswan_plugins_ha - Enable support for the ha plugin.
-net-vpn/strongswan:strongswan_plugins_ipseckey - Enable support for the ipseckey plugin.
-net-vpn/strongswan:strongswan_plugins_led - Enable support for the led plugin.
-net-vpn/strongswan:strongswan_plugins_lookip - Enable support for the lookip plugin.
-net-vpn/strongswan:strongswan_plugins_ntru - Enable support for the ntru plugin.
-net-vpn/strongswan:strongswan_plugins_padlock - Enable support for the padlock plugin.
-net-vpn/strongswan:strongswan_plugins_rdrand - Enable support for the rdrand plugin.
-net-vpn/strongswan:strongswan_plugins_systime-fix - Enable support for the systime-fix plugin.
-net-vpn/strongswan:strongswan_plugins_unbound - Enable support for the unbound plugin.
-net-vpn/strongswan:strongswan_plugins_unity - Enable support for the unity plugin.
-net-vpn/strongswan:strongswan_plugins_vici - Enable support for the vici plugin.
-net-vpn/strongswan:strongswan_plugins_whitelist - Enable support for the whitelist plugin.
-net-vpn/tinc:gui - Add GUI support, using dev-python/wxpython
-net-vpn/tinc:uml - Enable support for User Mode Linux Sockets
-net-vpn/tinc:vde - Enable Virtual Distributed Ethernet (VDE) based networking
-net-vpn/tor:scrypt - Use app-crypt/libscrypt for the scrypt algorithm
-net-vpn/tor:tor-hardening - Compile tor with hardening on vanilla compilers/linkers
-net-vpn/tor:web - Build a tor2web service instead of a tor client
-net-vpn/tor:zstd - Use app-arch/zstd for compression
-net-vpn/vpnc:resolvconf - Enable support for DNS managing framework net-dns/openresolv
-net-vpn/wireguard:debug - Enable verbose debug reporting in dmesg of various WireGuard peer and device information.
-net-vpn/wireguard:module - Compile the actual WireGuard kernel module. Most certainly you want this enabled, unless you're doing something strange.
-net-vpn/wireguard:module-src - Install the module source code to /usr/src, in case you like building kernel modules yourself.
-net-vpn/wireguard:tools - Compile the wg(8) tool and related helpers. You probably want this enabled.
 net-wireless/aircrack-ng:airdrop-ng - Build airdrop-ng
 net-wireless/aircrack-ng:airgraph-ng - Build airgraph-ng
 net-wireless/aircrack-ng:experimental - Build the "experimental" tools which may randomly fail to run properly
@@ -1790,7 +1739,6 @@ net-wireless/bladerf-fpga:x40 - bitstream for the x40KLE Cyclone IV FPGA bladerf
 net-wireless/blueman:appindicator - Enable usage of dev-libs/libappindicator to export menu options
 net-wireless/blueman:network - Add functionality to setup (host) PAN connections using either net-dns/dnsmasq or net-misc/dhcp
 net-wireless/blueman:thunar - Install the sendto-plugin for xfce-base/thunar
-net-wireless/chirp:radioreference - support downloading data from radioreference.com (premium users only)
 net-wireless/gnuradio:analog - enable analog signal processing blocks
 net-wireless/gnuradio:atsc - enable ATSC (HDTV) transmitter and receiver blocks
 net-wireless/gnuradio:audio - enable blocks to connect to audio sources (mic-in) and sinks (speaker-out) ports on a computer
@@ -1811,7 +1759,6 @@ net-wireless/gnuradio:utils - install scripts to enable viewing and analysis of 
 net-wireless/gnuradio:vocoder - enable blocks for audio voice encoders
 net-wireless/gnuradio:wavelet - enable wavelet signal processing blocks
 net-wireless/gnuradio:zeromq - enable zeromq message passing blocks
-net-wireless/gqrx:gr-audio - Use audio support from net-wireless/gnuradio
 net-wireless/gr-air-modes:fgfs - Support FlightGear
 net-wireless/gr-air-modes:gui - Build the GUI
 net-wireless/gr-air-modes:rtlsdr - Build with Realtek RTL2832U (rtlsdr) support
@@ -1855,9 +1802,6 @@ net-wireless/ubertooth:bluez - use bluez to support clock following and scanning
 net-wireless/ubertooth:pcap - Use libpcap for packet capture and read/write
 net-wireless/ubertooth:specan - Enable the ubertooth spectrum analyzer
 net-wireless/ubertooth:ubertooth1-firmware - Build/install ubertooth1-firmware
-net-wireless/urh:hackrf - use native backend which directly uses net-libs/libhackrf
-net-wireless/urh:rtlsdr - use native backend which directly uses net-wireless/rtl-sdr
-net-wireless/urh:uhd - use native backend which directly uses net-wireless/uhd
 net-wireless/wepattack:john - Build with app-crypt/johntheripper support
 net-wireless/wireless-tools:multicall - Build the most commonly used tools as one binary
 net-wireless/yatebts:bladerf - Build bladeRF transceiver
@@ -1872,11 +1816,9 @@ www-apache/mod_musicindex:cache - Add File cache support
 www-apache/mod_musicindex:mysql - Add MySQL cache support
 www-apache/mod_nss:ecc - enable Elliptical Curve Cyptography
 www-apache/mod_perl:ithreads - Build for use with thread-capable perl, needs same setting as in dev-lang/perl
-www-apache/mod_security:fuzzyhash - Support fuzzy hash computations (to detect malware, for example) using the app-crypt/ssdeep package.
-www-apache/mod_security:geoip - Pull in dev-libs/geoip for use by the SecGeoLookupDb directive.
+www-apache/mod_security:curl - Build the ModSecurity Audit Log Collector (mlogc) that depends on net-misc/curl.
+www-apache/mod_security:geoip - Configure ModSecurity to query the GeoIP database from MaxMind, provided by dev-libs/geoip. This flag only controls the default configuration, as the GeoIP query code is part of ModSecurity's source code.
 www-apache/mod_security:jit - Add support for the PCRE Just-in-Time optimisation, as enabled by dev-libs/libpcre with jit USE flag enabled. Might not be available on hardened systems.
-www-apache/mod_security:json - Suppose JSON in the request body parser through dev-libs/yajl.
-www-apache/mod_security:mlogc - Build and install the ModSecurity Audit Log Collector (mlogc).
 www-apache/pwauth:domain-aware - Ignore leading domain names in username (Windows compat)
 www-apache/pwauth:faillog - Log failed login attempts
 www-apache/pwauth:ignore-case - Ignore string case in username (mostly Windows compat)
@@ -1890,6 +1832,8 @@ www-apps/cgit:jit - If the lua flag is enabled, jit uses LuaJIT instead of vanil
 www-apps/cgit:lua - Enable support for Lua scripting
 www-apps/drupal:accelerator - Add dependency on a php accelerator
 www-apps/drupal:uploadprogress - Install dev-php/pecl-uploadprogress package
+www-apps/egroupware:gallery - Install gallery2 port for eGW
+www-apps/egroupware:jpgraph - Add dev-php/jpgraph support
 www-apps/gitit:network-uri - Get Network.URI from the network-uri package.
 www-apps/gitit:plugins - enables optional plugin runtime loader
 www-apps/guacamole:noauth - enable support for leaving out any authentication on the webinterface
@@ -1927,16 +1871,15 @@ www-apps/wordpress:akismet - Installs Akismet comment spam plug-in
 www-apps/wordpress:themes - Installs themes (including default theme)
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
 www-client/chromium:gconf - Enable support for GConf to retrieve system settings
+www-client/chromium:gn - Use GN (generate ninja) instead of GYP for building
 www-client/chromium:gtk3 - Use gtk3 instead of gtk2
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
 www-client/chromium:pic - Disable optimized assembly code that is not PIC friendly
 www-client/chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3
 www-client/chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels
 www-client/chromium:system-ffmpeg - Use system ffmpeg instead of the bundled one
-www-client/chromium:system-libvpx - Use system libvpx instead of the bundled one
 www-client/chromium:tcmalloc - Use bundled tcmalloc instead of system malloc
 www-client/chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
-www-client/dooble:qt4 - Build using qt4 instead of qt5
 www-client/elinks:bittorrent - Enable support for the BitTorrent protocol
 www-client/elinks:finger - Enable support for the finger protocol
 www-client/elinks:gc - Enable garbage collection support via dev-libs/boehm-gc
@@ -1946,13 +1889,13 @@ www-client/elinks:xml - Enable support for bookmarks via dev-libs/expat
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
 www-client/firefox:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
 www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
+www-client/firefox:gstreamer-0 - Use gstreamer:0.10 instead of gstreamer:1 for media support
 www-client/firefox:gtk2 - Use the cairo-gtk2 rendering engine
-www-client/firefox:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
+www-client/firefox:hwaccel - Use hardware-accelerated rendering
 www-client/firefox:jemalloc - Enable or disable jemalloc
 www-client/firefox:jemalloc3 - Enable or disable jemalloc3 (forced-on when supported prior to 38.0)
-www-client/firefox:nsplugin - Enable support for NPAPI plugins other than flash
 www-client/firefox:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
-www-client/firefox:rust - Enable support for using rust compiler (experimental)
+www-client/firefox:skia - Enable the SKIA engine for 2D rendering as an alternative to cairo
 www-client/firefox:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
 www-client/firefox:system-harfbuzz - Use the system-wide media-libs/harfbuzz and media-gfx/graphite2 instead of bundled.
 www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bundled.
@@ -1975,25 +1918,22 @@ www-client/netsurf:fbcon_frontend_linux - Use framebuffer frontend linux
 www-client/netsurf:fbcon_frontend_sdl - Use framebuffer frontend sdl
 www-client/netsurf:fbcon_frontend_vnc - Use framebuffer frontend vnc
 www-client/netsurf:fbcon_frontend_x - Use framebuffer frontend X
-www-client/netsurf:gtk - Build GTK GUI, defaults to GTK3
-www-client/netsurf:gtk2 - Build GTK2 GUI
-www-client/netsurf:gtk3 - Build GTK3 GUI
 www-client/netsurf:pdf-writer - PDF output support (media-libs/libharu)
-www-client/netsurf:psl - Use public suffix list via media-libs/libnspsl
 www-client/netsurf:rosprite - RISC OS Sprite bitmap image support (media-libs/librosprite)
 www-client/netsurf:svgtiny - SVG image support via media-libs/svgatiny instead of gnome-base/librsvg
 www-client/netsurf:webp - WebP image support (media-libs/libwebp)
 www-client/opera:gtk - Install support libraries and runtime dependencies to support GTK+/GNOME desktop integration
 www-client/opera:kde - Install support libraries and runtime dependencies to support KDE desktop integration
-www-client/qupzilla:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 www-client/qupzilla:nonblockdialogs - Enable fancy non-blocking JavaScript dialogs shown inside the page, not blocking the application window. When closing browser windows with open dialogs, this can crash the application.
 www-client/seamonkey:calendar - Build Mozilla's calendar
 www-client/seamonkey:chatzilla - Build Mozilla's IRC client (default on)
 www-client/seamonkey:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
 www-client/seamonkey:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
+www-client/seamonkey:gstreamer-0 - Use gstreamer:0.10 instead of gstreamer:1 for media support
 www-client/seamonkey:gtk3 - Use the cairo-gtk3 rendering engine
 www-client/seamonkey:ipc - Use inter-process communication between tabs and plugins. Allows for greater stability in case of plugin crashes
 www-client/seamonkey:jemalloc - Enable or disable jemalloc
+www-client/seamonkey:jemalloc3 - Enable or disable jemalloc3 (forced-on when supported prior to 38.0)
 www-client/seamonkey:roaming - Build roaming extension support (default on)
 www-client/seamonkey:skia - Enable the SKIA engine for 2D rendering as an alternative to cairo
 www-client/seamonkey:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
@@ -2019,11 +1959,14 @@ www-misc/monitorix:apcupsd - Make use of a daemon that controls APC UPSes with s
 www-misc/monitorix:httpd - Enables the CGI webserver with any package that satisfies virtual/httpd-cgi.
 www-misc/monitorix:postfix - Analyze postfix logs with net-mail/pflogsumm.
 www-misc/shellinabox:pam - Enable PAM support.
+www-misc/shellinabox:ssl - Enable SSL support.
 www-misc/vdradmin-am:vdr - Support for media-video/vdr. Disable this if the VDR you want to control runs at a remote machine.
 www-misc/xxv:themes - Enable more themes via x11-themes/xxv-skins
 www-misc/zoneminder:curl - Enable using net-misc/curl for streaming from cameras
 www-misc/zoneminder:gcrypt - ...
+www-misc/zoneminder:openssl - ...
 www-misc/zoneminder:vlc - Enable using media-libs/vlc for streaming from cameras
+www-plugins/adobe-flash:kde - Install a KCM plugin for configuring flash player preferences
 www-plugins/adobe-flash:nsplugin - Install the Netscape Flash API plugin (for Firefox and similar browsers)
 www-plugins/adobe-flash:ppapi - Install the Pepper Flash API plugin (for Chrome and similar browsers)
 www-plugins/chrome-binary-plugins:widevine - Install the Widevine DRM library
@@ -2034,6 +1977,7 @@ www-plugins/gnash:agg - Rendering based on the Anti-Grain Geometry Rendering Eng
 www-plugins/gnash:cygnal - Enable building of the cygnal server
 www-plugins/gnash:dump - Enable dump output module for creating video from SWF
 www-plugins/gnash:egl - Enable EGL support for the OpenVG, OpenGL and X11 renderers
+www-plugins/gnash:gconf - Enable GConf configuration backend
 www-plugins/gnash:harden - Enable upstream recommended hardening build flags (may conflict with system ones)
 www-plugins/gnash:jemalloc - Use dev-libs/jemalloc for allocations
 www-plugins/gnash:openvg - Rendering based on the OpenVG graphics acceleration API
@@ -2041,7 +1985,6 @@ www-plugins/gnash:sdl-sound - Enable SDL audio output for the standalone player
 www-plugins/gnash:ssh - Enable using SSH for network authentication in libnet
 www-plugins/gnash:ssl - Enable directly using OpenSSL in libnet (not needed for nsplugin ssl support)
 www-plugins/lightspark:gles - Replace default OpenGL renderer with GLESv2
-www-plugins/lightspark:ppapi - Install the PPAPI plugin (for Chromium)
 www-plugins/lightspark:rtmp - Enable Real Time Messaging Protocol using librtmp
 www-servers/apache:apache2_modules_access_compat - Group authorizations based on host (name or IP address). Available as a compatibility module with previous versions.
 www-servers/apache:apache2_modules_authn_core - Provides core authentication capabilities common to all authentication providers (functionality provided by authn_alias in previous versions).
@@ -2063,14 +2006,12 @@ www-servers/apache:apache2_modules_remoteip - Remotip module for logging
 www-servers/apache:apache2_modules_slotmem_shm - Slot-based shared memory provider.
 www-servers/apache:apache2_modules_socache_shmcb - A shared object cache provider using a high-performance cyclic buffer inside a shared memory segment.
 www-servers/apache:apache2_modules_unixd - Basic (required) security for Unix-family platforms.
-www-servers/apache:apache2_modules_xml2enc - Enable xml2 encoding module
 www-servers/apache:static - Link in apache2 modules statically rather then plugins
 www-servers/apache:suexec - Install suexec with apache
 www-servers/cherokee:admin - Install web based cherokee conf tool
 www-servers/cherokee:rrdtool - Enable rrdtool support
 www-servers/fnord:auth - Enable HTTP authentication support
 www-servers/gatling:diet - Compile against dev-libs/dietlibc
-www-servers/h2o:mruby - Enable support for mruby
 www-servers/hiawatha:cache - Enable caching of content
 www-servers/hiawatha:monitor - Pull in www-apps/hiawatha-monitor
 www-servers/hiawatha:rewrite - Enable the rewrite toolkit
@@ -2079,8 +2020,10 @@ www-servers/hiawatha:ssl - Enable TLS support via net-libs/mbedtls
 www-servers/hiawatha:tomahawk - Enable Tomahawk control server
 www-servers/hiawatha:xslt - Enable XSLT support. This is also needed for directory listings
 www-servers/lighttpd:libev - Enable fdevent handler
+www-servers/lighttpd:memcache - Enable memcache support for mod_cml and mod_trigger_b4_dl
 www-servers/lighttpd:mmap - Use mmap with files owned by lighttpd. This is a dangerous option as it may allow local users to trigger SIGBUS crashes.
 www-servers/lighttpd:rrdtool - Enable rrdtool support via mod_rrdtool
+www-servers/lighttpd:uploadprogress - Apply experimental patch for upload progress module
 www-servers/lighttpd:webdav - Enable webdav properties
 www-servers/monkeyd:debug - Enable lots of debugging info
 www-servers/monkeyd:static-plugins - Build statically linked plugins

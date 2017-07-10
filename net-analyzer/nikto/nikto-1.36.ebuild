@@ -1,5 +1,6 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 DESCRIPTION="Web Server vulnerability scanner"
 HOMEPAGE="http://www.cirt.net/Nikto2"

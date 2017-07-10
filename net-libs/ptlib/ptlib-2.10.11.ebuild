@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="5"
 
@@ -60,8 +61,7 @@ src_prepare() {
 		"${FILESDIR}/${PN}-2.10.9-pkgconfig_ldflags.patch" \
 		"${FILESDIR}/${PN}-2.10.9-respect_cxxflags.patch" \
 		"${FILESDIR}/${PN}-2.10.10-mga-bison-parameter.patch" \
-		"${FILESDIR}/${PN}-2.10.10-respect_cflags_cxxflags.patch" \
-		"${FILESDIR}/${P}-gcc6.patch"
+		"${FILESDIR}/${PN}-2.10.10-respect_cflags_cxxflags.patch"
 
 	if ! use telnet; then
 		epatch "${FILESDIR}/${PN}-2.10.9-disable-telnet-symbols.patch"

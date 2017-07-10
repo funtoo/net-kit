@@ -9,4 +9,4 @@ RDEPEND=net-analyzer/nagios-core
 SLOT=0
 SRC_URI=mirror://sourceforge/nagios-sap-ccms/sap-ccms-plugin-0.7.3.tar.gz
 _eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=75dd5af0ab1a7ab51988e9be64282d29
+_md5_=7f6860735972a6ace513056fae594f0f

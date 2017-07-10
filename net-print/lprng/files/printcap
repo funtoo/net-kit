@@ -1,4 +1,5 @@
 # /etc/printcap: printer capability database.
+# $Id$
 #
 # You can use the filter entries df, tf, cf, gf etc. for your
 # own filters. See the printcap(5) manpage for more details.

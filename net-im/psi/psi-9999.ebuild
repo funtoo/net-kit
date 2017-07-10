@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="4"
 
@@ -20,12 +21,13 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="crypt dbus debug doc enchant extras jingle iconsets spell ssl xscreensaver powersave
-plugins whiteboarding"
+plugins whiteboarding webkit"
 
 REQUIRED_USE="
 	iconsets? ( extras )
 	plugins? ( extras )
 	powersave? ( extras )
+	webkit? ( extras )
 "
 
 RDEPEND="
@@ -36,6 +38,7 @@ RDEPEND="
 	>=sys-libs/zlib-1.2.5.1-r2[minizip]
 	x11-libs/libX11
 	dbus? ( dev-qt/qtdbus:4 )
+	extras? ( webkit? ( dev-qt/qtwebkit:4 ) )
 	spell? (
 		enchant? ( >=app-text/enchant-1.3.0 )
 		!enchant? ( app-text/aspell )
@@ -146,6 +149,7 @@ src_configure() {
 	use xscreensaver || myconf+=" --disable-xss"
 	if use extras; then
 		use plugins && myconf+=" --enable-plugins"
+		use webkit && myconf+=" --enable-webkit"
 	fi
 
 	einfo "./configure ${myconf}"

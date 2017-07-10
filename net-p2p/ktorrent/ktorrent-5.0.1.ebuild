@@ -1,5 +1,6 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=6
 
@@ -26,7 +27,7 @@ KDE_HANDBOOK="forceoptional"
 inherit kde5
 
 DESCRIPTION="Powerful BitTorrent client based on KDE Frameworks"
-HOMEPAGE="https://www.kde.org/applications/internet/ktorrent/"
+HOMEPAGE="http://ktorrent.pwsp.net/"
 
 LICENSE="GPL-2"
 IUSE="+bwscheduler +downloadorder +infowidget +logviewer

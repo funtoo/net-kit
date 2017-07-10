@@ -1,5 +1,6 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI=5
 
@@ -22,12 +23,13 @@ HOMEPAGE="https://code.qt.io/cgit/qt-labs/messagingframework.git/"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="amd64 ~ppc ~ppc64 x86"
-IUSE="debug doc icu test zlib"
+IUSE="debug doc examples icu test zlib"
 
 RDEPEND="
 	dev-qt/qtcore:4[ssl]
 	dev-qt/qtgui:4
 	dev-qt/qtsql:4
+	examples? ( dev-qt/qtwebkit:4 )
 	icu? ( dev-libs/icu:= )
 	zlib? ( sys-libs/zlib )
 "
@@ -46,9 +48,9 @@ src_prepare() {
 
 	sed -i -e '/SUBDIRS.*=/s/benchmarks//' messagingframework.pro || die
 
-	# disable examples which require dev-qt/qtwebkit:4
-	sed -i -e '/SUBDIRS.*=/s/examples//' messagingframework.pro || die
-
+	if ! use examples; then
+		sed -i -e '/SUBDIRS.*=/s/examples//' messagingframework.pro || die
+	fi
 	if ! use test; then
 		sed -i -e '/SUBDIRS.*=/s/tests//' messagingframework.pro || die
 	fi

@@ -1,6 +1,5 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -19,10 +18,10 @@ SLOT="0"
 KEYWORDS="amd64 x86 ~x86-fbsd"
 IUSE=""
 
-# Note: While we depend on net-misc/tor, we strictly speaking
+# Note: While we depend on net-vpn/tor, we strictly speaking
 # don't have to because it could run on a different machine.
 RDEPEND="
-	>=net-misc/tor-0.2.1.27
+	>=net-vpn/tor-0.2.1.27
 	app-admin/sudo
 	sys-process/lsof
 	net-dns/bind-tools

@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
@@ -14,11 +13,12 @@ SRC_URI="https://github.com/johang/btfs/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 CDEPEND=">=sys-fs/fuse-2.8.0
 	>=net-misc/curl-7.22.0
 	dev-libs/boost:=
-	>=net-libs/rb_libtorrent-0.16.0:="
+	>=net-libs/libtorrent-rasterbar-0.16.0:="
 DEPEND="${CDEPEND}
 	virtual/pkgconfig"
 RDEPEND="${CDEPEND}

@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
@@ -22,6 +21,7 @@ IUSE="bittorrent bzip2 debug finger ftp gc gopher gpm guile idn ipv6
 RESTRICT="test"
 
 DEPEND="
+	${PYTHON_DEPS}
 	bzip2? ( >=app-arch/bzip2-1.0.2 )
 	gc? ( dev-libs/boehm-gc )
 	ssl? (

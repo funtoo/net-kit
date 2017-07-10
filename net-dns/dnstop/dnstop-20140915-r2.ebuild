@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -16,7 +15,7 @@ KEYWORDS="~amd64 ~arm ~hppa ~ppc ~x86"
 IUSE=""
 
 RDEPEND="sys-libs/ncurses:0
-	net-libs/libpcap[ipv6(+)]"
+	net-libs/libpcap"
 DEPEND="${RDEPEND}"
 
 PATCHES=( "${FILESDIR}/${P}"-pkg-config.patch )

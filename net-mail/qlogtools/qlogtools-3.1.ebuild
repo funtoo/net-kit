@@ -1,6 +1,5 @@
 # Copyright 1999-2010 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 inherit eutils toolchain-funcs
 
@@ -18,7 +17,7 @@ RDEPEND="!app-text/multitail"
 
 src_unpack() {
 	unpack ${A}
-	EPATCH_OPTS="-p1 -d ${P}" epatch ${FILESDIR}/qlogtools-3.1-errno.patch
+	EPATCH_OPTS="-p1 -d ${P}" epatch "${FILESDIR}"/qlogtools-3.1-errno.patch
 }
 
 src_compile() {

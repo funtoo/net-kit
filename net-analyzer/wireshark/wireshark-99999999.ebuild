@@ -1,33 +1,35 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 inherit autotools eutils fcaps flag-o-matic git-r3 multilib qmake-utils user
 
 DESCRIPTION="A network protocol analyzer formerly known as ethereal"
-HOMEPAGE="http://www.wireshark.org/"
+HOMEPAGE="https://www.wireshark.org/"
 EGIT_REPO_URI="https://code.wireshark.org/review/wireshark"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
 KEYWORDS=""
 IUSE="
-	adns androiddump +caps ciscodump cpu_flags_x86_sse4_2 crypt doc doc-pdf
-	geoip +gtk kerberos lua +netlink +pcap portaudio +qt5 sbc selinux smi
-	libssh randpkt randpktdump sshdump ssl tfshark zlib
+	adns androiddump +capinfos +caps +captype ciscodump cpu_flags_x86_sse4_2
+	+dftest doc doc-pdf +dumpcap +editcap geoip gtk kerberos libssh libxml2 lua
+	+mergecap +netlink nghttp2 +pcap portaudio +qt5 +randpkt +randpktdump
+	+reordercap sbc selinux +sharkd smi snappy spandsp sshdump ssl +text2pcap
+	tfshark +tshark +udpdump zlib
 "
 REQUIRED_USE="
 	ciscodump? ( libssh )
 	sshdump? ( libssh )
-	ssl? ( crypt )
 "
+
+S=${WORKDIR}/${P/_/}
 
 CDEPEND="
 	>=dev-libs/glib-2.14:2
+	dev-libs/libgcrypt:0
 	netlink? ( dev-libs/libnl:3 )
 	adns? ( >=net-dns/c-ares-1.5 )
-	crypt? ( dev-libs/libgcrypt:0 )
 	caps? ( sys-libs/libcap )
 	geoip? ( dev-libs/geoip )
 	gtk? (
@@ -38,7 +40,9 @@ CDEPEND="
 	)
 	kerberos? ( virtual/krb5 )
 	libssh? ( >=net-libs/libssh-0.6 )
+	libxml2? ( dev-libs/libxml2 )
 	lua? ( >=dev-lang/lua-5.1:* )
+	nghttp2? ( net-libs/nghttp2 )
 	pcap? ( net-libs/libpcap )
 	portaudio? ( media-libs/portaudio )
 	qt5? (
@@ -52,6 +56,8 @@ CDEPEND="
 	)
 	sbc? ( media-libs/sbc )
 	smi? ( net-libs/libsmi )
+	snappy? ( app-arch/snappy )
+	spandsp? ( media-libs/spandsp )
 	ssl? ( net-libs/gnutls:= )
 	zlib? ( sys-libs/zlib !=sys-libs/zlib-1.2.4 )
 "
@@ -83,6 +89,12 @@ RDEPEND="
 	qt5? ( virtual/freedesktop-icon-theme )
 	selinux? ( sec-policy/selinux-wireshark )
 "
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.99.8-qtchooser.patch
+	"${FILESDIR}"/${PN}-2.1.0-sse4_2-r1.patch
+	"${FILESDIR}"/${PN}-2.4-androiddump.patch
+	"${FILESDIR}"/${PN}-99999999-androiddump.patch
+)
 
 pkg_setup() {
 	enewgroup wireshark
@@ -93,12 +105,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch \
-		"${FILESDIR}"/${PN}-1.99.8-qtchooser.patch \
-		"${FILESDIR}"/${PN}-99999999-sse4_2.patch \
-		"${FILESDIR}"/${PN}-99999999-androiddump.patch
-
-	epatch_user
+	default
 
 	eautoreconf
 }
@@ -144,24 +151,38 @@ src_configure() {
 	econf \
 		$(use androiddump && use pcap && echo --enable-androiddump-use-libpcap=yes) \
 		$(use_enable androiddump) \
+		$(use_enable capinfos) \
+		$(use_enable captype) \
 		$(use_enable ciscodump) \
+		$(use_enable dftest) \
+		$(use_enable dumpcap) \
+		$(use_enable editcap) \
+		$(use_enable mergecap) \
 		$(use_enable randpkt) \
 		$(use_enable randpktdump) \
+		$(use_enable reordercap) \
+		$(use_enable sharkd) \
 		$(use_enable sshdump) \
+		$(use_enable text2pcap) \
 		$(use_enable tfshark) \
+		$(use_enable tshark) \
+		$(use_enable udpdump) \
 		$(use_with adns c-ares) \
 		$(use_with caps libcap) \
-		$(use_with crypt gcrypt) \
 		$(use_with geoip) \
 		$(use_with gtk gtk 3) \
 		$(use_with kerberos krb5) \
 		$(use_with libssh ssh) \
+		$(use_with libxml2) \
 		$(use_with lua) \
+		$(use_with nghttp2) \
 		$(use_with pcap dumpcap-group wireshark) \
 		$(use_with pcap) \
 		$(use_with portaudio) \
 		$(use_with sbc) \
 		$(use_with smi libsmi) \
+		$(use_with snappy) \
+		$(use_with spandsp) \
 		$(use_with ssl gnutls) \
 		$(use_with zlib) \
 		$(usex cpu_flags_x86_sse4_2 --enable-sse4_2 '') \
@@ -192,17 +213,18 @@ src_compile() {
 src_install() {
 	default
 
-	if use doc; then
-		dohtml -r docbook/{release-notes.html,ws{d,u}g_html{,_chunked}}
-		if use doc-pdf; then
-			insinto /usr/share/doc/${PF}/pdf/
-			doins docbook/{developer,user}-guide-{a4,us}.pdf docbook/release-notes.pdf
-		fi
-	fi
-
 	# FAQ is not required as is installed from help/faq.txt
 	dodoc AUTHORS ChangeLog NEWS README{,.bsd,.linux,.macos,.vmware} \
 		doc/{randpkt.txt,README*}
+
+	if use doc; then
+		docinto /usr/share/doc/${PF}/html
+		dodoc -r docbook/{release-notes.html,ws{d,u}g_html{,_chunked}}
+		if use doc-pdf; then
+			docinto /usr/share/doc/${PF}/pdf/
+			dodoc docbook/{developer,user}-guide-{a4,us}.pdf docbook/release-notes.pdf
+		fi
+	fi
 
 	# install headers
 	local wsheader

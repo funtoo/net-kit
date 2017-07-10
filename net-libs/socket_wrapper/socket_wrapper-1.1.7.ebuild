@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -11,7 +10,7 @@ HOMEPAGE="https://cwrap.org/socket_wrapper.html"
 SRC_URI="https://ftp.samba.org/pub/cwrap/${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="alpha amd64 ~arm ~arm64 ~hppa ia64 ppc ppc64 sparc x86"
 IUSE="test"
 
 DEPEND=""

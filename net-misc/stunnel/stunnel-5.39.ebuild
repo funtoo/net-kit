@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
@@ -41,7 +40,7 @@ src_prepare() {
 		tools/Makefile.in || die "sed failed"
 
 	# libressl compat
-	eapply "${FILESDIR}"/stunnel-compat-libressl.patch
+	eapply "${FILESDIR}"/${P}-compat-libressl.patch
 
 	echo "CONFIG_PROTECT=\"/etc/stunnel/stunnel.conf\"" > "${T}"/20stunnel
 

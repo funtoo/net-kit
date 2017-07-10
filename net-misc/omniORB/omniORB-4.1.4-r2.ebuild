@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -16,8 +15,10 @@ LICENSE="LGPL-2 GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ppc ppc64 ~sparc x86"
 IUSE="doc ssl static-libs"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="ssl? ( >=dev-libs/openssl-0.9.6b:0= )"
+RDEPEND="${PYTHON_DEPS}
+	ssl? ( >=dev-libs/openssl-0.9.6b:0= )"
 DEPEND="${RDEPEND}"
 
 src_prepare() {

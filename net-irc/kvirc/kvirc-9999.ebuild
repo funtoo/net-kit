@@ -1,11 +1,10 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
-PYTHON_DEPEND="python? 2"
+PYTHON_COMPAT=(python2_7)
 
-inherit cmake-utils flag-o-matic multilib python
+inherit cmake-utils flag-o-matic multilib python-single-r1
 
 if [[ "${PV}" == "9999" ]]; then
 	inherit git-r3
@@ -33,6 +32,7 @@ LICENSE="kvirc"
 SLOT="0"
 KEYWORDS=""
 IUSE="audiofile +dbus dcc_video debug doc gsm kde +nls oss +perl +phonon profile +python spell +ssl theora webkit"
+REQUIRED_USE="audiofile? ( oss ) python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5
@@ -45,6 +45,7 @@ RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtxml:5
 	sys-libs/zlib:0=
 	x11-libs/libX11
+	x11-libs/libXScrnSaver
 	audiofile? ( media-libs/audiofile )
 	dbus? ( dev-qt/qtdbus:5 )
 	dcc_video? ( dev-qt/qtmultimedia:5[widgets] )
@@ -58,6 +59,7 @@ RDEPEND="dev-qt/qtcore:5
 	)
 	perl? ( dev-lang/perl:0= )
 	phonon? ( media-libs/phonon:0[qt5] )
+	python? ( ${PYTHON_DEPS} )
 	spell? ( app-text/enchant )
 	ssl? ( dev-libs/openssl:0= )
 	theora? (
@@ -68,20 +70,17 @@ RDEPEND="dev-qt/qtcore:5
 	webkit? ( dev-qt/qtwebkit:5 )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
-	x11-proto/scrnsaverproto
 	doc? ( app-doc/doxygen )
 	kde? ( kde-frameworks/extra-cmake-modules:5 )
 	nls? ( sys-devel/gettext )"
 RDEPEND="${RDEPEND}
 	gsm? ( media-sound/gsm )"
-REQUIRED_USE="audiofile? ( oss )"
 
 DOCS=(ChangeLog doc/FAQ)
 
 pkg_setup() {
 	if use python; then
-		python_set_active_version 2
-		python_pkg_setup
+		python-single-r1_pkg_setup
 	fi
 }
 

@@ -1,6 +1,5 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 inherit eutils toolchain-funcs
 
@@ -15,7 +14,7 @@ DEPEND=""
 
 src_unpack() {
 	unpack ${A}
-	epatch ${FILESDIR}/${PN}-2.03-signed-char-fixup.patch
+	epatch "${FILESDIR}"/${PN}-2.03-signed-char-fixup.patch
 }
 
 src_compile() {

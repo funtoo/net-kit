@@ -1,9 +1,8 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
-inherit eutils versionator autotools
+inherit autotools eutils versionator
 
 FAX_SPOOL_DIR="${ROOT}/var/spool/fax"
 
@@ -13,24 +12,25 @@ MY_PV3="$(get_version_component_range 6)"
 MY_P="${PN}_${MY_PV1}.svn.${MY_PV2}"
 
 DESCRIPTION="capi4hylafax adds a faxcapi modem to the hylafax enviroment"
+HOMEPAGE="https://packages.qa.debian.org/c/capi4hylafax.html"
 SRC_URI="mirror://debian/pool/main/c/capi4hylafax/${MY_P}.orig.tar.gz
 	mirror://debian/pool/main/c/capi4hylafax/${MY_P}-${MY_PV3}.debian.tar.gz"
-HOMEPAGE="http://packages.qa.debian.org/c/capi4hylafax.html"
 
 S="${WORKDIR}/${PN}-svn"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="amd64 ~x86"
+KEYWORDS="amd64 ppc x86"
 
-RDEPEND="
+DEPEND="
 	app-shells/bash:0
-	net-libs/libcapi
 	media-libs/tiff:0
-	virtual/jpeg:0
+	net-libs/libcapi
 	sys-libs/zlib
+	virtual/jpeg:0
 "
-DEPEND="${RDEPEND}
+RDEPEND="
+	${DEPEND}
 	dev-util/dialog
 "
 

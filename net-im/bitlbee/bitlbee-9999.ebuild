@@ -1,30 +1,29 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
-inherit user systemd
+inherit user systemd toolchain-funcs
 
 if [[ ${PV} == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/bitlbee/bitlbee.git"
 	inherit git-r3
 else
-	SRC_URI="http://get.bitlbee.org/src/${P}.tar.gz"
+	SRC_URI="https://get.bitlbee.org/src/${P}.tar.gz"
 	KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~x86-fbsd"
 fi
 
 DESCRIPTION="irc to IM gateway that support multiple IM protocols"
-HOMEPAGE="http://www.bitlbee.org/"
+HOMEPAGE="https://www.bitlbee.org/"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE_PROTOCOLS="msn oscar purple twitter +xmpp yahoo"
+IUSE_PROTOCOLS="msn oscar purple twitter +xmpp"
 IUSE="debug +gnutls ipv6 libevent libressl nss otr +plugins selinux test xinetd
 	${IUSE_PROTOCOLS}"
 
 REQUIRED_USE="
-	|| ( purple xmpp msn oscar yahoo )
+	|| ( purple xmpp msn oscar )
 	xmpp? ( !nss )
 "
 
@@ -41,7 +40,7 @@ COMMON_DEPEND="
 			!libressl? ( dev-libs/openssl:0= )
 		)
 	)
-	"
+"
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	selinux? ( sec-policy/selinux-bitlbee )
@@ -57,7 +56,12 @@ pkg_setup() {
 }
 
 src_prepare() {
-	[[ ${PV} != "9999" ]] && eapply "${FILESDIR}"/${P}-systemd-user.patch
+	if [[ ${PV} != "9999" ]]; then
+		eapply \
+			"${FILESDIR}"/${P}-systemd-user.patch \
+			"${FILESDIR}"/${P}-verbose-build.patch
+	fi
+
 	eapply_user
 }
 
@@ -112,11 +116,16 @@ src_configure() {
 		--systemdsystemunitdir=$(systemd_get_systemunitdir) \
 		--doc=1 \
 		--strip=0 \
+		--verbose=1 \
 		"${myconf[@]}" || die
 
 	sed -i \
 		-e "/^EFLAGS/s:=:&${LDFLAGS} :" \
 		Makefile.settings || die
+}
+
+src_compile() {
+	emake CC="$(tc-getCC)" LD="$(tc-getLD)"
 }
 
 src_install() {

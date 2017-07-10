@@ -1,9 +1,8 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
-WANT_CMAKE="always"
+
 inherit eutils cmake-utils
 
 DESCRIPTION="Project aiming to recreate classic Opera (12.x) UI using Qt5"

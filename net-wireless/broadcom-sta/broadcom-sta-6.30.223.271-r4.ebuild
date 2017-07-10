@@ -1,12 +1,11 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit eutils linux-info linux-mod
 
 DESCRIPTION="Broadcom's IEEE 802.11a/b/g/n hybrid Linux device driver"
-HOMEPAGE="http://www.broadcom.com/support/802.11/"
+HOMEPAGE="https://www.broadcom.com/support/802.11"
 SRC_BASE="https://docs.broadcom.com/docs-and-downloads/docs/linux_sta/hybrid-v35"
 SRC_URI="x86? ( ${SRC_BASE}-nodebug-pcoem-${PV//\./_}.tar.gz )
 	amd64? ( ${SRC_BASE}_64-nodebug-pcoem-${PV//\./_}.tar.gz )
@@ -66,7 +65,9 @@ src_prepare() {
 		"${FILESDIR}/${PN}-6.30.223.271-r1-linux-3.18.patch" \
 		"${FILESDIR}/${PN}-6.30.223.271-r2-linux-4.3-v2.patch" \
 		"${FILESDIR}/${PN}-6.30.223.271-r4-linux-4.7.patch" \
-		"${FILESDIR}/${PN}-6.30.223.271-r4-linux-4.8.patch"
+		"${FILESDIR}/${PN}-6.30.223.271-r4-linux-4.8.patch" \
+		"${FILESDIR}/${PN}-6.30.223.271-r4-linux-4.11.patch" \
+		"${FILESDIR}/${PN}-6.30.223.271-r4-linux-4.12.patch"
 
 	epatch_user
 }

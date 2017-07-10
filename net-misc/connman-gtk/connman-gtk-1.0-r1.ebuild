@@ -1,6 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -18,7 +17,7 @@ IUSE="openconnect"
 CDEPEND="
 	>=dev-libs/glib-2.0:2
 	>=x11-libs/gtk+-3.10:3
-	openconnect? ( >=net-misc/openconnect-5.99 )
+	openconnect? ( >=net-vpn/openconnect-5.99 )
 "
 RDEPEND="${CDEPEND}
 	net-misc/connman

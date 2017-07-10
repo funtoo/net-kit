@@ -1,6 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # TODO: Add python support.
 
@@ -32,6 +31,7 @@ RDEPEND="
 		!libressl? ( >=dev-libs/openssl-1.0.2:0[-bindist,${MULTILIB_USEDEP}] )
 		libressl? ( dev-libs/libressl[${MULTILIB_USEDEP}] )
 		>=sys-libs/zlib-1.2.3[${MULTILIB_USEDEP}]
+		net-dns/c-ares:=[${MULTILIB_USEDEP}]
 	)
 	xml? ( >=dev-libs/libxml2-2.7.7:2[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}

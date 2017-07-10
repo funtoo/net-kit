@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -15,9 +14,10 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug doc ipoe postgres radius shaper snmp valgrind"
+IUSE="debug doc ipoe lua postgres radius shaper snmp valgrind"
 
-RDEPEND="postgres? ( dev-db/postgresql:* )
+RDEPEND="lua? ( dev-lang/lua:0 )
+	postgres? ( dev-db/postgresql:* )
 	snmp? ( net-analyzer/net-snmp )
 	dev-libs/libpcre
 	dev-libs/openssl:0"

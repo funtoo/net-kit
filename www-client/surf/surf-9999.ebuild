@@ -1,9 +1,8 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
-inherit eutils git-2 savedconfig toolchain-funcs
+EAPI=6
+inherit git-r3 savedconfig toolchain-funcs
 
 DESCRIPTION="a simple web browser based on WebKit/GTK+"
 HOMEPAGE="http://surf.suckless.org/"
@@ -16,8 +15,8 @@ KEYWORDS=""
 COMMON_DEPEND="
 	dev-libs/glib:2
 	net-libs/libsoup
-	net-libs/webkit-gtk:2
-	x11-libs/gtk+:2
+	net-libs/webkit-gtk:3
+	x11-libs/gtk+:3
 	x11-libs/libX11
 "
 DEPEND="
@@ -34,6 +33,9 @@ RDEPEND="
 		x11-terms/st
 	)
 "
+PATCHES=(
+	"${FILESDIR}"/${PN}-2.0-gentoo.patch
+)
 
 pkg_setup() {
 	if ! use savedconfig; then
@@ -49,13 +51,15 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}-gentoo.patch
-	epatch_user
+	default
+
 	restore_config config.h
+
 	tc-export CC PKG_CONFIG
 }
 
 src_install() {
 	default
+
 	save_config config.h
 }

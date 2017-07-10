@@ -1,8 +1,8 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
+
 PYTHON_COMPAT=( python2_7 )
 
 inherit eutils python-single-r1
@@ -16,6 +16,7 @@ SLOT="0"
 KEYWORDS="~alpha amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc x86"
 #IUSE="test"
 IUSE=""
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 # Tests failing, see upstream: https://bugs.freedesktop.org/34577
 RESTRICT="test"

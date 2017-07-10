@@ -20,6 +20,7 @@ net-p2p
 net-print
 net-proxy
 net-voip
+net-vpn
 net-wireless
 sys-libs
 www-apache

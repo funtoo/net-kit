@@ -16,10 +16,10 @@ net-im/ekg2 python_single_target_python2_7
 net-im/pidgin python_single_target_python2_7
 net-im/pyaim-t python_single_target_python2_7
 net-im/pyicq-t python_single_target_python2_7
-=net-irc/irker-2.13 python_single_target_python2_7
-=net-irc/irker-2.11 python_single_target_python2_7
 =net-irc/irker-2.12 python_single_target_python2_7
+=net-irc/irker-2.13 python_single_target_python2_7
 =net-irc/irker-2.15 python_single_target_python2_7
+=net-irc/irker-2.11 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
 net-libs/ldns python_single_target_python2_7
 net-libs/libgmail python_single_target_python2_7

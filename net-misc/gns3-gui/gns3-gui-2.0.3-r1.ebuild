@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_4 )
+PYTHON_COMPAT=( python3_{4,5} )
 
 inherit distutils-r1 eutils
 
@@ -37,6 +37,6 @@ src_prepare() {
 python_install_all() {
 	distutils-r1_python_install_all
 
-	doicon gns3.ico
-	make_desktop_entry "gns3" "GNS3" "gns3.ico" "Utility"
+	doicon "${WORKDIR}/${P}/resources/images/gns3.ico"
+	make_desktop_entry "gns3" "GNS3" "/usr/share/pixmaps/gns3.ico" "Utility"
 }

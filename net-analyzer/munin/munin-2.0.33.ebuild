@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PATCHSET=1
 
@@ -12,13 +12,13 @@ MY_P=${P/_/-}
 DESCRIPTION="Munin Server Monitoring Tool"
 HOMEPAGE="http://munin-monitoring.org/"
 SRC_URI="
-	mirror://sourceforge/munin/${MY_P}.tar.gz
-	https://dev.gentoo.org/~jlec/distfiles/${P}-gentoo-${PATCHSET}.tar.xz"
+	https://github.com/munin-monitoring/munin/archive/${PV}.tar.gz -> ${P}.tar.gz
+	https://dev.gentoo.org/~graaff/munin/${P}-gentoo-${PATCHSET}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~mips ~ppc ~x86"
-IUSE="asterisk irc java memcached minimal mysql postgres ssl test cgi ipv6 syslog ipmi http dhcpd doc apache"
+IUSE="asterisk irc java memcached minimal mysql postgres selinux ssl test cgi ipv6 syslog ipmi http dhcpd doc apache"
 REQUIRED_USE="cgi? ( !minimal ) apache? ( cgi )"
 
 # Upstream's listing of required modules is NOT correct!
@@ -45,7 +45,10 @@ DEPEND_COM="
 	virtual/perl-Time-HiRes
 	apache? ( www-servers/apache[apache2_modules_cgi,apache2_modules_cgid,apache2_modules_rewrite] )
 	asterisk? ( dev-perl/Net-Telnet )
-	cgi? ( dev-perl/FCGI )
+	cgi? (
+		dev-perl/FCGI
+		dev-perl/CGI-Fast
+		)
 	dhcpd? (
 		>=net-misc/dhcp-3[server]
 		dev-perl/Net-IP
@@ -61,7 +64,7 @@ DEPEND_COM="
 		dev-perl/Cache-Cache
 		dev-perl/DBD-mysql
 		)
-	postgres? ( dev-perl/DBD-Pg dev-db/postgresql )
+	postgres? ( dev-perl/DBD-Pg dev-db/postgresql:* )
 	ssl? ( dev-perl/Net-SSLeay )
 	syslog? ( virtual/perl-Sys-Syslog )
 	!minimal? (
@@ -98,6 +101,7 @@ RDEPEND="${DEPEND_COM}
 			virtual/cron
 			media-fonts/dejavu
 		)
+		selinux? ( sec-policy/selinux-munin )
 		!<sys-apps/openrc-0.11.8"
 
 S="${WORKDIR}/${MY_P}"
@@ -112,6 +116,8 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${WORKDIR}"/patches/*.patch
+
+	eapply_user
 
 	java-pkg-opt-2_src_prepare
 }
@@ -175,7 +181,7 @@ src_install() {
 
 	# parallel install doesn't work and it's also pointless to have this
 	# run in parallel for now (because it uses internal loops).
-	emake -j1 DESTDIR="${D}" $(usex minimal install-minimal install)
+	emake -j1 DESTDIR="${D}" $(usex minimal "install-minimal install-man" install)
 
 	# we remove /run from the install, as it's not the package's to deal
 	# with.

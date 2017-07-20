@@ -80,12 +80,10 @@ src_compile() {
 src_install() {
 	cd "${S}"/new || die
 	insinto /usr/bin
-	insopts -m 6755
 	doins procmail
 
 	doins lockfile
 	fowners root:mail /usr/bin/lockfile
-	fperms 2755 /usr/bin/lockfile
 
 	dobin formail mailstat
 	insopts -m 0644
@@ -103,6 +101,10 @@ src_install() {
 }
 
 pkg_postinst() {
+	# workaround permission mangle by FEATURES="sfperms" during install phase. https://bugs.funtoo.org/browse/FL-3946
+	chmod 6755 /usr/bin/procmail
+	chmod 2755 /usr/bin/lockfile
+
 	if ! use mbox ; then
 		elog "Starting with mail-filter/procmail-3.22-r9 you'll need to ensure"
 		elog "that you configure a mail storage location using DEFAULT in"

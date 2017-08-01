@@ -2071,6 +2071,7 @@ www-servers/cherokee:admin - Install web based cherokee conf tool
 www-servers/cherokee:rrdtool - Enable rrdtool support
 www-servers/fnord:auth - Enable HTTP authentication support
 www-servers/gatling:diet - Compile against dev-libs/dietlibc
+www-servers/glassfish-bin:update-tool - Installs the update tool which was removed from the 4.1.2 version
 www-servers/h2o:mruby - Enable support for mruby
 www-servers/hiawatha:cache - Enable caching of content
 www-servers/hiawatha:monitor - Pull in www-apps/hiawatha-monitor

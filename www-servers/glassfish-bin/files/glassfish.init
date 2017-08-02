@@ -1,0 +1,49 @@
+#!/sbin/openrc-run
+#
+# /etc/init.d/glassfish
+#
+# Copyright (c) 2017 Ryan P. Harris
+# All rights reserved. Released under the 2-clause BSD license.
+#
+
+ASADMIN="/opt/glassfish-bin/bin/asadmin"
+USER="${GF_USER}:glassfish"
+
+depend() {
+	after bootmisc
+	after net
+}
+
+
+start() {
+
+	ebegin "Starting GlassFish Server"
+	RESULT="0"
+	for domain in ${GF_DOMAINS} ; do
+		einfo "Starting domain ${domain}"
+		start-stop-daemon --pidfile "${DOMAIN_DIR}"/"${domain}"/config/pid --user "${USER}" --start --exec "${ASADMIN}" -- start-domain --domaindir "${DOMAIN_DIR}" "${domain}"
+		result="$?"
+		if [ ${result} != 0 ] ; then
+			RESULT="${result}"
+		fi
+	done
+	eend ${RESULT}
+
+}
+
+
+stop() {
+
+	ebegin "Stopping GlassFish Server"
+	RESULT="0"
+	for domain in ${GF_DOMAINS} ; do
+		einfo "Stopping domain ${domain}"
+		"${ASADMIN}" stop-domain --domaindir "${DOMAIN_DIR}" "${domain}"
+		result="$?"
+		if [ ${result} != 0 ] ; then
+			RESULT="${result}"
+		fi
+	done
+	eend ${RESULT}
+
+}

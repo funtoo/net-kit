@@ -1,0 +1,48 @@
+#!/sbin/openrc-run
+#
+# /etc/init.d/imq
+#
+# Copyright (c) 2017 Ryan P. Harris
+# All rights reserved. Released under the 2-clause BSD license.
+
+
+# Glassfish Message Queue Broker
+
+PROG="imqbrokerd"
+FULL_PATH_TO_PROG="${IMQ_HOME}/bin/${PROG}"
+PIDFILE="/run/imqbrokerd.pid"
+
+depend() {
+	after bootmisc
+	after net
+}
+
+
+start() {
+
+	ebegin "Starting Glassfish Message Queue Broker"
+
+	if [ ! -d "${IMQ_HOME}" ]; then
+		error "Cannot find Message Queue in IMQ_HOME (${IMQ_HOME})."
+	fi
+	start-stop-daemon --make-pidfile --pidfile "${PIDFILE}" --background --user glassfish:glassfish --start --exec "${FULL_PATH_TO_PROG}" -- "${IMQ_ARGS}"
+
+	# imqbrokerd spawns a child process which actually runs the broker. We
+	# need to get the pid of that process and replace the one in PIDFILE
+	# with it as we need to send it the stop signal in order for imqbrokerd
+	# to stop normally.
+	# Sleep for 5 seconds to make sure child process has started.
+	sleep 5
+	ps --ppid $(cat /var/run/imqbrokerd.pid) -o pid= > "${PIDFILE}"
+
+	eend $?
+
+}
+
+stop() {
+
+	ebegin "Stopping Glassfish Message Queue Broker"
+	start-stop-daemon --pidfile "${PIDFILE}" --stop
+	eend $?
+
+}

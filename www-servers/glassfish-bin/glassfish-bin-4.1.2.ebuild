@@ -22,7 +22,7 @@ INSTALL_DIR="/opt/${PN}"
 pkg_setup() {
 
 	enewgroup glassfish
-	enewuser glassfish -1 /bin/bash ${INSTALL_DIR}/home glassfish
+	enewuser glassfish -1 /bin/bash "${INSTALL_DIR}/home" glassfish
 
 }
 
@@ -33,9 +33,10 @@ src_unpack() {
 		# for some unknown reason so we must extract it from a
 		# pre-released version.
 		unpack glassfish-4.1.2-b03-02_25_2017.zip
-		mv ${S} ${WORKDIR}/glassfish-b03
+		mv "${S}" "${WORKDIR}"/glassfish-b03
 		unpack glassfish-4.1.2.zip
-		mv ${WORKDIR}/glassfish-b03/pkg ${S}/pkg
+		mv "${WORKDIR}/glassfish-b03/.org.opensolaris,pkg" "${S}"
+		mv "${WORKDIR}/glassfish-b03/pkg" "${S}"
 	else
 		unpack glassfish-4.1.2.zip
 	fi
@@ -49,27 +50,28 @@ src_prepare() {
 }
 
 src_install() {
-	insinto ${INSTALL_DIR}
+
+	insinto "${INSTALL_DIR}"
 
 	if use update-tool ; then
-		doins -r bin glassfish javadb mq pkg
+		doins -r bin glassfish javadb mq pkg .org.opensolaris,pkg
 	else
 		doins -r bin glassfish javadb mq
 	fi
 
-	keepdir ${INSTALL_DIR}/home
+	keepdir "${INSTALL_DIR}"/home
 
 	for i in bin/* ; do
-		fperms 755 ${INSTALL_DIR}/${i}
+		fperms 775 "${INSTALL_DIR}/${i}"
 		make_wrapper "gf-$(basename ${i})" "${INSTALL_DIR}/${i}"
 	done
 
 	for i in glassfish/bin/* ; do
-		fperms 755 ${INSTALL_DIR}/${i}
+		fperms 775 "${INSTALL_DIR}/${i}"
 	done
 
 	for i in mq/bin/* ; do
-		fperms 755 ${INSTALL_DIR}/${i}
+		fperms 775 "${INSTALL_DIR}/${i}"
 	done
 
 	# Install our own openrc init scripts
@@ -78,9 +80,8 @@ src_install() {
 	newinitd "${FILESDIR}/glassfish.init" glassfish
 	newconfd "${FILESDIR}/glassfish.conf" glassfish
 
-	# Domain directory needs to be group writable
-	keepdir ${INSTALL_DIR}/glassfish/domains
-	fperms -R g+w "${INSTALL_DIR}/glassfish/domains"
+	# Keep domains directory
+	keepdir "${INSTALL_DIR}/glassfish/domains"
 
 	# Default directory for MQ. Create now so we can set permissions
 	dodir /var/imq
@@ -89,12 +90,21 @@ src_install() {
 	fowners glassfish:glassfish /var/imq
 
 	# Change default in imqenv.conf to use /var/imq
-	sed -i '/^IMQ_DEFAULT_VARHOME=/c\IMQ_DEFAULT_VARHOME=/var/imq' ${ED}${INSTALL_DIR}/mq/etc/imqenv.conf
-	fowners -R glassfish:glassfish ${INSTALL_DIR}
+	sed -i '/^IMQ_DEFAULT_VARHOME=/c\IMQ_DEFAULT_VARHOME=/var/imq' "${ED}${INSTALL_DIR}/mq/etc/imqenv.conf"
+
+	# Change owner:group to glassfish
+	fowners -R glassfish:glassfish "${INSTALL_DIR}"
+
+	# Make everything group writable in case someone uses a different user besides
+	# the default glassfish user. This fixes a permission issue if they for example
+	# run the update-tool.
+	fperms -R g+w "${INSTALL_DIR}"
 
 	echo "CONFIG_PROTECT=\"${INSTALL_DIR}/glassfish/config\"" > "${T}/25glassfish"
 	doenvd "${T}/25glassfish"
+
 }
+
 
 pkg_postinst() {
 	elog "You must be in the glassfish group to use GlassFish without root privileges."

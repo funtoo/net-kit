@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 #
-# @ECLASS: mozconfig-v6.53.eclass
+# @ECLASS: mozconfig-v6.55.eclass
 # @MAINTAINER:
 # mozilla team <mozilla@gentoo.org>
 # @BLURB: the new mozilla common configuration eclass for FF33 and newer, v6
@@ -84,7 +84,7 @@ inherit flag-o-matic toolchain-funcs mozcoreconf-v5
 # Set the variable to any value if the use flag should exist but not be default-enabled.
 
 # use-flags common among all mozilla ebuilds
-IUSE="${IUSE} dbus debug +jemalloc neon pulseaudio selinux startup-notification system-cairo
+IUSE="${IUSE} dbus debug neon pulseaudio selinux startup-notification system-cairo
 	system-harfbuzz system-icu system-jpeg system-libevent system-sqlite system-libvpx"
 
 # some notes on deps:
@@ -124,7 +124,7 @@ RDEPEND=">=app-text/hunspell-1.5.4:=
 	system-icu? ( >=dev-libs/icu-58.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0= )
-	system-sqlite? ( >=dev-db/sqlite-3.17.0:3[secure-delete,debug=] )
+	system-sqlite? ( >=dev-db/sqlite-3.19.3:3[secure-delete,debug=] )
 	system-libvpx? ( >=media-libs/libvpx-1.5.0:0=[postproc] )
 	system-harfbuzz? ( >=media-libs/harfbuzz-1.3.3:0= >=media-gfx/graphite2-1.3.9-r1 )
 "
@@ -245,8 +245,6 @@ mozconfig_config() {
 	mozconfig_annotate '' --prefix="${EPREFIX}"/usr
 	mozconfig_annotate '' --libdir="${EPREFIX}"/usr/$(get_libdir)
 	mozconfig_annotate 'Gentoo default' --enable-system-hunspell
-	mozconfig_annotate '' --disable-gnomeui
-	mozconfig_annotate '' --enable-gio
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate 'Gentoo default' --with-system-png
 	mozconfig_annotate '' --enable-system-ffi
@@ -294,14 +292,6 @@ mozconfig_config() {
 	fi
 	mozconfig_annotate "${toolkit_comment}" --enable-default-toolkit=${toolkit}
 
-	# Use jemalloc unless libc is not glibc >= 2.4
-	# at this time the minimum glibc in the tree is 2.9 so we should be safe.
-	if use elibc_glibc && use jemalloc; then
-		# We must force-enable jemalloc 4 via .mozconfig
-		echo "export MOZ_JEMALLOC4=1" >> "${S}"/.mozconfig || die
-		mozconfig_annotate '' --enable-replace-malloc
-	fi
-
 	# Instead of the standard --build= and --host=, mozilla uses --host instead
 	# of --build, and --target intstead of --host.
 	# Note, mozilla also has --build but it does not do what you think it does.
@@ -314,6 +304,9 @@ mozconfig_config() {
 	if use kernel_linux && ! use pulseaudio ; then
 		mozconfig_annotate '-pulseaudio' --enable-alsa
 	fi
+
+	# For testing purpose only
+	mozconfig_annotate 'Sandbox' --enable-content-sandbox
 
 	mozconfig_use_enable system-cairo
 	mozconfig_use_enable system-sqlite

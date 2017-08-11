@@ -13,8 +13,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/${PN}/qBittorrent.git"
 else
 	MY_P=${P/_}
-	SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.xz
-		https://dev.gentoo.org/~kensington/distfiles/${P}-cmake-3.8.patch.gz"
+	SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~ppc64 ~x86"
 	S=${WORKDIR}/${MY_P}
 fi
@@ -44,7 +43,7 @@ DEPEND="${RDEPEND}
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
-PATCHES=( "${WORKDIR}"/${P}-cmake-3.8.patch )
+#PATCHES=( "${WORKDIR}"/${PN}-3.3.12-cmake-3.8.patch )
 
 src_configure() {
 	local mycmakeargs=(

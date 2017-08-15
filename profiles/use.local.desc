@@ -1504,7 +1504,7 @@ net-nds/389-ds-base:bitwise - Enable bitwise plugin - supported data in raw/bitw
 net-nds/389-ds-base:dna - Enable dna (distributed numeric assignment ) plugin - to automatically assign unique uid numbers to new user entries as they are created.
 net-nds/389-ds-base:ldapi - Enable LDAP over unix domain socket (LDAPI) support
 net-nds/389-ds-base:pam-passthru - Enable pam-passthru plugin - for simple and fast system services used in ldap
-net-nds/389-ds-base:presence - Enable presence plugin - non-stabdart syntax validation
+net-nds/389-ds-base:presence - Enable presence plugin - non-standard syntax validation
 net-nds/gosa-core:mail - Manage mail accounts and servers with gosa.
 net-nds/gosa-core:samba - Manage samba accounts with gosa.
 net-nds/ldapvi:gnutls - Use net-libs/gnutls instead of dev-libs/openssl
@@ -1561,14 +1561,6 @@ net-p2p/bitcoind:ljr - Enable Luke Dashjr's patches
 net-p2p/bitcoind:upnp - Enable Universal Plug and Play
 net-p2p/bitcoind:wallet - Enable wallet support
 net-p2p/bitcoind:zeromq - Report blocks and transactions via zeromq
-net-p2p/bitcoinxt-qt:ljr - Enable Luke Dashjr's patches
-net-p2p/bitcoinxt-qt:logrotate - Use app-admin/logrotate for rotating logs
-net-p2p/bitcoinxt-qt:qrcode - Enable generation of QR Codes for receiving payments
-net-p2p/bitcoinxt-qt:wallet - Enable wallet support
-net-p2p/bitcoinxtd:doc - Include documentatio
-net-p2p/bitcoinxtd:logrotate - Use app-admin/logrotate for rotating logs
-net-p2p/bitcoinxtd:upnp - Enable Universal Plug and Play
-net-p2p/bitcoinxtd:wallet - Enable wallet support
 net-p2p/datacoin-hp:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/dbhub:switch_user - Enable support for switching user
 net-p2p/deluge:console - Enable default console UI
@@ -1597,7 +1589,6 @@ net-p2p/ktorrent:mediaplayer - Phonon-based media player
 net-p2p/ktorrent:shutdown - Shutdown when done
 net-p2p/ktorrent:stats - Shows statistics about torrents in several graphs
 net-p2p/ktorrent:zeroconf - Discover peers on the local network using the Zeroconf protocol
-net-p2p/litecoin-qt:qrcode - Enable generation of QR Codes for receiving payments
 net-p2p/litecoind:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/litecoind:wallet - Enable wallet support
 net-p2p/mldonkey:bittorrent - enable bittorrent support

@@ -3,15 +3,16 @@
 
 EAPI=6
 
-inherit cmake-multilib git-r3
+MY_P="${PN}-${PV/_rc/rc}"
+inherit cmake-multilib
 
 DESCRIPTION="Access a working SSH implementation by means of a library"
-HOMEPAGE="http://www.libssh.org/"
-EGIT_REPO_URI="git://git.libssh.org/projects/libssh.git"
+HOMEPAGE="https://www.libssh.org/"
+SRC_URI="https://red.libssh.org/attachments/download/218/${MY_P}.tar.xz -> ${P}.tar.xz"
 
 LICENSE="LGPL-2.1"
-KEYWORDS=""
-SLOT="0"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
+SLOT="0/4" # subslot = soname major version
 IUSE="debug doc examples gcrypt gssapi libressl pcap server +sftp ssh1 static-libs test zlib"
 # Maintainer: check IUSE-defaults at DefineOptions.cmake
 
@@ -31,7 +32,13 @@ DEPEND="${RDEPEND}
 
 DOCS=( AUTHORS README ChangeLog )
 
-EGIT_MIN_CLONE_TYPE=single
+S="${WORKDIR}/${MY_P}"
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-0.5.0-tests.patch
+	"${FILESDIR}"/${P}-fix-config-parsing.patch
+	"${FILESDIR}"/${P}-fix-config-buffer-underflow.patch
+)
 
 src_prepare() {
 	cmake-utils_src_prepare
@@ -41,6 +48,10 @@ src_prepare() {
 		-e '/add_subdirectory(examples)/s/^/#DONOTWANT/' \
 		CMakeLists.txt || die
 
+	# keyfile torture test is currently broken
+	sed -i \
+		-e '/torture_keyfiles/d' \
+		tests/unittests/CMakeLists.txt || die
 }
 
 multilib_src_configure() {

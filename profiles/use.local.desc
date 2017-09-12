@@ -1295,8 +1295,6 @@ net-misc/csync:sftp - Enable sftp transfer support via net-libs/libssh
 net-misc/dahdi:flash - Support (short) flash on FXS
 net-misc/dahdi-tools:ppp - Enables PPP/DAHDIRAS support
 net-misc/dhcpcd-ui:gtk3 - Add support for x11-libs/gtk+ (The GIMP Toolkit)
-net-misc/directvnc:dmalloc - Enable debugging with the dmalloc library
-net-misc/directvnc:mouse - Adds mouse support
 net-misc/dropbear:bsdpty - Add support for legacy BSD pty's rather than dynamic UNIX pty's -- do not use this flag unless you are absolutely sure you actually want it
 net-misc/dropbear:multicall - Build all the programs as one little binary (to save space)
 net-misc/dropbear:shadow - Enable shadow password support
@@ -1994,7 +1992,6 @@ www-client/netsurf:rosprite - RISC OS Sprite bitmap image support (media-libs/li
 www-client/netsurf:svgtiny - SVG image support via media-libs/svgatiny instead of gnome-base/librsvg
 www-client/netsurf:webp - WebP image support (media-libs/libwebp)
 www-client/opera:gtk - Install support libraries and runtime dependencies to support GTK+/GNOME desktop integration
-www-client/opera:kde - Install support libraries and runtime dependencies to support KDE desktop integration
 www-client/qupzilla:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 www-client/qupzilla:nonblockdialogs - Enable fancy non-blocking JavaScript dialogs shown inside the page, not blocking the application window. When closing browser windows with open dialogs, this can crash the application.
 www-client/qutebrowser:webengine - Install packages required for experimental rendering support with webengine.

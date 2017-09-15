@@ -9,10 +9,10 @@ net-analyzer/mk-livestatus python_single_target_python2_7
 net-analyzer/net-snmp python_single_target_python2_7
 net-analyzer/nmap python_single_target_python2_7
 net-analyzer/ntop python_single_target_python2_7
+=net-analyzer/rrdtool-1.6.0-r1 python_single_target_python2_7
+=net-analyzer/rrdtool-1.7.0 python_single_target_python2_7
 =net-analyzer/rrdtool-1.5.5 python_single_target_python2_7
 =net-analyzer/rrdtool-1.5.5-r1 python_single_target_python2_7
-=net-analyzer/rrdtool-1.7.0 python_single_target_python2_7
-=net-analyzer/rrdtool-1.6.0-r1 python_single_target_python2_7
 net-analyzer/w3af python_single_target_python2_7
 net-dialup/freeradius python_single_target_python2_7
 net-dns/unbound python_single_target_python2_7
@@ -24,12 +24,12 @@ net-im/pyaim-t python_single_target_python2_7
 net-im/pyicq-t python_single_target_python2_7
 net-irc/hexchat python_single_target_python2_7
 =net-irc/irker-2.11 python_single_target_python2_7
+=net-irc/irker-2.16 python_single_target_python2_7
 =net-irc/irker-2.12 python_single_target_python2_7
-=net-irc/irker-2.17 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
 =net-irc/irker-2.13 python_single_target_python2_7
-=net-irc/irker-2.16 python_single_target_python2_7
 =net-irc/irker-2.15 python_single_target_python2_7
+=net-irc/irker-2.17 python_single_target_python2_7
 =net-irc/irker-2.18 python_single_target_python2_7
 net-irc/kvirc python_single_target_python2_7
 =net-irc/znc-9999 python_single_target_python3_4 python_targets_python3_4
@@ -76,8 +76,8 @@ net-vpn/tinc python_single_target_python2_7
 net-wireless/airpwn python_single_target_python2_7
 net-wireless/blueberry python_single_target_python2_7
 =net-wireless/blueman-2.0.4 python_single_target_python2_7
-=net-wireless/blueman-2.0.3 python_single_target_python2_7
 =net-wireless/blueman-2.1_alpha1 python_single_target_python2_7
+=net-wireless/blueman-2.0.3 python_single_target_python2_7
 net-wireless/cpyrit-cuda python_single_target_python2_7
 net-wireless/cpyrit-opencl python_single_target_python2_7
 net-wireless/gnuradio python_single_target_python2_7

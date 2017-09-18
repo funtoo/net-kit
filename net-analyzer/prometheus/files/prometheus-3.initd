@@ -1,19 +1,19 @@
 #!/sbin/openrc-run
-# Copyright 2017 Gentoo Foundation
+# Copyright 2016-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-description="Calico Felix host agent"
+description="Prometheus monitoring system and time series database"
 pidfile=${pidfile:-"/run/${RC_SVCNAME}.pid"}
-user=${user:-root}
-group=${group:-root}
+user=${user:-${SVCNAME}}
+group=${group:-${SVCNAME}}
 
-command="/usr/bin/calico-felix"
-command_args="${command_args}"
+command="/usr/bin/prometheus"
+command_args="${command_args:---config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/var/lib/prometheus/data}"
 command_background="true"
 start_stop_daemon_args="--user ${user} --group ${group} \
 	--stdout /var/log/${RC_SVCNAME}/${RC_SVCNAME}.log \
 	--stderr /var/log/${RC_SVCNAME}/${RC_SVCNAME}.log"
 
 depend() {
-	need net
+	after net
 }

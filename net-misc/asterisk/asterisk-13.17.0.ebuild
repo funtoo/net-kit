@@ -9,7 +9,7 @@ MY_P="${PN}-${PV/_/-}"
 DESCRIPTION="Asterisk: A Modular Open Source PBX System"
 HOMEPAGE="http://www.asterisk.org/"
 SRC_URI="http://downloads.asterisk.org/pub/telephony/asterisk/releases/${MY_P}.tar.gz
-	 mirror://gentoo/gentoo-asterisk-patchset-4.04.tar.bz2"
+	 mirror://gentoo/gentoo-asterisk-patchset-4.05.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -74,7 +74,7 @@ DEPEND="${CDEPEND}
 	!net-libs/pjsip
 	voicemail_storage_imap? ( virtual/imap-c-client )
 	virtual/pkgconfig
-	pjproject? ( net-libs/pjproject )
+	pjproject? ( >=net-libs/pjproject-2.6 )
 "
 
 RDEPEND="${CDEPEND}

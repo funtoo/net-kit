@@ -3,11 +3,10 @@
 
 EAPI=6
 
-inherit autotools eutils flag-o-matic git-r3
+inherit autotools eutils flag-o-matic
 
-EGIT_REPO_URI="https://github.com/neomutt/neomutt.git"
-EGIT_CHECKOUT_DIR="${WORKDIR}/neomutt-${P}"
-KEYWORDS=""
+SRC_URI="https://github.com/${PN}/${PN}/archive/${P}.tar.gz"
+KEYWORDS="~amd64 ~x86"
 
 DESCRIPTION="A small but very powerful text-based mail client"
 HOMEPAGE="https://www.neomutt.org/"
@@ -55,8 +54,9 @@ RDEPEND="${CDEPEND}
 S="${WORKDIR}/${PN}-${P}"
 
 src_prepare() {
+	eapply "${FILESDIR}/0001-Rename-mutt-to-neomutt-${PV}.patch"
 	eapply_user
-	eautoreconf
+	AT_M4DIR="m4" eautoreconf
 }
 
 src_configure() {
@@ -95,8 +95,6 @@ src_install() {
 	emake DESTDIR="${D}" install
 
 	# A newer file is provided by app-misc/mime-types. So we link it.
-	#rm "${ED}"/etc/${PN}/mime.types || die
-	#dosym "${EPREFIX}/etc/mime.types" /etc/${PN}/mime.types
 
 	# A man-page is always handy, so fake one
 	if use !doc; then

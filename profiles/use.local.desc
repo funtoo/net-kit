@@ -683,9 +683,6 @@ net-im/centerim:gadu - Enable support for the Gadu-Gadu protocol
 net-im/centerim:irc - Enable support for the IRC protocol
 net-im/centerim:lj - Enable support for the LiveJournal weblog system
 net-im/centerim:otr - Enable encrypted conversations
-net-im/choqok:attica - Build Open Collaboration Services plugin using dev-libs/libattica
-net-im/choqok:konqueror - Build Konqueror Choqok plugin
-net-im/choqok:telepathy - Enable support for the real-time communication framework telepathy
 net-im/climm:otr - Enable encrypted conversations
 net-im/corebird:glade - Install glade catalogs for corebird
 net-im/corebird:spellcheck - Support spell checking
@@ -1605,21 +1602,6 @@ net-p2p/fms:frost - Add support for frost boards
 net-p2p/go-ethereum:evm - Build Ethereum Virtual Machine (EVM)
 net-p2p/go-ethereum:opencl - Add OpenCL GPU mining support
 net-p2p/go-ipfs-bin:fuse - Enable runtime support for sys-fs/fuse
-net-p2p/ktorrent:bwscheduler - Schedule upload and download limits over a period of a week
-net-p2p/ktorrent:downloadorder - Specify the download order of a multi-file torrent
-net-p2p/ktorrent:infowidget - Displays general information about a torrent in several tabs
-net-p2p/ktorrent:ipfilter - Filter IP addresses through a blocklist
-net-p2p/ktorrent:kross - Enable kross scripting support
-net-p2p/ktorrent:logviewer - Displays the logging output
-net-p2p/ktorrent:magnetgenerator - Generates magnet URI's
-net-p2p/ktorrent:mediaplayer - Phonon-based media player
-net-p2p/ktorrent:rss - Syndication plugin for KTorrent, supporting RSS and Atom feeds
-net-p2p/ktorrent:scanfolder - Scan folders for torrent files and load them
-net-p2p/ktorrent:search - Search for torrents
-net-p2p/ktorrent:shutdown - Shutdown when done
-net-p2p/ktorrent:stats - Shows statistics about torrents in several graphs
-net-p2p/ktorrent:upnp - Forward ports using UPnP
-net-p2p/ktorrent:zeroconf - Discover peers on the local network using the Zeroconf protocol
 net-p2p/litecoind:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/litecoind:wallet - Enable wallet support
 net-p2p/mldonkey:bittorrent - enable bittorrent support

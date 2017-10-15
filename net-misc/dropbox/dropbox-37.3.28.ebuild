@@ -14,7 +14,7 @@ SRC_URI="
 
 LICENSE="CC-BY-ND-3.0 FTL MIT LGPL-2 openssl dropbox"
 SLOT="0"
-KEYWORDS="amd64 x86 ~x86-linux"
+KEYWORDS="~amd64 ~x86 ~x86-linux"
 IUSE="+librsync-bundled selinux X"
 RESTRICT="mirror strip"
 
@@ -73,11 +73,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	local target=(
-		dropbox_sqlite_ext-0.0-py2.7.egg
-		setuptools-20.3-py2.7.egg
-	)
-
 	eapply_user
 
 	rm -vf libbz2* libpopt.so.0 libpng12.so.0 || die
@@ -94,9 +89,7 @@ src_prepare() {
 	else
 		rm -vf librsync.so.1 || die
 	fi
-	mv ${target[@]} "${T}" || die
 	rm -rf *.egg library.zip || die
-	(cd "${T}"; mv ${target[@]} "${S}") || die
 	ln -s dropbox library.zip || die
 	pax-mark cm dropbox
 	mv README ACKNOWLEDGEMENTS "${T}" || die

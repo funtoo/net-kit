@@ -47,7 +47,6 @@ net-libs/libbtbb python_single_target_python2_7
 net-libs/libgmail python_single_target_python2_7
 net-libs/libsearpc python_single_target_python2_7
 net-libs/nfqueue-bindings python_single_target_python2_7
-net-libs/nodejs python_single_target_python2_7
 net-libs/xrootd python_single_target_python2_7
 net-mail/automx python_single_target_python2_7
 net-mail/fetchmail python_single_target_python2_7

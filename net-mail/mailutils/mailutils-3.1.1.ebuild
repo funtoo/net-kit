@@ -13,7 +13,7 @@ SRC_URI="mirror://gnu/mailutils/${P}.tar.xz"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~hppa ~ppc ~x86 ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS="amd64 ~arm64 ~hppa ~ppc x86 ~ppc-macos ~x64-macos ~x86-macos"
 IUSE="berkdb bidi +clients gdbm sasl guile ipv6 kerberos kyotocabinet ldap \
 	mysql nls pam postgres python servers ssl static-libs +threads tcpd \
 	tokyocabinet"
@@ -56,6 +56,7 @@ pkg_setup() {
 src_prepare() {
 	# Disable bytecompilation of Python modules.
 	echo "#!/bin/sh" > build-aux/py-compile
+	eapply "${FILESDIR}/${PN}-2.99.98-readline-6.3.patch" #503954
 	# bug 567976
 	sed -i -e /AM_GNU_GETTEXT_VERSION/s/0.18/0.19/ configure.ac || die
 	# add missing tests so that make check doesn't fail
@@ -64,8 +65,6 @@ src_prepare() {
 		sed -i -e /^INCLUDES/"s:$:$(mysql_config --include):" \
 			sql/Makefile.am || die
 	fi
-	# bug #612712
-	eapply "${FILESDIR}"/${P}-fix-build.patch
 	eapply_user
 	eautoreconf
 }

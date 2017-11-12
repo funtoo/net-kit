@@ -1,11 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
 
 inherit eutils toolchain-funcs multilib pam systemd
 
-IUSE="dane dcc +dkim dlfunc dmarc +dnsdb doc dovecot-sasl dsn exiscan-acl gnutls ipv6 ldap libressl lmtp maildir mbx mysql nis pam perl pkcs11 postgres +prdr proxy radius redis sasl selinux spf sqlite srs ssl syslog tcpd tpda X elibc_glibc"
+IUSE="auth_tls dane dcc +dkim dlfunc dmarc +dnsdb doc dovecot-sasl dsn exiscan-acl gnutls ipv6 ldap libressl lmtp maildir mbx mysql nis pam perl pkcs11 postgres +prdr proxy radius redis sasl selinux socks spf sqlite srs ssl syslog tcpd tpda X elibc_glibc"
 REQUIRED_USE="
 	dane? ( !gnutls )
 	dmarc? ( spf dkim )
@@ -24,7 +23,7 @@ HOMEPAGE="http://www.exim.org/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="alpha amd64 ~arm ~hppa ia64 ppc ppc64 ~sparc x86 ~x86-fbsd ~x86-solaris"
+KEYWORDS="~*"
 
 COMMON_DEPEND=">=sys-apps/sed-4.0.5
 	>=sys-libs/db-3.2:=
@@ -378,7 +377,7 @@ src_configure() {
 	# Proxy Protocol
 	if use proxy; then
 		cat >> Makefile <<- EOC
-			EXPERIMENTAL_PROXY=yes
+			SUPPORT_PROXY=yes
 		EOC
 	fi
 
@@ -431,6 +430,22 @@ src_configure() {
 			AUTH_LIBS += -lfreeradius-client
 		EOC
 	fi
+	
+	# Requested features. FL-3885.
+	# TLS authentification
+	if use auth_tls; then
+		cat >> Makefile <<- EOC
+			AUTH_TLS=yes
+		EOC
+	fi
+
+	# SOCKS support
+	if use socks; then
+		cat >> Makefile <<- EOC
+			SUPPORT_SOCKS=yes
+		EOC
+	fi
+
 }
 
 src_compile() {

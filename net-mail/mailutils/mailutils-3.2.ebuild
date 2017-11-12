@@ -14,9 +14,9 @@ SRC_URI="mirror://gnu/mailutils/${P}.tar.xz"
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~hppa ~ppc ~x86 ~ppc-macos ~x64-macos ~x86-macos"
-IUSE="berkdb bidi +clients gdbm sasl guile ipv6 kerberos kyotocabinet ldap \
+IUSE="berkdb bidi +clients emacs gdbm sasl guile ipv6 kerberos kyotocabinet ldap \
 	mysql nls pam postgres python servers ssl static-libs +threads tcpd \
-	tokyocabinet"
+	tokyocabinet xemacs"
 
 RDEPEND="!mail-client/nmh
 	!mail-filter/libsieve
@@ -28,6 +28,7 @@ RDEPEND="!mail-client/nmh
 	virtual/mta
 	berkdb? ( sys-libs/db:= )
 	bidi? ( dev-libs/fribidi )
+	emacs? ( app-editors/emacs )
 	gdbm? ( sys-libs/gdbm )
 	guile? ( dev-scheme/guile:= )
 	kerberos? ( virtual/krb5 )
@@ -41,13 +42,15 @@ RDEPEND="!mail-client/nmh
 	sasl? ( virtual/gsasl )
 	ssl? ( net-libs/gnutls:= )
 	tcpd? ( sys-apps/tcp-wrappers )
-	tokyocabinet? ( dev-db/tokyocabinet )"
+	tokyocabinet? ( dev-db/tokyocabinet )
+	xemacs? ( app-editors/xemacs )"
 
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )
-	servers? ( tcpd )"
+	servers? ( tcpd )
+	?? ( emacs xemacs )"
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
@@ -73,8 +76,18 @@ src_prepare() {
 src_configure() {
 	append-flags -fno-strict-aliasing
 
+	local emacs
+	if use emacs; then
+		emacs="${EPREFIX}/usr/bin/emacs"
+	elif use xemacs; then
+		emacs="${EPREFIX}/usr/bin/xemacs"
+	else
+		emacs="no"
+	fi
+
 	# maildir is the Gentoo default
 	econf MU_DEFAULT_SCHEME=maildir \
+		EMACS="${emacs}" \
 		CURSES_LIBS="$($(tc-getPKG_CONFIG) --libs ncurses)" \
 		$(use_with berkdb berkeley-db) \
 		$(use_with bidi fribidi) \

@@ -83,15 +83,12 @@ src_configure() {
 
 	econf "${myconf[@]}"
 }
-
 src_compile() {
-	# generating translation files in parallel is currently broken
-	use nls && emake -C po -j1
-	emake
+	emake -j1
 }
 
 src_install() {
-	emake install DESTDIR="${D}"
+	emake -j1 install DESTDIR="${D}"
 
 	sed -i "s|^HELPFILE.*$|HELPFILE:file://localhost/usr/share/doc/${PF}/lynx_help/lynx_help_main.html|" \
 			"${ED}"/etc/lynx.cfg || die "lynx.cfg not found"

@@ -62,6 +62,8 @@ DEPEND="${DEPEND_COMMON}
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.1.4-mtab-sym.patch
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
+	"${FILESDIR}"/${PN}-2.2.1-nfsidmap-abi.patch
+	"${FILESDIR}"/${PN}-2.2.2-rc1.patch
 )
 
 src_prepare() {

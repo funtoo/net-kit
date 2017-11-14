@@ -1,31 +1,19 @@
-# Copyright 1999-2017 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
+# Distributed under the terms of the GNU  General Public License v2
 
 EAPI=6
 
-inherit autotools
+# this is workaround ebuild to sort dependency block introduced with gentoo glib'c unofficial library split (rpcsvcp-proto is a split of SunRPC). Not applicable to Funtoo.
+# https://github.com/thkukuk/rpcsvc-proto
+# https://bugs.funtoo.org/browse/FL-4432
 
-DESCRIPTION="rpcsvc protocol definitions from glibc"
-HOMEPAGE="https://github.com/thkukuk/rpcsvc-proto"
-SRC_URI="https://github.com/thkukuk/${PN}/archive/${P}.tar.gz"
+DESCRIPTION="dummy ebuild for glib's SunRPC"
+HOMEPAGE=""
+SRC_URI=""
 
+LICENSE=""
 SLOT="0"
-LICENSE="LGPL-2.1+ BSD"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="*"
 IUSE=""
 
-RDEPEND="!<sys-libs/glibc-2.26"
-
-S=${WORKDIR}/${PN}-${P}
-
-src_prepare(){
-	default
-	eautoreconf
-}
-
-src_install(){
-	default
-
-	# provided by sys-fs/quota[rpc]
-	rm "${ED}"/usr/include/rpcsvc/rquota.{x,h} || die
-}
+DEPEND=""
+RDEPEND="${DEPEND} sys-libs/glibc"

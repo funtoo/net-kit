@@ -1,37 +1,19 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit autotools multilib-minimal
+# this is workaround ebuild to sort dependency block introduced with gentoo glib'c unofficial library split (libnsl is a split of glibc's libnsl). Not applicable to Funtoo.
+# https://github.com/thkukuk/libnsl
+# https://bugs.funtoo.org/browse/FL-4436
 
-DESCRIPTION="Public client interface for NIS(YP) and NIS+ in a IPv6 ready version"
-HOMEPAGE="https://github.com/thkukuk/libnsl"
-SRC_URI="https://github.com/thkukuk/${PN}/archive/${P}.tar.gz"
+DESCRIPTION="A dummy ebuild for the glibc's libnsl"
+HOMEPAGE=""
+SRC_URI=""
 
-SLOT="0/2"
-LICENSE="LGPL-2.1+"
-
-# Stabilize together with glibc-2.26!
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
-
+LICENSE=""
+SLOT="0"
+KEYWORDS="*"
 IUSE=""
 
-DEPEND="
-	net-libs/libtirpc[${MULTILIB_USEDEP}]
-"
-RDEPEND="${DEPEND}
-	!<sys-libs/glibc-2.26
-"
-
-S=${WORKDIR}/${PN}-${P}
-
-src_prepare(){
-	default
-	eautoreconf
-}
-
-multilib_src_configure() {
-	# Fool multilib-minimal to run ./configure in out-of-tree build
-	ECONF_SOURCE=${S} econf
-}
+DEPEND=""
+RDEPEND="${DEPEND} sys-libs/glibc"

@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 #
-# @ECLASS: mozconfig-v6.56.eclass
+# @ECLASS: mozconfig-v6.57.eclass
 # @MAINTAINER:
 # mozilla team <mozilla@gentoo.org>
 # @BLURB: the new mozilla common configuration eclass for FF33 and newer, v6
@@ -124,7 +124,7 @@ RDEPEND=">=app-text/hunspell-1.5.4:=
 	system-icu? ( >=dev-libs/icu-59.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0= )
-	system-sqlite? ( >=dev-db/sqlite-3.19.3:3[secure-delete,debug=] )
+	system-sqlite? ( >=dev-db/sqlite-3.20.1:3[secure-delete,debug=] )
 	system-libvpx? ( >=media-libs/libvpx-1.5.0:0=[postproc] )
 	system-harfbuzz? ( >=media-libs/harfbuzz-1.3.3:0= >=media-gfx/graphite2-1.3.9-r1 )
 "
@@ -167,6 +167,8 @@ DEPEND="app-arch/zip
 	>=sys-devel/binutils-2.16.1
 	sys-apps/findutils
 	pulseaudio? ( media-sound/pulseaudio )
+	>=virtual/rust-1.19.0
+	dev-util/cargo
 	${RDEPEND}"
 
 RDEPEND+="
@@ -197,10 +199,10 @@ mozconfig_config() {
 		--with-system-zlib \
 		--with-system-bz2
 
-	# Disable for testing purposes only
-	mozconfig_annotate 'Upstream bug 1341234' --disable-stylo
+	# Stylo is only broken on x86 builds
+	use x86 && mozconfig_annotate 'Upstream bug 1341234' --disable-stylo
 
-	# Must pass release in order to properly select linker via gold useflag
+	# Must pass release in order to properly select linker
 	mozconfig_annotate 'Enable by Gentoo' --enable-release
 
 	# Must pass --enable-gold if using ld.gold

@@ -58,8 +58,8 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
 	amd64? ( ${ASM_DEPEND} virtual/opengl
-			>=sys-devel/llvm-4.0.1
-			>=sys-devel/clang-4.0.1 )
+			sys-devel/llvm
+			sys-devel/clang )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
 S="${WORKDIR}/firefox-${MOZ_PV}"

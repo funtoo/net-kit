@@ -20,6 +20,7 @@ net-analyzer/nmap python_single_target_python2_7
 net-analyzer/ntop python_single_target_python2_7
 net-analyzer/w3af python_single_target_python2_7
 net-dialup/freeradius python_single_target_python2_7
+net-dns/maradns python_single_target_python2_7
 net-dns/unbound python_single_target_python2_7
 net-firewall/dshieldpy python_single_target_python2_7
 net-fs/samba python_single_target_python2_7

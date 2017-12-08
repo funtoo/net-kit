@@ -13,9 +13,7 @@
 =net-irc/znc-1.6.3-r1 python_single_target_python3_4 python_targets_python3_4
 =net-irc/znc-9999 python_single_target_python3_4 python_targets_python3_4
 =net-print/hplip-3.16.3 python_single_target_python2_7
-=net-wireless/blueman-2.0.3 python_single_target_python2_7
 =net-wireless/blueman-2.0.4 python_single_target_python2_7
-=net-wireless/blueman-2.1_alpha1 python_single_target_python2_7
 mail-client/claws-mail python_single_target_python2_7
 mail-filter/tmda python_single_target_python2_7
 net-analyzer/bro python_single_target_python2_7

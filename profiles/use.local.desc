@@ -1609,7 +1609,7 @@ net-p2p/eiskaltdcpp:json - Enable JSON for cli and daemon
 net-p2p/eiskaltdcpp:libcanberra - Enable sound notifications support over libcanberra in EiskaltDC++ Gtk
 net-p2p/eiskaltdcpp:minimal - Don't install headers
 net-p2p/fms:frost - Add support for frost boards
-net-p2p/go-ethereum:evm - Build Ethereum Virtual Machine (EVM)
+net-p2p/go-ethereum:devtools - Build Ethereum development tools (evm, abigen, puppeth, ...)
 net-p2p/go-ethereum:opencl - Add OpenCL GPU mining support
 net-p2p/go-ipfs-bin:fuse - Enable runtime support for sys-fs/fuse
 net-p2p/litecoind:logrotate - Use app-admin/logrotate for rotating logs

@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -9,19 +9,20 @@ inherit eutils python-any-r1 systemd user
 
 DESCRIPTION="RabbitMQ is a high-performance AMQP-compliant message broker written in Erlang"
 HOMEPAGE="http://www.rabbitmq.com/"
-SRC_URI="http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/rabbitmq-server-${PV}.tar.xz"
+SRC_URI="https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/rabbitmq-server-${PV}.tar.xz"
 
 LICENSE="GPL-2 MPL-1.1"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
-RDEPEND=">=dev-lang/erlang-18[ssl]"
+RDEPEND=">=dev-lang/erlang-19.3[ssl]"
 DEPEND="${RDEPEND}
 	app-arch/zip
 	app-arch/unzip
 	app-text/docbook-xml-dtd:4.5
 	app-text/xmlto
+	dev-lang/elixir
 	dev-libs/libxslt
 	$(python_gen_any_dep 'dev-python/simplejson[${PYTHON_USEDEP}]')
 "
@@ -60,8 +61,10 @@ src_install() {
 	systemd_dounit "${FILESDIR}/rabbitmq.service"
 
 	# install documentation
-	dodoc deps/rabbit/docs/*.xml
-	dodoc deps/rabbit/README
+	dodoc deps/rabbit/docs/*.example
+	dodoc deps/rabbit/README.md
+	doman deps/rabbit/docs/*.5
+	doman deps/rabbit/docs/*.8
 
 	# create the directory where our log file will go.
 	diropts -m 0770 -o rabbitmq -g rabbitmq

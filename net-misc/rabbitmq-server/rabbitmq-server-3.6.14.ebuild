@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI="6"
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -13,10 +13,10 @@ SRC_URI="http://www.rabbitmq.com/releases/rabbitmq-server/v${PV}/rabbitmq-server
 
 LICENSE="GPL-2 MPL-1.1"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE=""
 
-RDEPEND="dev-lang/erlang[ssl]"
+RDEPEND=">=dev-lang/erlang-18[ssl]"
 DEPEND="${RDEPEND}
 	app-arch/zip
 	app-arch/unzip
@@ -42,16 +42,16 @@ src_install() {
 
 	einfo "Setting correct RABBITMQ_HOME in scripts"
 	sed -e "s:^RABBITMQ_HOME=.*:RABBITMQ_HOME=\"${targetdir}\":g" \
-		-i scripts/rabbitmq-env || die
+		-i deps/rabbit/scripts/rabbitmq-env || die
 
 	einfo "Installing Erlang modules to ${targetdir}"
 	insinto "${targetdir}"
-	doins -r ebin include plugins
+	doins -r deps/rabbit/ebin deps/rabbit/include plugins
 
 	einfo "Installing server scripts to /usr/sbin"
 	for script in rabbitmq-env rabbitmq-server rabbitmqctl rabbitmq-defaults rabbitmq-plugins; do
 		exeinto /usr/libexec/rabbitmq
-		doexe scripts/${script}
+		doexe deps/rabbit/scripts/${script}
 		newsbin "${FILESDIR}"/rabbitmq-script-wrapper ${script}
 	done
 
@@ -60,8 +60,8 @@ src_install() {
 	systemd_dounit "${FILESDIR}/rabbitmq.service"
 
 	# install documentation
-	doman docs/*.[15]
-	dodoc README
+	dodoc deps/rabbit/docs/*.xml
+	dodoc deps/rabbit/README.md
 
 	# create the directory where our log file will go.
 	diropts -m 0770 -o rabbitmq -g rabbitmq

@@ -1,13 +1,11 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
 DISTUTILS_OPTIONAL=true
-DISTUTILS_SINGLE_IMPL=true
 GENTOO_DEPEND_ON_PERL=no
-PYTHON_COMPAT=( python2_7 )
-inherit autotools eutils perl-module distutils-r1 flag-o-matic multilib
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
+inherit autotools perl-module distutils-r1 flag-o-matic multilib
 
 DESCRIPTION="A system to store and display time-series data"
 HOMEPAGE="http://oss.oetiker.ch/rrdtool/"
@@ -15,7 +13,7 @@ SRC_URI="http://oss.oetiker.ch/rrdtool/pub/${P/_/-}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0/8.0.0"
-KEYWORDS="alpha ~amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos ~x86-solaris"
 IUSE="dbi doc graph lua perl python rados rrdcgi ruby static-libs tcl tcpd"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -48,6 +46,13 @@ RDEPEND="
 PDEPEND="
 	ruby? ( ~dev-ruby/rrdtool-bindings-${PV} )
 "
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.4.9-disable-rrd_graph-perl.patch
+	"${FILESDIR}"/${PN}-1.5.0_rc1-disable-rrd_graph-lua.patch
+	"${FILESDIR}"/${PN}-1.6.0-configure.ac.patch
+	"${FILESDIR}"/${PN}-1.7.0-disable-rrd_graph-cgi.patch
+	"${FILESDIR}"/${PN}-1.7.0-fix_arbitrary_permissions.patch
+)
 
 S=${WORKDIR}/${P/_/-}
 
@@ -61,21 +66,15 @@ python_install() {
 	distutils-r1_python_install
 }
 
-pkg_setup() {
-	use python && python-single-r1_pkg_setup
-}
-
 src_prepare() {
+	default
 	# At the next version bump, please see if you actually still need this
 	# before adding versions
-	cp "${FILESDIR}"/${PN}-1.5.5-rrdrados.pod doc/rrdrados.pod || die
-
-	epatch \
-		"${FILESDIR}"/${PN}-1.4.9-disable-rrd_graph-cgi.patch \
-		"${FILESDIR}"/${PN}-1.4.9-disable-rrd_graph-perl.patch \
-		"${FILESDIR}"/${PN}-1.5.0_rc1-disable-rrd_graph-lua.patch \
-		"${FILESDIR}"/${PN}-1.5.0_rc1-disable-rrd_graph-python.patch \
-		"${FILESDIR}"/${PN}-1.6.0-configure.ac.patch
+	if ! [ -f doc/rrdrados.pod ]; then
+		cp "${FILESDIR}"/${PN}-1.5.5-rrdrados.pod doc/rrdrados.pod
+	else
+		die "File already exists: doc/rrdrados.pod. Remove this code!"
+	fi
 
 	# bug 456810
 	# no time to sleep

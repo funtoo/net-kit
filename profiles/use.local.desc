@@ -1102,6 +1102,7 @@ net-mail/cyrus-imapd:sieve - Enable sieve support
 net-mail/cyrus-imapd:sphinx - Enable Sphinx search engine support
 net-mail/cyrus-imapd:xapian - Enable Xapian search engine support
 net-mail/dbmail:sieve - Enable sieve filter support
+net-mail/dovecot:argon2 - Add support for ARGON2 password schemes
 net-mail/dovecot:cydir - Add cydir storage support
 net-mail/dovecot:imapc - Add imap client storage support
 net-mail/dovecot:lucene - Add lucene full text search (FTS) support using dev-cpp/clucene
@@ -1462,7 +1463,6 @@ net-misc/rdesktop:xrandr - Enable XRandR window extension support
 net-misc/remmina:spice - Support connecting to SPICE-enabled virtual machines
 net-misc/remmina:ssh - Enable support for SSH/SFTP protocol; see also 'vte'
 net-misc/remmina:telepathy - Enable telepathy support
-net-misc/remmina:webkit - Enable a user survey using net-libs/webkit-gtk
 net-misc/scponly:gftp - Enables gFTP compatibility
 net-misc/scponly:logging - Enables SFTP logging compatibility
 net-misc/scponly:passwd - Enables passwd compatibility

@@ -88,10 +88,6 @@ net-wireless/multimode python_single_target_python2_7
 net-wireless/pyrit python_single_target_python2_7
 net-wireless/uhd python_single_target_python2_7
 net-wireless/wifi-radar python_single_target_python2_7
-sys-libs/ldb python_single_target_python2_7
-sys-libs/talloc python_single_target_python2_7
-sys-libs/tdb python_single_target_python2_7
-sys-libs/tevent python_single_target_python2_7
 www-apps/curator python_single_target_python2_7
 www-apps/moinmoin python_single_target_python2_7
 www-apps/trac python_single_target_python2_7

@@ -24,7 +24,7 @@ HOMEPAGE="http://www.exim.org/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="sparc"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~x86-solaris"
 
 COMMON_DEPEND=">=sys-apps/sed-4.0.5
 	>=sys-libs/db-3.2:=
@@ -95,7 +95,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/exim-4.82-makefile-freebsd.patch # 235785
 	epatch "${FILESDIR}"/exim-4.89-as-needed-ldflags.patch # 352265, 391279
 	epatch "${FILESDIR}"/exim-4.76-crosscompile.patch # 266591
-	epatch "${FILESDIR}"/exim-4.89-CVE-2017-1000369.patch # 622212
+
+	epatch "${FILESDIR}"/exim-4.89-address-expando-crash.patch # from git/in next release
 
 	if use maildir ; then
 		epatch "${FILESDIR}"/exim-4.20-maildir.patch
@@ -452,9 +453,9 @@ src_install () {
 	dosym exim /usr/sbin/sendmail
 	dosym exim /usr/sbin/rsmtp
 	dosym exim /usr/sbin/rmail
-	dosym /usr/sbin/exim /usr/bin/mailq
-	dosym /usr/sbin/exim /usr/bin/newaliases
-	dosym /usr/sbin/sendmail /usr/lib/sendmail
+	dosym ../sbin/exim /usr/bin/mailq
+	dosym ../sbin/exim /usr/bin/newaliases
+	dosym ../sbin/sendmail /usr/lib/sendmail
 
 	for i in exicyclog exim_dbmbuild exim_dumpdb exim_fixdb exim_lock \
 		exim_tidydb exinext exiwhat exigrep eximstats exiqsumm exiqgrep \

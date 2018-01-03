@@ -168,7 +168,6 @@ mail-mta/courier:fax - Enables fax support in the courier mail server
 mail-mta/courier:norewrite - Prevents courier mail server from mangling virtual user addresses when sending
 mail-mta/courier:web - Enable the web interface
 mail-mta/courier:webmail - Enable the webmail interface
-mail-mta/exim:auth_tls - Adds support for the tls authenticator, which provides server support for authentication based on client certificates
 mail-mta/exim:dane - Adds support for DNS-based Authentication of Named Entities
 mail-mta/exim:dcc - Adds support for Distributed Checksum Clearinghouse (DCC)
 mail-mta/exim:dkim - Adds support for DomainKeys Identified Mail (DKIM)
@@ -184,7 +183,6 @@ mail-mta/exim:pkcs11 - Require pkcs11 support in net-libs/gnutls with USE=gnutls
 mail-mta/exim:prdr - Adds support for Per-Recipient Data Response
 mail-mta/exim:proxy - Add support for being behind a proxy, such as HAProxy
 mail-mta/exim:redis - Adds support for querying dev-db/redis
-mail-mta/exim:socks - Adds support for sending outbound SMTP via a proxy using a protocol called SOCKS5 (defined by RFC1928).
 mail-mta/exim:spf - Adds support for Sender Policy Framework
 mail-mta/exim:srs - Adds support for Sender Rewriting Scheme
 mail-mta/exim:tpda - Adds support for Transport Post-Delivery Actions

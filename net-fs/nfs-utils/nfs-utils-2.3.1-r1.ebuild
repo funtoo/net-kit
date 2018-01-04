@@ -64,6 +64,7 @@ DEPEND="${DEPEND_COMMON}
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.1.4-mtab-sym.patch
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
+	"${FILESDIR}"/${P}-svcgssd_undefined_reference.patch #641912
 )
 
 src_prepare() {
@@ -84,7 +85,6 @@ src_configure() {
 		--enable-tirpc
 		--with-tirpcinclude="${EPREFIX}"/usr/include/tirpc/
 		--with-pluginpath="${EPREFIX}"/usr/$(get_libdir)/libnfsidmap
-		$(use_enable ldap)
 		$(use_enable libmount libmount-mount)
 		$(use_with tcpd tcp-wrappers)
 		$(use_enable nfsdcld nfsdcltrack)

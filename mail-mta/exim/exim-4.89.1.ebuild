@@ -24,7 +24,7 @@ HOMEPAGE="http://www.exim.org/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="alpha amd64 ~arm hppa ia64 ppc ppc64 ~sparc x86 ~x86-fbsd ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~x86-solaris"
 
 COMMON_DEPEND=">=sys-apps/sed-4.0.5
 	>=sys-libs/db-3.2:=
@@ -95,11 +95,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/exim-4.82-makefile-freebsd.patch # 235785
 	epatch "${FILESDIR}"/exim-4.89-as-needed-ldflags.patch # 352265, 391279
 	epatch "${FILESDIR}"/exim-4.76-crosscompile.patch # 266591
-	epatch "${FILESDIR}"/exim-4.89-CVE-2017-1000369.patch # 622212
-	epatch "${FILESDIR}"/${P}-transport-crash.patch # from git/in next release
-	epatch "${FILESDIR}"/${P}-address-expando-crash.patch # from git/in next release
-	epatch "${FILESDIR}"/${P}-CVE-2017-16943.patch # from git/in next release
-	epatch "${FILESDIR}"/${P}-CVE-2017-16944.patch # from git/in next release
+
+	epatch "${FILESDIR}"/exim-4.89-address-expando-crash.patch # from git/in next release
 
 	if use maildir ; then
 		epatch "${FILESDIR}"/exim-4.20-maildir.patch

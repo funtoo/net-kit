@@ -3,10 +3,10 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{4,5} )
 PYTHON_REQ_USE="ncurses?"
 
-inherit distutils-r1 gnome2-utils
+inherit distutils-r1 gnome2-utils xdg-utils
 
 MY_P="Electrum-${PV}"
 DESCRIPTION="User friendly Bitcoin client"
@@ -16,7 +16,7 @@ SRC_URI="https://download.electrum.org/${PV}/${MY_P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-MY_LANGS="ar_SA bg_BG cs_CZ da_DK de_DE el_GR eo_UY es_ES fr_FR hu_HU hy_AM id_ID it_IT ja_JP ko_KR ky_KG lv_LV nb_NO nl_NL no_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI ta_IN th_TH tr_TR vi_VN zh_CN zh_TW"
+MY_LANGS="ar_SA bg_BG cs_CZ da_DK de_DE el_GR eo_UY es_ES fa_IR fr_FR hu_HU hy_AM id_ID it_IT ja_JP ko_KR ky_KG lv_LV nb_NO nl_NL pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI ta_IN th_TH tr_TR uk_UA vi_VN zh_CN zh_TW"
 
 my_langs_to_l10n() {
 	# Map all except pt_* and zh_* to their generic codes
@@ -26,7 +26,7 @@ my_langs_to_l10n() {
 	esac
 }
 
-IUSE="audio_modem cli cosign digitalbitbox email greenaddress_it ncurses qrcode +qt4 sync trustedcoin_com vkb"
+IUSE="audio_modem cli cosign digitalbitbox email greenaddress_it ncurses qrcode +qt5 sync trustedcoin_com vkb"
 
 for lang in ${MY_LANGS}; do
 	IUSE+=" l10n_$(my_langs_to_l10n ${lang})"
@@ -34,16 +34,16 @@ done
 unset lang
 
 REQUIRED_USE="
-	|| ( cli ncurses qt4 )
-	audio_modem? ( qt4 )
-	cosign? ( qt4 )
-	digitalbitbox? ( qt4 )
-	email? ( qt4 )
-	greenaddress_it? ( qt4 )
-	qrcode? ( qt4 )
-	sync? ( qt4 )
-	trustedcoin_com? ( qt4 )
-	vkb? ( qt4 )
+	|| ( cli ncurses qt5 )
+	audio_modem? ( qt5 )
+	cosign? ( qt5 )
+	digitalbitbox? ( qt5 )
+	email? ( qt5 )
+	greenaddress_it? ( qt5 )
+	qrcode? ( qt5 )
+	sync? ( qt5 )
+	trustedcoin_com? ( qt5 )
+	vkb? ( qt5 )
 "
 
 RDEPEND="
@@ -62,9 +62,9 @@ RDEPEND="
 		dev-libs/protobuf[python,${PYTHON_USEDEP}]
 	)
 	virtual/python-dnspython[${PYTHON_USEDEP}]
-	qrcode? ( media-gfx/zbar[python,v4l,${PYTHON_USEDEP}] )
-	qt4? (
-		dev-python/PyQt4[X,${PYTHON_USEDEP}]
+	qrcode? ( media-gfx/zbar[v4l] )
+	qt5? (
+		dev-python/PyQt5[gui,widgets,${PYTHON_USEDEP}]
 	)
 	ncurses? ( dev-lang/python )
 "
@@ -75,9 +75,6 @@ DOCS="RELEASE-NOTES"
 
 src_prepare() {
 	eapply "${FILESDIR}/2.8.0-no-user-root.patch"
-
-	# Don't advise using PIP
-	sed -i "s/On Linux, try 'sudo pip install zbar'/Re-emerge Electrum with the qrcode USE flag/" lib/qrscanner.py || die
 
 	# Prevent icon from being installed in the wrong location
 	sed -i '/icons/d' setup.py || die
@@ -105,7 +102,7 @@ src_prepare() {
 	for gui in  \
 		$(usex cli      '' stdio)  \
 		kivy \
-		$(usex qt4      '' qt   )  \
+		$(usex qt5      '' qt   )  \
 		$(usex ncurses  '' text )  \
 	; do
 		rm gui/"${gui}"* -r || die
@@ -113,7 +110,7 @@ src_prepare() {
 
 	# And install requested ones...
 	for gui in  \
-		$(usex qt4      qt   '')  \
+		$(usex qt5      qt   '')  \
 	; do
 		setup_py_gui="${setup_py_gui}'electrum_gui.${gui}',"
 	done
@@ -121,7 +118,7 @@ src_prepare() {
 	sed -i "s/'electrum_gui\\.qt',/${setup_py_gui}/" setup.py || die
 
 	local bestgui
-	if use qt4; then
+	if use qt5; then
 		bestgui=qt
 	elif use ncurses; then
 		bestgui=text
@@ -143,6 +140,7 @@ src_prepare() {
 		ledger \
 		keepkey \
 		$(usex sync            '' labels               ) \
+		revealer \
 		trezor  \
 		$(usex trustedcoin_com '' trustedcoin          ) \
 		$(usex vkb             '' virtualkeyboard      ) \
@@ -167,8 +165,10 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_icon_cache_update
+	xdg_desktop_database_update
 }
 
 pkg_postrm() {
 	gnome2_icon_cache_update
+	xdg_desktop_database_update
 }

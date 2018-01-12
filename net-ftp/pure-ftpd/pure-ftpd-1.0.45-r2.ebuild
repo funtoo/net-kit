@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -37,8 +37,9 @@ RDEPEND="${DEPEND}
 	selinux? ( sec-policy/selinux-ftp )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.0.28-pam.patch
-	"${FILESDIR}"/${P}-openssl-1.1.patch
+	"${FILESDIR}/${PN}-1.0.28-pam.patch"
+	"${FILESDIR}/${P}-openssl-1.1.patch"
+	"${FILESDIR}/${PN}-1.0.47-MAX_DATA_SIZE.patch"
 )
 
 src_configure() {

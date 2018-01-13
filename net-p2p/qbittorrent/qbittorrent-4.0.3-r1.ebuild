@@ -29,7 +29,7 @@ RDEPEND="
 	dev-qt/qtnetwork:5[ssl]
 	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[qt5,X?]
 	dev-qt/qtxml:5
-	>=net-libs/libtorrent-rasterbar-1.0.6
+	>=net-libs/libtorrent-rasterbar-1.0.6:0=
 	sys-libs/zlib
 	dbus? ( dev-qt/qtdbus:5 )
 	X? (
@@ -45,9 +45,8 @@ DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
 src_prepare() {
 	cmake-utils_src_prepare
-
-	# bug 641382
-	sed -i -e "s/-Werror  //" cmake/Modules/MacroQbtCompilerSettings.cmake || die
+	# FL-4573: remove harmful Werror compiler flags.
+	eapply "${FILESDIR}"/${P}-werror.patch
 }
 
 src_configure() {

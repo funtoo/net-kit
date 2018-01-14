@@ -2,12 +2,12 @@ DEFINED_PHASES=compile configure install prepare
 DEPEND=>=dev-libs/libxml2-2.5.6 >=sys-libs/ncurses-5.3[unicode?] dev-libs/openssl virtual/pkgconfig
 DESCRIPTION=Snownews, a text-mode RSS/RDF newsreader
 EAPI=5
-HOMEPAGE=http://snownews.kcore.de/
+HOMEPAGE=https://kiza.eu/software/snownews/
 IUSE=unicode
 KEYWORDS=amd64 ppc x86 ~amd64-linux ~x86-linux ~x86-macos
 LICENSE=GPL-2
 RDEPEND=>=dev-libs/libxml2-2.5.6 >=sys-libs/ncurses-5.3[unicode?] dev-libs/openssl dev-perl/XML-LibXML dev-perl/libwww-perl
 SLOT=0
-SRC_URI=http://home.kcore.de/~kiza/software/snownews/download/snownews-1.5.12.tar.gz
+SRC_URI=https://kiza.eu/media/software/snownews/snownews-1.5.12.tar.gz
 _eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=4df2c6b9aef8331bba58d461b3b56599
+_md5_=2a832d90d49cee82299f1524c1797c65

@@ -17,21 +17,19 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 COMMON_DEPEND="
-	app-accessibility/at-spi2-atk:2
 	app-arch/bzip2:=
 	cups? ( >=net-print/cups-1.3.11:= )
-	dev-libs/atk
 	dev-libs/expat:=
 	dev-libs/glib:2
-	system-icu? ( >=dev-libs/icu-59:= )
+	system-icu? ( >=dev-libs/icu-59 <dev-libs/icu-60:= )
 	>=dev-libs/libxml2-2.9.4-r3:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
-	>=dev-libs/nss-3.14.3:=
+	>=dev-libs/nss-3.26:=
 	>=dev-libs/re2-0.2016.05.01:=
 	gnome-keyring? ( >=gnome-base/libgnome-keyring-3.12:= )
 	>=media-libs/alsa-lib-1.0.19:=
@@ -144,13 +142,12 @@ GTK+ icon theme.
 "
 
 PATCHES=(
-	"${FILESDIR}/chromium-widevine-r1.patch"
-	"${FILESDIR}/chromium-FORTIFY_SOURCE-r2.patch"
-	"${FILESDIR}/chromium-webrtc-r0.patch"
-	"${FILESDIR}/chromium-memcpy-r0.patch"
-	"${FILESDIR}/chromium-cups-r0.patch"
-	"${FILESDIR}/chromium-clang-r2.patch"
-	"${FILESDIR}/chromium-angle-r0.patch"
+	"${FILESDIR}/${PN}-widevine-r1.patch"
+	"${FILESDIR}/${PN}-FORTIFY_SOURCE-r2.patch"
+	"${FILESDIR}/${PN}-gcc5-r4.patch"
+	"${FILESDIR}/${PN}-clang-r1.patch"
+	"${FILESDIR}/${PN}-webrtc-r0.patch"
+	"${FILESDIR}/${PN}-gcc5-r5.patch"
 )
 
 pre_build_checks() {
@@ -187,13 +184,13 @@ pkg_pretend() {
 pkg_setup() {
 	pre_build_checks
 
+	# Make sure the build system will use the right python, bug #344367.
+	python-any-r1_pkg_setup
+
 	chromium_suid_sandbox_check_kernel_config
 }
 
 src_prepare() {
-	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
-
 	default
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
@@ -223,7 +220,6 @@ src_prepare() {
 		third_party/angle/src/third_party/trace_event
 		third_party/blink
 		third_party/boringssl
-		third_party/boringssl/src/third_party/fiat
 		third_party/breakpad
 		third_party/breakpad/breakpad/src/third_party/curl
 		third_party/brotli
@@ -239,6 +235,7 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/oboe
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
+		third_party/cld_2
 		third_party/cld_3
 		third_party/crc32c
 		third_party/cros_system_api
@@ -274,7 +271,6 @@ src_prepare() {
 		third_party/lzma_sdk
 		third_party/markupsafe
 		third_party/mesa
-		third_party/metrics_proto
 		third_party/modp_b64
 		third_party/mt19937ar
 		third_party/node
@@ -363,9 +359,6 @@ bootstrap_gn() {
 }
 
 src_configure() {
-	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
-
 	local myconf_gn=""
 
 	# GN needs explicit config for Debug/Release as opposed to inferring it from build directory.
@@ -374,6 +367,9 @@ src_configure() {
 	# Component build isn't generally intended for use by end users. It's mostly useful
 	# for development and debugging.
 	myconf_gn+=" is_component_build=$(usex component-build true false)"
+
+	# https://chromium.googlesource.com/chromium/src/+/lkcr/docs/jumbo.md
+	myconf_gn+=" use_jumbo_build=$(usex jumbo-build true false)"
 
 	myconf_gn+=" use_allocator=$(usex tcmalloc \"tcmalloc\" \"none\")"
 
@@ -442,9 +438,6 @@ src_configure() {
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
 	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
-
-	# Disable forced lld, bug 641556
-	myconf_gn+=" use_lld=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -548,9 +541,6 @@ src_configure() {
 }
 
 src_compile() {
-	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
-
 	# Build mksnapshot and pax-mark it.
 	local x
 	for x in mksnapshot v8_context_snapshot_generator; do
@@ -624,8 +614,10 @@ src_install() {
 	doins -r out/Release/locales
 	doins -r out/Release/resources
 
-	insinto "${CHROMIUM_HOME}/swiftshader"
-	doins out/Release/swiftshader/*.so
+	if [[ -d out/Release/swiftshader ]]; then
+		insinto "${CHROMIUM_HOME}/swiftshader"
+		doins out/Release/swiftshader/*.so
+	fi
 
 	# Install icons and desktop entry.
 	local branding size

@@ -25,14 +25,7 @@ IUSE="berkdb crypt doc gdbm gnutls gpg gpgme idn kerberos kyotocabinet
 
 CDEPEND="
 	app-misc/mime-types
-	berkdb? (
-		|| (
-			sys-libs/db:6.2
-			sys-libs/db:5.3
-			sys-libs/db:4.8
-		)
-		<sys-libs/db-6.3:=
-	)
+	berkdb? ( >=sys-libs/db-4:= )
 	gdbm? ( sys-libs/gdbm )
 	kyotocabinet? ( dev-db/kyotocabinet )
 	lmdb? ( dev-db/lmdb )

@@ -930,9 +930,6 @@ net-libs/c-client:doc - Install RFCs related to IMAP
 net-libs/c-client:topal - Enable support for net-mail/topal for use with mail-client/alpine
 net-libs/courier-authlib:vpopmail - Enable vpopmail support
 net-libs/cvm:vpopmail - Enable vpopmail support
-net-libs/h323plus:aec - Enable acoustic echo cancellation
-net-libs/h323plus:sound - Enable audio codecs
-net-libs/h323plus:video - Enable video codecs
 net-libs/iax:snomhack - Use slower memset for SNOM phoneem
 net-libs/ldns:dane - Enable DNS-based Authentication of Named Entities (DANE) support
 net-libs/ldns:ecdsa - Enable ECDSA support
@@ -1043,21 +1040,6 @@ net-libs/pjproject:resample - Include resampling implementations in the build
 net-libs/pjproject:silk - Include SILK support in the build
 net-libs/pjproject:v4l2 - Include Video4Linux v2 support in the build
 net-libs/pjproject:webrtc - Enable WebRTC support
-net-libs/ptlib:asn - Enable ASN decoding/encoding support
-net-libs/ptlib:dtmf - Enable DTMF encoding/decoding support
-net-libs/ptlib:http - Enable HTTP support
-net-libs/ptlib:mail - Enable mail protocols (POP3/SMTP)
-net-libs/ptlib:qos - Enable QOS support
-net-libs/ptlib:remote - Enable remote connection support
-net-libs/ptlib:serial - Enable serial port support
-net-libs/ptlib:shmvideo - Enable shared memory video devices
-net-libs/ptlib:socks - Enable SOCKS protocol support
-net-libs/ptlib:stun - Enable STUN support
-net-libs/ptlib:telnet - Enable telnet protocol support
-net-libs/ptlib:tts - Enable Text-To-Speech server support
-net-libs/ptlib:video - Enable video support
-net-libs/ptlib:vxml - Enable VoiceXML support
-net-libs/ptlib:wav - Enable WAVFILE support
 net-libs/qxmpp:opus - Enable Opus codec support via media-libs/opus
 net-libs/qxmpp:vpx - Enable VP8 codec support via media-libs/libvpx
 net-libs/rabbitmq-c:tools - Builds cli tools to interact with brokers
@@ -1894,8 +1876,6 @@ net-proxy/tsocks:server-lookups - Allow hostname resolution _for_ SOCKS servers
 net-proxy/tsocks:tordns - Apply tordns patch which allows transparent TORification of the DNS queries
 net-proxy/ufdbguard:doc - Download and install the ufdbguard reference manual in PDF.
 net-proxy/ufdbguard:httpd - Build, install and start the provided mini-http daemon with the redirect CGI integrated. Since there is no way to tell ufdbguard to not start it, this is a build-time option.
-net-voip/ekiga:h323 - Enable H.323 protocol
-net-voip/ekiga:shm - Enable the Shared Memory Extension from libXext
 net-voip/linphone:assistant - Turn on assistant compiling (needs gtk enabled)
 net-voip/linphone:gsm-nonstandard - Support non-standard GSM frequencies
 net-voip/linphone:sqlite - Turn on compilation of message storage

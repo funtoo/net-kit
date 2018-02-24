@@ -1387,6 +1387,7 @@ net-misc/nextcloud-client:sftp - Enable sftp transfer support via net-libs/libss
 net-misc/nextcloud-client:shibboleth - Build support for Shibboleth single sign-on
 net-misc/ntpsec:early - Drop root privileges early
 net-misc/ntpsec:gdb - Enable debugging with gdb
+net-misc/ntpsec:heat - Install contrib heat generating scripts
 net-misc/ntpsec:nist - Enable lockclock
 net-misc/ntpsec:ntpviz - Make visualizations of offsets, jiffies, etc.
 net-misc/ntpsec:rclock_arbiter - Arbiter 1088A/B GPS driver

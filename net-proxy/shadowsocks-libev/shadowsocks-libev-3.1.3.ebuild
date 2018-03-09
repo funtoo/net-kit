@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -19,13 +18,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="debug doc"
 
-RDEPEND="net-libs/mbedtls
+RDEPEND="
+	net-dns/c-ares
+	net-libs/mbedtls
 	net-libs/libbloom
 	net-libs/libcork
 	net-libs/libcorkipset
 	>=dev-libs/libsodium-1.0.8
 	dev-libs/libev
-	net-libs/udns
 	dev-libs/libpcre
 	"
 DEPEND="${RDEPEND}

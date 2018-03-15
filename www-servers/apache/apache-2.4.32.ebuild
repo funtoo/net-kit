@@ -4,9 +4,9 @@
 EAPI=6
 
 # latest gentoo apache files
-GENTOO_PATCHSTAMP="20160303"
+GENTOO_PATCHSTAMP="20180315"
 GENTOO_DEVELOPER="polynomial-c"
-GENTOO_PATCHNAME="gentoo-apache-2.4.18-r1"
+GENTOO_PATCHNAME="gentoo-apache-2.4.32"
 
 # IUSE/USE_EXPAND magic
 IUSE_MPMS_FORK="prefork"
@@ -33,7 +33,7 @@ IUSE_MPMS_THREAD="event worker"
 IUSE_MODULES="access_compat actions alias asis auth_basic auth_digest
 authn_alias authn_anon authn_core authn_dbd authn_dbm authn_file authz_core
 authz_dbd authz_dbm authz_groupfile authz_host authz_owner authz_user autoindex
-cache cache_disk cache_socache cern_meta charset_lite cgi cgid dav dav_fs dav_lock
+brotli cache cache_disk cache_socache cern_meta charset_lite cgi cgid dav dav_fs dav_lock
 dbd deflate dir dumpio env expires ext_filter file_cache filter headers http2
 ident imagemap include info lbmethod_byrequests lbmethod_bytraffic lbmethod_bybusyness
 lbmethod_heartbeat log_config log_forensic logio macro mime mime_magic negotiation
@@ -49,6 +49,7 @@ unixd version vhost_alias watchdog xml2enc"
 # inter-module dependencies
 # TODO: this may still be incomplete
 MODULE_DEPENDS="
+	brotli:filter
 	dav_fs:dav
 	dav_lock:dav
 	deflate:filter
@@ -128,8 +129,15 @@ HOMEPAGE="https://httpd.apache.org/"
 LICENSE="Apache-2.0 Apache-1.1"
 SLOT="2"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x64-macos ~x86-macos ~m68k-mint ~sparc64-solaris ~x64-solaris"
+# Enable http2 by default (bug #563452)
+# FIXME: Move to apache-2.eclass once this has reached stable.
+IUSE="${IUSE/apache2_modules_http2/+apache2_modules_http2}"
 
-DEPEND+="apache2_modules_http2? ( >=net-libs/nghttp2-1.2.1 )"
+CDEPEND="apache2_modules_brotli? ( >=app-arch/brotli-0.6.0:= )
+	apache2_modules_http2? ( >=net-libs/nghttp2-1.2.1 )"
+
+DEPEND+="${CDEPEND}"
+RDEPEND+="${CDEPEND}"
 
 REQUIRED_USE="apache2_modules_http2? ( ssl )"
 
@@ -164,26 +172,25 @@ src_compile() {
 
 src_install() {
 	apache-2_src_install
+	local i
 	for i in /usr/bin/{htdigest,logresolve,htpasswd,htdbm,ab,httxt2dbm}; do
-		rm "${ED}"/$i || die "Failed to prune apache-tools bits"
+		rm "${ED%/}"/$i || die "Failed to prune apache-tools bits"
 	done
 	for i in /usr/share/man/man8/{rotatelogs.8,htcacheclean.8}; do
-		rm "${ED}"/$i || die "Failed to prune apache-tools bits"
+		rm "${ED%/}"/$i || die "Failed to prune apache-tools bits"
 	done
 	for i in /usr/share/man/man1/{logresolve.1,htdbm.1,htdigest.1,htpasswd.1,dbmmanage.1,ab.1}; do
-		rm "${ED}"/$i || die "Failed to prune apache-tools bits"
+		rm "${ED%/}"/$i || die "Failed to prune apache-tools bits"
 	done
 	for i in /usr/sbin/{checkgid,fcgistarter,htcacheclean,rotatelogs}; do
-		rm "${ED}/"$i || die "Failed to prune apache-tools bits"
+		rm "${ED%/}/"$i || die "Failed to prune apache-tools bits"
 	done
 
 	# install apxs in /usr/bin (bug #502384) and put a symlink into the
 	# old location until all ebuilds and eclasses have been modified to
 	# use the new location.
-	local apxs="/usr/bin/apxs"
-	cp "${S}"/support/apxs "${ED%/}/${apxs}" || die "Failed to install apxs"
-	ln -s ../bin/apxs "${ED%/}/usr/sbin/apxs" || die
-	chmod 0755 "${ED%/}${apxs}" || die
+	dobin support/apxs
+	dosym ../bin/apxs /usr/sbin/apxs
 
 	# Note: wait for mod_systemd to be included in some forthcoming release,
 	# Then apache2.4.service can be used and systemd support controlled
@@ -196,6 +203,9 @@ src_install() {
 	# Install http2 module config
 	insinto /etc/apache2/modules.d
 	doins "${FILESDIR}"/41_mod_http2.conf
+
+	# Fix path to apache libdir
+	sed "s|@LIBDIR@|$(get_libdir)|" -i "${ED%/}"/usr/sbin/apache2ctl || die
 }
 
 pkg_postinst() {

@@ -1,9 +1,6 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-
-MULTILIB_COMPAT=( abi_x86_64 )
 
 inherit eutils gnome2-utils pax-utils rpm multilib-build xdg-utils
 
@@ -21,39 +18,39 @@ QA_PREBUILT="*"
 RESTRICT="mirror bindist strip" #299368
 
 RDEPEND="
-	app-crypt/libsecret[${MULTILIB_USEDEP}]
-	dev-libs/atk[${MULTILIB_USEDEP}]
-	dev-libs/expat[${MULTILIB_USEDEP}]
-	dev-libs/glib:2[${MULTILIB_USEDEP}]
-	dev-libs/nspr[${MULTILIB_USEDEP}]
-	dev-libs/nss[${MULTILIB_USEDEP}]
-	gnome-base/gconf:2[${MULTILIB_USEDEP}]
-	media-libs/alsa-lib[${MULTILIB_USEDEP}]
-	media-libs/fontconfig:1.0[${MULTILIB_USEDEP}]
-	media-libs/freetype:2[${MULTILIB_USEDEP}]
-	media-libs/libv4l[${MULTILIB_USEDEP}]
-	net-print/cups[${MULTILIB_USEDEP}]
-	sys-apps/dbus[${MULTILIB_USEDEP}]
+	app-crypt/libsecret
+	dev-libs/atk
+	dev-libs/expat
+	dev-libs/glib:2
+	dev-libs/nspr
+	dev-libs/nss
+	gnome-base/gconf:2
+	media-libs/alsa-lib
+	media-libs/fontconfig:1.0
+	media-libs/freetype:2
+	media-libs/libv4l
+	net-print/cups
+	sys-apps/dbus
 	sys-devel/gcc[cxx]
 	virtual/ttf-fonts
-	x11-libs/cairo[${MULTILIB_USEDEP}]
-	x11-libs/gdk-pixbuf:2[${MULTILIB_USEDEP}]
-	x11-libs/gtk+:2[${MULTILIB_USEDEP}]
-	x11-libs/libX11[${MULTILIB_USEDEP}]
-	x11-libs/libXScrnSaver[${MULTILIB_USEDEP}]
-	x11-libs/libXcomposite[${MULTILIB_USEDEP}]
-	x11-libs/libXcursor[${MULTILIB_USEDEP}]
-	x11-libs/libXdamage[${MULTILIB_USEDEP}]
-	x11-libs/libXext[${MULTILIB_USEDEP}]
-	x11-libs/libXfixes[${MULTILIB_USEDEP}]
-	x11-libs/libXi[${MULTILIB_USEDEP}]
-	x11-libs/libXrandr[${MULTILIB_USEDEP}]
-	x11-libs/libXrender[${MULTILIB_USEDEP}]
-	x11-libs/libXtst[${MULTILIB_USEDEP}]
-	x11-libs/libxcb[${MULTILIB_USEDEP}]
-	x11-libs/libxkbfile[${MULTILIB_USEDEP}]
-	x11-libs/pango[${MULTILIB_USEDEP}]"
-
+	x11-libs/cairo
+	x11-libs/gdk-pixbuf:2
+	x11-libs/gtk+:2
+	x11-libs/libX11
+	x11-libs/libXScrnSaver
+	x11-libs/libXcomposite
+	x11-libs/libXcursor
+	x11-libs/libXdamage
+	x11-libs/libXext
+	x11-libs/libXfixes
+	x11-libs/libXi
+	x11-libs/libXrandr
+	x11-libs/libXrender
+	x11-libs/libXtst
+	x11-libs/libxcb
+	x11-libs/libxkbfile
+	x11-libs/pango
+"
 src_unpack() {
 	rpm_src_unpack ${A}
 }

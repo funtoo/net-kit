@@ -133,7 +133,6 @@ mail-filter/opensmtpd-extras:filter-spamassassin - filter for scanning with mail
 mail-filter/opensmtpd-extras:filter-stub - stub filter
 mail-filter/opensmtpd-extras:filter-trace - trace filter
 mail-filter/opensmtpd-extras:filter-void - void filter
-mail-filter/opensmtpd-extras:luajit - Use JIT for Lua via dev-lang/luajit instead of dev-lang/lua
 mail-filter/opensmtpd-extras:queue-null - null queue
 mail-filter/opensmtpd-extras:queue-python - queue for interfacing with dev-lang/python
 mail-filter/opensmtpd-extras:queue-ram - ram queue
@@ -418,7 +417,6 @@ net-analyzer/suricata:control-socket - Enable unix socket
 net-analyzer/suricata:cuda - Enable NVIDIA Cuda computations support
 net-analyzer/suricata:detection - Enable detection modules
 net-analyzer/suricata:logrotate - Install logrotate rule
-net-analyzer/suricata:luajit - Enable Luajit support
 net-analyzer/suricata:nflog - Enable libnetfilter_log support
 net-analyzer/suricata:nfqueue - Enable NFQUEUE support for inline IDP
 net-analyzer/suricata:redis - Enable Redis support
@@ -505,7 +503,6 @@ net-dns/ddclient:hardened - Use iproute2 instead of ifconfig to grab an IP addre
 net-dns/dnscrypt-proxy:plugins - Enable plugin support to inspect and modify queries and responses
 net-dns/dnscrypt-proxy:systemd - Use systemd's socket activation instead of creating the sockets itself
 net-dns/dnsdist:dnscrypt - Enable the ability to act as a DNSCrypt server
-net-dns/dnsdist:luajit - Use dev-lang/luajit instead of dev-lang/lua
 net-dns/dnsdist:regex - Enable support for regular expression matching via dev-libs/re2
 net-dns/dnsdist:remote-logging - Enable support for remote logging via dev-libs/protobuf
 net-dns/dnsdist:ssl - Enable support for and encrypted client-server communication via dev-libs/libsodium
@@ -556,7 +553,6 @@ net-dns/opendnssec:opensc - Enables support for storing DNSSEC keys through a de
 net-dns/opendnssec:signer - Enables signing capabilities for OpenDNSSEC
 net-dns/opendnssec:softhsm - Enables support for storing DNSSEC keys in a dev-libs/softhsm PKCS#11 object
 net-dns/pdns:botan - Make it possible to use the dev-libs/botan library for crypto-related stuff (like DNSSec) which can be significantly faster than PolarSSL.
-net-dns/pdns:luajit - Enable support for dev-lang/luajit
 net-dns/pdns:mydns - Making it possible to use a MyDNS MySQL database with PowerDNS (not recommended for new deployments).
 net-dns/pdns:opendbx - Use a database supported by dev-db/opendbx as backend.
 net-dns/pdns:protobuf - Enable support for dev-libs/protobuf.
@@ -564,7 +560,6 @@ net-dns/pdns:remote - Use a generic socket or pipe as a backend (via JSON RPC re
 net-dns/pdns:sodium - Use dev-libs/libsodium for cryptography
 net-dns/pdns:tinydns - Use a TinyDNS CDB database as backend.
 net-dns/pdns:tools - Build optional tools (dnsscan, dnsscope, etc..).
-net-dns/pdns-recursor:luajit - Enable support for dev-lang/luajit.
 net-dns/pdns-recursor:protobuf - Enable support for dev-libs/protobuf.
 net-dns/pdns-recursor:sodium - Use dev-libs/libsodium for cryptography
 net-dns/pdnsd:isdn - Linux-only: check status of ippp interfaces with ISDN-specific system calls.
@@ -1224,6 +1219,8 @@ net-misc/bfgminer:x6500 - Enable support for mining with X6500 FPGAs
 net-misc/bfgminer:zeusminer - Enable support for mining with ZeusMiner units
 net-misc/bfgminer:ztex - Enable support for mining with Ztex FPGAs
 net-misc/bird:client - Build the ncurses/readline full featured CLI
+net-misc/casync:fuse - Enable fuse support
+net-misc/casync:man - Build and install man pages
 net-misc/cfengine:html - Install HTML documentation
 net-misc/cfengine:libvirt - Enable support for virtual machine management through app-emulation/libvirt
 net-misc/cfengine:masterfiles - Install the Masterfiles Policy Framework
@@ -1980,7 +1977,6 @@ www-client/google-chrome:plugins - Add system plugins path to launcher
 www-client/google-chrome-beta:plugins - Add system plugins path to launcher
 www-client/google-chrome-unstable:plugins - Add system plugins path to launcher
 www-client/links:libevent - Enable dev-libs/libevent support
-www-client/luakit:luajit - Use dev-lang/luajit instead of dev-lang/lua
 www-client/lynx:gnutls - Use gnutls library for HTTPS support (openssl is the default library for HTTPS support).
 www-client/lynx:ssl - Enable HTTPS support.
 www-client/midori:granite - Enable support for the elementary library dev-libs/granite

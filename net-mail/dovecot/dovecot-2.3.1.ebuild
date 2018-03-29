@@ -7,9 +7,9 @@ SSL_DEPS_SKIP=1
 inherit ssl-cert systemd user versionator
 
 MY_P="${P/_/.}"
-MY_S="${PN}-ce-${PV}"
+#MY_S="${PN}-ce-${PV}"
 major_minor="$(get_version_component_range 1-2)"
-sieve_version="0.5.0.1"
+sieve_version="0.5.1"
 if [[ ${PV} == *_rc* ]] ; then
 	rc_dir="rc/"
 else
@@ -27,7 +27,7 @@ HOMEPAGE="https://www.dovecot.org/"
 
 SLOT="0"
 LICENSE="LGPL-2.1 MIT"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 
 IUSE_DOVECOT_AUTH="kerberos ldap lua mysql pam postgres sqlite vpopmail"
 IUSE_DOVECOT_COMPRESS="bzip2 lzma lz4 zlib"
@@ -62,7 +62,7 @@ DEPEND="argon2? ( dev-libs/libsodium )
 RDEPEND="${DEPEND}
 	net-mail/mailbase"
 
-S=${WORKDIR}/${MY_S}
+PATCHES=()
 
 pkg_setup() {
 	if use managesieve && ! use sieve; then
@@ -126,9 +126,9 @@ src_configure() {
 		cd "../dovecot-${major_minor}-pigeonhole-${sieve_version}" || die "cd failed"
 		econf \
 			$( use_enable static-libs static ) \
-			--localstatedir="${EPREFIX}/var" \
+			--localstatedir="${EPREFIX%/}/var" \
 			--enable-shared \
-			--with-dovecot="../${MY_S}" \
+			--with-dovecot="${S}" \
 			$( use_with managesieve )
 	fi
 }

@@ -1,13 +1,13 @@
 DEFINED_PHASES=compile configure install prepare
-DEPEND=media-libs/freetype:2 >=media-libs/libpng-1.2.8:* >=sys-libs/zlib-1.2.3 virtual/jpeg:* virtual/pkgconfig x11-libs/libfontenc x11-libs/libXfont2 x11-misc/gccmakedep x11-misc/imake x11-proto/inputproto x11-proto/xextproto >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEPEND=dev-libs/libxml2 >=media-libs/libpng-1.2.8:0= >=sys-libs/zlib-1.2.3 virtual/jpeg:* x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXdmcp x11-libs/libXext x11-libs/libXfixes x11-libs/libXfont2 x11-libs/libXinerama x11-libs/libXpm x11-libs/libXrandr x11-libs/libXrender x11-libs/libXtst x11-libs/pixman virtual/pkgconfig x11-libs/libfontenc x11-misc/gccmakedep x11-misc/imake x11-proto/inputproto x11-proto/xextproto >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
 DESCRIPTION=NX compression technology core libraries
 EAPI=6
 HOMEPAGE=http://www.x2go.org/doku.php/wiki:libs:nx-libs
 IUSE=elibc_glibc
 KEYWORDS=~amd64 ~ppc ~x86
 LICENSE=GPL-2
-RDEPEND=media-libs/freetype:2 >=media-libs/libpng-1.2.8:* >=sys-libs/zlib-1.2.3 virtual/jpeg:*
+RDEPEND=dev-libs/libxml2 >=media-libs/libpng-1.2.8:0= >=sys-libs/zlib-1.2.3 virtual/jpeg:* x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXdmcp x11-libs/libXext x11-libs/libXfixes x11-libs/libXfont2 x11-libs/libXinerama x11-libs/libXpm x11-libs/libXrandr x11-libs/libXrender x11-libs/libXtst x11-libs/pixman
 SLOT=0
 SRC_URI=http://code.x2go.org/releases/source/nx-libs/nx-libs-3.5.99.16-full.tar.gz
 _eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	e7491451996e8b54c3caeb713285b0fb	libtool	e32ea84bf82cf8987965b574672dba93	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=47df3001a1b4bcbeaca78bc1abbf5345
+_md5_=ce9de75b9e6fd4042c989178b505e320

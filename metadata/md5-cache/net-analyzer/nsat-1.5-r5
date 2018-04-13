@@ -4,10 +4,10 @@ DESCRIPTION=Network Security Analysis Tool, an application-level network securit
 EAPI=6
 HOMEPAGE=http://nsat.sourceforge.net/
 IUSE=X
-KEYWORDS=~amd64 ~ppc ~x86
+KEYWORDS=~amd64 ~ppc x86
 LICENSE=GPL-2
 RDEPEND=dev-libs/libmix net-libs/libnsl:0= net-libs/libpcap net-libs/libtirpc net-libs/rpcsvc-proto X? ( dev-lang/tk:* x11-libs/libX11 )
 SLOT=0
 SRC_URI=mirror://sourceforge/nsat/nsat-1.5.tgz
 _eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	libtool	e32ea84bf82cf8987965b574672dba93	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=1f9af8464babba9debbb84bbc4b11b0d
+_md5_=0ab52517f56811c4580f4c354ac4dbbb

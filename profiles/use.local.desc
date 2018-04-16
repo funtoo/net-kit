@@ -516,6 +516,13 @@ net-dns/dnsmasq:libidn2 - Enable support for Internationalized Domain Names, via
 net-dns/dnsmasq:script - Enable support for calling scripts when leases change.
 net-dns/dnsmasq:tftp - Enables built in TFTP server for netbooting.
 net-dns/dnssec-validator:ecdsa-check - Requires openssl[-bindist]
+net-dns/getdns:getdns_query - Add getdns_query tool
+net-dns/getdns:getdns_server_mon - Add getdns_server_mon tool
+net-dns/getdns:libev - Enable dev-libs/libev support
+net-dns/getdns:libevent - Enable dev-libs/libevent support
+net-dns/getdns:libuv - Enable dev-libs/libuv support
+net-dns/getdns:stubby - Add Stubby DNS Privacy Deamon
+net-dns/getdns:unbound - Enable net-dns/unbound libraries support
 net-dns/hash-slinger:ipsec - Enable support for IPSECKEY records (ipseckey)
 net-dns/hash-slinger:openpgp - Enable support for OPENPGPKEY records (openpgpkey)
 net-dns/hash-slinger:ssh - Enable support for SSHFP records (sshfp)

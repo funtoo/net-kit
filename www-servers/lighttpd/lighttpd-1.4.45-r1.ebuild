@@ -1,8 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-inherit autotools eutils readme.gentoo-r1 user systemd
+EAPI=6
+
+inherit autotools readme.gentoo-r1 systemd user
 
 DESCRIPTION="Lightweight high-performance web server"
 HOMEPAGE="http://www.lighttpd.net/"
@@ -10,7 +11,7 @@ SRC_URI="http://download.lighttpd.net/lighttpd/releases-1.4.x/${P}.tar.xz"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~x86-fbsd"
 IUSE="bzip2 doc fam gdbm ipv6 kerberos ldap libev libressl lua minimal mmap memcached mysql pcre php rrdtool selinux ssl test webdav xattr zlib"
 
 REQUIRED_USE="kerberos? ( ssl !libressl )"
@@ -22,7 +23,7 @@ CDEPEND="
 	ldap?     ( >=net-nds/openldap-2.1.26 )
 	libev?    ( >=dev-libs/libev-4.01 )
 	lua?      ( >=dev-lang/lua-5.1:= )
-	memcached? ( dev-libs/libmemcache )
+	memcached? ( dev-libs/libmemcached )
 	mysql?    ( >=virtual/mysql-4.0 )
 	pcre?     ( >=dev-libs/libpcre-3.1 )
 	php?      ( dev-lang/php:*[cgi] )
@@ -51,10 +52,6 @@ RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-apache )
 "
 
-PATCHES=(
-	"${FILESDIR}/${P}-3d257ec3-respect-HAVE_IPV6.patch"
-)
-
 # update certain parts of lighttpd.conf based on conditionals
 update_config() {
 	local config="${D}/etc/lighttpd/lighttpd.conf"
@@ -78,7 +75,7 @@ remove_non_essential() {
 
 	# non-essential modules
 	rm -f \
-		${libdir}/mod_{compress,evhost,expire,proxy,scgi,secdownload,simple_vhost,status,setenv,trigger*,usertrack}.*
+		${libdir}/mod_{compress,evhost,expire,proxy,scgi,secdownload,simple_vhost,status,setenv,trigger*,usertrack}.* || die
 
 	# allow users to keep some based on USE flags
 	use pcre    || rm -f ${libdir}/mod_{ssi,re{direct,write}}.*
@@ -158,7 +155,9 @@ src_test() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	default
+
+	find "${D}" -name '*.la' -delete || die
 
 	# init script stuff
 	newinitd "${FILESDIR}"/lighttpd.initd lighttpd
@@ -181,7 +180,7 @@ src_install() {
 	newdoc doc/config//lighttpd.conf lighttpd.conf.distrib
 	use ipv6 && readme.gentoo_create_doc
 
-	use doc && dohtml -r doc/*
+	use doc && dodoc -r doc
 
 	docinto txt
 	dodoc doc/outdated/*.txt
@@ -195,7 +194,7 @@ src_install() {
 	fperms 0750 /var/l{ib,og}/lighttpd
 
 	#spawn-fcgi may optionally be installed via www-servers/spawn-fcgi
-	rm -f "${D}"/usr/bin/spawn-fcgi "${D}"/usr/share/man/man1/spawn-fcgi.*
+	rm -f "${D}"/usr/bin/spawn-fcgi "${D}"/usr/share/man/man1/spawn-fcgi.* || die
 
 	use minimal && remove_non_essential
 

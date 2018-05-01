@@ -16,8 +16,8 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
+KEYWORDS="~amd64 ~arm64 ~x86"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 COMMON_DEPEND="
@@ -85,7 +85,6 @@ RDEPEND="${COMMON_DEPEND}
 	virtual/ttf-fonts
 	selinux? ( sec-policy/selinux-chromium )
 	tcmalloc? ( !<x11-drivers/nvidia-drivers-331.20 )
-	widevine? ( www-plugins/chrome-binary-plugins[widevine(-)] )
 "
 # dev-vcs/git - https://bugs.gentoo.org/593476
 # sys-apps/sandbox - https://crbug.com/586444
@@ -145,16 +144,14 @@ GTK+ icon theme.
 "
 
 PATCHES=(
-	"${FILESDIR}/chromium-widevine-r1.patch"
-	"${FILESDIR}/chromium-FORTIFY_SOURCE-r2.patch"
+	"${FILESDIR}/chromium-compiler-r1.patch"
 	"${FILESDIR}/chromium-webrtc-r0.patch"
 	"${FILESDIR}/chromium-memcpy-r0.patch"
-	"${FILESDIR}/chromium-clang-r2.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
-	"${FILESDIR}/chromium-clang-r4.patch"
 	"${FILESDIR}/chromium-ffmpeg-r1.patch"
 	"${FILESDIR}/chromium-ffmpeg-clang.patch"
+	"${FILESDIR}/chromium-gn-bootstrap-r23.patch"
 )
 
 pre_build_checks() {
@@ -217,6 +214,7 @@ src_prepare() {
 		buildtools/third_party/libc++abi
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
+		net/third_party/http2
 		net/third_party/mozilla_security_manager
 		net/third_party/nss
 		third_party/WebKit
@@ -231,6 +229,7 @@ src_prepare() {
 		third_party/angle/third_party/spirv-headers
 		third_party/angle/third_party/spirv-tools
 		third_party/angle/third_party/vulkan-validation-layers
+		third_party/apple_apsl
 		third_party/blink
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
@@ -250,6 +249,8 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_3
+		third_party/crashpad
+		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
 		third_party/cros_system_api
 		third_party/devscripts
@@ -303,6 +304,7 @@ src_prepare() {
 		third_party/pdfium/third_party/libpng16
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
+		third_party/perfetto
 		third_party/ply
 		third_party/polymer
 		third_party/protobuf
@@ -312,6 +314,7 @@ src_prepare() {
 		third_party/sfntly
 		third_party/skia
 		third_party/skia/third_party/gif
+		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
 		third_party/smhasher
 		third_party/spirv-headers
@@ -333,6 +336,7 @@ src_prepare() {
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/src/third_party/utf8-decoder
+		v8/third_party/antlr4
 		v8/third_party/inspector_protocol
 
 		# gyp -> gn leftovers
@@ -468,7 +472,6 @@ src_configure() {
 
 	# Optional dependencies.
 	myconf_gn+=" enable_hangout_services_extension=$(usex hangouts true false)"
-	myconf_gn+=" enable_widevine=$(usex widevine true false)"
 	myconf_gn+=" use_cups=$(usex cups true false)"
 	myconf_gn+=" use_gnome_keyring=$(usex gnome-keyring true false)"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
@@ -630,11 +633,6 @@ src_install() {
 	pushd out/Release/locales > /dev/null || die
 	chromium_remove_language_paks
 	popd
-
-	if use widevine; then
-		# These will be provided by chrome-binary-plugins
-		rm out/Release/libwidevinecdm*.so || die
-	fi
 
 	insinto "${CHROMIUM_HOME}"
 	doins out/Release/*.bin

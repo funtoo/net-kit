@@ -1049,7 +1049,6 @@ net-libs/qxmpp:opus - Enable Opus codec support via media-libs/opus
 net-libs/qxmpp:vpx - Enable VP8 codec support via media-libs/libvpx
 net-libs/rabbitmq-c:tools - Builds cli tools to interact with brokers
 net-libs/shairplay:alac - Add support for Apple Lossless Audio Codec files
-net-libs/shairplay:static-libs - Build static versions of dynamic libraries as well
 net-libs/shairplay:tools - Build and install a binary shairplay in /usr/bin
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-libs/tox:av - Adds support for audio and video.
@@ -1512,7 +1511,6 @@ net-misc/stargazer:sgconf - Enable build of command-line utility for configuring
 net-misc/stargazer:sgconf_xml - Enable build of command-line xml-based utility for configuring Stargazer.
 net-misc/stargazer:sgconv - Enable build of utility to convert Stargazer data between storage backends.
 net-misc/stargazer:stargazer - Enable build of Stargazer billing system.
-net-misc/stargazer:static-libs - Install static libraries.
 net-misc/streamtuner:shout - Enable shoutcast plug-in.
 net-misc/streamtuner:xiph - Enable xiph.org plug-in.
 net-misc/stunnel:stunnel3 - Install the stunnel3 wrapper.

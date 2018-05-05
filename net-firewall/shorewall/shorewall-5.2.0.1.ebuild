@@ -66,7 +66,7 @@ if [[ ${MY_PV} = *-Beta* ]] || [[ ${MY_PV} = *-RC* ]]; then
 	unset _tmp_last_index
 	unset _tmp_suffix
 else
-	KEYWORDS="alpha amd64 hppa ppc ppc64 sparc x86"
+	KEYWORDS="~alpha ~amd64 ~hppa ~ppc ~ppc64 ~sparc ~x86"
 fi
 
 SRC_URI="
@@ -156,7 +156,7 @@ src_prepare() {
 	# This allows us to use patches from upstream and keeps epatch_user working
 
 	einfo "Preparing shorewallrc ..."
-	cp "${FILESDIR}"/shorewallrc-r2 "${S}"/shorewallrc.gentoo || die "Copying shorewallrc failed"
+	cp "${FILESDIR}"/shorewallrc-r3 "${S}"/shorewallrc.gentoo || die "Copying shorewallrc failed"
 	eprefixify "${S}"/shorewallrc.gentoo
 	sed -i \
 		-e "s|SERVICEDIR=tbs|SERVICEDIR=$(systemd_get_systemunitdir)|" \
@@ -174,9 +174,12 @@ src_prepare() {
 		ebegin "Applying Gentoo-specific changes to ${MY_P_IPV4}"
 		ln -s ../shorewallrc.gentoo ${MY_PN_IPV4}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
 		cp "${FILESDIR}"/shorewall.confd-r1 "${S}"/${MY_PN_IPV4}/default.gentoo || die "Copying shorewall.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall.initd-r2 "${S}"/${MY_PN_IPV4}/init.gentoo.sh || die "Copying shorewall.initd-r2 failed"
+		cp "${FILESDIR}"/shorewall.initd-r3 "${S}"/${MY_PN_IPV4}/init.gentoo.sh || die "Copying shorewall.initd-r2 failed"
 		cp "${FILESDIR}"/shorewall.systemd "${S}"/${MY_PN_IPV4}/gentoo.service || die "Copying shorewall.systemd failed"
 		eend 0
+
+		eapply "${FILESDIR}"/shorewall-5.2.0.1-YESNO.patch
+		eapply "${FILESDIR}"/shorewall-5.2.0.1-AUTOMAKE-SAVE.patch
 	fi
 
 	# shorewall6
@@ -185,7 +188,7 @@ src_prepare() {
 		ebegin "Applying Gentoo-specific changes to ${MY_P_IPV6}"
 		ln -s ../shorewallrc.gentoo ${MY_PN_IPV6}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
 		cp "${FILESDIR}"/shorewall.confd-r1 "${S}"/${MY_PN_IPV6}/default.gentoo || die "Copying shorewall.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall.initd-r2 "${S}"/${MY_PN_IPV6}/init.gentoo.sh || die "Copying shorewall.initd-r2 failed"
+		cp "${FILESDIR}"/shorewall.initd-r3 "${S}"/${MY_PN_IPV6}/init.gentoo.sh || die "Copying shorewall.initd-r2 failed"
 		cp "${FILESDIR}"/shorewall6.systemd "${S}"/${MY_PN_IPV6}/gentoo.service || die "Copying shorewall6.systemd failed"
 		eend 0
 	fi
@@ -196,7 +199,7 @@ src_prepare() {
 		ebegin "Applying Gentoo-specific changes to ${MY_P_LITE4}"
 		ln -s ../shorewallrc.gentoo ${MY_PN_LITE4}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
 		cp "${FILESDIR}"/shorewall-lite.confd-r1 "${S}"/${MY_PN_LITE4}/default.gentoo || die "Copying shorewall-lite.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall-lite.initd-r2 "${S}"/${MY_PN_LITE4}/init.gentoo.sh || die "Copying shorewall-lite.initd-r2 failed"
+		cp "${FILESDIR}"/shorewall-lite.initd-r3 "${S}"/${MY_PN_LITE4}/init.gentoo.sh || die "Copying shorewall-lite.initd-r2 failed"
 		cp "${FILESDIR}"/shorewall-lite.systemd "${S}"/${MY_PN_LITE4}/gentoo.service || die "Copying shorewall-lite.systemd failed"
 		eend 0
 	fi
@@ -207,7 +210,7 @@ src_prepare() {
 		ebegin "Applying Gentoo-specific changes to ${MY_P_LITE6}"
 		ln -s ../shorewallrc.gentoo ${MY_PN_LITE6}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
 		cp "${FILESDIR}"/shorewall-lite.confd-r1 "${S}"/${MY_PN_LITE6}/default.gentoo || die "Copying shorewall-lite.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall-lite.initd-r2 "${S}"/${MY_PN_LITE6}/init.gentoo.sh || die "Copying shorewall-lite.initd-r2 failed"
+		cp "${FILESDIR}"/shorewall-lite.initd-r3 "${S}"/${MY_PN_LITE6}/init.gentoo.sh || die "Copying shorewall-lite.initd-r2 failed"
 		cp "${FILESDIR}"/shorewall6-lite.systemd "${S}"/${MY_PN_LITE6}/gentoo.service || die "Copying shorewall6-lite.systemd failed"
 		eend 0
 	fi
@@ -411,7 +414,7 @@ pkg_postinst() {
 			elog "You are upgrading from a previous major version. It is highly recommended that you read"
 			elog ""
 			elog "  - /usr/share/doc/shorewall*/releasenotes.tx*"
-			elog "  - http://shorewall.net/Shorewall-5.html#idp51151872"
+			elog "  - http://shorewall.net/Shorewall-5.html#idm214"
 
 			if use ipv4; then
 				elog ""

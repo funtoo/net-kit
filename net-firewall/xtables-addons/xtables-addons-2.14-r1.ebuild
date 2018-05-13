@@ -164,6 +164,7 @@ src_prepare() {
 
 	use xtables_addons_geoip || sed  -e '/^SUBDIRS/{s/geoip//}' -i Makefile.in
 
+	eapply "${FILESDIR}"/linux-4.15.patch #FL-4872
 	eapply_user
 }
 

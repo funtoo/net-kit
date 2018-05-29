@@ -630,6 +630,7 @@ net-fs/netatalk:shadow - Add shadow support
 net-fs/netatalk:ssl - Use dev-libs/openssl to provide DHX User Access Modules. These are not used with most recent versions of OS X and can be kept disabled without risks.
 net-fs/netatalk:tracker - Add support for spotlight like tracker
 net-fs/netatalk:utils - Install afpstats script
+net-fs/nfs-utils:junction - Enable NFS junction support in nfsref
 net-fs/nfs-utils:ldap - Add ldap support
 net-fs/nfs-utils:libmount - Link mount.nfs with libmount
 net-fs/nfs-utils:nfsdcld - Enable nfsdcld NFSv4 clientid tracking daemon
@@ -1075,6 +1076,7 @@ net-libs/wvstreams:boost - Use dev-libs/boost to provide TR1-compatible function
 net-libs/xrootd:fuse - Enable the sys-fs/fuse filesystem driver
 net-libs/xrootd:http - Enable http protocol support
 net-libs/xrootd:rbd - Enable rados block device support via sys-cluster/ceph
+net-libs/zeromq:drafts - Build draft API, which may change at any time without any notice, and is therefore not recommended for normal use.
 net-libs/zeromq:pgm - Build PGM (Pragmatic General Multicast)extention, a protocol for reliable multicast transport of data over IP networks.
 net-libs/zeromq:sodium - Use dev-libs/libsodium for cryptography
 net-mail/automx:memcached - Enable memcached support
@@ -1577,8 +1579,6 @@ net-nntp/slrn:canlock - Add support for cancel locks via net-libs/canlock
 net-nntp/slrn:uudeview - Add support for yEnc coding and more using dev-libs/uulib
 net-nntp/tin:cancel-locks - Enable Cancel-Lock header functionality (also enables USE=evil)
 net-nntp/tin:etiquette - Enable the display off posting etiquettes
-net-nntp/tin:evil - Let tin generate a message ID
-net-nntp/tin:forgery - Cancel messages posted from a different account
 net-nntp/tin:gpg - Enable app-crypt/gnupg support
 net-p2p/airdcpp-webclient:nat-pmp - Enable support for the NAT-PMP protocol
 net-p2p/airdcpp-webclient:tbb - Enable support of the TBB library to improve performance

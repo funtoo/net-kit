@@ -16,7 +16,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
@@ -44,7 +44,7 @@ COMMON_DEPEND="
 	>=media-libs/openh264-1.6.0:=
 	pulseaudio? ( media-sound/pulseaudio:= )
 	system-ffmpeg? (
-		>=media-video/ffmpeg-3:=
+		>=media-video/ffmpeg-4:=
 		|| (
 			media-video/ffmpeg[-samba]
 			>=net-fs/samba-4.5.10-r1[-debug(-)]
@@ -104,21 +104,7 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/clang-5
 	virtual/pkgconfig
 	dev-vcs/git
-	$(python_gen_any_dep '
-		dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]
-		>=dev-python/beautifulsoup-4.3.2:4[${PYTHON_USEDEP}]
-		dev-python/html5lib[${PYTHON_USEDEP}]
-		dev-python/simplejson[${PYTHON_USEDEP}]
-	')
 "
-
-# Keep this in sync with the python_gen_any_dep call.
-python_check_deps() {
-	has_version --host-root "dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]" &&
-	has_version --host-root ">=dev-python/beautifulsoup-4.3.2:4[${PYTHON_USEDEP}]" &&
-	has_version --host-root "dev-python/html5lib[${PYTHON_USEDEP}]" &&
-	has_version --host-root "dev-python/simplejson[${PYTHON_USEDEP}]"
-}
 
 if ! has chromium_pkg_die ${EBUILD_DEATH_HOOKS}; then
 	EBUILD_DEATH_HOOKS+=" chromium_pkg_die";
@@ -144,14 +130,12 @@ GTK+ icon theme.
 "
 
 PATCHES=(
-	"${FILESDIR}/chromium-widevine-r1.patch"
-	"${FILESDIR}/chromium-FORTIFY_SOURCE-r2.patch"
+	"${FILESDIR}/chromium-widevine-r2.patch"
+	"${FILESDIR}/chromium-compiler-r0.patch"
 	"${FILESDIR}/chromium-webrtc-r0.patch"
 	"${FILESDIR}/chromium-memcpy-r0.patch"
-	"${FILESDIR}/chromium-clang-r2.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
-	"${FILESDIR}/chromium-clang-r4.patch"
 	"${FILESDIR}/chromium-ffmpeg-r1.patch"
 	"${FILESDIR}/chromium-ffmpeg-clang.patch"
 )
@@ -230,6 +214,7 @@ src_prepare() {
 		third_party/angle/third_party/spirv-headers
 		third_party/angle/third_party/spirv-tools
 		third_party/angle/third_party/vulkan-validation-layers
+		third_party/apple_apsl
 		third_party/blink
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
@@ -240,7 +225,10 @@ src_prepare() {
 		third_party/catapult
 		third_party/catapult/common/py_vulcanize/third_party/rcssmin
 		third_party/catapult/common/py_vulcanize/third_party/rjsmin
+		third_party/catapult/third_party/beautifulsoup4
+		third_party/catapult/third_party/html5lib-python
 		third_party/catapult/third_party/polymer
+		third_party/catapult/third_party/six
 		third_party/catapult/tracing/third_party/d3
 		third_party/catapult/tracing/third_party/gl-matrix
 		third_party/catapult/tracing/third_party/jszip
@@ -249,6 +237,8 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_3
+		third_party/crashpad
+		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
 		third_party/cros_system_api
 		third_party/devscripts
@@ -309,6 +299,7 @@ src_prepare() {
 		third_party/qcms
 		third_party/s2cellid
 		third_party/sfntly
+		third_party/simplejson
 		third_party/skia
 		third_party/skia/third_party/gif
 		third_party/skia/third_party/vulkan
@@ -549,7 +540,7 @@ src_configure() {
 	mkdir -p -m 755 "${TMPDIR}" || die
 
 	# https://bugs.gentoo.org/654216
-	addpredict /dev/dri/
+	addpredict /dev/dri/ #nowarn
 
 	if ! use system-ffmpeg; then
 		local build_ffmpeg_args=""
@@ -632,11 +623,6 @@ src_install() {
 	pushd out/Release/locales > /dev/null || die
 	chromium_remove_language_paks
 	popd
-
-	if use widevine; then
-		# These will be provided by chrome-binary-plugins
-		rm out/Release/libwidevinecdm*.so || die
-	fi
 
 	insinto "${CHROMIUM_HOME}"
 	doins out/Release/*.bin

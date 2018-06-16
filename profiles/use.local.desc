@@ -939,6 +939,8 @@ net-libs/c-client:topal - Enable support for net-mail/topal for use with mail-cl
 net-libs/courier-authlib:vpopmail - Enable vpopmail support
 net-libs/cvm:vpopmail - Enable vpopmail support
 net-libs/davix:tools - Install additional tools
+net-libs/grpc:systemtap - Enable SystemTAP/DTrace tracing
+net-libs/grpc:tools - Install gRPC python tools
 net-libs/iax:snomhack - Use slower memset for SNOM phoneem
 net-libs/ldns:dane - Enable DNS-based Authentication of Named Entities (DANE) support
 net-libs/ldns:ecdsa - Enable ECDSA support

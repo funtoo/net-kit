@@ -1402,6 +1402,7 @@ net-misc/mulk:checksum - Enable checksum verification for Metalink from dev-libs
 net-misc/mulk:metalink - Enable support for media-libs/libmetalink
 net-misc/ncp:diet - Compile against dev-libs/dietlibc
 net-misc/netkit-bootparamd:libtirpc - Build against net-libs/libtirpc for RPC support
+net-misc/networkmanager-strongswan:glib - Enable libnm-glib compatibility.
 net-misc/nextcloud-client:dolphin - Install the kde-apps/dolphin extension
 net-misc/nextcloud-client:nautilus - Install the gnome-base/nautilus extension
 net-misc/nextcloud-client:sftp - Enable sftp transfer support via net-libs/libssh

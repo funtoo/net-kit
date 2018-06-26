@@ -5,5 +5,8 @@
 		<email>bkohler@gentoo.org</email>
 		<name>Ben Kohler</name>
 	</maintainer>
+	<use>
+		<flag name='client'>Enable iwctl client tool</flag>
+		<flag name='monitor'>Enable iwmon monitor tool</flag>
+	</use>
 </pkgmetadata>
-

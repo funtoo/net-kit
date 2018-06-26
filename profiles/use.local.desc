@@ -1854,6 +1854,8 @@ net-wireless/gr-osmosdr:rtlsdr - Build with Realtek RTL2832U (rtlsdr) support
 net-wireless/gr-osmosdr:soapy - Build with SoapySDR support
 net-wireless/gr-osmosdr:uhd - Build with Ettus Research USRP Hardware Driver support
 net-wireless/horst:pcap - Add support for network packet capture via net-libs/libpcap
+net-wireless/iwd:client - Enable iwctl client tool
+net-wireless/iwd:monitor - Enable iwmon monitor tool
 net-wireless/kismet:client - Build the ncurses-based user interface
 net-wireless/kismet:pcre - Build with pcre support
 net-wireless/kismet:plugin-autowep - Build the autowep plugin

@@ -1,0 +1,13 @@
+DEFINED_PHASES=install setup
+DEPEND=virtual/pkgconfig
+DESCRIPTION=Management Controller for UniFi APs
+EAPI=6
+HOMEPAGE=https://www.ubnt.com/download/unifi
+KEYWORDS=~amd64
+LICENSE=GPL-3
+RDEPEND=dev-db/mongodb virtual/jre
+RESTRICT=mirror
+SLOT=0
+SRC_URI=http://dl.ubnt.com/unifi/5.6.39/UniFi.unix.zip -> unifi-5.6.39.zip
+_eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	8f5286f89e265842f5b5189666eae88b	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	user	8bc2845510e2109af75e3eeac607ec81
+_md5_=5de16923e77bff17e546feb70a91e7a9

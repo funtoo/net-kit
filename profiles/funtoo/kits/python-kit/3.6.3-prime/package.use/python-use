@@ -6,6 +6,7 @@
 =net-irc/irker-2.15 python_single_target_python2_7
 =net-irc/irker-2.16 python_single_target_python2_7
 =net-irc/irker-2.18 python_single_target_python2_7
+=net-irc/irker-2.18-r1 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
 =net-news/liferea-1.12_rc3 python_single_target_python3_4 python_targets_python3_4
 =net-news/liferea-1.12_rc3-r1 python_single_target_python3_4 python_targets_python3_4

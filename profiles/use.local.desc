@@ -491,6 +491,11 @@ net-dialup/freeradius-client:scp - Add service type hints derived from username 
 net-dialup/freeradius-client:shadow - Enable shadow password support
 net-dialup/mgetty:fax - Enables fax support
 net-dialup/mgetty:fidonet - Enables FidoNet support
+net-dialup/openl2tp:client - Enable l2tp client.
+net-dialup/openl2tp:dmalloc - Enable debugging using dev-libs/dmalloc.
+net-dialup/openl2tp:rpc - Enable RPC control management. This flag is required for l2tpconfig to be built and used.
+net-dialup/openl2tp:server - Enable l2tp server.
+net-dialup/openl2tp:stats - Enable status files. Note: when they are used, this hampers performance of the daemon.
 net-dialup/xl2tpd:dnsretry - Patch for host lookup retries, activated by redial feature
 net-dialup/xl2tpd:kernel - Enable kernel interface for PPPoL2TP
 net-dns/bind:dlz - Enables dynamic loaded zones, 3rd party extension

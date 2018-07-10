@@ -14,6 +14,7 @@ SRC_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="ISC"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
+IUSE="test"
 
 FILECAPS=( cap_net_bind_service+ep usr/bin/dnscrypt-proxy )
 PATCHES=( "${FILESDIR}"/config-full-paths-r10.patch )
@@ -39,7 +40,7 @@ src_install() {
 	doins "src/${EGO_PN}"/example-{blacklist.txt,whitelist.txt}
 	doins "src/${EGO_PN}"/example-{cloaking-rules.txt,forwarding-rules.txt}
 
-	insinto "/usr/share/dnscrypt-proxy"
+	insinto /usr/share/dnscrypt-proxy
 	doins -r "utils/generate-domains-blacklists/."
 
 	newinitd "${FILESDIR}"/dnscrypt-proxy.initd dnscrypt-proxy

@@ -10,12 +10,6 @@
 		<name>Proxy Maintainers</name>
 	</maintainer>
 	<longdescription>
-		IGMPproxy is a simple multicast router using only the IGMP protocol.
-		It is intended for forwarding of multicast traffic between networks,
-		like used by IPTV.
+		transWhat is a WhatsApp XMPP Gateway based on Spectrum 2 and Yowsup 2.
 	</longdescription>
-	<upstream>
-		<bugs-to>https://github.com/pali/igmpproxy/issues</bugs-to>
-		<remote-id type="github">pali/igmpproxy</remote-id>
-	</upstream>
 </pkgmetadata>

@@ -29,10 +29,7 @@ DEPEND="${RDEPEND}
 		virtual/pkgconfig
 	)"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-2.2-mruby.patch
-	"${FILESDIR}"/${P}-libressl.patch
-)
+PATCHES=( "${FILESDIR}"/${PN}-2.2-mruby.patch )
 
 pkg_setup() {
 	enewgroup ${PN}

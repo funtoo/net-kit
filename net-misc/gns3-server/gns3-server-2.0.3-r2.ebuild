@@ -29,7 +29,7 @@ RDEPEND=">=app-emulation/dynamips-0.2.12
 		>=dev-python/pyzmq-14.3.1[${PYTHON_USEDEP}]
 		>=dev-python/python-zipstream-1.1.4[${PYTHON_USEDEP}]
 		>=www-servers/tornado-3.1.1[${PYTHON_USEDEP}]
-		>=dev-python/typing-3.5.3.0[${PYTHON_USEDEP}]
+		virtual/python-typing[${PYTHON_USEDEP}]
 		~dev-python/yarl-0.9.8[${PYTHON_USEDEP}]"
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 

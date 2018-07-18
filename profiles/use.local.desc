@@ -1323,6 +1323,7 @@ net-misc/electrum:digitalbitbox - Enable plugin to support Digital Bitbox hardwa
 net-misc/electrum:email - Enable plugin to support emailing invoices
 net-misc/electrum:greenaddress_it - Enable plugin to verify GreenAddress.it instant transactions
 net-misc/electrum:qrcode - Enable QR code scanning with media-gfx/zbar
+net-misc/electrum:revealer - Enable revealer plugin for extra security. https://revealer.cc/
 net-misc/electrum:sync - Enable plugin to sync wallet metadata across multiple Electrum clients
 net-misc/electrum:trustedcoin_com - Enable plugin to use two-factor service by TrustedCoin.com
 net-misc/electrum:vkb - Enable plugin for virtual keyboard
@@ -2117,6 +2118,8 @@ www-servers/apache:apache2_modules_watchdog - Provides infrastructure for other 
 www-servers/apache:apache2_modules_xml2enc - Enable xml2 encoding module
 www-servers/apache:static - Link in apache2 modules statically rather then plugins
 www-servers/apache:suexec - Install suexec with apache
+www-servers/apache:suexec-caps - Install suexec with capabilities instead of SUID
+www-servers/apache:suexec-syslog - Log suexec to syslog instead of to a separate file
 www-servers/cherokee:admin - Install web based cherokee conf tool
 www-servers/cherokee:rrdtool - Enable rrdtool support
 www-servers/fnord:auth - Enable HTTP authentication support

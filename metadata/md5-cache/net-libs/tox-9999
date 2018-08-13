@@ -1,12 +1,12 @@
-DEFINED_PHASES=configure install postinst prepare unpack
-DEPEND=av? ( media-libs/libvpx:= media-libs/opus ) daemon? ( dev-libs/libconfig ) ntox? ( sys-libs/ncurses:0= ) >=dev-libs/libsodium-0.6.1:=[asm,urandom] test? ( dev-libs/check ) virtual/pkgconfig >=app-portage/elt-patches-20170317 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1 virtual/pkgconfig
+DEFINED_PHASES=compile configure install postinst prepare test unpack
+DEPEND=av? ( media-libs/libvpx:= media-libs/opus ) daemon? ( dev-libs/libconfig ) >=dev-libs/libsodium-0.6.1:=[asm,urandom] virtual/pkgconfig sys-devel/make >=dev-util/cmake-3.7.2 >=dev-vcs/git-1.8.2.1 virtual/pkgconfig
 DESCRIPTION=Encrypted P2P, messaging, and audio/video calling platform
 EAPI=6
 HOMEPAGE=https://tox.chat
-IUSE=+av daemon log-debug log-error log-info log-trace log-warn +no-log ntox static-libs test
+IUSE=+av daemon log-debug log-trace +no-log static-libs test
 LICENSE=GPL-3+
-RDEPEND=av? ( media-libs/libvpx:= media-libs/opus ) daemon? ( dev-libs/libconfig ) ntox? ( sys-libs/ncurses:0= ) >=dev-libs/libsodium-0.6.1:=[asm,urandom]
-REQUIRED_USE=^^ ( no-log log-trace log-debug log-info log-warn log-error )
-SLOT=0/0.1
-_eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	git-r3	18aed4252aebae08e3db185e684ee37c	libtool	e32ea84bf82cf8987965b574672dba93	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	user	8bc2845510e2109af75e3eeac607ec81
-_md5_=91adc6ba4c3069c257eaf778eac0f8fc
+RDEPEND=av? ( media-libs/libvpx:= media-libs/opus ) daemon? ( dev-libs/libconfig ) >=dev-libs/libsodium-0.6.1:=[asm,urandom]
+REQUIRED_USE=^^ ( no-log log-trace log-debug )
+SLOT=0/0.2
+_eclasses_=cmake-utils	1878df07fb7968266bdbcfcd576fea4b	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	02908f00f002f0f07c5b74783d778325	git-r3	18aed4252aebae08e3db185e684ee37c	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	2e13cdcb950cddcb1f52c92c9712a675	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	user	8bc2845510e2109af75e3eeac607ec81	versionator	c80ccf29e90adea7c5cae94b42eb76d0	xdg-utils	9ef13b5c5bcf0c50d6aa53692d8e441c
+_md5_=4a7b2726e5be717be9b1ad3634724645

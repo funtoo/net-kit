@@ -749,7 +749,6 @@ net-im/ekg2:oracle - Support logging messages into Oracle database.
 net-im/ekg2:sqlite - Support logging messages into SQLite3 database.
 net-im/ekg2:ssl - Enable the complete SSL/TLS support through OpenSSL. This also enables the 'sim' plugin which relies on OpenSSL.
 net-im/err:irc - Pull optional dependencies, needed for IRC backend
-net-im/err:plugins - Enable support for installing plugins with dev-vcs/git
 net-im/gajim:idle - Enable idle module
 net-im/gajim:srv - SRV capabilities
 net-im/gajim:xhtml - Enable XHTML support

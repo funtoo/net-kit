@@ -7,7 +7,7 @@ CMAKE_IN_SOURCE_BUILD=1
 
 inherit autotools cmake-utils eutils flag-o-matic java-pkg-opt-2 systemd xdg-utils gnome2-utils
 
-XSERVER_VERSION="1.20.0"
+XSERVER_VERSION="1.19.5"
 
 DESCRIPTION="Remote desktop viewer display system"
 HOMEPAGE="http://www.tigervnc.org"
@@ -89,8 +89,7 @@ src_prepare() {
 
 	if use server ; then
 		cd unix/xserver || die
-		eapply "${FILESDIR}"/xserver120.patch
-		eapply "${FILESDIR}"/xserver120-drmfourcc-header.patch
+		eapply "${FILESDIR}"/xserver119.patch
 		eautoreconf
 	fi
 }

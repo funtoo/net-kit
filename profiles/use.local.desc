@@ -1362,8 +1362,6 @@ net-misc/gerbera:protocol-extensions - Enable partial DLNA support
 net-misc/gerbera:taglib - Use media-libs/taglib for reading files' metadata
 net-misc/gsasl:gcrypt - Use dev-libs/libgcrypt for low-level crypto
 net-misc/gsasl:ntlm - Add support for Microsoft's NTLM mechanism using net-libs/libntlm
-net-misc/guacamole-server:ssh - enable support for ssh connections
-net-misc/guacamole-server:telnet - enable support for telnet connections
 net-misc/gwget:epiphany - Build epiphany extensions
 net-misc/hotot:chrome - Build chrome browser extension
 net-misc/htbinit:esfq - Add support for Enhanced Stochastic Fairness queueing discipline.
@@ -1940,7 +1938,6 @@ www-apps/drupal:accelerator - Add dependency on a php accelerator
 www-apps/drupal:uploadprogress - Install dev-php/pecl-uploadprogress package
 www-apps/gitit:network-uri - Get Network.URI from the network-uri package.
 www-apps/gitit:plugins - enables optional plugin runtime loader
-www-apps/guacamole:noauth - enable support for leaving out any authentication on the webinterface
 www-apps/icingaweb2:nginx - Adds support for nginx
 www-apps/ikiwiki:extras - Installs additional modules used by ikiwiki plugins
 www-apps/kibana-bin:x-pack - Enable additional features (may need a license)

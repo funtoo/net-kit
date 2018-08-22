@@ -45,6 +45,7 @@ src_prepare() {
 		-e 's/\(pluginsdir.path[[:space:]]*= \)\(.*\)$/\1\/usr\/lib\/nsbrowser\/plugins/' \
 		-e 's/\(plugspec.path[[:space:]]*= \)\(.*\)$/\1\/usr\/include\/dooble\/plugin-spec/' \
 		-e 's/\(postinstall.path[[:space:]]*= \)\(.*\)$/\1\/usr\/share\/dooble/' \
+		-e 's/\(translations.path[[:space:]]*= \)\(.*\)$/\1\/usr\/share\/dooble/' \
 		-e 's/\(tab.path[[:space:]]*= \)\(.*\)$/\1\/usr\/share\/dooble/' \
 		dooble.pro dooble.qt5.pro
 

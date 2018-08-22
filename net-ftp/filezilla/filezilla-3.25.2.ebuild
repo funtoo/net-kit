@@ -12,29 +12,29 @@ MY_P="FileZilla_${MY_PV}"
 
 DESCRIPTION="FTP client with lots of useful features and an intuitive interface"
 HOMEPAGE="https://filezilla-project.org/"
-SRC_URI="https://dl2.cdn.filezilla-project.org/client/${MY_P}_src.tar.bz2"
+SRC_URI="mirror://sourceforge/${PN}/${MY_P}_src.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~x86"
+KEYWORDS="amd64 ~arm ~ia64 ~ppc x86"
 IUSE="dbus nls test"
 
 # pugixml 1.7 minimal dependency is for c++11 proper configuration
 RDEPEND=">=app-eselect/eselect-wxwidgets-0.7-r1
 	>=dev-libs/nettle-3.1:=
 	>=dev-db/sqlite-3.7
-	>=dev-libs/libfilezilla-0.13.0
+	=dev-libs/libfilezilla-0.9*
 	>=dev-libs/pugixml-1.7
 	net-dns/libidn:=
-	>=net-libs/gnutls-3.4.15
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X]
+	>=net-libs/gnutls-3.4.0
+	>=x11-libs/wxGTK-3.0.2.0-r1:3.0[X]
 	x11-misc/xdg-utils
 	dbus? ( sys-apps/dbus )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	>=sys-devel/libtool-1.4
 	nls? ( >=sys-devel/gettext-0.11 )
-	test? ( >=dev-util/cppunit-1.13.0 )"
+	test? ( dev-util/cppunit )"
 
 S="${WORKDIR}"/${PN}-${MY_PV}
 

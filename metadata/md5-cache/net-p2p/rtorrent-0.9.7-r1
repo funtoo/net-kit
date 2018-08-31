@@ -4,10 +4,10 @@ DESCRIPTION=BitTorrent Client using libtorrent
 EAPI=6
 HOMEPAGE=https://rakshasa.github.io/rtorrent/
 IUSE=daemon debug selinux test xmlrpc
-KEYWORDS=amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris
+KEYWORDS=amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris
 LICENSE=GPL-2
 RDEPEND=~net-libs/libtorrent-0.13.7 >=dev-libs/libsigc++-2.2.2:2 >=net-misc/curl-7.19.1 sys-libs/ncurses:0= xmlrpc? ( dev-libs/xmlrpc-c ) daemon? ( app-misc/screen ) selinux? ( sec-policy/selinux-rtorrent )
 SLOT=0
 SRC_URI=http://rtorrent.net/downloads/rtorrent-0.9.7.tar.gz
 _eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	libtool	e32ea84bf82cf8987965b574672dba93	linux-info	ca370deef9d44125d829f2eb6ebc83e0	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	c80ccf29e90adea7c5cae94b42eb76d0
-_md5_=bda544303159dd61216ec653b6293785
+_md5_=f9bce188ef1b9d4e410c9d1d71f2703e

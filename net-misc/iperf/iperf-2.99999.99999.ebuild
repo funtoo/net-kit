@@ -2,14 +2,16 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+inherit git-r3
 
 DESCRIPTION="Tool to measure IP bandwidth using UDP or TCP"
 HOMEPAGE="http://iperf2.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}2/${P}.tar.gz"
+#SRC_URI="mirror://sourceforge/${PN}2/${P}.tar.gz"
+EGIT_REPO_URI="https://git.code.sf.net/p/iperf2/code"
 
 LICENSE="HPND"
 SLOT="2"
-KEYWORDS="~amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~m68k-mint"
+KEYWORDS=""
 IUSE="ipv6 threads debug"
 
 DOCS="INSTALL README"

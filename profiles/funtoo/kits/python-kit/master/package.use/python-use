@@ -74,6 +74,7 @@ net-wireless/gr-baz python_single_target_python2_7
 net-wireless/gr-doa python_single_target_python2_7
 net-wireless/gr-foo python_single_target_python2_7
 net-wireless/gr-ieee802154 python_single_target_python2_7
+net-wireless/gr-iio python_single_target_python2_7
 net-wireless/gr-iqbal python_single_target_python2_7
 net-wireless/gr-osmosdr python_single_target_python2_7
 net-wireless/gr-paint python_single_target_python2_7

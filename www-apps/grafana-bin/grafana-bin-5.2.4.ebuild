@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI="7"
 
 inherit user systemd
 
@@ -10,7 +10,7 @@ S=${WORKDIR}/${MY_PN}-${PV}
 
 DESCRIPTION="Gorgeous metric viz, dashboards & editors for Graphite, InfluxDB & OpenTSDB"
 HOMEPAGE="https://grafana.org"
-SRC_URI="https://s3-us-west-2.amazonaws.com/grafana-releases/release/${MY_PN}-${PV}.linux-x64.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://s3-us-west-2.amazonaws.com/grafana-releases/release/${MY_PN}-${PV}.linux-amd64.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -20,6 +20,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 
 QA_EXECSTACK="usr/share/grafana/vendor/phantomjs/phantomjs"
+QA_PREBUILT="usr/bin/grafana-*"
 QA_PRESTRIPPED=${QA_EXECSTACK}
 
 pkg_setup() {

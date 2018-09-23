@@ -1540,7 +1540,6 @@ net-misc/stargazer:stargazer - Enable build of Stargazer billing system.
 net-misc/streamtuner:shout - Enable shoutcast plug-in.
 net-misc/streamtuner:xiph - Enable xiph.org plug-in.
 net-misc/stunnel:stunnel3 - Install the stunnel3 wrapper.
-net-misc/teamviewer:system-wine - Use virtual/wine instead of bundled wine.
 net-misc/termpkg:uucp - Adds support for uucp style device locking
 net-misc/tigervnc:dri3 - Build with DRI3 support
 net-misc/tigervnc:drm - Build with DRM support
@@ -1874,6 +1873,12 @@ net-wireless/gr-osmosdr:sdrplay - Enable support for SDRplay devices through net
 net-wireless/gr-osmosdr:soapy - Build with SoapySDR support
 net-wireless/gr-osmosdr:uhd - Build with Ettus Research USRP Hardware Driver support
 net-wireless/horst:pcap - Add support for network packet capture via net-libs/libpcap
+net-wireless/hostapd:crda - Add CRDA support
+net-wireless/hostapd:internal-tls - Use internal TLSv1 implementation instead of depending on OpenSSL, LibreSSL or GnuTLS
+net-wireless/hostapd:logwatch - Install support files for sys-apps/logwatch
+net-wireless/hostapd:netlink - Adding support for using netlink to create VLANs
+net-wireless/hostapd:sqlite - Adding sqlite support
+net-wireless/hostapd:wps - Add support for Wi-Fi Protected Setup
 net-wireless/iwd:client - Enable iwctl client tool
 net-wireless/iwd:monitor - Enable iwmon monitor tool
 net-wireless/kismet:client - Build the ncurses-based user interface
@@ -1923,21 +1928,6 @@ net-wireless/yatebts:bladerf - Build bladeRF transceiver
 net-wireless/yatebts:rad1 - Build RAD1 transceiver
 net-wireless/yatebts:uhd - Build UHD transceiver
 net-wireless/yatebts:usrp1 - Build USRP1 transceiver
-www-apache/mod_backtrace:unwind - Use sys-libs/libunwind to provide better resolution of function names.
-www-apache/mod_extract_forwarded:mod_proxy - Enable support for Apache's internal proxy
-www-apache/mod_musicindex:archive - Add archive support
-www-apache/mod_musicindex:cache - Add File cache support
-www-apache/mod_musicindex:mysql - Add MySQL cache support
-www-apache/mod_nss:ecc - enable Elliptical Curve Cyptography
-www-apache/mod_perl:ithreads - Build for use with thread-capable perl, needs same setting as in dev-lang/perl
-www-apache/mod_security:fuzzyhash - Support fuzzy hash computations (to detect malware, for example) using the app-crypt/ssdeep package.
-www-apache/mod_security:geoip - Pull in dev-libs/geoip for use by the SecGeoLookupDb directive.
-www-apache/mod_security:jit - Add support for the PCRE Just-in-Time optimisation, as enabled by dev-libs/libpcre with jit USE flag enabled. Might not be available on hardened systems.
-www-apache/mod_security:json - Suppose JSON in the request body parser through dev-libs/yajl.
-www-apache/mod_security:mlogc - Build and install the ModSecurity Audit Log Collector (mlogc).
-www-apache/pwauth:domain-aware - Ignore leading domain names in username (Windows compat)
-www-apache/pwauth:faillog - Log failed login attempts
-www-apache/pwauth:ignore-case - Ignore string case in username (mostly Windows compat)
 www-apps/ampache:transcode - Install optional dependencies for transcoding support
 www-apps/blohg:git - Enable Git support
 www-apps/blohg:mercurial - Enable Mercurial support
@@ -1950,6 +1940,7 @@ www-apps/drupal:accelerator - Add dependency on a php accelerator
 www-apps/drupal:uploadprogress - Install dev-php/pecl-uploadprogress package
 www-apps/gitit:network-uri - Get Network.URI from the network-uri package.
 www-apps/gitit:plugins - enables optional plugin runtime loader
+www-apps/hugo:sass - Enable SASS/SCSS support
 www-apps/icingaweb2:nginx - Adds support for nginx
 www-apps/ikiwiki:extras - Installs additional modules used by ikiwiki plugins
 www-apps/kibana-bin:x-pack - Enable additional features (may need a license)
@@ -2154,6 +2145,15 @@ www-servers/lighttpd:rrdtool - Enable rrdtool support via mod_rrdtool
 www-servers/lighttpd:webdav - Enable webdav properties
 www-servers/monkeyd:debug - Enable lots of debugging info
 www-servers/monkeyd:static-plugins - Build statically linked plugins
+www-servers/nginx:aio - Enables file AIO support
+www-servers/nginx:http - Enable HTTP core support
+www-servers/nginx:http-cache - Enable HTTP cache support
+www-servers/nginx:http2 - Enable HTTP2 module support
+www-servers/nginx:libatomic - Use libatomic instead of builtin atomic operations
+www-servers/nginx:luajit - Use dev-lang/luajit instead of dev-lang/lua for lua support when building the lua http module.
+www-servers/nginx:pcre-jit - Enable JIT for pcre
+www-servers/nginx:rtmp - NGINX-based Media Streaming Server
+www-servers/nginx:ssl - Enable HTTPS module for http. Enable SSL/TLS support for POP3/IMAP/SMTP for mail.
 www-servers/pshs:magic - Enable automatic detection of Content-Type using libmagic (sys-apps/file)
 www-servers/pshs:netlink - Use libnetlink (sys-apps/iproute2) to get network interface addresses
 www-servers/pshs:qrcode - Enable generating QRCodes for server URL

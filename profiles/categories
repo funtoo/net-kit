@@ -1,4 +1,3 @@
-app-admin
 mail-client
 mail-filter
 mail-mta
@@ -23,7 +22,6 @@ net-voip
 net-vpn
 net-wireless
 virtual
-www-apache
 www-apps
 www-client
 www-misc

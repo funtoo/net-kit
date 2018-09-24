@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install setup
+DEPEND=>=dev-libs/libmowgli-2.1.0:2 cracklib? ( sys-libs/cracklib ) ldap? ( net-nds/openldap ) perl? ( dev-lang/perl ) pcre? ( dev-libs/libpcre ) ssl? ( dev-libs/openssl:0= ) virtual/pkgconfig
+DESCRIPTION=A portable and secure set of open-source and modular IRC services
+EAPI=6
+HOMEPAGE=https://github.com/atheme/atheme
+IUSE=cracklib largenet ldap nls +pcre perl profile ssl
+KEYWORDS=~amd64
+LICENSE=BSD
+RDEPEND=>=dev-libs/libmowgli-2.1.0:2 cracklib? ( sys-libs/cracklib ) ldap? ( net-nds/openldap ) perl? ( dev-lang/perl ) pcre? ( dev-libs/libpcre ) ssl? ( dev-libs/openssl:0= )
+SLOT=0
+SRC_URI=https://github.com/atheme/atheme/releases/download/v7.2.10-r2/atheme-v7.2.10-r2.tar.xz -> atheme-services-7.2.10_p2.tar.xz
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	flag-o-matic	55aaa148741116aa54ad0d80e361818e	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	perl-functions	f2e3420aed32cf1abe33b4129b842636	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	user	8bc2845510e2109af75e3eeac607ec81
+_md5_=6f214a4835a103d14e2a1602604df896

@@ -1,0 +1,14 @@
+DEFINED_PHASES=install postinst postrm prepare unpack
+DEPEND=>=sys-apps/sed-4 >=app-arch/rpm2targz-9.0.0.3g
+DESCRIPTION=Instant messaging client, with support for audio and video
+EAPI=6
+HOMEPAGE=https://www.skype.com/
+IUSE=pax_kernel abi_x86_32 abi_x86_64 abi_x86_x32 abi_mips_n32 abi_mips_n64 abi_mips_o32 abi_ppc_32 abi_ppc_64 abi_s390_32 abi_s390_64
+KEYWORDS=~amd64 -*
+LICENSE=Skype-TOS MIT MIT-with-advertising BSD-1 BSD-2 BSD Apache-2.0 Boost-1.0 ISC CC-BY-SA-3.0 CC0-1.0 openssl ZLIB APSL-2 icu Artistic-2 LGPL-2.1
+RDEPEND=app-crypt/libsecret dev-libs/atk dev-libs/expat dev-libs/glib:2 dev-libs/nspr dev-libs/nss gnome-base/gconf:2 media-libs/alsa-lib media-libs/fontconfig:1.0 media-libs/freetype:2 media-libs/libv4l net-print/cups sys-apps/dbus sys-devel/gcc[cxx] virtual/ttf-fonts x11-libs/cairo x11-libs/gdk-pixbuf:2 x11-libs/gtk+:2 x11-libs/libX11 x11-libs/libXScrnSaver x11-libs/libXcomposite x11-libs/libXcursor x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXi x11-libs/libXrandr x11-libs/libXrender x11-libs/libXtst x11-libs/libxcb x11-libs/libxkbfile x11-libs/pango
+RESTRICT=mirror bindist strip
+SLOT=0
+SRC_URI=https://repo.skype.com/rpm/stable/skypeforlinux_8.18.0.6-1.x86_64.rpm
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	gnome2-utils	c6060f4ab634aca444c4b2176b0f3877	ltprune	2770eed66a9b8ef944714cd0e968182e	multibuild	40fe59465edacd730c644ec2bc197809	multilib	97f470f374f2e94ccab04a2fb21d811e	multilib-build	b42436dc1260f475af229754c165cb6b	pax-utils	e85f015e815dd463b0c206d781ef45a5	rpm	f52cfa3a435468d86d3b49c357b9cb35	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	xdg-utils	89bb9f083a2590d9b447fd0b78a96186
+_md5_=2cf3f38a4033db5a2b822ddae8624149

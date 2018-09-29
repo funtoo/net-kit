@@ -87,3 +87,4 @@ www-apps/trac python_single_target_python2_7
 www-apps/venus python_single_target_python2_7
 www-apps/viewvc python_single_target_python2_7
 www-misc/nx_util python_single_target_python2_7
+www-plugins/passff-host python_single_target_python3_5 python_targets_python3_5

@@ -983,6 +983,8 @@ net-libs/libssh:server - Build with SSH server support
 net-libs/libssh:sftp - Build with SFTP support
 net-libs/libssh:ssh1 - Build with SSH1 support
 net-libs/libssh2:gcrypt - Use dev-libs/libgcrypt instead of dev-libs/openssl
+net-libs/libssh2:libressl - Use dev-libs/libressl instead of dev-libs/openssl
+net-libs/libssh2:mbedtls - Use net-libs/mbedtls instead of dev-libs/openssl
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/libtrace:numa - Use sys-process/numactl
 net-libs/libupnp:blocking-tcp - Do not use async socket calls.
@@ -2143,15 +2145,6 @@ www-servers/lighttpd:rrdtool - Enable rrdtool support via mod_rrdtool
 www-servers/lighttpd:webdav - Enable webdav properties
 www-servers/monkeyd:debug - Enable lots of debugging info
 www-servers/monkeyd:static-plugins - Build statically linked plugins
-www-servers/nginx:aio - Enables file AIO support
-www-servers/nginx:http - Enable HTTP core support
-www-servers/nginx:http-cache - Enable HTTP cache support
-www-servers/nginx:http2 - Enable HTTP2 module support
-www-servers/nginx:libatomic - Use libatomic instead of builtin atomic operations
-www-servers/nginx:luajit - Use dev-lang/luajit instead of dev-lang/lua for lua support when building the lua http module.
-www-servers/nginx:pcre-jit - Enable JIT for pcre
-www-servers/nginx:rtmp - NGINX-based Media Streaming Server
-www-servers/nginx:ssl - Enable HTTPS module for http. Enable SSL/TLS support for POP3/IMAP/SMTP for mail.
 www-servers/pshs:magic - Enable automatic detection of Content-Type using libmagic (sys-apps/file)
 www-servers/pshs:netlink - Use libnetlink (sys-apps/iproute2) to get network interface addresses
 www-servers/pshs:qrcode - Enable generating QRCodes for server URL

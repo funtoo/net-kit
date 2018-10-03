@@ -21,6 +21,7 @@ net-proxy
 net-voip
 net-vpn
 net-wireless
+sys-libs
 virtual
 www-apps
 www-client

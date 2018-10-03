@@ -1924,6 +1924,11 @@ net-wireless/yatebts:bladerf - Build bladeRF transceiver
 net-wireless/yatebts:rad1 - Build RAD1 transceiver
 net-wireless/yatebts:uhd - Build UHD transceiver
 net-wireless/yatebts:usrp1 - Build USRP1 transceiver
+sys-libs/ldb:doc - Builds documentation
+sys-libs/ldb:ldap - Enable LDAP support
+sys-libs/ldb:lmdb - Enable LMDB backend
+sys-libs/ldb:python - Enable Python support
+sys-libs/talloc:compat - Enable extra compatibility stuff
 www-apps/ampache:transcode - Install optional dependencies for transcoding support
 www-apps/blohg:git - Enable Git support
 www-apps/blohg:mercurial - Enable Mercurial support

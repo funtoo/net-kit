@@ -10,5 +10,5 @@ RDEPEND=gnome-base/libgnome-keyring x11-libs/libXScrnSaver
 RESTRICT=strip mirror
 SLOT=0
 SRC_URI=https://github.com/brave/browser-laptop/releases/download/v0.17.13dev/Brave.tar.bz2 -> brave-bin-0.17.13.tar.bz2
-_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	linux-info	915cae3d7d636732918d18827fb1c226	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
+_eclasses_=eapi7-ver	756b3f27d8e46131d5cf3c51bd876446	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
 _md5_=e22674539ae7c69fe6854f476200b004

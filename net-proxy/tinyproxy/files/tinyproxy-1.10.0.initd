@@ -12,9 +12,9 @@ get_config() {
     fi
 }
 
-: ${CONFFILE:="/etc/${SVCNAME}.conf"}
+: ${CONFFILE:="/etc/${SVCNAME}/${SVCNAME}.conf"}
 
-command=/usr/sbin/tinyproxy
+command=/usr/bin/tinyproxy
 command_args="-c ${CONFFILE}"
 pidfile=$(get_config PidFile /run/tinyproxy/${SVCNAME}.pid)
 

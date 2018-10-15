@@ -101,10 +101,15 @@ DEPEND="${COMMON_DEPEND}
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
-	>=sys-devel/clang-5
 	virtual/pkgconfig
 	dev-vcs/git
 "
+
+: ${CHROMIUM_FORCE_CLANG=yes}
+
+if [[ ${CHROMIUM_FORCE_CLANG} == yes ]]; then
+	DEPEND+=" >=sys-devel/clang-5"
+fi
 
 if ! has chromium_pkg_die ${EBUILD_DEATH_HOOKS}; then
 	EBUILD_DEATH_HOOKS+=" chromium_pkg_die";
@@ -136,6 +141,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
+	"${FILESDIR}/chromium-pdfium-stdlib-r0.patch"
 )
 
 pre_build_checks() {
@@ -380,7 +386,7 @@ src_configure() {
 	# Make sure the build system will use the right tools, bug #340795.
 	tc-export AR CC CXX NM
 
-	if ! tc-is-clang; then
+	if [[ ${CHROMIUM_FORCE_CLANG} == yes ]] && ! tc-is-clang; then
 		# Force clang since gcc is pretty broken at the moment.
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
@@ -575,9 +581,6 @@ src_compile() {
 
 	#"${EPYTHON}" tools/clang/scripts/update.py --force-local-build --gcc-toolchain /usr --skip-checkout --use-system-cmake --without-android || die
 
-	# Work around broken deps
-	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom{,-shared}.h
-
 	# Build mksnapshot and pax-mark it.
 	local x
 	for x in mksnapshot v8_context_snapshot_generator; do
@@ -589,6 +592,10 @@ src_compile() {
 			pax-mark m "out/Release/${x}"
 		fi
 	done
+
+	# Work around broken deps
+	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom.h
+	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom-shared.h
 
 	# Even though ninja autodetects number of CPUs, we respect
 	# user's options, for debugging with -j 1 or any other reason.

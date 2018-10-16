@@ -15,7 +15,7 @@ if [[ "${PV}" == *9999 ]] ; then
 else
 	inherit eapi7-ver
 	SRC_URI="https://www.libssh.org/files/$(ver_cut 1-2)/${MY_P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-linux"
 fi
 
 LICENSE="LGPL-2.1"
@@ -46,7 +46,10 @@ DOCS=( AUTHORS README ChangeLog )
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=( "${FILESDIR}/${PN}-0.8.0-tests.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-0.8.0-tests.patch"
+	"${FILESDIR}/${PN}-0.8.3-strict-overflow.patch"
+)
 
 src_prepare() {
 	cmake-utils_src_prepare

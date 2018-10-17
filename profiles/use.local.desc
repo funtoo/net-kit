@@ -792,6 +792,7 @@ net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
 net-im/pyicq-t:webinterface - Install dependencies needed for the web interface
 net-im/qtox:X - Adds support for X11
 net-im/qtox:notification - Adds support for GTK Status Notifier tray backends
+net-im/skypeforlinux:pax_kernel - Triggers a paxmarking of the main skype binary
 net-im/slack-bin:pax_kernel - Triggers a paxmarking of the binary
 net-im/telepathy-connection-managers:gadu - Enable Gadu Gadu protocol support.
 net-im/telepathy-connection-managers:irc - Enable Internet Relay Chat (IRC) support.

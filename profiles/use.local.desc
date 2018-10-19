@@ -519,6 +519,7 @@ net-dns/dnsmasq:conntrack - Add support for Linux conntrack connection marking.
 net-dns/dnsmasq:dhcp - Enable support for acting as a DHCP server.
 net-dns/dnsmasq:dhcp-tools - Install extra command line tools for manually managing DHCP leases.
 net-dns/dnsmasq:dnssec - Enable support DNSSEC validation and caching.
+net-dns/dnsmasq:dumpfile - Include code to dump packets to a libpcap-format file for debugging
 net-dns/dnsmasq:id - Whether report *.bind CHAOS info to clients, otherwise forward such requests upstream instead
 net-dns/dnsmasq:libidn2 - Enable support for Internationalized Domain Names, via net-dns/libidn2 rather than net-dns/libidn
 net-dns/dnsmasq:script - Enable support for calling scripts when leases change.
@@ -543,6 +544,7 @@ net-dns/knot:geoip - Enable the Geography-based responses module
 net-dns/knot:libidn2 - If IDN support is enabled, use net-dns/libidn2 instead of net-dns/libidn
 net-dns/knot:noudp - Enable the module which can send empty truncated responses to UDP queries
 net-dns/knot:onlinesign - Enable the module that sign zones on the fly instead of pre-signing zone
+net-dns/knot:queryacl - Enable the module for query access control
 net-dns/knot:rosedb - Enable the module that staticaly override certain responses
 net-dns/knot:rrl - Enable the response rate limiting module
 net-dns/knot:stats - Enable the server statistics module
@@ -2047,7 +2049,6 @@ www-client/netsurf:pdf-writer - PDF output support (media-libs/libharu)
 www-client/netsurf:psl - Use public suffix list via media-libs/libnspsl
 www-client/netsurf:rosprite - RISC OS Sprite bitmap image support (media-libs/librosprite)
 www-client/netsurf:svgtiny - SVG image support via media-libs/svgatiny instead of gnome-base/librsvg
-www-client/netsurf:webp - WebP image support (media-libs/libwebp)
 www-client/opera:gtk - Install support libraries and runtime dependencies to support GTK+/GNOME desktop integration
 www-client/otter:webengine - Use dev-qt/qtwebengine as backend instead of dev-qt/qtwebkit (experimental)
 www-client/qupzilla:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet

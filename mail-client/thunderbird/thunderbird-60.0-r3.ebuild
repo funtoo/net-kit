@@ -109,7 +109,7 @@ CDEPEND="
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
-	>=sys-devel/binutils-2.30
+	>=sys-devel/binutils-2.29
 	sys-apps/findutils
 	>=sys-devel/llvm-4.0.1
 	>=sys-devel/clang-4.0.1

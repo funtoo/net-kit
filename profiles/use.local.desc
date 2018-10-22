@@ -2,6 +2,14 @@
 # your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using egencache *
 
+dev-lang/rust:cargo - Install cargo component
+dev-lang/rust:clippy - Install clippy component
+dev-lang/rust:rls - Install rls component
+dev-lang/rust:rustfmt - Install rustfmt component
+dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
+dev-lang/rust-bin:cargo - Install cargo component
+dev-lang/rust-bin:clippy - Install clippy component
+dev-lang/rust-bin:rustfmt - Install rustfmt component
 dev-lang/spidermonkey:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
 dev-lang/spidermonkey:debug - Enable assertions to allow for easier debugging of programs that link to spidermonkey -- note this will often crash software on regular end-user systems
 dev-lang/spidermonkey:system-icu - Use the system-wide dev-libs/icu instead of bundled -- note, only takes effect when icu flag is enabled
@@ -76,7 +84,6 @@ mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
 mail-client/thunderbird:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
 mail-client/thunderbird:gtk2 - Use the cairo-gtk2 rendering engine instead of the default cairo-gtk3
-mail-client/thunderbird:jemalloc - Enable or disable jemalloc
 mail-client/thunderbird:lightning - Enable app-global calendar support (note 38.0 and above bundles calendar support when this flag is off)
 mail-client/thunderbird:minimal - Remove the software development kit and headers
 mail-client/thunderbird:mozdom - Enable Mozilla's DOM inspector
@@ -164,7 +171,6 @@ mail-filter/postgrey:targrey - Enables the targrey patch
 mail-filter/rmilter:dkim - Enable support for DomainKeys Identified Mail
 mail-filter/rmilter:memcached - Enable support for memcached
 mail-filter/rspamd:fann - Enable neural network plugin (requires sci-mathematics/fann).
-mail-filter/rspamd:jemalloc - Use dev-libs/jemalloc for allocations
 mail-filter/rspamd:pcre2 - Use dev-libs/libpcre2
 mail-filter/rspamd:torch - Enable torch support. This is required for the neural module
 mail-filter/spamassassin:cron - Install a cron job to update SpamAssassin's rules daily.
@@ -219,11 +225,10 @@ net-analyzer/bro:broctl - An interactive shell for managing Bro installations
 net-analyzer/bro:broker - Bro's new Messaging Library (experimental)
 net-analyzer/bro:geoip - Enable support for Maxmind's GeoIP library
 net-analyzer/bro:ipv6 - Support for mobile IPv6
-net-analyzer/bro:jemalloc - Support for the Jemalloc allocator
 net-analyzer/bro:python - Enable Python bindings
 net-analyzer/bro:ruby - Enable Ruby bindings (deprecated)
 net-analyzer/bro:tcmalloc - Enable Google's Performance Analysis Tools
-net-analyzer/bro:tools - Small auxiliary tools for Bro
+net-analyzer/bro:tools - Auxiliary tools for Bro: adtrace, bro-cut, devel-tools, rst
 net-analyzer/bwm-ng:csv - Enable csv output
 net-analyzer/bwm-ng:html - Enable html output
 net-analyzer/cacti:doc - install html documentation
@@ -520,6 +525,7 @@ net-dns/dnsmasq:conntrack - Add support for Linux conntrack connection marking.
 net-dns/dnsmasq:dhcp - Enable support for acting as a DHCP server.
 net-dns/dnsmasq:dhcp-tools - Install extra command line tools for manually managing DHCP leases.
 net-dns/dnsmasq:dnssec - Enable support DNSSEC validation and caching.
+net-dns/dnsmasq:dumpfile - Include code to dump packets to a libpcap-format file for debugging
 net-dns/dnsmasq:id - Whether report *.bind CHAOS info to clients, otherwise forward such requests upstream instead
 net-dns/dnsmasq:libidn2 - Enable support for Internationalized Domain Names, via net-dns/libidn2 rather than net-dns/libidn
 net-dns/dnsmasq:script - Enable support for calling scripts when leases change.
@@ -544,6 +550,7 @@ net-dns/knot:geoip - Enable the Geography-based responses module
 net-dns/knot:libidn2 - If IDN support is enabled, use net-dns/libidn2 instead of net-dns/libidn
 net-dns/knot:noudp - Enable the module which can send empty truncated responses to UDP queries
 net-dns/knot:onlinesign - Enable the module that sign zones on the fly instead of pre-signing zone
+net-dns/knot:queryacl - Enable the module for query access control
 net-dns/knot:rosedb - Enable the module that staticaly override certain responses
 net-dns/knot:rrl - Enable the response rate limiting module
 net-dns/knot:stats - Enable the server statistics module
@@ -779,6 +786,7 @@ net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
 net-im/pyicq-t:webinterface - Install dependencies needed for the web interface
 net-im/qtox:X - Adds support for X11
 net-im/qtox:notification - Adds support for GTK Status Notifier tray backends
+net-im/skypeforlinux:pax_kernel - Triggers a paxmarking of the main skype binary
 net-im/slack-bin:pax_kernel - Triggers a paxmarking of the binary
 net-im/telepathy-connection-managers:gadu - Enable Gadu Gadu protocol support.
 net-im/telepathy-connection-managers:irc - Enable Internet Relay Chat (IRC) support.
@@ -1008,7 +1016,6 @@ net-libs/loudmouth:openssl - Enable dev-libs/openssl support instead of gnutls (
 net-libs/mbedtls:havege - Enable the HAVEGE random generator. Warning: the HAVEGE random generator is not suitable for virtualized environments
 net-libs/mbedtls:programs - Build PolarSSL programs
 net-libs/nghttp2:hpack-tools - Install HPACK (header compression) helper tools
-net-libs/nghttp2:jemalloc - Use dev-libs/jemalloc for memory allocation
 net-libs/nghttp2:utils - Install nghttp, nghttpd and nghttpx
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:npm - Enable NPM package manager
@@ -1056,12 +1063,10 @@ net-libs/pjproject:ilbc - Include iLBC codec in the build
 net-libs/pjproject:l16 - Include Linear/L16 codec family in the build
 net-libs/pjproject:libyuv - Include libyuv in the build
 net-libs/pjproject:openh264 - Include Open H.264 support in the build
-net-libs/pjproject:opus - Include OPUS support in the build
 net-libs/pjproject:resample - Include resampling implementations in the build
 net-libs/pjproject:silk - Include SILK support in the build
 net-libs/pjproject:v4l2 - Include Video4Linux v2 support in the build
 net-libs/pjproject:webrtc - Enable WebRTC support
-net-libs/qxmpp:opus - Enable Opus codec support via media-libs/opus
 net-libs/qxmpp:vpx - Enable VP8 codec support via media-libs/libvpx
 net-libs/rabbitmq-c:tools - Builds cli tools to interact with brokers
 net-libs/shairplay:alac - Add support for Apple Lossless Audio Codec files
@@ -1153,7 +1158,6 @@ net-mail/vpopmail:maildrop - Enables mail-filter/maildrop support in vdelivermai
 net-mail/vpopmail:spamassassin - Enables mail-filter/spamassassin support
 net-misc/apt-cacher-ng:fuse - Install the sys-fs/fuse based acngfs, to use a userspace filesystem for the apt cache.
 net-misc/aria2:bittorrent - Enable support for the bittorrent protocol.
-net-misc/aria2:jemalloc - Use dev-libs/jemalloc to replace the malloc() implementation with a possibly faster one
 net-misc/aria2:libuv - Use dev-libs/libuv backend.
 net-misc/aria2:libxml2 - Use dev-libs/libxml2 for XML parsing (preferred) instead of dev-libs/expat.
 net-misc/aria2:metalink - Enable support for metalink.
@@ -1393,7 +1397,6 @@ net-misc/lldpd:old-kernel - Enable compatibility with Linux kernel older than 2.
 net-misc/lldpd:sanitizers - Enable code instrumentation with selected sanitizers
 net-misc/lldpd:snmp - Enable the use of SNMP
 net-misc/lldpd:sonmp - Enable SynOptics Network Management
-net-misc/megatools:fuse - Enables support for the filesystem in userspace plugin through sys-fs/fuse.
 net-misc/memcached:slabs-reassign - Allow manual reassignment of memory slabs at the cost of slab optimizations.
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
@@ -1724,6 +1727,7 @@ net-proxy/tinyproxy:reverse-proxy - Enable reverse proxying
 net-proxy/tinyproxy:transparent-proxy - Enable transparent proxying
 net-proxy/tinyproxy:upstream-proxy - Enable upstream proxying
 net-proxy/tinyproxy:xtinyproxy-header - Include the X-Tinyproxy header
+net-proxy/trojan:mysql - build with MySQL support
 net-proxy/tsocks:dns - Force DNS queries to use SOCKS server via tcp
 net-proxy/tsocks:envconf - Allow TSOCKS_CONF_FILE to specify configuration file
 net-proxy/tsocks:server-lookups - Allow hostname resolution _for_ SOCKS servers
@@ -1998,7 +2002,6 @@ www-client/firefox:geckodriver - Enable WebDriver support
 www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
 www-client/firefox:gtk2 - Use the cairo-gtk2 rendering engine
 www-client/firefox:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
-www-client/firefox:jemalloc - Enable or disable jemalloc
 www-client/firefox:lto - Enable Link Time Optimization (LTO). Requires Gold linker when using GCC or LDD linker when using Clang
 www-client/firefox:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
 www-client/firefox:rust - Enable support for using rust compiler (experimental)
@@ -2032,7 +2035,6 @@ www-client/netsurf:pdf-writer - PDF output support (media-libs/libharu)
 www-client/netsurf:psl - Use public suffix list via media-libs/libnspsl
 www-client/netsurf:rosprite - RISC OS Sprite bitmap image support (media-libs/librosprite)
 www-client/netsurf:svgtiny - SVG image support via media-libs/svgatiny instead of gnome-base/librsvg
-www-client/netsurf:webp - WebP image support (media-libs/libwebp)
 www-client/opera:gtk - Install support libraries and runtime dependencies to support GTK+/GNOME desktop integration
 www-client/otter:webengine - Use dev-qt/qtwebengine as backend instead of dev-qt/qtwebkit (experimental)
 www-client/qupzilla:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
@@ -2043,7 +2045,6 @@ www-client/seamonkey:custom-optimization - Build with user-specified compiler op
 www-client/seamonkey:force-gtk3 - Use the cairo-gtk3 rendering engine
 www-client/seamonkey:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
 www-client/seamonkey:ipc - Use inter-process communication between tabs and plugins. Allows for greater stability in case of plugin crashes
-www-client/seamonkey:jemalloc - Enable or disable jemalloc
 www-client/seamonkey:roaming - Build roaming extension support (default on)
 www-client/seamonkey:system-cairo - Use the system-wide x11-libs/cairo instead of bundled
 www-client/seamonkey:system-harfbuzz - Use the system-wide media-libs/harfbuzz instead of bundled
@@ -2080,16 +2081,6 @@ www-plugins/chrome-binary-plugins:widevine - Install the Widevine DRM library
 www-plugins/freshplayerplugin:gles2 - Use system GLESv2 libraries instead of ANGLE for shader translation
 www-plugins/freshplayerplugin:gtk3 - Build with GTK+ 3 instead of GTK+ 2
 www-plugins/freshplayerplugin:v4l - Use libv4l2 for colorspace conversion
-www-plugins/gnash:agg - Rendering based on the Anti-Grain Geometry Rendering Engine library
-www-plugins/gnash:cygnal - Enable building of the cygnal server
-www-plugins/gnash:dump - Enable dump output module for creating video from SWF
-www-plugins/gnash:egl - Enable EGL support for the OpenVG, OpenGL and X11 renderers
-www-plugins/gnash:harden - Enable upstream recommended hardening build flags (may conflict with system ones)
-www-plugins/gnash:jemalloc - Use dev-libs/jemalloc for allocations
-www-plugins/gnash:openvg - Rendering based on the OpenVG graphics acceleration API
-www-plugins/gnash:sdl-sound - Enable SDL audio output for the standalone player
-www-plugins/gnash:ssh - Enable using SSH for network authentication in libnet
-www-plugins/gnash:ssl - Enable directly using OpenSSL in libnet (not needed for nsplugin ssl support)
 www-plugins/lightspark:gles - Replace default OpenGL renderer with GLESv2
 www-plugins/lightspark:ppapi - Install the PPAPI plugin (for Chromium)
 www-plugins/lightspark:rtmp - Enable Real Time Messaging Protocol using librtmp
@@ -2137,7 +2128,6 @@ www-servers/uwsgi:routing - Enable routing support
 www-servers/uwsgi:yajl - Use dev-libs/yajl instead of dev-libs/jansson for parsing JSON configuration files (if USe=json is set)
 www-servers/uwsgi:yaml - Support yaml as a configuration file format.
 www-servers/uwsgi:zeromq - Enable logging and deployment via ZeroMQ.
-www-servers/varnish:jemalloc - Use dev-libs/jemalloc for allocations
 www-servers/xsp:developer - creates .mdb files for either Release and Debug
 www-servers/xsp:net35 - use .NET 3.5 Framework
 www-servers/xsp:net40 - use .NET 4.0 Framework

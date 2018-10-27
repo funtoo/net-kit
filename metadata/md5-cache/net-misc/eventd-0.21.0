@@ -3,12 +3,12 @@ DEPEND=>=dev-libs/glib-2.40:2 sys-apps/util-linux introspection? ( >=dev-libs/go
 DESCRIPTION=A small daemon to act on remote or local events
 EAPI=6
 HOMEPAGE=https://www.eventd.org/
-IUSE=debug fbcon +introspection ipv6 libcanberra libnotify +notification pulseaudio purple speech systemd test upnp websocket +X zeroconf
+IUSE=debug fbcon +introspection ipv6 libcanberra libnotify +notification pulseaudio purple speech systemd test upnp websocket +X zeroconf kernel_linux
 KEYWORDS=~amd64
 LICENSE=GPL-3+ LGPL-3+ MIT
 RDEPEND=>=dev-libs/glib-2.40:2 sys-apps/util-linux introspection? ( >=dev-libs/gobject-introspection-1.42 ) libcanberra? ( media-libs/libcanberra ) libnotify? ( x11-libs/gdk-pixbuf:2 ) notification? ( x11-libs/cairo x11-libs/pango x11-libs/gdk-pixbuf:2 X? ( x11-libs/cairo[xcb] x11-libs/libxcb:= x11-libs/xcb-util x11-libs/xcb-util-wm ) ) pulseaudio? ( media-libs/libsndfile media-sound/pulseaudio ) purple? ( net-im/pidgin ) speech? ( app-accessibility/speech-dispatcher ) systemd? ( sys-apps/systemd:= ) upnp? ( net-libs/gssdp:= ) websocket? ( >=net-libs/libsoup-2.50:2.4 ) zeroconf? ( net-dns/avahi[dbus] ) net-libs/glib-networking[ssl]
 REQUIRED_USE=X? ( notification ) fbcon? ( notification ) notification? ( || ( X fbcon ) )
 SLOT=0
 SRC_URI=https://www.eventd.org/download/eventd/eventd-0.21.0.tar.xz
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	epunt-cxx	f8073339d152f56626493f43d8ba4691	estack	5ac2a138d0b33354b764d84f9e835db8	eutils	1fb064d93b3ffd05c2fb19ef430a4aa1	linux-info	ca370deef9d44125d829f2eb6ebc83e0	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	c80ccf29e90adea7c5cae94b42eb76d0	xdg-utils	9ef13b5c5bcf0c50d6aa53692d8e441c
+_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	xdg-utils	9ef13b5c5bcf0c50d6aa53692d8e441c
 _md5_=b7b7e632f2cf86da3393f3dc0e458d4a

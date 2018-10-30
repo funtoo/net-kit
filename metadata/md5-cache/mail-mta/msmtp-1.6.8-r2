@@ -12,4 +12,4 @@ REQUIRED_USE=gnutls? ( ssl )
 SLOT=0
 SRC_URI=https://marlam.de/msmtp/releases/msmtp-1.6.8.tar.xz
 _eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=b16bb0441ebb190d61eed36440fa2a9d
+_md5_=72584a47c780c8cce9ad8a877ff0ce78

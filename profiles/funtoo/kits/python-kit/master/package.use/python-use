@@ -1,3 +1,4 @@
+=net-dialup/freeradius-3.0.15 python_single_target_python2_7
 =net-irc/irker-2.11 python_single_target_python2_7
 =net-irc/irker-2.12 python_single_target_python2_7
 =net-irc/irker-2.13 python_single_target_python2_7
@@ -18,7 +19,6 @@ net-analyzer/net-snmp python_single_target_python2_7
 net-analyzer/nmap python_single_target_python2_7
 net-analyzer/rrdtool python_single_target_python2_7
 net-analyzer/w3af python_single_target_python2_7
-net-dialup/freeradius python_single_target_python2_7
 net-dns/maradns python_single_target_python2_7
 net-dns/unbound python_single_target_python2_7
 net-firewall/dshieldpy python_single_target_python2_7

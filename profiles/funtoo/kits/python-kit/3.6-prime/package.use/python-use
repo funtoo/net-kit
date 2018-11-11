@@ -7,8 +7,7 @@
 =net-irc/irker-2.18 python_single_target_python2_7
 =net-irc/irker-2.18-r1 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
-=net-news/liferea-1.12_rc3 python_single_target_python3_4 python_targets_python3_4
-=net-news/liferea-1.12_rc3-r1 python_single_target_python3_4 python_targets_python3_4
+=net-wireless/kismet-2018.08_beta1-r3 python_single_target_python2_7
 mail-client/claws-mail python_single_target_python2_7
 mail-filter/tmda python_single_target_python2_7
 net-analyzer/bro python_single_target_python2_7
@@ -79,7 +78,6 @@ net-wireless/gr-paint python_single_target_python2_7
 net-wireless/gr-rds python_single_target_python2_7
 net-wireless/gr-rftap python_single_target_python2_7
 net-wireless/gr-specest python_single_target_python2_7
-net-wireless/kismet python_single_target_python2_7
 net-wireless/mousejack python_single_target_python2_7
 net-wireless/multimode python_single_target_python2_7
 net-wireless/pyrit python_single_target_python2_7

@@ -334,6 +334,7 @@ net-analyzer/netdata:compression - Enable compression via zlib
 net-analyzer/netdata:ipmi - Install sys-apps/ipmitool required for monitoring IPMI sensors.
 net-analyzer/netdata:nfacct - Enable the nfacct plugin
 net-analyzer/netdata:nodejs - Enable use of nodejs (which some plugins use)
+net-analyzer/netdata:tor - Enable monitoring of tor
 net-analyzer/netperf:demo - Emit interim results during the run. May affect results
 net-analyzer/nfdump:compat15 - Enable read support for nfdump data files created with nfdump 1.5.x
 net-analyzer/nfdump:ftconv - Build the flow-tools to nfdump converter
@@ -1581,6 +1582,11 @@ net-nds/rpcbind:remotecalls - Enable remote calls
 net-nds/rpcbind:warmstarts - Enables rpcbind to cache configuration for warm restarts
 net-nds/tac_plus:finger - Adds support for checking user counts via fingering the NAS
 net-nds/tac_plus:maxsess - Enforce a limit on maximum sessions per user
+net-news/liferea:gnome-keyring - Enable support for Libsecret Support plugin that allows Liferea to use app-crypt/libsecret as password store
+net-news/liferea:mediaplayer - Enable support for Media Player plugin that allows to play music and videos directly from Liferea
+net-news/liferea:networkmanager - Use NetworkManager to monitor nerwork status
+net-news/liferea:notification - Enable support for Popup Notifications plugin that display popups informing about new updates
+net-news/liferea:tray - Enable support for Tray Icon (GNOME Classic) plugin that display a small system tray icon to hide/unhide Liferea
 net-news/rssguard:webengine - Use dev-qt/qtwebengine for embedded web browser
 net-nntp/inn:innkeywords - Enable automatic keyword generation support
 net-nntp/inn:inntaggedhash - Use tagged hash table for history (disables large file support)
@@ -2091,6 +2097,7 @@ www-plugins/passff-host:firefox - Install plugin for firefox
 www-plugins/passff-host:vivaldi - Install plugin for vivaldi
 www-servers/cherokee:admin - Install web based cherokee conf tool
 www-servers/cherokee:rrdtool - Enable rrdtool support
+www-servers/civetweb:server - Build standalone server
 www-servers/fnord:auth - Enable HTTP authentication support
 www-servers/gatling:diet - Compile against dev-libs/dietlibc
 www-servers/h2o:mruby - Enable support for mruby

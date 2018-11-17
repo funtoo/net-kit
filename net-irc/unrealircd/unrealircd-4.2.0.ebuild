@@ -1,33 +1,39 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 SSL_CERT_MANDATORY=1
-inherit autotools eutils ssl-cert versionator multilib user
+inherit eapi7-ver ssl-cert user
 
 DESCRIPTION="An advanced Internet Relay Chat daemon"
 HOMEPAGE="https://www.unrealircd.org/"
-SRC_URI="https://www.unrealircd.org/${PN}$(get_version_component_range 1)/${P}.tar.gz"
+SRC_URI="https://www.unrealircd.org/${PN}$(ver_cut 1)/${P}.tar.gz"
 
-SLOT="0"
 LICENSE="GPL-2"
+SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86 ~x86-fbsd ~amd64-linux"
 IUSE="class-nofakelag curl +extban-stacking +operoverride operoverride-verify +prefixaq
 	showlistmodes shunnotices topicisnuhost +usermod"
 
-RDEPEND="dev-libs/openssl:=
-	curl? ( net-misc/curl[adns] )
+RDEPEND="
+	dev-libs/openssl:0=
 	dev-libs/libpcre2
 	dev-libs/tre
-	>=net-dns/c-ares-1.7"
+	>=net-dns/c-ares-1.7:=
+	sys-libs/zlib
+	curl? ( net-misc/curl[adns] )
+"
 DEPEND="${RDEPEND}
-	virtual/pkgconfig"
+	virtual/pkgconfig
+"
+
+DOCS=( doc/{Authors,Donation,RELEASE-NOTES{,.old},tao.of.irc,technical/,translations.txt} )
 
 pkg_pretend() {
 	local v
 	for v in ${REPLACING_VERSIONS}; do
-		version_is_at_least 4 "${v}" && continue
+		ver_test "${v}" -ge 4 && continue
 		ewarn "The configuration file format has changed since ${v}."
 		ewarn "Please be prepared to manually update them and visit:"
 		ewarn "https://www.unrealircd.org/docs/Upgrading_from_3.2.x"
@@ -51,9 +57,6 @@ src_prepare() {
 	# that to look for ca-certificates-provided file instead. %s is
 	# CONFDIR. #618066
 	sed -i -e 's:%s/ssl/curl-ca-bundle.crt:%s/../ssl/certs/ca-certificates.crt:' src/s_conf.c || die
-
-	epatch "${FILESDIR}"/${P}-without-privatelibdir.patch
-	eautoreconf -I autoconf/m4
 
 	eapply_user
 }
@@ -116,12 +119,10 @@ src_install() {
 	newins doc/conf/examples/example.conf ${PN}.conf
 	keepdir /etc/${PN}/ssl
 
-	dodoc \
-		doc/{Changes.old,Changes.older,RELEASE-NOTES} \
-		doc/{Donation,translations.txt}
+	einstalldocs
 
-	newinitd "${FILESDIR}"/${PN}.initd-r1 ${PN}
-	newconfd "${FILESDIR}"/${PN}.confd-r2 ${PN}
+	newinitd "${FILESDIR}"/${PN}.initd-r2 ${PN}
+	newconfd "${FILESDIR}"/${PN}.confd-r3 ${PN}
 
 	# config should be read-only
 	fperms -R 0640 /etc/${PN}
@@ -131,52 +132,6 @@ src_install() {
 	fperms 0770 /var/log/${PN}
 	fperms 0770 /var/lib/${PN}{,/tmp}
 	fowners -R root:unrealircd /{etc,var/{lib,log}}/${PN}
-}
-
-pkg_preinst() {
-	# Must pre-create directories; otherwise their permissions are lost
-	# on installation.
-
-	# Usage: _unrealircd_dir_permissions <user> <group> <mode> <dir>[, <dir>…]
-	#
-	# Ensure that directories are created with the correct permissions
-	# before portage tries to merge them to the filesystem because,
-	# otherwise, those directories are installed world-readable.
-	#
-	# If this is a first-time install, create those directories with
-	# correct permissions before installing. Otherwise, update
-	# permissions—but only if we are replacing an unrealircd ebuild at
-	# least as old as net-irc/unrealircd-3.2.10. Portage handles normal
-	# file permissions correctly, so no need for recursive
-	# chmoding/chowning.
-	_unrealircd_dir_permissions() {
-		local user=${1} group=${2} mode=${3} dir v
-		shift 3
-		while dir=${1} && shift; do
-			if [[ ! -d "${EROOT}${dir}" ]]; then
-				ebegin "Creating ""${EROOT}${dir}"" with correct permissions"
-				install -d -m "${mode}" -o "${user}" -g "${group}" "${EROOT}${dir}" || die
-				eend ${?}
-			elif ! [[ ${REPLACING_VERSIONS} ]] || for v in ${REPLACING_VERSIONS}; do
-					# If 3.2.10 ≤ ${REPLACING_VERSIONS}, then we update
-					# existing permissions.
-					version_is_at_least "${v}" 3.2.10 && break
-				done; then
-				ebegin "Correcting permissions of ""${EROOT}${dir}"" left by ${CATEGORY}/${PN}-${v}"
-				chmod "${mode}" "${EROOT}${dir}" \
-					&& chown ${user}:${group} "${EROOT}${dir}" \
-					|| die "Unable to correct permissions of ${EROOT}${dir}"
-				eend ${?}
-			fi
-		done
-	}
-
-	# unrealircd only needs to be able to read files in /etc/unrealircd.
-	_unrealircd_dir_permissions root unrealircd 0750 etc/${PN}{,/aliases}
-
-	# unrealircd needs to be able to create files in /var/lib/unrealircd
-	# and /var/log/unrealircd.
-	_unrealircd_dir_permissions root unrealircd 0770 var/{lib,log}/${PN}
 }
 
 pkg_postinst() {
@@ -202,7 +157,7 @@ pkg_postinst() {
 	if grep -qe '"and another one";$' "${unrealircd_conf}" && grep -qe '"aoAr1HnR6gl3sJ7hVz4Zb7x4YwpW";$' "${unrealircd_conf}"; then
 		ebegin "Generating cloak-keys"
 		local keys=(
-			$(${PN} -k 2>&1 | tail -n 3)
+			$(su ${PN} -s /bin/sh -c "${PN} -k 2>&1 | tail -n 3")
 		)
 		[[ -n ${keys[0]} || -n ${keys[1]} || -n ${keys[2]} ]]
 		eend $?
@@ -220,26 +175,6 @@ s/"and another one";/"'"${keys[2]}"'";/
 			"${unrealircd_conf}"
 		eend $?
 	fi
-
-	# Precreate ircd.tune and ircd.log with the correct ownership to
-	# protect people from themselves when they run unrealircd as root
-	# before trying the initscripts. #560790
-	local f
-	for f in "${EROOT}"var/{lib/${PN}/ircd.tune,log/${PN}/ircd.log}; do
-		[[ -e ${f} ]] && continue
-		ebegin "Precreating ${f} to set ownership"
-		(
-			umask 0037
-			# ircd.tune must be seeded with content instead of being empty.
-			if [[ ${f} == *ircd.tune ]]; then
-				echo 0 > "${f}"
-				echo 0 >> "${f}"
-			fi
-			touch "${f}"
-		)
-		chown unrealircd "${f}"
-		eend $?
-	done
 
 	elog "UnrealIRCd will not run until you've set up /etc/unrealircd/unrealircd.conf"
 	elog

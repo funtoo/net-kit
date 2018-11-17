@@ -1,8 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
 
+MODULES_OPTIONAL_USE=modules
+MODULES_OPTIONAL_USE_IUSE_DEFAULT=1
 inherit eutils linux-info linux-mod multilib
 
 DESCRIPTION="iptables extensions not yet accepted in the main kernel"
@@ -11,8 +13,7 @@ SRC_URI="mirror://sourceforge/xtables-addons/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="modules"
+KEYWORDS="amd64 x86"
 
 MODULES="quota2 psd pknock lscan length2 ipv4options ipp2p iface gradm geoip fuzzy condition tarpit sysrq logmark ipmark echo dnetmap dhcpmac delude chaos account"
 
@@ -164,7 +165,6 @@ src_prepare() {
 
 	use xtables_addons_geoip || sed  -e '/^SUBDIRS/{s/geoip//}' -i Makefile.in
 
-	eapply "${FILESDIR}"/linux-4.15.patch #FL-4872
 	eapply_user
 }
 
@@ -172,7 +172,7 @@ src_configure() {
 	set_arch_to_kernel # .. or it'll look for /arch/amd64/Makefile
 	econf --prefix="${EPREFIX}/" \
 		--libexecdir="${EPREFIX}/$(get_libdir)/" \
-		--with-kbuild="${KV_DIR}"
+		--with-kbuild="${KV_OUT_DIR}"
 }
 
 src_compile() {

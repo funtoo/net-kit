@@ -21,7 +21,7 @@ for mod in ${MODULES}; do
 	IUSE="${IUSE} xtables_addons_${mod}"
 done
 
-DEPEND=">=net-firewall/iptables-1.6.0"
+DEPEND=">=net-firewall/iptables-1.4.5"
 
 RDEPEND="${DEPEND}
 	xtables_addons_geoip? (
@@ -65,7 +65,7 @@ pkg_setup()	{
 			SKIP_IPV6_MODULES="ip6table_rawpost"
 			ewarn "No IPV6 support in kernel. Disabling: ${SKIP_IPV6_MODULES}"
 		fi
-		kernel_is -lt 4 15 && die "${P} requires kernel version >= 4.15, if you have older kernel please use 2.x version instead"
+		kernel_is -lt 3 7 && die "${P} requires kernel version >= 3.7, if you have older kernel please use 1.x version instead"
 	fi
 }
 

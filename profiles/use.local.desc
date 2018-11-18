@@ -1935,6 +1935,21 @@ www-apps/nikola:watchdog - Use dev-python/watchdog to monitor file system events
 www-apps/nikola:webmedia - Use dev-python/micawber to extract metadata from web media links
 www-apps/nikola:websocket - Add websocket support thru dev-python/ws4py
 www-apps/otrs:mod_perl - Provide all dependencies for use of mod_perl instead of cgi
+www-apps/phpsysinfo:apcupsd - Install sys-power/apcupsd to display those stats.
+www-apps/phpsysinfo:dmraid - Install sys-fs/dmraid to display those stats.
+www-apps/phpsysinfo:freeipmi - Install sys-libs/freeipmi to display those stats.
+www-apps/phpsysinfo:hddtemp - Install app-admin/hddtemp to display those stats.
+www-apps/phpsysinfo:ipmitool - Install sys-apps/ipmitool to display those stats.
+www-apps/phpsysinfo:ipmiutil - Install sys-apps/ipmiutil to display those stats.
+www-apps/phpsysinfo:iptables - Install net-firewall/iptables to display those stats.
+www-apps/phpsysinfo:lm_sensors - Install sys-apps/lm_sensors to display those stats.
+www-apps/phpsysinfo:mdadm - Install sys-fs/mdadm to display those stats.
+www-apps/phpsysinfo:megactl - Install sys-block/megactl to display those stats.
+www-apps/phpsysinfo:nut - Install sys-power/nut to display those stats.
+www-apps/phpsysinfo:quota - Install sys-fs/quota to display those stats.
+www-apps/phpsysinfo:smart - Install sys-apps/smartmontools to display those stats.
+www-apps/phpsysinfo:snmp - Install net-analyzer/net-snmp to display those stats.
+www-apps/phpsysinfo:uptime - Install app-misc/uptimed to display those stats.
 www-apps/postfixadmin:vacation - Install vacation.pl script and dependencies
 www-apps/radicale:bcrypt - Depend on passlib to enable bcrypt and md5 authentication methods
 www-apps/redmine:markdown - Enable support for Markdown
@@ -2100,7 +2115,6 @@ www-servers/tomcat:extra-webapps - Build also the docs and examples webapp
 www-servers/tomcat:websockets - Builds websockets api and implementation (requires java 7)
 www-servers/uwsgi:embedded - Embed plugins instead of building them as real plugins. When disabling this USE flag make sure you specify all used plugins in your uWSGI configuration. Note: Language plugins will always be built as real plugins.
 www-servers/uwsgi:go - Build the gccgo plugin to run Go applications.
-www-servers/uwsgi:jemalloc - Use dev-libs/jemalloc instead of libc's malloc
 www-servers/uwsgi:json - Support json as a configuration file format.
 www-servers/uwsgi:pypy - Build the pypy plugin to run your code using virtual/pypy.
 www-servers/uwsgi:python_asyncio - Use the EXPERIMENTAL asyncio (tulip) for python3.4 async request dispatching and as LoopEngine (see http://uwsgi-docs.readthedocs.org/en/latest/asyncio.html).

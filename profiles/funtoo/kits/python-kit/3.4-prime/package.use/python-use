@@ -6,6 +6,9 @@
 =net-irc/irker-2.15 python_single_target_python2_7
 =net-irc/irker-2.18-r1 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
+=net-misc/omniORB-4.1.4-r2 python_single_target_python2_7
+=net-misc/omniORB-4.2.1_p2 python_single_target_python2_7
+=net-misc/omniORB-4.2.2 python_single_target_python2_7
 =net-wireless/kismet-2018.08_beta1-r3 python_single_target_python2_7
 =net-wireless/kismet-9999 python_single_target_python3_6 python_targets_python3_6
 mail-client/claws-mail python_single_target_python2_7
@@ -45,7 +48,6 @@ net-misc/connman-notify python_single_target_python2_7
 net-misc/dropbox python_single_target_python2_7
 net-misc/hblink python_single_target_python2_7
 net-misc/hotot python_single_target_python2_7
-net-misc/omniORB python_single_target_python2_7
 net-misc/pssh python_single_target_python2_7
 net-misc/pulseaudio-dlna python_single_target_python2_7
 net-misc/pytvshows python_single_target_python2_7

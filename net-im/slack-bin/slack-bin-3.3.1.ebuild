@@ -1,3 +1,4 @@
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -14,11 +15,10 @@ SRC_URI="https://downloads.slack-edge.com/linux_releases/${MY_PN}-desktop-${PV}-
 LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="~amd64 -*"
-IUSE="pax_kernel"
+IUSE="ayatana gnome-keyring pax_kernel"
 RESTRICT="bindist mirror"
 
-RDEPEND="app-crypt/libsecret:0
-	dev-libs/atk:0[${MULTILIB_USEDEP}]
+RDEPEND="dev-libs/atk:0[${MULTILIB_USEDEP}]
 	dev-libs/expat:0[${MULTILIB_USEDEP}]
 	dev-libs/glib:2[${MULTILIB_USEDEP}]
 	dev-libs/nspr:0[${MULTILIB_USEDEP}]
@@ -32,7 +32,7 @@ RDEPEND="app-crypt/libsecret:0
 	sys-apps/dbus:0[${MULTILIB_USEDEP}]
 	x11-libs/cairo:0[${MULTILIB_USEDEP}]
 	x11-libs/gdk-pixbuf:2[${MULTILIB_USEDEP}]
-	x11-libs/gtk+:2[${MULTILIB_USEDEP}]
+	x11-libs/gtk+:3[${MULTILIB_USEDEP}]
 	x11-libs/libX11:0[${MULTILIB_USEDEP}]
 	x11-libs/libxcb:0/1.12[${MULTILIB_USEDEP}]
 	x11-libs/libXcomposite:0[${MULTILIB_USEDEP}]
@@ -46,7 +46,9 @@ RDEPEND="app-crypt/libsecret:0
 	x11-libs/libXrender:0[${MULTILIB_USEDEP}]
 	x11-libs/libXScrnSaver:0[${MULTILIB_USEDEP}]
 	x11-libs/libXtst:0[${MULTILIB_USEDEP}]
-	x11-libs/pango:0[${MULTILIB_USEDEP}]"
+	x11-libs/pango:0[${MULTILIB_USEDEP}]
+	ayatana? ( dev-libs/libappindicator:3[${MULTILIB_USEDEP}] )
+	gnome-keyring? ( app-crypt/libsecret:0[${MULTILIB_USEDEP}] )"
 
 QA_PREBUILT="opt/slack/slack
 	opt/slack/resources/app.asar.unpacked/node_modules/*
@@ -56,19 +58,27 @@ QA_PREBUILT="opt/slack/slack
 
 S="${WORKDIR}"
 
+src_prepare() {
+	default
+
+	if use ayatana ; then
+		sed -i '/Exec/s|=|=env XDG_CURRENT_DESKTOP=Unity |' \
+			usr/share/applications/slack.desktop \
+			|| die "sed failed for slack.desktop"
+	fi
+}
+
 src_install() {
-	insinto /usr/share/pixmaps
-	doins usr/share/pixmaps/${MY_PN}.png
+	doicon usr/share/pixmaps/slack.png
+	doicon -s 512 usr/share/pixmaps/slack.png
+	domenu usr/share/applications/slack.desktop
 
-	newicon -s 512 usr/share/pixmaps/${MY_PN}.png ${MY_PN}.png
-	domenu usr/share/applications/${MY_PN}.desktop
+	insinto /opt/slack
+	doins -r usr/lib/slack/.
+	fperms +x /opt/slack/slack
+	dosym ../../opt/slack/slack usr/bin/slack
 
-	insinto /opt/${MY_PN}
-	doins -r usr/lib/${MY_PN}/.
-	fperms +x /opt/${MY_PN}/${MY_PN}
-	dosym ../../opt/${MY_PN}/${MY_PN} usr/bin/${MY_PN}
-
-	use pax_kernel && pax-mark -m ${ED%/}/opt/${MY_PN}/${MY_PN}
+	use pax_kernel && pax-mark -m "${ED%/}"/opt/slack/slack
 }
 
 pkg_postinst() {

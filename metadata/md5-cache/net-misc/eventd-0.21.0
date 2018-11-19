@@ -10,5 +10,5 @@ RDEPEND=>=dev-libs/glib-2.40:2 sys-apps/util-linux introspection? ( >=dev-libs/g
 REQUIRED_USE=X? ( notification ) fbcon? ( notification ) notification? ( || ( X fbcon ) )
 SLOT=0
 SRC_URI=https://www.eventd.org/download/eventd/eventd-0.21.0.tar.xz
-_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	xdg-utils	9ef13b5c5bcf0c50d6aa53692d8e441c
+_eclasses_=eapi7-ver	d97a56a62c7df8614afddcb25f5ff00f	linux-info	953c3b1c472dcadbf62098a9301327f2	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	xdg-utils	9ef13b5c5bcf0c50d6aa53692d8e441c
 _md5_=b7b7e632f2cf86da3393f3dc0e458d4a

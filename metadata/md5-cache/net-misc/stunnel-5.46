@@ -10,5 +10,5 @@ RDEPEND=tcpd? ( sys-apps/tcp-wrappers ) !libressl? ( dev-libs/openssl:0= ) libre
 RESTRICT=test
 SLOT=0
 SRC_URI=ftp://ftp.stunnel.org/stunnel/archive/5.x/stunnel-5.46.tar.gz http://www.usenix.org.uk/mirrors/stunnel/archive/5.x/stunnel-5.46.tar.gz http://ftp.nluug.nl/pub/networking/stunnel/archive/5.x/stunnel-5.46.tar.gz http://www.namesdir.com/mirrors/stunnel/archive/5.x/stunnel-5.46.tar.gz http://stunnel.cybermirror.org/archive/5.x/stunnel-5.46.tar.gz http://mirrors.zerg.biz/stunnel/archive/5.x/stunnel-5.46.tar.gz ftp://mirrors.go-parts.com/stunnel/archive/5.x/stunnel-5.46.tar.gz
-_eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	ssl-cert	7e3d54dd10c76306015e70068c20dbb2	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	user	8bc2845510e2109af75e3eeac607ec81
+_eclasses_=multilib	97f470f374f2e94ccab04a2fb21d811e	ssl-cert	7e3d54dd10c76306015e70068c20dbb2	systemd	1caaa6bdb6e41b2920a203d6b45f2f99	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	user	8bc2845510e2109af75e3eeac607ec81
 _md5_=09b584bb246620d2bb1204ca4f05a3f4

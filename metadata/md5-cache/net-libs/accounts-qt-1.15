@@ -10,5 +10,5 @@ RDEPEND=>=net-libs/libaccounts-glib-1.23 dev-libs/glib:2 dev-qt/qtcore:5 dev-qt/
 RESTRICT=test
 SLOT=0
 SRC_URI=https://gitlab.com/accounts-sso/libaccounts-qt/repository/VERSION_1.15/archive.tar.gz -> accounts-qt-1.15.tar.gz
-_eclasses_=estack	5ac2a138d0b33354b764d84f9e835db8	multilib	97f470f374f2e94ccab04a2fb21d811e	qmake-utils	990448b067cb3cfe1443bc25fb57239c	toolchain-funcs	fa43c370cf1e0d4ada6e123b775a35b7	vcs-snapshot	80ddf8e42aad3fa1cdc08166f446f632
+_eclasses_=estack	5ac2a138d0b33354b764d84f9e835db8	multilib	97f470f374f2e94ccab04a2fb21d811e	qmake-utils	990448b067cb3cfe1443bc25fb57239c	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	vcs-snapshot	80ddf8e42aad3fa1cdc08166f446f632
 _md5_=00716887bec0bea11d2159306b4be2df

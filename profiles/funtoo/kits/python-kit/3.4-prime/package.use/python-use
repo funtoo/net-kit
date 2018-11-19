@@ -18,6 +18,7 @@ net-analyzer/net-snmp python_single_target_python2_7
 net-analyzer/nmap python_single_target_python2_7
 net-analyzer/w3af python_single_target_python2_7
 net-dns/maradns python_single_target_python2_7
+net-dns/unbound python_single_target_python2_7
 net-firewall/dshieldpy python_single_target_python2_7
 net-fs/samba python_single_target_python2_7
 net-im/ekg2 python_single_target_python2_7
@@ -42,6 +43,7 @@ net-misc/charm python_single_target_python2_7
 net-misc/chrome-remote-desktop python_single_target_python2_7
 net-misc/connman-notify python_single_target_python2_7
 net-misc/dropbox python_single_target_python2_7
+net-misc/hblink python_single_target_python2_7
 net-misc/hotot python_single_target_python2_7
 net-misc/omniORB python_single_target_python2_7
 net-misc/pssh python_single_target_python2_7
@@ -91,3 +93,4 @@ www-apps/trac python_single_target_python2_7
 www-apps/venus python_single_target_python2_7
 www-apps/viewvc python_single_target_python2_7
 www-misc/nx_util python_single_target_python2_7
+www-plugins/passff-host python_single_target_python3_5 python_targets_python3_5

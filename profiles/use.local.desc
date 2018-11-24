@@ -797,6 +797,14 @@ net-im/qtox:X - Adds support for X11
 net-im/qtox:notification - Adds support for GTK Status Notifier tray backends
 net-im/skypeforlinux:pax_kernel - Triggers a paxmarking of the main skype binary
 net-im/slack-bin:pax_kernel - Triggers a paxmarking of the binary
+net-im/spectrum2:frotz - Enables the Z-Engine backend.
+net-im/spectrum2:irc - Enables the IRC backend, based on net-im/libcommuni.
+net-im/spectrum2:purple - Enables the libpurple backend, based on net-im/pidgin.
+net-im/spectrum2:sms - Enables the SMS backend, based on app-mobilephone/smstools.
+net-im/spectrum2:twitter - Enables the Twitter backend.
+net-im/spectrum2:whatsapp - Enables the WhatsApp backend, based on net-im/transwhat.
+net-im/swift:client - Build the full graphical XMPP client.
+net-im/swift:gconf - Enable configuration through gnome-base/gconf.
 net-im/telepathy-connection-managers:gadu - Enable Gadu Gadu protocol support.
 net-im/telepathy-connection-managers:irc - Enable Internet Relay Chat (IRC) support.
 net-im/telepathy-connection-managers:meanwhile - Enable meanwhile support for Sametime protocol.

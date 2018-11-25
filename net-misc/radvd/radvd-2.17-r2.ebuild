@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit systemd user eutils readme.gentoo
+inherit systemd user eutils readme.gentoo-r1
 
 DESCRIPTION="Linux IPv6 Router Advertisement Daemon"
 HOMEPAGE="http://v6web.litech.org/radvd/"
@@ -11,7 +11,7 @@ SRC_URI="http://v6web.litech.org/radvd/dist/${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 arm ~arm64 hppa ppc sparc x86 ~x86-fbsd"
+KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ppc ~sparc ~x86 ~x86-fbsd"
 IUSE="kernel_FreeBSD selinux test"
 
 CDEPEND="dev-libs/libdaemon"
@@ -25,34 +25,32 @@ RDEPEND="${CDEPEND}
 "
 DOCS=( CHANGES README TODO radvd.conf.example )
 
+PATCHES=(
+	"${FILESDIR}"/${P}-nd_opt_6co.patch
+)
+
 pkg_setup() {
 	enewgroup radvd
 	enewuser radvd -1 -1 /dev/null radvd
-
-	# force ownership of radvd user and group (bug #19647)
-	[[ -d ${ROOT}/var/run/radvd ]] && chown radvd:radvd "${ROOT}"/var/run/radvd
-}
-
-src_prepare() {
-	epatch "${FILESDIR}"/${P}-headers.patch
 }
 
 src_configure() {
-	econf --with-pidfile=/var/run/radvd/radvd.pid \
+	econf --with-pidfile=/run/radvd/radvd.pid \
 		--disable-silent-rules \
+		--with-systemdsystemunitdir=no \
 		$(use_with test check)
 }
 
 src_install() {
 	default
 
-	dohtml INTRO.html
+	insinto /usr/share/doc/${PF}/html
+	doins INTRO.html
 
-	newinitd "${FILESDIR}"/${PN}-1.9.1.init ${PN}
+	newinitd "${FILESDIR}"/${PN}-2.15.init ${PN}
 	newconfd "${FILESDIR}"/${PN}.conf ${PN}
 
 	systemd_dounit "${FILESDIR}"/${PN}.service
-	systemd_newtmpfilesd  "${FILESDIR}"/${PN}.tmpfilesd ${PN}.conf
 
 	if use kernel_FreeBSD ; then
 		sed -i -e \

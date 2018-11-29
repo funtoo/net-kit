@@ -27,7 +27,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-62.0-patches-01"
+PATCH="${PN}-63.0-patches-01"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils llvm \
@@ -52,7 +52,7 @@ SRC_URI="${SRC_URI}
 	${PATCH_URIS[@]}"
 
 CDEPEND="
-	>=dev-libs/nss-3.38
+	>=dev-libs/nss-3.39
 	>=dev-libs/nspr-4.19
 	>=app-text/hunspell-1.5.4:=
 	dev-libs/atk
@@ -104,7 +104,9 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
-	>=sys-devel/binutils-2.29
+	dev-util/cbindgen
+	>=net-libs/nodejs-8.11.0
+	>=sys-devel/binutils-2.30
 	sys-apps/findutils
 	>=sys-devel/llvm-4.0.1
 	>=sys-devel/clang-4.0.1
@@ -113,14 +115,8 @@ DEPEND="${CDEPEND}
 		>=sys-devel/lld-4.0.1
 	)
 	pulseaudio? ( media-sound/pulseaudio )
-	elibc_glibc? (
-		virtual/cargo
-		virtual/rust
-	)
-	elibc_musl? (
-		virtual/cargo
-		virtual/rust
-	)
+	>=virtual/cargo-1.28.0
+	>=virtual/rust-1.28.0
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
 	x86? ( >=dev-lang/yasm-1.1 virtual/opengl )"
 
@@ -184,10 +180,10 @@ src_unpack() {
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
 
-	eapply "${FILESDIR}"/${PN}-60.0-blessings-TERM.patch # 654316
-	eapply "${FILESDIR}"/${PN}-60.0-do-not-force-lld.patch
-	eapply "${FILESDIR}"/${PN}-60.0-sandbox-lto.patch # 666580
-	eapply "${FILESDIR}"/${PN}-60.0-missing-errno_h-in-SandboxOpenedFiles_cpp.patch
+	eapply "${FILESDIR}"/${P}-support-latest-cbindgen.patch
+
+	# Allow user to apply any additional patches without modifing ebuild
+	eapply_user
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -230,8 +226,10 @@ src_prepare() {
 	sed '/^MOZ_DEV_EDITION=1/d' \
 		-i "${S}"/browser/branding/aurora/configure.sh || die
 
-	# Allow user to apply any additional patches without modifing ebuild
-	eapply_user
+	# rustfmt, a tool to format Rust code, is optional and not required to build Firefox.
+	# However, when available, an unsupported version can cause problems, bug #669548
+	sed -i -e "s@check_prog('RUSTFMT', add_rustup_path('rustfmt')@check_prog('RUSTFMT', add_rustup_path('rustfmt_do_not_use')@" \
+		"${S}"/build/moz.configure/rust.configure || die
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -291,12 +289,38 @@ src_configure() {
 	filter-flags -flto*
 
 	if use lto ; then
+		local show_old_compiler_warning=
+
 		if use clang ; then
+			# At this stage CC is adjusted and the following check will
+			# will work
+			if [[ $(clang-major-version) -lt 7 ]]; then
+				show_old_compiler_warning=1
+			fi
+
 			# Upstream only supports lld when using clang
 			mozconfig_annotate "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
 		else
+			if [[ $(gcc-major-version) -lt 8 ]]; then
+				show_old_compiler_warning=1
+			fi
+
 			# Linking only works when using ld.gold when LTO is enabled
 			mozconfig_annotate "forcing ld=gold due to USE=lto" --enable-linker=gold
+		fi
+
+		if [[ -n "${show_old_compiler_warning}" ]]; then
+			# Checking compiler's major version uses CC variable. Because we allow
+			# user to control used compiler via USE=clang flag, we cannot use
+			# initial value. So this is the earliest stage where we can do this check
+			# because pkg_pretend is not called in the main phase function sequence
+			# environment saving is not guaranteed so we don't know if we will have
+			# correct compiler until now.
+			ewarn ""
+			ewarn "USE=lto requires up-to-date compiler (>=gcc-8 or >=clang-7)."
+			ewarn "You are on your own -- expect build failures. Don't file bugs using that unsupported configuration!"
+			ewarn ""
+			sleep 5
 		fi
 
 		mozconfig_annotate '+lto' --enable-lto=thin
@@ -426,6 +450,7 @@ src_configure() {
 
 	if use clang ; then
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1423822
+		# bug #669382
 		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
 	fi
 
@@ -537,6 +562,10 @@ PROFILE_EOF
 		icon="${PN}"
 		name="Mozilla Firefox"
 	fi
+
+	# Disable built-in auto-update because we update firefox through package manager
+	insinto ${MOZILLA_FIVE_HOME}/distribution/
+	newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
 
 	# Install icons and .desktop for menu entry
 	for size in ${sizes}; do

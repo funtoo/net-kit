@@ -27,7 +27,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-60.0-patches-03"
+PATCH="${PN}-60.0-patches-04"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_WIFI=1
@@ -48,7 +48,7 @@ RESTRICT="!bindist? ( bindist )"
 SDIR="release"
 [[ ${PV} = *_beta* ]] && SDIR="beta"
 
-PATCH_URIS=( https://dev.gentoo.org/~whissi/dist/firefox/${PATCH}.tar.xz https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
+PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
 	${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz
 	${PATCH_URIS[@]}"
@@ -124,13 +124,10 @@ src_unpack() {
 }
 
 src_prepare() {
-	rm "${WORKDIR}/firefox/2005_ffmpeg4.patch"
+	rm -v "${WORKDIR}"/firefox/2005_ffmpeg4.patch \
+		"${WORKDIR}"/firefox/2012_update-cc-to-honor-CC.patch \
+		|| die "Failed to remove unused patches"
 	eapply "${WORKDIR}/firefox"
-
-	eapply "${FILESDIR}"/bug_1461221.patch
-	eapply "${FILESDIR}"/${PN}-60.0-blessings-TERM.patch # 654316
-	eapply "${FILESDIR}"/${PN}-60.0-missing-errno_h-in-SandboxOpenedFiles_cpp.patch
-	eapply "${FILESDIR}"/${PN}-60.0-update-cc-to-honor-CC.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -341,6 +338,10 @@ PROFILE_EOF
 		icon="${PN}"
 		name="Mozilla Firefox"
 	fi
+
+	# Disable built-in auto-update because we update firefox through package manager
+	insinto ${MOZILLA_FIVE_HOME}/distribution/
+	newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
 
 	# Install icons and .desktop for menu entry
 	for size in ${sizes}; do

@@ -976,6 +976,7 @@ net-libs/libosmocore:embedded - Build for embedded use and disable unsupported f
 net-libs/libosmocore:pcsc-lite - Enable smartcard support with sys-apps/pcsc-lite
 net-libs/libpcap:netlink - Use dev-libs/libnl to put wireless interfaces in monitor mode.
 net-libs/libprotoident:tools - Build and install command-line tools
+net-libs/libqmi:mbim - Support QMI over Mobile Broadband Interface Model (MBIM)
 net-libs/libsrtp:aesicm - Use AES ICM cryptographic algorithm
 net-libs/libsrtp:console - Use /dev/console instead of stdout for error messages
 net-libs/libsrtp:openssl - Use OpenSSL crypto primitives

@@ -1,14 +1,14 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 GNOME_ORG_MODULE="NetworkManager"
 GNOME2_LA_PUNT="yes"
 VALA_USE_DEPEND="vapigen"
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6,3_7} )
 
 inherit bash-completion-r1 gnome2 linux-info multilib python-any-r1 systemd \
-	user readme.gentoo-r1 toolchain-funcs vala versionator virtualx udev multilib-minimal
+	user readme.gentoo-r1 vala virtualx udev multilib-minimal
 
 DESCRIPTION="A set of co-operative tools that make networking simple and straightforward"
 HOMEPAGE="https://wiki.gnome.org/Projects/NetworkManager"
@@ -16,34 +16,32 @@ HOMEPAGE="https://wiki.gnome.org/Projects/NetworkManager"
 LICENSE="GPL-2+"
 SLOT="0" # add subslot if libnm-util.so.2 or libnm-glib.so.4 bumps soname version
 
-IUSE="audit bluetooth connection-sharing consolekit +dhclient gnutls +introspection \
-json kernel_linux +nss +modemmanager ncurses ofono +ppp resolvconf selinux \
-systemd teamd test vala +wext +wifi"
+IUSE="audit bluetooth connection-sharing consolekit +dhclient dhcpcd elogind gnutls +introspection iwd json kernel_linux +nss +modemmanager ncurses ofono ovs policykit +ppp resolvconf selinux systemd teamd test vala +wext +wifi"
 
 REQUIRED_USE="
+	iwd? ( wifi )
 	modemmanager? ( ppp )
 	vala? ( introspection )
 	wext? ( wifi )
 	^^ ( nss gnutls )
+	?? ( consolekit elogind systemd )
 "
 
-KEYWORDS="~alpha amd64 arm ~arm64 ~ia64 ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 
 # gobject-introspection-0.10.3 is needed due to gnome bug 642300
 # wpa_supplicant-0.7.3-r3 is needed due to bug 359271
-# TODO: need multilib janson (linked to libnm.so)
 COMMON_DEPEND="
 	>=sys-apps/dbus-1.2[${MULTILIB_USEDEP}]
 	>=dev-libs/dbus-glib-0.100[${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.37.6:2[${MULTILIB_USEDEP}]
-	>=dev-libs/libnl-3.2.8:3=
-	>=sys-auth/polkit-0.106
-	net-libs/libndp
-	>=net-libs/libsoup-2.40:2.4=
+	>=dev-libs/glib-2.40:2[${MULTILIB_USEDEP}]
+	policykit? ( >=sys-auth/polkit-0.106 )
+	net-libs/libndp[${MULTILIB_USEDEP}]
+	>=net-misc/curl-7.24
 	net-misc/iputils
 	sys-apps/util-linux[${MULTILIB_USEDEP}]
 	sys-libs/readline:0=
-	>=virtual/libgudev-165:=[${MULTILIB_USEDEP}]
+	>=virtual/libudev-175:=[${MULTILIB_USEDEP}]
 	audit? ( sys-process/audit )
 	bluetooth? ( >=net-wireless/bluez-5 )
 	connection-sharing? (
@@ -51,35 +49,50 @@ COMMON_DEPEND="
 		net-firewall/iptables )
 	consolekit? ( >=sys-auth/consolekit-1.0.0 )
 	dhclient? ( >=net-misc/dhcp-4[client] )
+	dhcpcd? ( net-misc/dhcpcd )
+	elogind? ( >=sys-auth/elogind-219 )
 	gnutls? (
 		dev-libs/libgcrypt:0=[${MULTILIB_USEDEP}]
 		>=net-libs/gnutls-2.12:=[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-0.10.3:= )
-	json? ( dev-libs/jansson )
+	json? ( >=dev-libs/jansson-2.5[${MULTILIB_USEDEP}] )
 	modemmanager? ( >=net-misc/modemmanager-0.7.991:0= )
 	ncurses? ( >=dev-libs/newt-0.52.15 )
 	nss? ( >=dev-libs/nss-3.11:=[${MULTILIB_USEDEP}] )
 	ofono? ( net-misc/ofono )
+	ovs? ( dev-libs/jansson )
 	ppp? ( >=net-dialup/ppp-2.4.5:=[ipv6] )
 	resolvconf? ( net-dns/openresolv )
 	selinux? ( sys-libs/libselinux )
 	systemd? ( >=sys-apps/systemd-209:0= )
-	teamd? ( >=net-misc/libteam-1.9 )
+	teamd? (
+		dev-libs/jansson
+		>=net-misc/libteam-1.9
+	)
 "
 RDEPEND="${COMMON_DEPEND}
 	|| (
 		net-misc/iputils[arping(+)]
 		net-analyzer/arping
 	)
-	wifi? ( >=net-wireless/wpa_supplicant-0.7.3-r3[dbus] )
+	wifi? (
+		!iwd? ( >=net-wireless/wpa_supplicant-0.7.3-r3[dbus] )
+		iwd? ( net-wireless/iwd )
+	)
 "
 DEPEND="${COMMON_DEPEND}
 	dev-util/gdbus-codegen
+	dev-util/glib-utils
 	dev-util/gtk-doc-am
 	>=dev-util/intltool-0.40
 	>=sys-devel/gettext-0.17
 	>=sys-kernel/linux-headers-2.6.29
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
+	introspection? (
+		$(python_gen_any_dep 'dev-python/pygobject:3[${PYTHON_USEDEP}]')
+		dev-lang/perl
+		dev-libs/libxslt
+	)
 	vala? ( $(vala_depend) )
 	test? (
 		$(python_gen_any_dep '
@@ -89,11 +102,12 @@ DEPEND="${COMMON_DEPEND}
 "
 
 python_check_deps() {
+	if use introspection; then
+		has_version "dev-python/pygobject:3[${PYTHON_USEDEP}]" || return
+	fi
 	if use test; then
 		has_version "dev-python/dbus-python[${PYTHON_USEDEP}]" &&
 		has_version "dev-python/pygobject:3[${PYTHON_USEDEP}]"
-	else
-		return 0
 	fi
 }
 
@@ -129,7 +143,9 @@ pkg_setup() {
 		linux-info_pkg_setup
 	fi
 	enewgroup plugdev
-	use test && python-any-r1_pkg_setup
+	if use introspection || use test; then
+		python-any-r1_pkg_setup
+	fi
 }
 
 src_prepare() {
@@ -141,7 +157,55 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	local myconf=()
+	local myconf=(
+		--disable-more-warnings
+		--disable-static
+		--localstatedir=/var
+		--disable-lto
+		--disable-config-plugin-ibft
+		--disable-qt
+		--without-netconfig
+		--with-dbus-sys-dir=/etc/dbus-1/system.d
+		# We need --with-libnm-glib (and dbus-glib dep) as reverse deps are
+		# still not ready for removing that lib, bug #665338
+		--with-libnm-glib
+		--with-nmcli=yes
+		--with-udev-dir="$(get_udevdir)"
+		--with-config-plugins-default=keyfile
+		--with-iptables=/sbin/iptables
+		$(multilib_native_enable concheck)
+		--with-crypto=$(usex nss nss gnutls)
+		--with-session-tracking=$(multilib_native_usex systemd systemd $(multilib_native_usex elogind elogind $(multilib_native_usex consolekit consolekit no)))
+		--with-suspend-resume=$(multilib_native_usex systemd systemd $(multilib_native_usex elogind elogind consolekit))
+		$(multilib_native_use_with audit libaudit)
+		$(multilib_native_use_enable bluetooth bluez5-dun)
+		$(use_with dhclient)
+		$(use_with dhcpcd)
+		$(multilib_native_use_enable introspection)
+		$(use_enable json json-validation)
+		$(multilib_native_use_enable ppp)
+		--without-libpsl
+		$(multilib_native_use_with modemmanager modem-manager-1)
+		$(multilib_native_use_with ncurses nmtui)
+		$(multilib_native_use_with ofono)
+		$(multilib_native_use_enable ovs)
+		$(multilib_native_use_with resolvconf)
+		$(multilib_native_use_with selinux)
+		$(multilib_native_use_with systemd systemd-journal)
+		$(multilib_native_use_enable teamd teamdctl)
+		$(multilib_native_use_enable test tests)
+		$(multilib_native_use_enable vala)
+		--without-valgrind
+		$(multilib_native_use_with wifi iwd)
+		$(multilib_native_use_with wext)
+		$(multilib_native_use_enable wifi)
+	)
+
+	if multilib_is_native_abi && use policykit; then
+		myconf+=( --enable-polkit=yes )
+	else
+		myconf+=( --enable-polkit=disabled )
+	fi
 
 	# Same hack as net-dialup/pptpd to get proper plugin dir for ppp, bug #519986
 	if use ppp; then
@@ -157,92 +221,24 @@ multilib_src_configure() {
 
 	if multilib_is_native_abi; then
 		# work-around man out-of-source brokenness, must be done before configure
-		mkdir man || die
-		find "${S}"/man -name '*.?' -exec ln -s {} man/ ';' || die
-	else
-		# libnl, libndp are only used for executables, not libraries
-		myconf+=( LIB{NL,NDP}_{CFLAGS,LIBS}=' ' )
+		ln -s "${S}/docs" docs || die
+		ln -s "${S}/man" man || die
 	fi
 
-	# ifnet plugin always disabled until someone volunteers to actively
-	# maintain and fix it
-	# Also disable dhcpcd support as it's also completely unmaintained
-	# and facing bugs like #563938 and many others
-	#
-	# We need --with-libnm-glib (and dbus-glib dep) as reverse deps are
-	# still not ready for removing that lib
-	ECONF_SOURCE=${S} \
-	runstatedir="/run" \
-		gnome2_src_configure \
-			--disable-more-warnings \
-			--disable-static \
-			--localstatedir=/var \
-			--disable-lto \
-			--disable-config-plugin-ibft \
-			--disable-ifnet \
-			--disable-qt \
-			--without-netconfig \
-			--with-dbus-sys-dir=/etc/dbus-1/system.d \
-			--with-libnm-glib \
-			--with-nmcli=yes \
-			--with-udev-dir="$(get_udevdir)" \
-			--with-config-plugins-default=keyfile \
-			--with-iptables=/sbin/iptables \
-			$(multilib_native_with libsoup) \
-			$(multilib_native_enable concheck) \
-			--with-crypto=$(usex nss nss gnutls) \
-			--with-session-tracking=$(multilib_native_usex systemd systemd $(multilib_native_usex consolekit consolekit no)) \
-			--with-suspend-resume=$(multilib_native_usex systemd systemd consolekit) \
-			$(multilib_native_use_with audit libaudit) \
-			$(multilib_native_use_enable bluetooth bluez5-dun) \
-			$(multilib_native_use_enable introspection) \
-			$(multilib_native_use_enable json json-validation) \
-			$(multilib_native_use_enable ppp) \
-			$(use_with dhclient) \
-			--without-dhcpcd \
-			$(multilib_native_use_with modemmanager modem-manager-1) \
-			$(multilib_native_use_with ncurses nmtui) \
-			$(multilib_native_use_with ofono) \
-			$(multilib_native_use_with resolvconf) \
-			$(multilib_native_use_with selinux) \
-			$(multilib_native_use_with systemd systemd-journal) \
-			$(multilib_native_use_enable teamd teamdctl) \
-			$(multilib_native_use_enable test tests) \
-			$(multilib_native_use_enable vala) \
-			--without-valgrind \
-			$(multilib_native_use_with wext) \
-			$(multilib_native_use_enable wifi) \
-			"${myconf[@]}"
-
-	# work-around gtk-doc out-of-source brokedness
-	if multilib_is_native_abi; then
-		local d
-		for d in api libnm libnm-util libnm-glib; do
-			ln -s "${S}"/docs/${d}/html docs/${d}/html || die
-		done
-	fi
-
-	# Disable examples
-	# https://bugzilla.gnome.org/show_bug.cgi?id=769711
-	cat > examples/Makefile <<-EOF
-	.PHONY: all check install
-	all:
-	check:
-	install:
-	EOF
+	ECONF_SOURCE=${S} runstatedir="/run" gnome2_src_configure "${myconf[@]}"
 }
 
 multilib_src_compile() {
 	if multilib_is_native_abi; then
 		emake
 	else
-		emake all-am
-		emake -C shared
-		emake -C introspection # generated headers, needed for libnm
-		emake -C libnm-core
-		emake -C libnm
-		emake -C libnm-util
-		emake -C libnm-glib
+		local targets=(
+			libnm/libnm.la
+			libnm-util/libnm-util.la
+			libnm-glib/libnm-glib.la
+			libnm-glib/libnm-glib-vpn.la
+		)
+		emake "${targets[@]}"
 	fi
 }
 
@@ -258,17 +254,25 @@ multilib_src_install() {
 		# Install completions at proper place, bug #465100
 		gnome2_src_install completiondir="$(get_bashcompdir)"
 	else
-		emake DESTDIR="${D}" install-am
-		emake DESTDIR="${D}" install -C shared
-		emake DESTDIR="${D}" install -C introspection
-		emake DESTDIR="${D}" install -C libnm-core
-		emake DESTDIR="${D}" install -C libnm
-		emake DESTDIR="${D}" install -C libnm-util
-		emake DESTDIR="${D}" install -C libnm-glib
+		local targets=(
+			install-libLTLIBRARIES
+			install-libdeprecatedHEADERS
+			install-libnm_glib_libnmvpnHEADERS
+			install-libnm_glib_libnmincludeHEADERS
+			install-libnm_util_libnm_util_includeHEADERS
+			install-libnmincludeHEADERS
+			install-nodist_libnm_glib_libnmincludeHEADERS
+			install-nodist_libnm_glib_libnmvpnHEADERS
+			install-nodist_libnm_util_libnm_util_includeHEADERS
+			install-nodist_libnmincludeHEADERS
+			install-pkgconfigDATA
+		)
+		emake DESTDIR="${D}" "${targets[@]}"
 	fi
 }
 
 multilib_src_install_all() {
+	einstalldocs
 	! use systemd && readme.gentoo_create_doc
 
 	newinitd "${FILESDIR}/init.d.NetworkManager-r1" NetworkManager
@@ -290,8 +294,16 @@ multilib_src_install_all() {
 	insinto /usr/share/polkit-1/rules.d/
 	doins "${FILESDIR}/01-org.freedesktop.NetworkManager.settings.modify.system.rules"
 
-	# Remove empty /run/NetworkManager
-	rmdir "${D}"/run/NetworkManager "${D}"/run || die
+	if use iwd; then
+		# This goes to $nmlibdir/conf.d/ and $nmlibdir is '${prefix}'/lib/$PACKAGE, thus always lib, not get_libdir
+		cat <<-EOF > "${ED%/}"/usr/lib/NetworkManager/conf.d/iwd.conf
+		[device]
+		wifi.backend=iwd
+		EOF
+	fi
+
+	# Empty
+	rmdir "${ED%/}"/var{/lib{/NetworkManager,},} || die
 }
 
 pkg_postinst() {
@@ -305,25 +317,6 @@ pkg_postinst() {
 		ewarn "to ${EROOT}etc/NetworkManager/NetworkManager.conf"
 		ewarn
 		ewarn "After doing so, you can remove ${EROOT}etc/NetworkManager/nm-system-settings.conf"
-	fi
-
-	# The polkit rules file moved to /usr/share
-	old_rules="${EROOT}etc/polkit-1/rules.d/01-org.freedesktop.NetworkManager.settings.modify.system.rules"
-	if [[ -f "${old_rules}" ]]; then
-		case "$(md5sum ${old_rules})" in
-		  574d0cfa7e911b1f7792077003060240* )
-			# Automatically delete the old rules.d file if the user did not change it
-			elog
-			elog "Removing old ${old_rules} ..."
-			rm -f "${old_rules}" || eerror "Failed, please remove ${old_rules} manually"
-			;;
-		  * )
-			elog "The ${old_rules}"
-			elog "file moved to /usr/share/polkit-1/rules.d/ in >=networkmanager-0.9.4.0-r4"
-			elog "If you edited ${old_rules}"
-			elog "without changing its behavior, you may want to remove it."
-			;;
-		esac
 	fi
 
 	# NM fallbacks to plugin specified at compile time (upstream bug #738611)

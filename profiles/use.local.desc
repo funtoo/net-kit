@@ -97,8 +97,6 @@ mail-filter/amavisd-new:razor - Add support for mail-filter/razor
 mail-filter/amavisd-new:spamassassin - Add support for mail-filter/spamassassin
 mail-filter/amavisd-new:zmq - Add support for zeromq sockets
 mail-filter/ask:procmail - Adds support for mail-filter/procmail
-mail-filter/assp:spf - Adds support for Sender Policy Framework
-mail-filter/assp:srs - Adds support for Sender Rewriting Scheme
 mail-filter/bogofilter:tokyocabinet - Enable Tokyo Cabinet database support
 mail-filter/clamassassin:clamd - Use the app-antivirus/clamav daemon for virus checking
 mail-filter/clamassassin:subject-rewrite - Adds support for subject rewriting
@@ -313,7 +311,6 @@ net-analyzer/nagios-plugins:nagios-ping - Install net-analyzer/fping required fo
 net-analyzer/nagios-plugins:snmp - Install dev-perl/Net-SNMP required for monitoring SNMP values. Disabling the flag does not remove any plugin file.
 net-analyzer/nagios-plugins:ssh - Install net-misc/openssh required for monitoring SSH servers. Disabling the flag does not remove any plugin file.
 net-analyzer/nagios-plugins-flameeyes:smart - Install sys-apps/smartmontools required for S.M.A.R.T. disk monitoring. Disabling the flag removes the plugin file. This plugin also requires the sudo flag to be enable.
-net-analyzer/nagvis:automap - Enable automated map generation using media-gfx/graphviz
 net-analyzer/net-snmp:elf - Enable the use of elf utils to check uptime on some systems
 net-analyzer/net-snmp:mfd-rewrites - Use MFD rewrites of mib modules where available
 net-analyzer/net-snmp:netlink - Use dev-libs/libnl to fetch TCP statistics instead of using /proc/net/tcp (Linux only).
@@ -991,6 +988,7 @@ net-libs/libosmocore:embedded - Build for embedded use and disable unsupported f
 net-libs/libosmocore:pcsc-lite - Enable smartcard support with sys-apps/pcsc-lite
 net-libs/libpcap:netlink - Use dev-libs/libnl to put wireless interfaces in monitor mode.
 net-libs/libprotoident:tools - Build and install command-line tools
+net-libs/libqmi:mbim - Support QMI over Mobile Broadband Interface Model (MBIM)
 net-libs/libsrtp:aesicm - Use AES ICM cryptographic algorithm
 net-libs/libsrtp:console - Use /dev/console instead of stdout for error messages
 net-libs/libsrtp:openssl - Use OpenSSL crypto primitives
@@ -1419,10 +1417,27 @@ net-misc/miniupnpd:leasefile - Enable lease file.
 net-misc/miniupnpd:pcp-peer - Enable support for PCP-PEER to allow NAT-PMP clients to mangle their packets.
 net-misc/miniupnpd:portinuse - Check if a port is in use before allowing a NAT-PMP client to map it.
 net-misc/miniupnpd:strict - Be more strict regarding compliance with UPnP specifications.
+net-misc/modemmanager:mbim - Enable MBIM modem protocol
+net-misc/modemmanager:qmi - Enable support for the QMI modem protocol used by devices with Qualcomm chipsets
 net-misc/mulk:checksum - Enable checksum verification for Metalink from dev-libs/openssl
 net-misc/mulk:metalink - Enable support for media-libs/libmetalink
 net-misc/ncp:diet - Compile against dev-libs/dietlibc
 net-misc/netkit-bootparamd:libtirpc - Build against net-libs/libtirpc for RPC support
+net-misc/networkmanager:connection-sharing - Use net-dns/dnsmasq and net-firewall/iptables for connection sharing
+net-misc/networkmanager:consolekit - Use sys-auth/consolekit for session tracking
+net-misc/networkmanager:dhclient - Use dhclient from net-misc/dhcp for getting ip
+net-misc/networkmanager:dhcpcd - Use net-misc/dhcpcd for getting ip
+net-misc/networkmanager:elogind - Use sys-auth/elogind for session tracking
+net-misc/networkmanager:json - Enable JSON validation via dev-libs/jansson in libnm.
+net-misc/networkmanager:modemmanager - Enable support for mobile broadband devices using net-misc/modemmanager
+net-misc/networkmanager:nss - Use dev-libs/nss for cryptography
+net-misc/networkmanager:ofono - Use net-misc/ofono for telephony support.
+net-misc/networkmanager:ovs - Enable OpenVSwitch support
+net-misc/networkmanager:ppp - Enable support for mobile broadband and PPPoE connections using net-dialup/ppp
+net-misc/networkmanager:resolvconf - Use net-dns/openresolv for managing DNS information
+net-misc/networkmanager:teamd - Enable Teamd control support
+net-misc/networkmanager:wext - Enable support for the deprecated Wext (Wireless Extensions) API; needed for some older drivers (e.g. ipw2200, ndiswrapper)
+net-misc/networkmanager:wifi - Enable support for wifi and 802.1x security using net-wireless/wpa_supplicant
 net-misc/networkmanager-strongswan:glib - Enable libnm-glib compatibility.
 net-misc/nextcloud-client:dolphin - Install the kde-apps/dolphin extension
 net-misc/nextcloud-client:nautilus - Install the gnome-base/nautilus extension

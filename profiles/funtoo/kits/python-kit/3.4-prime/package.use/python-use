@@ -9,8 +9,6 @@
 =net-misc/omniORB-4.1.4-r2 python_single_target_python2_7
 =net-misc/omniORB-4.2.1_p2 python_single_target_python2_7
 =net-misc/omniORB-4.2.2 python_single_target_python2_7
-=net-wireless/kismet-2018.08_beta1-r3 python_single_target_python2_7
-=net-wireless/kismet-9999 python_single_target_python3_6 python_targets_python3_6
 mail-client/claws-mail python_single_target_python2_7
 mail-filter/tmda python_single_target_python2_7
 net-analyzer/bro python_single_target_python2_7
@@ -19,7 +17,6 @@ net-analyzer/gsm-receiver python_single_target_python2_7
 net-analyzer/mk-livestatus python_single_target_python2_7
 net-analyzer/net-snmp python_single_target_python2_7
 net-analyzer/nmap python_single_target_python2_7
-net-analyzer/w3af python_single_target_python2_7
 net-dns/maradns python_single_target_python2_7
 net-dns/unbound python_single_target_python2_7
 net-firewall/dshieldpy python_single_target_python2_7
@@ -55,7 +52,6 @@ net-misc/pytvshows python_single_target_python2_7
 net-misc/ris-linux python_single_target_python2_7
 net-misc/seafile python_single_target_python2_7
 net-misc/vde python_single_target_python2_7
-net-nntp/inn python_single_target_python2_7
 net-nntp/sabnzbd python_single_target_python2_7
 net-p2p/deluge python_single_target_python2_7
 net-p2p/nicotine+ python_single_target_python2_7
@@ -81,6 +77,7 @@ net-wireless/gr-paint python_single_target_python2_7
 net-wireless/gr-rds python_single_target_python2_7
 net-wireless/gr-rftap python_single_target_python2_7
 net-wireless/gr-specest python_single_target_python2_7
+net-wireless/kismet python_single_target_python2_7
 net-wireless/mousejack python_single_target_python2_7
 net-wireless/multimode python_single_target_python2_7
 net-wireless/pyrit python_single_target_python2_7
@@ -91,7 +88,6 @@ sys-libs/talloc python_single_target_python2_7
 sys-libs/tdb python_single_target_python2_7
 sys-libs/tevent python_single_target_python2_7
 www-apps/curator python_single_target_python2_7
-www-apps/moinmoin python_single_target_python2_7
 www-apps/trac python_single_target_python2_7
 www-apps/venus python_single_target_python2_7
 www-apps/viewvc python_single_target_python2_7

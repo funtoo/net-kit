@@ -10,4 +10,4 @@ RDEPEND=sys-libs/zlib gnutls? ( net-libs/gnutls ) ssl? ( !libressl? ( dev-libs/o
 SLOT=0
 SRC_URI=mirror://sourceforge/gsoap2/gsoap_2.8.72.zip
 _eclasses_=autotools	dc412f38566b91012efd58b9c203e6c3	libtool	e32ea84bf82cf8987965b574672dba93	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee
-_md5_=396980b39c403c2b76f3194b697ea4a1
+_md5_=2a891ebd9158a1aa113cc32a937c1e58

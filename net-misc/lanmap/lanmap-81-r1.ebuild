@@ -1,4 +1,3 @@
-# Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -10,12 +9,12 @@ SRC_URI="http://www.parseerror.com/${PN}/rev/${PN}-2006-03-07-rev${PV}.zip"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 
 CDEPEND="net-libs/libpcap"
 RDEPEND="
 	${CDEPEND}
-	media-gfx/graphviz
+	<=media-gfx/graphviz-2.28.0
 "
 DEPEND="
 	${CDEPEND}

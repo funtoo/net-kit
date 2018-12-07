@@ -669,6 +669,7 @@ net-fs/s3fs:nss - Enable dev-libs/nss crypto backend
 net-fs/s3fs:openssl - Enable dev-libs/openssl crypto backend
 net-fs/s3ql:contrib - Install additional contributed scripts
 net-fs/smbnetfs:gnome - Use the gnome-base/gnome-keyring for password management.
+net-fs/unfs3:cluster - Enable ClusterNFS file naming extensions
 net-ftp/frox:transparent - Enable transparent proxying of data connections
 net-ftp/lftp:convert-mozilla-cookies - Install the convert-mozilla-cookies script and its run-time dependencies
 net-ftp/lftp:verify-file - Install the verify-file script and its run-time dependencies
@@ -720,6 +721,7 @@ net-im/bitlbee:otr - Enable support for encrypted conversations
 net-im/bitlbee:plugins - Enable support for plugins
 net-im/bitlbee:purple - Use libpurple instead of the built-in IM protocol support
 net-im/bitlbee:twitter - Enable Twitter protocol support
+net-im/corebird:glade - Install glade catalogs for corebird
 net-im/corebird:spellcheck - Support spell checking
 net-im/coturn:mongodb - Enable support for the mongodb database
 net-im/coturn:redis - Enable support for the redis database
@@ -1029,6 +1031,30 @@ net-libs/onion:boehm-gc - Add dev-libs/boehm-gc support for memory allocations.
 net-libs/onion:libev - Use dev-libs/libev as thread poller instead of Linux's epoll.
 net-libs/onion:libevent - Use dev-libs/libevent as thread poller instead of libev or Linux's epoll.
 net-libs/onion:redis - Add support for redis sessions.
+net-libs/opal:capi - Enable CAPI support
+net-libs/opal:celt - Enable CELT ultra-low delay audio codec
+net-libs/opal:dtmf - Enable DTMF encoding/decoding support
+net-libs/opal:fax - Enable T.38 FAX protocol
+net-libs/opal:h224 - Enable H.224 real time control protocol
+net-libs/opal:h281 - Enable H.281 Far-End Camera Control protocol
+net-libs/opal:h323 - Enable H.323 protocol
+net-libs/opal:iax - Enable Inter-Asterisk eXchange protocol
+net-libs/opal:ilbc - Enable iLBC (RFC 3951) speech codec
+net-libs/opal:ivr - Enable Interactive Voice Response
+net-libs/opal:ixj - Enable xJack cards support
+net-libs/opal:lid - Enable Line Interface Device
+net-libs/opal:plugins - Enable plugins support
+net-libs/opal:sbc - Enable the Bluetooth low-complexity, SubBand Codec
+net-libs/opal:sip - Enable Session Initiation Protocol
+net-libs/opal:sipim - Enable SIP Instant Messages session
+net-libs/opal:srtp - Enable Secure Real-time Transport Protocol
+net-libs/opal:stats - Enable statistic reporting
+net-libs/opal:swig - Use swig to generate bindings
+net-libs/opal:video - Enable video support
+net-libs/opal:vpb - Enable Voicetronics VPB card support
+net-libs/opal:vxml - Enable VXML support
+net-libs/opal:wav - Enable WAVFILE support
+net-libs/opal:x264-static - Install x264 plugin statically linked with x264
 net-libs/ortp:ntp-timestamp - Turn on NTP timestamping on received packet
 net-libs/ortp:srtp - Add support for Secure RTP
 net-libs/phodav:spice - Install the spice-webdavd guest agent
@@ -1289,7 +1315,6 @@ net-misc/dhcpcd-ui:gtk3 - Add support for x11-libs/gtk+ (The GIMP Toolkit)
 net-misc/dropbear:bsdpty - Add support for legacy BSD pty's rather than dynamic UNIX pty's -- do not use this flag unless you are absolutely sure you actually want it
 net-misc/dropbear:multicall - Build all the programs as one little binary (to save space)
 net-misc/dropbear:shadow - Enable shadow password support
-net-misc/dropbox:librsync-bundled - Use bundled librsync library
 net-misc/electron-cash:audio_modem - Enable plugin to support Audio Modem
 net-misc/electron-cash:cli - Enables the CLI interface
 net-misc/electron-cash:cosign - Enable plugin to support multisig wallets between multiple Electrum clients

@@ -25,7 +25,9 @@ DEPEND="
 S=${WORKDIR}/${PN}
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}-make.patch
+	epatch \
+		"${FILESDIR}"/${P}-make.patch \
+		"${FILESDIR}"/${P}-printf-format.patch
 	rm configure || die
 	eautoreconf
 }

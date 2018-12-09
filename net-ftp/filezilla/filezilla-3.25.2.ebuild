@@ -1,39 +1,40 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.0"
 
-inherit autotools flag-o-matic gnome2-utils wxwidgets
+inherit autotools eutils flag-o-matic multilib wxwidgets
 
 MY_PV=${PV/_/-}
 MY_P="FileZilla_${MY_PV}"
 
 DESCRIPTION="FTP client with lots of useful features and an intuitive interface"
-HOMEPAGE="https://filezilla-project.org/"
-SRC_URI="https://download.filezilla-project.org/client/${MY_P}_src.tar.bz2"
+HOMEPAGE="http://filezilla-project.org/"
+SRC_URI="mirror://sourceforge/${PN}/${MY_P}_src.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ia64 ~ppc ~x86"
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="dbus nls test"
 
 # pugixml 1.7 minimal dependency is for c++11 proper configuration
 RDEPEND=">=app-eselect/eselect-wxwidgets-0.7-r1
 	>=dev-libs/nettle-3.1:=
 	>=dev-db/sqlite-3.7
-	>=dev-libs/libfilezilla-0.15.0
+	>=dev-libs/libfilezilla-0.9.1
 	>=dev-libs/pugixml-1.7
-	>=net-libs/gnutls-3.4.15
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X]
+	net-dns/libidn
+	>=net-libs/gnutls-3.4.0
+	>=x11-libs/wxGTK-3.0.2.0-r1:3.0[X]
 	x11-misc/xdg-utils
 	dbus? ( sys-apps/dbus )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	>=sys-devel/libtool-1.4
 	nls? ( >=sys-devel/gettext-0.11 )
-	test? ( >=dev-util/cppunit-1.13.0 )"
+	test? ( dev-util/cppunit )"
 
 S="${WORKDIR}"/${PN}-${MY_PV}
 
@@ -64,12 +65,4 @@ src_configure() {
 	econf $(use_with dbus) $(use_enable nls locales) \
 		--with-pugixml=system \
 		--disable-autoupdatecheck
-}
-
-pkg_postinst() {
-	gnome2_icon_cache_update
-}
-
-pkg_postrm() {
-	gnome2_icon_cache_update
 }

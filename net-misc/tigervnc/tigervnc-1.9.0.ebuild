@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,8 +16,8 @@ SRC_URI="https://github.com/TigerVNC/tigervnc/archive/v${PV}.tar.gz -> ${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ppc ppc64 ~sh sparc x86"
-IUSE="dri3 +drm gnutls java libressl nls +opengl pam server xinerama +xorgmodule"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86"
+IUSE="+drm gnutls nls java +opengl pam server +xorgmodule xinerama dri3"
 
 CDEPEND="
 	virtual/jpeg:0
@@ -39,10 +39,9 @@ CDEPEND="
 		>=x11-apps/xauth-1.0.3
 		x11-apps/xsetroot
 		>=x11-misc/xkeyboard-config-2.4.1-r3
+		opengl? ( virtual/opengl )
 		xorgmodule? ( =x11-base/xorg-server-${XSERVER_VERSION%.*}* )
 		drm? ( x11-libs/libdrm )
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
 	)
 	xinerama? ( x11-libs/libXinerama )
 	"
@@ -54,10 +53,13 @@ RDEPEND="${CDEPEND}
 	java? ( >=virtual/jre-1.5:* )"
 
 DEPEND="${CDEPEND}
+	amd64? ( dev-lang/nasm )
+	x86? ( dev-lang/nasm )
 	nls? ( sys-devel/gettext )
 	java? ( >=virtual/jdk-1.5 )
 	x11-base/xorg-proto
 	media-libs/fontconfig
+	x11-base/xorg-proto
 	x11-libs/libICE
 	x11-libs/libSM
 	x11-libs/libXcursor
@@ -139,8 +141,7 @@ src_configure() {
 			--enable-dri2 \
 			--with-pic \
 			--without-dtrace \
-			--disable-present \
-			--with-sha1=libcrypto
+			--disable-present
 	fi
 }
 

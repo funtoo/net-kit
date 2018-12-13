@@ -2083,6 +2083,10 @@ www-client/uget:aria2 - Enable support for net-misc/aria2 through xmlrpc. You'll
 www-client/uget:control-socket - Enable JSON-RPC over unix domain socket
 www-client/uget:openssl - Use dev-libs/openssl instead of net-libs/gnutls
 www-client/uget:rss - Enable uGet feed messages
+www-client/vivaldi:l10n_es-PE - Spanish, Peru locale
+www-client/vivaldi:l10n_io - Ido locale
+www-client/vivaldi:l10n_jbo - Lojban locale
+www-client/vivaldi:l10n_sc - Sardinian locale
 www-client/vivaldi-snapshot:l10n_es-PE - Spanish, Peru locale
 www-client/vivaldi-snapshot:l10n_io - Ido locale
 www-client/vivaldi-snapshot:l10n_jbo - Lojban locale

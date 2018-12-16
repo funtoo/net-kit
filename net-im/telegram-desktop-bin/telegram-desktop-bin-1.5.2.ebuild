@@ -9,8 +9,8 @@ DESCRIPTION="Official desktop client for Telegram (binary package)"
 HOMEPAGE="https://desktop.telegram.org"
 SRC_URI="
 	https://github.com/telegramdesktop/tdesktop/archive/v${PV}.tar.gz -> tdesktop-${PV}.tar.gz
-	amd64? ( https://updates.tdesktop.com/tlinux/tsetup.${PV}.tar.xz )
-	x86? ( https://updates.tdesktop.com/tlinux32/tsetup32.${PV}.tar.xz )
+	amd64? ( https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/tsetup.${PV}.tar.xz )
+	x86? ( https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/tsetup32.${PV}.tar.xz )
 "
 
 LICENSE="telegram"
@@ -33,7 +33,7 @@ S="${WORKDIR}/Telegram"
 src_install() {
 	exeinto /usr/lib/${PN}
 	doexe "Telegram"
-	newbin "${FILESDIR}"/${PN}-r2 "telegram-desktop"
+	newbin "${FILESDIR}"/${PN} "telegram-desktop"
 
 	local icon_size
 	for icon_size in 16 32 48 64 128 256 512; do
@@ -41,10 +41,6 @@ src_install() {
 			"${WORKDIR}/tdesktop-${PV}/Telegram/Resources/art/icon${icon_size}.png" \
 			telegram.png
 	done
-
-	dodir /etc/${PN}
-	insinto /etc/${PN}/
-	doins "${FILESDIR}"/fonts.conf
 
 	domenu "${WORKDIR}/tdesktop-${PV}"/lib/xdg/telegramdesktop.desktop
 }
@@ -61,12 +57,6 @@ pkg_postinst() {
 	einfo "\"~/.local/share/applications/telegram.desktop\". These files"
 	einfo "conflict with the one shipped by portage and should be removed"
 	einfo "from all homedirs. (https://bugs.gentoo.org/618662)"
-	einfo
-	einfo "This versions fixes fontconfig issues that have been reported"
-	einfo "by several users. However, the fix might have side-effects on"
-	einfo "non-latin fonts. If you have font issues with this version just"
-	einfo "delete \"/etc/${PN}/fonts.conf\" and leave a comment here"
-	einfo "https://bugs.gentoo.org/664872"
 }
 
 pkg_postrm() {

@@ -37,7 +37,7 @@ inherit check-reqs flag-o-matic toolchain-funcs gnome2-utils llvm mozcoreconf-v6
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
 
-KEYWORDS="amd64 x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang dbus debug hardened jack lightning neon pulseaudio
@@ -198,6 +198,8 @@ src_prepare() {
 		"${WORKDIR}"/firefox/2012_update-cc-to-honor-CC.patch \
 		|| die
 	eapply "${WORKDIR}/firefox"
+
+	eapply "${FILESDIR}"/thunderbird-60-sqlite3-fts3-tokenizer.patch
 
 	# Ensure that are plugins dir is enabled as default
 	sed -i -e "s:/usr/lib/mozilla/plugins:/usr/lib/nsbrowser/plugins:" \
@@ -472,13 +474,6 @@ src_install() {
 			>>"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" || die
 	fi
 
-	# dev-db/sqlite does not have FTS3_TOKENIZER support.
-	# gloda needs it to function, and bad crashes happen when its enabled and doesn't work
-	if use system-sqlite ; then
-		echo "sticky_pref(\"mailnews.database.global.indexer.enabled\", false);" \
-			>>"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" || die
-	fi
-
 	cd "${S}" || die
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	DESTDIR="${D}" ./mach install || die
@@ -533,6 +528,12 @@ src_install() {
 		emid='{a62ef8ec-5fdc-40c2-873c-223b8a6925cc}'
 		mkdir -p "${T}/${emid}" || die
 		cp -RLp -t "${T}/${emid}" "${BUILD_OBJ_DIR}"/dist/xpi-stage/gdata-provider/* || die
+
+		# manifest.json does not allow the addon to load, put install.rdf in place
+		# note, version number needs to be set properly
+		cp -RLp -t "${T}/${emid}" "${WORKDIR}"/gdata-provider-${MOZ_LIGHTNING_GDATA_VER}/install.rdf
+		sed -i -e '/em:version/ s/>[^<]*</>4.1</' "${T}/${emid}"/install.rdf
+
 		insinto ${MOZILLA_FIVE_HOME}/extensions
 		doins -r "${T}/${emid}"
 	fi

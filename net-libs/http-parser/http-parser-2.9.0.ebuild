@@ -2,15 +2,15 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit git-r3 toolchain-funcs multilib-minimal
+inherit toolchain-funcs multilib-minimal
 
 DESCRIPTION="HTTP request/response parser for C"
 HOMEPAGE="https://github.com/nodejs/http-parser"
-EGIT_REPO_URI="${HOMEPAGE}"
+SRC_URI="${HOMEPAGE}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
-SLOT="0"
-KEYWORDS=""
+SLOT="0/2.8.0"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x64-macos ~x64-solaris"
 IUSE="static-libs"
 
 src_prepare() {

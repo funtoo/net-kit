@@ -1956,6 +1956,7 @@ www-apps/drupal:uploadprogress - Install dev-php/pecl-uploadprogress package
 www-apps/gitit:network-uri - Get Network.URI from the network-uri package.
 www-apps/gitit:plugins - enables optional plugin runtime loader
 www-apps/hugo:sass - Enable SASS/SCSS support
+www-apps/icingaweb2:fpm - Adds FPM support to php
 www-apps/icingaweb2:nginx - Adds support for nginx
 www-apps/ikiwiki:extras - Installs additional modules used by ikiwiki plugins
 www-apps/kibana-bin:x-pack - Enable additional features (may need a license)

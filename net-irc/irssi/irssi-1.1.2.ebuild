@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -16,10 +16,10 @@ SRC_URI="https://github.com/${PN}/${PN}/releases/download/${PV/_/-}/${MY_P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 ~hppa ~ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="alpha amd64 arm ~arm64 ~hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="+perl selinux socks5 +proxy libressl"
 
-CDEPEND="
+COMMON_DEPEND="
 	sys-libs/ncurses:0=
 	>=dev-libs/glib-2.6.0
 	!libressl? ( dev-libs/openssl:= )
@@ -28,17 +28,24 @@ CDEPEND="
 	socks5? ( >=net-proxy/dante-1.1.18 )"
 
 DEPEND="
-	${CDEPEND}
+	${COMMON_DEPEND}
 	virtual/pkgconfig"
 
 RDEPEND="
-	${CDEPEND}
+	${COMMON_DEPEND}
 	selinux? ( sec-policy/selinux-irc )
 	perl? ( !net-im/silc-client )"
 
 RESTRICT="test"
 
 S="${WORKDIR}/${MY_P}"
+
+src_prepare() {
+	default
+	if has_version '>=dev-libs/libressl-2.7.3'; then
+	eapply "${FILESDIR}"/libressl.patch
+	fi
+}
 
 src_configure() {
 	econf \

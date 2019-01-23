@@ -3,12 +3,11 @@
 =net-dns/unbound-1.8.0-r1 python_single_target_python2_7
 =net-dns/unbound-1.8.1 python_single_target_python2_7
 =net-fs/samba-4.5.16 python_single_target_python2_7
-=net-fs/samba-4.7.12 python_single_target_python2_7
+=net-fs/samba-4.7.12-r1 python_single_target_python2_7
 =net-fs/samba-4.8.6-r2 python_single_target_python2_7
-=net-fs/samba-4.8.7 python_single_target_python2_7
-=net-fs/samba-4.8.8 python_single_target_python2_7
-=net-fs/samba-4.9.3 python_single_target_python2_7
-=net-fs/samba-4.9.4 python_single_target_python2_7
+=net-fs/samba-4.8.6-r3 python_single_target_python2_7
+=net-fs/samba-4.8.8-r1 python_single_target_python2_7
+=net-fs/samba-4.9.4-r1 python_single_target_python2_7
 =net-irc/irker-2.11 python_single_target_python2_7
 =net-irc/irker-2.12 python_single_target_python2_7
 =net-irc/irker-2.13 python_single_target_python2_7

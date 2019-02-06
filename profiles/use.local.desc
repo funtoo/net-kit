@@ -721,6 +721,9 @@ net-im/bitlbee:otr - Enable support for encrypted conversations
 net-im/bitlbee:plugins - Enable support for plugins
 net-im/bitlbee:purple - Use libpurple instead of the built-in IM protocol support
 net-im/bitlbee:twitter - Enable Twitter protocol support
+net-im/choqok:attica - Build Open Collaboration Services plugin using kde-frameworks/attica
+net-im/choqok:konqueror - Build Konqueror Choqok plugin
+net-im/choqok:telepathy - Enable support for the real-time communication framework telepathy
 net-im/corebird:spellcheck - Support spell checking
 net-im/coturn:mongodb - Enable support for the mongodb database
 net-im/coturn:redis - Enable support for the redis database
@@ -1627,6 +1630,21 @@ net-p2p/eiskaltdcpp:minimal - Don't install headers
 net-p2p/fms:frost - Add support for frost boards
 net-p2p/go-ethereum:devtools - Build Ethereum development tools (evm, abigen, puppeth, ...)
 net-p2p/go-ethereum:opencl - Add OpenCL GPU mining support
+net-p2p/ktorrent:bwscheduler - Schedule upload and download limits over a period of a week
+net-p2p/ktorrent:downloadorder - Specify the download order of a multi-file torrent
+net-p2p/ktorrent:infowidget - Displays general information about a torrent in several tabs
+net-p2p/ktorrent:ipfilter - Filter IP addresses through a blocklist
+net-p2p/ktorrent:kross - Enable kross scripting support
+net-p2p/ktorrent:logviewer - Displays the logging output
+net-p2p/ktorrent:magnetgenerator - Generates magnet URI's
+net-p2p/ktorrent:mediaplayer - Phonon-based media player
+net-p2p/ktorrent:rss - Syndication plugin for KTorrent, supporting RSS and Atom feeds
+net-p2p/ktorrent:scanfolder - Scan folders for torrent files and load them
+net-p2p/ktorrent:search - Search for torrents
+net-p2p/ktorrent:shutdown - Shutdown when done
+net-p2p/ktorrent:stats - Shows statistics about torrents in several graphs
+net-p2p/ktorrent:upnp - Forward ports using UPnP
+net-p2p/ktorrent:zeroconf - Discover peers on the local network using the Zeroconf protocol
 net-p2p/litecoind:logrotate - Use app-admin/logrotate for rotating logs
 net-p2p/litecoind:wallet - Enable wallet support
 net-p2p/mldonkey:bittorrent - enable bittorrent support
@@ -1943,7 +1961,6 @@ www-apps/gitit:plugins - enables optional plugin runtime loader
 www-apps/hugo:sass - Enable SASS/SCSS support
 www-apps/icingaweb2:nginx - Adds support for nginx
 www-apps/ikiwiki:extras - Installs additional modules used by ikiwiki plugins
-www-apps/kibana-bin:x-pack - Enable additional features (may need a license)
 www-apps/klaus:ctags - Enable support for Exuberant ctags; makes all source code symbols hyperlinks to their definitions
 www-apps/nikola:assets - Support web asset management through dev-python/assets
 www-apps/nikola:charts - Support chart generation through dev-python/pygal
@@ -2008,6 +2025,7 @@ www-client/elinks:gopher - Enable support for the gopher protocol
 www-client/elinks:mouse - Make elinks to grab all mouse events
 www-client/elinks:tre - Enable support for regex searches via dev-libs/tre
 www-client/elinks:xml - Enable support for bookmarks via dev-libs/expat
+www-client/falkon:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
 www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)

@@ -2,14 +2,6 @@
 # your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using egencache *
 
-dev-lang/rust:cargo - Install cargo component
-dev-lang/rust:clippy - Install clippy component
-dev-lang/rust:rls - Install rls component
-dev-lang/rust:rustfmt - Install rustfmt component
-dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
-dev-lang/rust-bin:cargo - Install cargo component
-dev-lang/rust-bin:clippy - Install clippy component
-dev-lang/rust-bin:rustfmt - Install rustfmt component
 dev-lang/spidermonkey:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
 dev-lang/spidermonkey:debug - Enable assertions to allow for easier debugging of programs that link to spidermonkey -- note this will often crash software on regular end-user systems
 dev-lang/spidermonkey:system-icu - Use the system-wide dev-libs/icu instead of bundled -- note, only takes effect when icu flag is enabled

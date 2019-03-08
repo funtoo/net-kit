@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 2011-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -26,7 +26,6 @@ SRC_URI="https://dl.google.com/linux/chrome/deb/pool/main/g/${MY_PN}/${MY_P}_amd
 
 LICENSE="google-chrome"
 SLOT="0"
-IUSE="+plugins"
 RESTRICT="bindist mirror strip"
 
 DEPEND=""
@@ -104,12 +103,6 @@ src_install() {
 	pushd "${CHROME_HOME}/locales" > /dev/null || die
 	chromium_remove_language_paks
 	popd > /dev/null || die
-
-	if use plugins ; then
-		local plugins="--extra-plugin-dir=/usr/$(get_libdir)/nsbrowser/plugins"
-		sed -e "/^exec/ i set -- \"${plugins}\" \"\$@\"" \
-			-i "${CHROME_HOME}/${PN}" || die
-	fi
 
 	local suffix=
 	[[ ${PN} == google-chrome-beta ]] && suffix=_beta

@@ -1,15 +1,16 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit golang-build golang-vcs-snapshot systemd user
+inherit golang-build golang-vcs-snapshot user
 
 EGO_PN="code.gitea.io/gitea"
 KEYWORDS="~amd64 ~arm"
 
 DESCRIPTION="A painless self-hosted Git service, written in Go"
 HOMEPAGE="https://github.com/go-gitea/gitea"
-SRC_URI="https://github.com/go-gitea/gitea/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+MY_PV="v${PV/_/-}"
+SRC_URI="https://github.com/go-gitea/gitea/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
@@ -49,7 +50,6 @@ src_install() {
 	popd >/dev/null || die
 	newinitd "${FILESDIR}"/gitea.initd-r1 gitea
 	newconfd "${FILESDIR}"/gitea.confd gitea
-	systemd_dounit "${FILESDIR}/gitea.service"
 }
 
 pkg_postinst() {
@@ -57,6 +57,7 @@ pkg_postinst() {
 		elog "No app.ini found, copying initial config over"
 		cp "${FILESDIR}"/app.ini "${EROOT}"/var/lib/gitea/conf/ || die
 		chown git:git /var/lib/gitea/conf/app.ini
+		elog "Please make sure that your 'git' user has the correct homedir (/var/lib/gitea)."
 	else
 		elog "app.ini found, please check example file for possible changes"
 		ewarn "Please note that environment variables have been changed:"

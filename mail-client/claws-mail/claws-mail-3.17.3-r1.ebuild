@@ -1,21 +1,26 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
-inherit autotools gnome2-utils python-single-r1 xdg-utils
+inherit autotools desktop python-single-r1 xdg
 
 DESCRIPTION="An email client (and news reader) based on GTK+"
 HOMEPAGE="https://www.claws-mail.org/"
 
-SRC_URI="https://www.claws-mail.org/download.php?file=releases/${P}.tar.xz"
+if [[ "${PV}" == 9999 ]] ; then
+	inherit git-r3
+	EGIT_REPO_URI="git://git.claws-mail.org/claws.git"
+else
+	SRC_URI="https://www.claws-mail.org/download.php?file=releases/${P}.tar.xz"
+	KEYWORDS="alpha amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc x86"
+fi
 
 SLOT="0"
 LICENSE="GPL-3"
-KEYWORDS="~alpha ~amd64 ~hppa ~ppc ~ppc64 ~sparc ~x86"
 
-IUSE="archive bogofilter calendar clamav dbus debug doc gdata +gnutls gtk3 +imap ipv6 ldap +libcanberra +libindicate +libnotify networkmanager nls nntp +notification pda pdf perl +pgp python rss session sieve smime spamassassin spam-report spell startup-notification svg valgrind xface"
+IUSE="archive bogofilter calendar clamav dbus debug dillo doc gdata +gnutls +imap ipv6 ldap +libcanberra +libindicate +libnotify networkmanager nls nntp +notification pda pdf perl +pgp python rss session sieve smime spamassassin spam-report spell startup-notification svg valgrind xface"
 REQUIRED_USE="libcanberra? ( notification )
 	libindicate? ( notification )
 	libnotify? ( notification )
@@ -24,7 +29,14 @@ REQUIRED_USE="libcanberra? ( notification )
 	smime? ( pgp )"
 
 COMMONDEPEND="
+	dev-libs/nettle
 	net-mail/ytnef
+	sys-libs/zlib:=
+	x11-libs/cairo
+	x11-libs/gdk-pixbuf:2[jpeg]
+	>=x11-libs/gtk+-2.24:2
+	x11-libs/libX11
+	x11-libs/pango
 	archive? (
 		app-arch/libarchive
 		>=net-misc/curl-7.9.7
@@ -34,11 +46,13 @@ COMMONDEPEND="
 		>=dev-libs/libical-2.0.0:=
 		>=net-misc/curl-7.9.7
 	)
-	dbus? ( >=dev-libs/dbus-glib-0.60 )
+	dbus? (
+		>=dev-libs/dbus-glib-0.60
+		sys-apps/dbus
+	)
 	gdata? ( >=dev-libs/libgdata-0.17.2 )
+	dillo? ( www-client/dillo )
 	gnutls? ( >=net-libs/gnutls-3.0 )
-	gtk3? ( x11-libs/gtk+:3 )
-	!gtk3? ( >=x11-libs/gtk+-2.20:2 )
 	imap? ( >=net-libs/libetpan-0.57 )
 	ldap? ( >=net-nds/openldap-2.0.7 )
 	nls? ( >=sys-devel/gettext-0.18 )
@@ -90,7 +104,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	default
+	xdg_src_prepare
 	eautoreconf
 }
 
@@ -118,10 +132,10 @@ src_configure() {
 		$(use_enable clamav clamd-plugin)
 		$(use_enable dbus)
 		$(use_enable debug crash-dialog)
+		$(use_enable dillo dillo-plugin)
 		$(use_enable doc manual)
 		$(use_enable gdata gdata-plugin)
 		$(use_enable gnutls)
-		$(use_enable gtk3)
 		$(use_enable ipv6)
 		$(use_enable ldap)
 		$(use_enable networkmanager)
@@ -177,7 +191,7 @@ src_install() {
 	domenu ${PN}.desktop
 
 	einfo "Installing extra tools"
-	cd "${S}"/tools
+	cd "${S}"/tools || die
 	exeinto /usr/$(get_libdir)/${PN}/tools
 	doexe *.pl *.py *.conf *.sh
 	doexe tb2claws-mail update-po uudec uuooffice
@@ -187,19 +201,17 @@ src_install() {
 }
 
 pkg_preinst() {
-	gnome2_icon_savelist
+	xdg_pkg_preinst
 }
 
 pkg_postinst() {
 	ewarn "When upgrading from version 3.9.0 or below some changes have happened:"
 	ewarn "- There are no individual plugins in mail-client/claws-mail-* anymore, but they are integrated mostly controlled through USE flags"
 	ewarn "- Plugins with no special dependencies are just built and can be loaded through the interface"
-	ewarn "- The gtkhtml2, dillo and trayicon plugins have been dropped entirely"
-	gnome2_icon_cache_update
-	xdg_desktop_database_update
+	ewarn "- The gtkhtml2 and trayicon plugins have been dropped entirely"
+	xdg_pkg_postinst
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
-	xdg_desktop_database_update
+	xdg_pkg_postrm
 }

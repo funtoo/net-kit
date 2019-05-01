@@ -10,5 +10,5 @@ RDEPEND=dev-libs/nettle net-mail/ytnef sys-libs/zlib:= x11-libs/cairo x11-libs/g
 REQUIRED_USE=libcanberra? ( notification ) libindicate? ( notification ) libnotify? ( notification ) networkmanager? ( dbus ) python? ( python_targets_python2_7 ) smime? ( pgp )
 SLOT=0
 SRC_URI=https://www.claws-mail.org/download.php?file=releases/claws-mail-3.17.3.tar.xz
-_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	desktop	b1d22ac8bdd4679ab79c71aca235009d	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	b2f01ad412baf81650c23fcf0975fa33	python-single-r1	3a0fc81f484bfdbd9c2b7448015a36e4	python-utils-r1	12114a2a9aab35b93efc037a196b3234	toolchain-funcs	f164325a2cdb5b3ea39311d483988861	xdg	4939e61ae72d18779a8bdac386a7a07e	xdg-utils	93b2dfbb00a09161e1e7f6360c0f7f6b
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	desktop	b1d22ac8bdd4679ab79c71aca235009d	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	b2f01ad412baf81650c23fcf0975fa33	python-single-r1	3a0fc81f484bfdbd9c2b7448015a36e4	python-utils-r1	12114a2a9aab35b93efc037a196b3234	toolchain-funcs	f164325a2cdb5b3ea39311d483988861	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	93b2dfbb00a09161e1e7f6360c0f7f6b
 _md5_=1b8d9e1e009afd9b0163d30ca1c21f8d

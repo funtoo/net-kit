@@ -2009,6 +2009,7 @@ www-client/firefox:lto - Enable Link Time Optimization (LTO). Requires Gold link
 www-client/firefox:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
 www-client/firefox:rust - Enable support for using rust compiler (experimental)
 www-client/firefox:screenshot - Allow to disable screenshot extension in global profile
+www-client/firefox:system-av1 - Use the system-wide media-libs/dav1d and media-libs/libaom library instead of bundled.
 www-client/firefox:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
 www-client/firefox:system-harfbuzz - Use the system-wide media-libs/harfbuzz and media-gfx/graphite2 instead of bundled.
 www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bundled.
@@ -2016,6 +2017,7 @@ www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo in
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
+www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
 www-client/google-chrome-beta:plugins - Add system plugins path to launcher
 www-client/google-chrome-unstable:plugins - Add system plugins path to launcher
 www-client/jd:oniguruma - Use dev-libs/oniguruma for regular expression

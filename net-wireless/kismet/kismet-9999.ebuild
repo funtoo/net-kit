@@ -1,24 +1,21 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python2_7 )
 
 inherit autotools eutils multilib user python-single-r1
 
-MY_P=${P/\./-}
-MY_P=${MY_P/_beta/-BETA}
-MY_P=${MY_P/./-R}
-S=${WORKDIR}/${MY_P}
-
 if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://www.kismetwireless.net/${PN}.git"
-	SRC_URI=""
+	EGIT_REPO_URI="https://www.kismetwireless.net/git/${PN}.git"
 	inherit git-r3
-	KEYWORDS=""
 	RESTRICT="strip"
 else
+	MY_P=${P/\./-}
+	MY_P=${MY_P/_beta/-BETA}
+	MY_P=${MY_P/./-R}
+	S=${WORKDIR}/${MY_P/BETA/beta}
 	SRC_URI="https://www.kismetwireless.net/code/${MY_P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
 fi
@@ -28,7 +25,7 @@ HOMEPAGE="https://www.kismetwireless.net"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
-IUSE="lm_sensors networkmanager +pcre selinux +suid"
+IUSE="lm_sensors mousejack networkmanager +pcre selinux +suid"
 
 CDEPEND="
 	${PYTHON_DEPS}
@@ -42,6 +39,7 @@ CDEPEND="
 			dev-libs/libnl:3
 			net-libs/libpcap
 			)
+	mousejack? ( dev-libs/libusb:= )
 	dev-libs/protobuf-c:=
 	dev-libs/protobuf:=
 	sys-libs/ncurses:=
@@ -66,27 +64,24 @@ src_prepare() {
 	sed -i -e 's| -s||g' \
 		-e 's|@mangrp@|root|g' Makefile.in
 
-	epatch "${FILESDIR}"/fix-setuptools2.patch
 	eapply_user
 
-	if [[ ${PV} == "9999" ]] ; then
+	#just use set to fix setup.py
+	find . -name "Makefile.in" -exec sed -i 's#setup.py install#setup.py install --root=$(DESTDIR)#' {} + || die
+	find . -name "Makefile" -exec sed -i 's#setup.py install#setup.py install --root=$(DESTDIR)#' {} + || die
+
+	if [ "${PV}" = "9999" ]; then
 		eautoreconf
 	fi
-
-	if ! use lm_sensors; then
-		sed -i "s#HAVE_LMSENSORS_H=1#HAVE_LMSENSORS_H=0#" configure
-	fi
-	if use networkmanager; then
-		sed -i "s#havelibnm\=no#havelibnm\=yes#" configure
-	else
-		sed -i "s#havelibnm\=yes#havelibnm\=no#" configure
-	fi
-	sed -i 's#-O3##' configure
 }
 
 src_configure() {
 	econf \
-		$(use_enable pcre)
+		$(use_enable pcre) \
+		$(use_enable lm_sensors lmsensors) \
+		$(use_enable mousejack libusb) \
+		$(use_enable networkmanager libnm) \
+		--disable-optimization
 }
 
 src_install() {
@@ -95,6 +90,7 @@ src_install() {
 
 	insinto /usr/share/${PN}
 	doins -r log_tools
+	doins Makefile.inc
 
 	#dodoc CHANGELOG RELEASENOTES.txt README* docs/DEVEL.client docs/README.newcore
 	dodoc CHANGELOG README*

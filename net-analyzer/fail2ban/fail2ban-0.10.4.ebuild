@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} pypy )
+PYTHON_COMPAT=( python{2_7,3_5,3_6} pypy )
 DISTUTILS_SINGLE_IMPL=1
 
 inherit distutils-r1 eutils systemd vcs-snapshot
@@ -29,9 +29,8 @@ RDEPEND="
 		sys-apps/systemd[python(-),${PYTHON_USEDEP}]
 	)' 'python*' ) )
 "
-
 REQUIRED_USE="systemd? ( !python_single_target_pypy )"
-
+RESTRICT="test"
 DOCS=( ChangeLog DEVELOP README.md THANKS TODO doc/run-rootless.txt )
 
 python_prepare_all() {
@@ -51,10 +50,6 @@ python_compile() {
 		./fail2ban-2to3 || die
 	fi
 	distutils-r1_python_compile
-}
-
-python_test() {
-	"${PYTHON}" "bin/${PN}-testcases" || die "tests failed with ${EPYTHON}"
 }
 
 python_install_all() {

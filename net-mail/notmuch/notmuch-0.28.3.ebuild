@@ -4,7 +4,7 @@
 EAPI=6
 
 DISTUTILS_OPTIONAL=1
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6,3_7} )
+PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
 
 inherit bash-completion-r1 elisp-common eutils flag-o-matic pax-utils \
 	distutils-r1 toolchain-funcs
@@ -41,19 +41,32 @@ CDEPEND="
 	"
 DEPEND="${CDEPEND}
 	virtual/pkgconfig
-	doc? ( app-doc/doxygen )
-	test? ( app-misc/dtach || ( >=app-editors/emacs-23[libxml2]
-		>=app-editors/emacs-vcs-23[libxml2] ) sys-devel/gdb
-		crypt? ( app-crypt/gnupg dev-libs/openssl ) )
+	doc? (
+		app-doc/doxygen
+		dev-python/mock[${PYTHON_USEDEP}]
+	)
+	test? (
+		app-misc/dtach
+		|| ( >=app-editors/emacs-23[libxml2] >=app-editors/emacs-vcs-23[libxml2] )
+		sys-devel/gdb
+		crypt? ( app-crypt/gnupg dev-libs/openssl )
+	)
 	valgrind? ( dev-util/valgrind )
 	"
 RDEPEND="${CDEPEND}
 	crypt? ( app-crypt/gnupg )
 	nmbug? ( dev-vcs/git )
-	mutt? ( dev-perl/File-Which dev-perl/Mail-Box dev-perl/MailTools
-		dev-perl/String-ShellQuote dev-perl/Term-ReadLine-Gnu
-		virtual/perl-Digest-SHA virtual/perl-File-Path virtual/perl-Getopt-Long
-		virtual/perl-Pod-Parser )
+	mutt? (
+		dev-perl/File-Which
+		dev-perl/Mail-Box
+		dev-perl/MailTools
+		dev-perl/String-ShellQuote
+		dev-perl/Term-ReadLine-Gnu
+		virtual/perl-Digest-SHA
+		virtual/perl-File-Path
+		virtual/perl-Getopt-Long
+		virtual/perl-Pod-Parser
+	)
 	"
 
 DOCS=( AUTHORS NEWS README )
@@ -123,6 +136,8 @@ src_prepare() {
 }
 
 src_configure() {
+	python_setup  # for sphinx
+
 	local myeconfargs=(
 		--bashcompletiondir="$(get_bashcompdir)"
 		--emacslispdir="${EPREFIX}/${SITELISP}/${PN}"
@@ -138,6 +153,8 @@ src_configure() {
 }
 
 src_compile() {
+	python_setup  # for sphinx
+
 	V=1 default
 	bindings python distutils-r1_src_compile
 
@@ -169,7 +186,9 @@ src_test() {
 src_install() {
 	default
 
-	doman doc/_build/man/man?/*.?
+	if use doc; then
+		doman doc/_build/man/man?/*.?
+	fi
 
 	if use emacs; then
 		elisp-site-file-install "${FILESDIR}/${SITEFILE}" || die

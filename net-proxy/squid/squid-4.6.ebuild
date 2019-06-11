@@ -1,16 +1,28 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+
+WANT_AUTOMAKE="1.15"
+
 inherit autotools linux-info pam toolchain-funcs user
 
 DESCRIPTION="A full-featured web proxy cache"
 HOMEPAGE="http://www.squid-cache.org/"
-SRC_URI="http://www.squid-cache.org/Versions/v3/3.5/${P}.tar.xz"
+
+# Upstream patch ID for the most recent bug-fixed update to the formal release.
+r=
+#r=-20181117-r0022167
+if [ -z "$r" ]; then
+	SRC_URI="http://www.squid-cache.org/Versions/v${PV%.*}/${P}.tar.xz"
+else
+	SRC_URI="http://www.squid-cache.org/Versions/v${PV%.*}/${P}${r}.tar.bz2"
+	S="${S}${r}"
+fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~sparc x86 ~x86-fbsd"
+KEYWORDS="alpha amd64 arm ~hppa ia64 ~mips ppc ppc64 ~sparc x86 ~x86-fbsd"
 IUSE="caps ipv6 pam ldap libressl samba sasl kerberos nis radius ssl snmp selinux logrotate test \
 	ecap esi ssl-crtd \
 	mysql postgres sqlite \
@@ -18,6 +30,8 @@ IUSE="caps ipv6 pam ldap libressl samba sasl kerberos nis radius ssl snmp selinu
 	+htcp +wccp +wccpv2 \
 	pf-transparent ipf-transparent kqueue \
 	elibc_uclibc kernel_linux"
+
+BDEPEND="dev-lang/perl"
 
 COMMON_DEPEND="caps? ( >=sys-libs/libcap-2.16 )
 	pam? ( virtual/pam )
@@ -35,7 +49,7 @@ COMMON_DEPEND="caps? ( >=sys-libs/libcap-2.16 )
 	>=sys-libs/db-4:*
 	dev-libs/libltdl:0"
 DEPEND="${COMMON_DEPEND}
-	dev-lang/perl
+	${BDEPEND}
 	ecap? ( virtual/pkgconfig )
 	test? ( dev-util/cppunit )"
 RDEPEND="${COMMON_DEPEND}
@@ -48,7 +62,7 @@ RDEPEND="${COMMON_DEPEND}
 	!<=sci-biology/meme-4.8.1-r1"
 
 REQUIRED_USE="tproxy? ( caps )
-			qos? ( caps )"
+		qos? ( caps )"
 
 pkg_pretend() {
 	if use tproxy; then
@@ -63,17 +77,14 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/${PN}-3.5.7-gentoo.patch"
-	eapply -p0 "${FILESDIR}/${PN}-cppunit-1.14.patch"
-	eapply "${FILESDIR}/${PN}-2018-1.patch"
-	eapply "${FILESDIR}/${PN}-2018-2.patch"
+	eapply "${FILESDIR}/${PN}-4.3-gentoo.patch"
 	sed -i -e 's:/usr/local/squid/etc:/etc/squid:' \
 		INSTALL QUICKSTART \
 		scripts/fileno-to-pathname.pl \
 		scripts/check_cache.pl \
 		tools/cachemgr.cgi.8 \
 		tools/purge/conffile.hh \
-		tools/purge/README  || die
+		tools/purge/purge.1  || die
 	sed -i -e 's:/usr/local/squid/sbin:/usr/sbin:' \
 		INSTALL QUICKSTART || die
 	sed -i -e 's:/usr/local/squid/var/cache:/var/cache/squid:' \
@@ -84,17 +95,10 @@ src_prepare() {
 	sed -i -e 's:/usr/local/squid/logs:/var/log/squid:' \
 		src/log/access_log.cc || die
 	sed -i -e 's:/usr/local/squid/libexec:/usr/libexec/squid:' \
-		helpers/external_acl/unix_group/ext_unix_group_acl.8 \
-		helpers/external_acl/session/ext_session_acl.8 \
-		src/ssl/ssl_crtd.8 || die
+		src/acl/external/unix_group/ext_unix_group_acl.8 \
+		src/acl/external/session/ext_session_acl.8 || die
 	sed -i -e 's:/usr/local/squid/cache:/var/cache/squid:' \
 		scripts/check_cache.pl || die
-	sed -i -e 's:/usr/local/squid/ssl_cert:/etc/ssl/squid:' \
-		src/ssl/ssl_crtd.8 || die
-	sed -i -e 's:/usr/local/squid/var/lib/ssl_db:/var/lib/squid/ssl_db:' \
-		src/ssl/ssl_crtd.8 || die
-	sed -i -e 's:/var/lib/ssl_db:/var/lib/squid/ssl_db:' \
-		src/ssl/ssl_crtd.8 || die
 	# /var/run/squid to /run/squid
 	sed -i -e 's:$(localstatedir)::' \
 		src/ipc/Makefile.am || die
@@ -106,9 +110,9 @@ src_prepare() {
 }
 
 src_configure() {
-	local basic_modules="MSNT-multi-domain,NCSA,POP3,getpwnam"
+	local basic_modules="NCSA,POP3,getpwnam"
 	use samba && basic_modules+=",SMB"
-	use ldap && basic_modules+=",LDAP"
+	use ldap && basic_modules+=",SMB_LM,LDAP"
 	use pam && basic_modules+=",PAM"
 	use sasl && basic_modules+=",SASL"
 	use nis && ! use elibc_uclibc && basic_modules+=",NIS"
@@ -132,12 +136,15 @@ src_configure() {
 	fi
 
 	local ntlm_modules="none"
-	use samba && ntlm_modules="smb_lm"
+	use samba && ntlm_modules="SMB_LM"
 
-	local ext_helpers="file_userip,session,unix_group"
+	local ext_helpers="file_userip,session,unix_group,delayer,time_quota"
 	use samba && ext_helpers+=",wbinfo_group"
 	use ldap && ext_helpers+=",LDAP_group,eDirectory_userip"
 	use ldap && use kerberos && ext_helpers+=",kerberos_ldap_group"
+	if use mysql || use postgres || use sqlite ; then
+	    ext_helpers+=",SQL_session"
+	fi
 
 	local storeio_modules="aufs,diskd,rock,ufs"
 
@@ -192,7 +199,7 @@ src_configure() {
 		--with-build-environment=default \
 		--disable-strict-error-checking \
 		--disable-arch-native \
-		--with-ltdl-includedir=/usr/include \
+		--with-included-ltdl=/usr/include \
 		--with-ltdl-libdir=/usr/$(get_libdir) \
 		$(use_with caps libcap) \
 		$(use_enable ipv6) \
@@ -211,7 +218,7 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	default
 
 	# need suid root for looking into /etc/shadow
 	fowners root:squid /usr/libexec/squid/basic_ncsa_auth
@@ -226,34 +233,29 @@ src_install() {
 
 	# these scripts depend on perl
 	if ! use perl; then
-		local f
-		local PERL_SCRIPTS=(
-		    "${D}"/usr/libexec/squid/basic_pop3_auth
-		    "${D}"/usr/libexec/squid/log_db_daemon
-		    "${D}"/usr/libexec/squid/basic_msnt_multi_domain_auth
-		    "${D}"/usr/libexec/squid/storeid_file_rewrite
-		    "${D}"/usr/libexec/squid/helper-mux.pl
-		)
-		for f in "${PERL_SCRIPTS[@]}"; do
-			rm -v "${f}" || die
+		for f in basic_pop3_auth \
+			ext_delayer_acl \
+			helper-mux \
+			log_db_daemon \
+			security_fake_certverify \
+			storeid_file_rewrite \
+			url_lfs_rewrite; do
+				rm "${D}"/usr/libexec/squid/${f} || die
 		done
 	fi
 
 	# cleanup
-	rm -f "${D}"/usr/bin/Run*
-	rm -rf "${D}"/run/squid "${D}"/var/cache/squid
+	rm -r "${D}"/run "${D}"/var/cache || die
 
 	dodoc CONTRIBUTORS CREDITS ChangeLog INSTALL QUICKSTART README SPONSORS doc/*.txt
-	newdoc helpers/negotiate_auth/kerberos/README README.kerberos
-	newdoc helpers/basic_auth/RADIUS/README README.RADIUS
-	newdoc helpers/external_acl/kerberos_ldap_group/README README.kerberos_ldap_group
-	newdoc tools/purge/README README.purge
-	newdoc tools/helper-mux.README README.helper-mux
+	newdoc src/auth/negotiate/kerberos/README README.kerberos
+	newdoc src/auth/basic/RADIUS/README README.RADIUS
+	newdoc src/acl/external/kerberos_ldap_group/README README.kerberos_ldap_group
 	dodoc RELEASENOTES.html
 
 	newpamd "${FILESDIR}/squid.pam" squid
-	newconfd "${FILESDIR}/squid.confd-r1" squid
-	newinitd "${FILESDIR}/squid.initd-r4" squid
+	newconfd "${FILESDIR}/squid.confd-r2" squid
+	newinitd "${FILESDIR}/squid.initd-r5" squid
 	if use logrotate; then
 		insinto /etc/logrotate.d
 		newins "${FILESDIR}/squid.logrotate" squid
@@ -264,4 +266,11 @@ src_install() {
 
 	diropts -m0750 -o squid -g squid
 	keepdir /var/log/squid /etc/ssl/squid /var/lib/squid
+}
+
+pkg_postinst() {
+	elog "A good starting point to debug Squid issues is to use 'squidclient mgr:' commands such as 'squidclient mgr:info'."
+	if [ ${#r} -gt 0 ]; then
+		elog "You are using a release with the official ${r} patch! Make sure you mention that, or send the output of 'squidclient mgr:info' when asking for support."
+	fi
 }

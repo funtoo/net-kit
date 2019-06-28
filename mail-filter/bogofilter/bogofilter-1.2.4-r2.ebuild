@@ -94,11 +94,6 @@ src_configure() {
 		elog "Using berkdb as database backend."
 	fi
 
-	# Include the right berkdb headers for FreeBSD
-	if ${berkdb} ; then
-		append-cppflags "-I$(db_includedir)"
-	fi
-
 	econf ${myconf}
 }
 

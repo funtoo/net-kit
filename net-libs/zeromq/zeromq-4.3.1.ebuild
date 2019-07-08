@@ -1,6 +1,7 @@
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 inherit autotools
 
@@ -10,8 +11,8 @@ SRC_URI="https://github.com/zeromq/libzmq/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"
-KEYWORDS="*"
-IUSE="doc +drafts pgm +sodium static-libs test unwind elibc_Darwin"
+KEYWORDS="amd64 arm arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
+IUSE="doc drafts pgm +sodium static-libs test unwind elibc_Darwin"
 
 RDEPEND="
 	!elibc_Darwin? ( unwind? ( sys-libs/libunwind ) )
@@ -25,7 +26,7 @@ DEPEND="${RDEPEND}
 	)
 	pgm? ( virtual/pkgconfig )"
 
-PATCHES=()
+PATCHES=( "${FILESDIR}"/${P}-fix-test_security_zap.patch )
 
 src_prepare() {
 	sed \
@@ -57,5 +58,5 @@ src_test() {
 
 src_install() {
 	default
-	find "${ED}"usr/lib* -name '*.la' -delete || die
+	find "${ED%/}"/usr/lib* -name '*.la' -delete || die
 }

@@ -1,11 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="6.2.5"
+MOZ_LIGHTNING_VER="6.2.2.1"
 MOZ_LIGHTNING_GDATA_VER="4.4.1"
 
 PYTHON_COMPAT=( python3_{5,6,7} )
@@ -13,16 +13,16 @@ PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
 MOZ_LANGS=(ar ast be bg br ca cs cy da de el en en-GB en-US es-AR
-es-ES et eu fi fr fy-NL ga-IE gd gl he hr hsb hu hy-AM id is it
-ja ko lt nb-NO nl nn-NO pl pt-BR pt-PT rm ro ru si sk sl sq sr
-sv-SE tr uk vi zh-CN zh-TW )
+es-ES et eu fi fr fy-NL ga-IE gd gl he hr hsb hu hy-AM id is it ja ko lt
+nb-NO nl nn-NO pl pt-BR pt-PT rm ro ru si sk sl sq sr sv-SE tr
+uk vi zh-CN zh-TW )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
 PATCHTB="thunderbird-60.0-patches-0"
-PATCHFF="firefox-60.6-patches-07"
+PATCHFF="firefox-60.0-patches-04"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -31,8 +31,6 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 	MOZ_PV="${MOZ_PV}esr"
 fi
 MOZ_P="${PN}-${MOZ_PV}"
-
-LLVM_MAX_SLOT=8
 
 inherit check-reqs flag-o-matic toolchain-funcs gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils autotools mozlinguas-v2
 
@@ -57,7 +55,7 @@ SRC_URI="${SRC_URI}
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 CDEPEND="
-	>=dev-libs/nss-3.36.7
+	>=dev-libs/nss-3.36.4
 	>=dev-libs/nspr-4.19
 	>=app-text/hunspell-1.5.4:=
 	dev-libs/atk
@@ -96,11 +94,8 @@ CDEPEND="
 	)
 	system-icu? ( >=dev-libs/icu-59.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1:= )
-	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
-	system-libvpx? (
-		>=media-libs/libvpx-1.5.0:0=[postproc]
-		<media-libs/libvpx-1.8:0=[postproc]
-	)
+	system-libevent? ( >=dev-libs/libevent-2.0:0= )
+	system-libvpx? ( >=media-libs/libvpx-1.5.0:0=[postproc] )
 	system-sqlite? ( >=dev-db/sqlite-3.23.1:3[secure-delete,debug=] )
 	wifi? (
 		kernel_linux? (
@@ -116,31 +111,11 @@ DEPEND="${CDEPEND}
 	app-arch/unzip
 	>=sys-devel/binutils-2.30
 	sys-apps/findutils
-	|| (
-		(
-			sys-devel/clang:8
-			!clang? ( sys-devel/llvm:8 )
-			clang? (
-				=sys-devel/lld-8*
-				sys-devel/llvm:8[gold]
-			)
-		)
-		(
-			sys-devel/clang:7
-			!clang? ( sys-devel/llvm:7 )
-			clang? (
-				=sys-devel/lld-7*
-				sys-devel/llvm:7[gold]
-			)
-		)
-		(
-			sys-devel/clang:6
-			!clang? ( sys-devel/llvm:6 )
-			clang? (
-				=sys-devel/lld-6*
-				sys-devel/llvm:6[gold]
-			)
-		)
+	>=sys-devel/llvm-4.0.1
+	>=sys-devel/clang-4.0.1
+	clang? (
+		>=sys-devel/llvm-4.0.1[gold]
+		>=sys-devel/lld-4.0.1
 	)
 	pulseaudio? ( media-sound/pulseaudio )
 	elibc_glibc? (
@@ -177,22 +152,6 @@ REQUIRED_USE="wifi? ( dbus )"
 S="${WORKDIR}/${MOZ_P%b[0-9]*}"
 
 BUILD_OBJ_DIR="${S}/tbird"
-
-llvm_check_deps() {
-	if ! has_version "sys-devel/clang:${LLVM_SLOT}" ; then
-		ewarn "sys-devel/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..."
-		return 1
-	fi
-
-	if use clang ; then
-		if ! has_version "=sys-devel/lld-${LLVM_SLOT}*" ; then
-			ewarn "=sys-devel/lld-${LLVM_SLOT}* is missing! Cannot use LLVM slot ${LLVM_SLOT} ..."
-			return 1
-		fi
-	fi
-
-	einfo "Will use LLVM slot ${LLVM_SLOT}!"
-}
 
 pkg_setup() {
 	moz_pkgsetup

@@ -16,6 +16,9 @@ gd gl gn gu-IN he hi-IN hr hsb hu hy-AM id is it ja ka kab kk km kn ko lij lt lv
 mai mk ml mr ms nb-NO nl nn-NO or pa-IN pl pt-BR pt-PT rm ro ru si sk sl son sq
 sr sv-SE ta te th tr uk uz vi xh zh-CN zh-TW )
 
+# Must be removed next bump
+MOZ_LANGPACK_PREFIX="66.0.3/linux-i686/xpi/"
+
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
 MOZ_PV="${MOZ_PV/_beta/b}" # Handle beta for SRC_URI
@@ -27,7 +30,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-67.0-patches-05"
+PATCH="${PN}-66.0-patches-09"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
@@ -64,13 +67,14 @@ SRC_URI="${SRC_URI}
 	${PATCH_URIS[@]}"
 
 CDEPEND="
-	>=dev-libs/nss-3.43
-	>=dev-libs/nspr-4.21
+	>=dev-libs/nss-3.42
+	>=dev-libs/nspr-4.19
+	>=app-text/hunspell-1.5.4:*
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
 	>=x11-libs/gtk+-2.18:2
-	>=x11-libs/gtk+-3.4.0:3=[X]
+	>=x11-libs/gtk+-3.4.0:3
 	x11-libs/gdk-pixbuf
 	>=x11-libs/pango-1.22.0
 	>=media-libs/libpng-1.6.35:0=[apng]
@@ -102,8 +106,11 @@ CDEPEND="
 	system-icu? ( >=dev-libs/icu-63.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
-	system-libvpx? ( =media-libs/libvpx-1.7*:0=[postproc] )
-	system-sqlite? ( >=dev-db/sqlite-3.27.2:3[secure-delete,debug=] )
+	system-libvpx? (
+		>=media-libs/libvpx-1.7.0:0=[postproc]
+		<media-libs/libvpx-1.8:0=[postproc]
+	)
+	system-sqlite? ( >=dev-db/sqlite-3.26:3[secure-delete,debug=] )
 	system-webp? ( >=media-libs/libwebp-1.0.2:0= )
 	wifi? ( kernel_linux? ( >=sys-apps/dbus-0.60
 			>=dev-libs/dbus-glib-0.72
@@ -120,7 +127,7 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
-	>=dev-util/cbindgen-0.8.2
+	>=dev-util/cbindgen-0.6.8
 	>=net-libs/nodejs-8.11.0
 	>=sys-devel/binutils-2.30
 	sys-apps/findutils
@@ -245,7 +252,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	use !wayland && rm -f "${WORKDIR}/firefox/2019_mozilla-bug1539471.patch"
 	eapply "${WORKDIR}/firefox"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -487,11 +493,7 @@ src_configure() {
 
 	# use the gtk3 toolkit (the only one supported at this point)
 	# TODO: Will this result in automagic dependency on x11-libs/gtk+[wayland]?
-	if use wayland ; then
-		mozconfig_annotate '' --enable-default-toolkit=cairo-gtk3-wayland
-	else
-		mozconfig_annotate '' --enable-default-toolkit=cairo-gtk3
-	fi
+	mozconfig_annotate '' --enable-default-toolkit=cairo-gtk3
 
 	mozconfig_use_enable startup-notification
 	mozconfig_use_enable system-sqlite
@@ -552,8 +554,6 @@ src_configure() {
 
 	# Finalize and report settings
 	mozconfig_final
-
-	mkdir -p "${S}"/third_party/rust/libloading/.deps
 
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \

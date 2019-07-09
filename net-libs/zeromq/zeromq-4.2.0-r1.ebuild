@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -11,22 +11,22 @@ SRC_URI="https://github.com/zeromq/libzmq/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"
-KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
-IUSE="doc drafts pgm +sodium static-libs test unwind elibc_Darwin"
+KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+IUSE="pgm +sodium static-libs test"
 
 RDEPEND="
-	!elibc_Darwin? ( unwind? ( sys-libs/libunwind ) )
+	sys-libs/libunwind
 	sodium? ( dev-libs/libsodium:= )
 	pgm? ( =net-libs/openpgm-5.2.122 )"
 DEPEND="${RDEPEND}
-	!elibc_Darwin? ( sys-apps/util-linux )
-	doc? (
-		app-text/asciidoc
-		app-text/xmlto
-	)
+	app-text/asciidoc
+	app-text/xmlto
+	sys-apps/util-linux
 	pgm? ( virtual/pkgconfig )"
 
-PATCHES=()
+PATCHES=(
+	"${FILESDIR}"/${P}-dl-backport.patch
+)
 
 src_prepare() {
 	sed \
@@ -39,12 +39,9 @@ src_prepare() {
 src_configure() {
 	local myeconfargs=(
 		--enable-shared
-		$(use_enable drafts)
 		$(use_enable static-libs static)
-		$(use_enable unwind libunwind)
 		$(use_with sodium libsodium)
 		$(use_with pgm)
-		$(use_with doc docs)
 	)
 	econf "${myeconfargs[@]}"
 }

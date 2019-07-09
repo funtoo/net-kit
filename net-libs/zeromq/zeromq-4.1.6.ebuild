@@ -1,32 +1,27 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=6
 
-inherit autotools
+inherit autotools eutils
 
 DESCRIPTION="A brokerless kernel"
 HOMEPAGE="http://www.zeromq.org/"
-SRC_URI="https://github.com/zeromq/libzmq/releases/download/v${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/zeromq/zeromq4-1/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"
-KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
-IUSE="doc drafts pgm +sodium static-libs test unwind elibc_Darwin"
+KEYWORDS="amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 x86 ~amd64-linux ~x86-linux"
+IUSE="pgm static-libs test"
 
 RDEPEND="
-	!elibc_Darwin? ( unwind? ( sys-libs/libunwind ) )
-	sodium? ( dev-libs/libsodium:= )
+	dev-libs/libsodium:=
 	pgm? ( =net-libs/openpgm-5.2.122 )"
 DEPEND="${RDEPEND}
-	!elibc_Darwin? ( sys-apps/util-linux )
-	doc? (
-		app-text/asciidoc
-		app-text/xmlto
-	)
+	app-text/asciidoc
+	app-text/xmlto
+	sys-apps/util-linux
 	pgm? ( virtual/pkgconfig )"
-
-PATCHES=()
 
 src_prepare() {
 	sed \
@@ -39,12 +34,10 @@ src_prepare() {
 src_configure() {
 	local myeconfargs=(
 		--enable-shared
-		$(use_enable drafts)
 		$(use_enable static-libs static)
-		$(use_enable unwind libunwind)
-		$(use_with sodium libsodium)
+		--with-relaxed
+		--with-libsodium
 		$(use_with pgm)
-		$(use_with doc docs)
 	)
 	econf "${myeconfargs[@]}"
 }
@@ -58,5 +51,5 @@ src_test() {
 
 src_install() {
 	default
-	find "${ED}"usr/lib* -name '*.la' -delete || die
+	prune_libtool_files
 }

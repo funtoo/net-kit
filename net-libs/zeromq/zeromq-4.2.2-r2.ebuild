@@ -11,7 +11,7 @@ SRC_URI="https://github.com/zeromq/libzmq/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"
-KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
+KEYWORDS="amd64 arm arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
 IUSE="doc drafts pgm +sodium static-libs test unwind elibc_Darwin"
 
 RDEPEND="
@@ -26,7 +26,8 @@ DEPEND="${RDEPEND}
 	)
 	pgm? ( virtual/pkgconfig )"
 
-PATCHES=()
+PATCHES=( "${FILESDIR}"/${PN}-4.2.1-disable-experimental-zmq_poll-implementation.patch
+	"${FILESDIR}"/${PN}-4.2.2-optional-libunwind.patch )
 
 src_prepare() {
 	sed \

@@ -61,8 +61,6 @@ net-misc/vde python_single_target_python2_7
 net-nntp/sabnzbd python_single_target_python2_7
 net-p2p/deluge python_single_target_python2_7
 net-p2p/nicotine+ python_single_target_python2_7
-net-print/cups python_single_target_python2_7
-net-print/hplip python_single_target_python2_7
 net-proxy/http-replicator python_single_target_python2_7
 net-voip/telepathy-haze python_single_target_python2_7
 net-voip/telepathy-rakia python_single_target_python2_7

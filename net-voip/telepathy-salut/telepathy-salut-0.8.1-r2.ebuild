@@ -1,9 +1,9 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python2_7 )
 
+PYTHON_COMPAT=( python2_7 )
 inherit python-any-r1
 
 DESCRIPTION="A link-local XMPP connection manager for Telepathy"
@@ -12,7 +12,7 @@ SRC_URI="https://telepathy.freedesktop.org/releases/${PN}/${P}.tar.gz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="alpha amd64 ~arm ia64 ppc ~ppc64 sparc x86 ~x86-linux"
+KEYWORDS="alpha amd64 ~arm ~arm64 ~ia64 ppc ~ppc64 sparc x86 ~x86-linux"
 IUSE="gnutls test"
 
 RDEPEND="
@@ -45,8 +45,8 @@ DEPEND="${RDEPEND}
 #               >=net-dns/avahi-0.6.22[python]
 
 PATCHES=(
-	# Fix uninitialized variable, upstream bug #37701
-	"${FILESDIR}"/${PN}-0.5.0-uninitialized.patch
+	"${FILESDIR}"/${PN}-0.5.0-uninitialized.patch # upstream bug #37701
+	"${FILESDIR}"/${P}-openssl-1.1.patch # bug #663994
 )
 
 python_check_deps() {
@@ -70,6 +70,9 @@ src_configure() {
 		--docdir=/usr/share/doc/${PF} \
 		--with-tls=$(usex gnutls gnutls openssl)
 		#$(use_enable test avahi-tests)
+
+	# false positives according to bug #413581:
+	# unrecognized options: --disable-plugins, --disable-avahi-tests
 }
 
 src_install() {

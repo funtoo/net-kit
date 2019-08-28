@@ -18,7 +18,7 @@ IUSE="pax_kernel"
 
 S="${WORKDIR}"
 QA_PREBUILT="*"
-RESTRICT="mirror bindist strip" #299368
+RESTRICT="bindist strip"
 
 RDEPEND="
 	|| (

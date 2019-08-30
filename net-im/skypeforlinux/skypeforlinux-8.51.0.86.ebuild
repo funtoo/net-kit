@@ -1,11 +1,11 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 MULTILIB_COMPAT=( abi_x86_64 )
 
-inherit desktop gnome2-utils pax-utils rpm multilib-build xdg-utils
+inherit desktop pax-utils rpm multilib-build xdg
 
 DESCRIPTION="Instant messaging client, with support for audio and video"
 HOMEPAGE="https://www.skype.com/"
@@ -18,19 +18,19 @@ IUSE="pax_kernel"
 
 S="${WORKDIR}"
 QA_PREBUILT="*"
-RESTRICT="mirror bindist strip" #299368
+RESTRICT="bindist strip"
 
 RDEPEND="
 	|| (
 		sys-auth/elogind
 		sys-apps/systemd
 	)
+	app-crypt/libsecret[${MULTILIB_USEDEP}]
 	dev-libs/atk[${MULTILIB_USEDEP}]
 	dev-libs/expat[${MULTILIB_USEDEP}]
 	dev-libs/glib:2[${MULTILIB_USEDEP}]
 	dev-libs/nspr[${MULTILIB_USEDEP}]
 	dev-libs/nss[${MULTILIB_USEDEP}]
-	gnome-base/gconf:2[${MULTILIB_USEDEP}]
 	media-libs/alsa-lib[${MULTILIB_USEDEP}]
 	media-libs/fontconfig:1.0[${MULTILIB_USEDEP}]
 	media-libs/freetype:2[${MULTILIB_USEDEP}]
@@ -41,7 +41,7 @@ RDEPEND="
 	virtual/ttf-fonts
 	x11-libs/cairo[${MULTILIB_USEDEP}]
 	x11-libs/gdk-pixbuf:2[${MULTILIB_USEDEP}]
-	x11-libs/gtk+:2[${MULTILIB_USEDEP}]
+	x11-libs/gtk+:3[${MULTILIB_USEDEP}]
 	x11-libs/libX11[${MULTILIB_USEDEP}]
 	x11-libs/libXScrnSaver[${MULTILIB_USEDEP}]
 	x11-libs/libXcomposite[${MULTILIB_USEDEP}]
@@ -65,8 +65,7 @@ src_prepare() {
 	default
 	sed -e "s!^SKYPE_PATH=.*!SKYPE_PATH=${EPREFIX}/opt/skypeforlinux/skypeforlinux!" \
 		-i usr/bin/skypeforlinux || die
-	sed -e "s!^Exec=/usr/!Exec=${EPREFIX}/opt/!" \
-		-e "s!^Categories=.*!Categories=Network;InstantMessaging;Telephony;!" \
+	sed -e "s!^Categories=.*!Categories=Network;InstantMessaging;Telephony;!" \
 		-e "/^OnlyShowIn=/d" \
 		-i usr/share/applications/skypeforlinux.desktop || die
 }
@@ -75,18 +74,14 @@ src_install() {
 	dodir /opt
 	cp -a usr/share/skypeforlinux "${D}"/opt || die
 
-	into /opt
 	dobin usr/bin/skypeforlinux
 
 	dodoc usr/share/skypeforlinux/*.html
 	dodoc -r usr/share/doc/skypeforlinux/.
 	# symlink required for the "Help->3rd Party Notes" menu entry  (otherwise frozen skype -> xdg-open)
-	dosym ${P} usr/share/doc/skypeforlinux
+	dosym ${PF} usr/share/doc/skypeforlinux
 
 	doicon usr/share/pixmaps/skypeforlinux.png
-
-	# compat symlink for the autostart desktop file
-	dosym ../../opt/bin/skypeforlinux usr/bin/skypeforlinux
 
 	local res
 	for res in 16 32 256 512; do
@@ -96,24 +91,12 @@ src_install() {
 	domenu usr/share/applications/skypeforlinux.desktop
 
 	if use pax_kernel; then
-		pax-mark -m "${ED%/}"/opt/skypeforlinux/skypeforlinux
-		pax-mark -m "${ED%/}"/opt/skypeforlinux/resources/app.asar.unpacked/node_modules/slimcore/bin/slimcore.node
+		pax-mark -m "${ED}"/opt/skypeforlinux/skypeforlinux
+		pax-mark -m "${ED}"/opt/skypeforlinux/resources/app.asar.unpacked/node_modules/slimcore/bin/slimcore.node
 		ewarn "You have set USE=pax_kernel meaning that you intend to run"
 		ewarn "${PN} under a PaX enabled kernel. To do so, we must modify"
 		ewarn "the ${PN} binary itself and this *may* lead to breakage! If"
 		ewarn "you suspect that ${PN} is being broken by this modification,"
 		ewarn "please open a bug."
 	fi
-}
-
-pkg_postinst() {
-	xdg_desktop_database_update
-	xdg_mimeinfo_database_update
-	gnome2_icon_cache_update
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
-	xdg_mimeinfo_database_update
-	gnome2_icon_cache_update
 }

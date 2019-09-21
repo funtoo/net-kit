@@ -10,7 +10,7 @@ inherit autotools eapi7-ver ssl-cert systemd user
 MY_P="${P/_/.}"
 #MY_S="${PN}-ce-${PV}"
 major_minor="$(ver_cut 1-2)"
-sieve_version="0.5.5"
+sieve_version="0.5.7.2"
 if [[ ${PV} == *_rc* ]] ; then
 	rc_dir="rc/"
 else
@@ -28,7 +28,7 @@ HOMEPAGE="https://www.dovecot.org/"
 
 SLOT="0"
 LICENSE="LGPL-2.1 MIT"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 s390 ~sparc x86"
+KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 
 IUSE_DOVECOT_AUTH="kerberos ldap lua mysql pam postgres sqlite vpopmail"
 IUSE_DOVECOT_COMPRESS="bzip2 lzma lz4 zlib"
@@ -52,6 +52,7 @@ DEPEND="argon2? ( dev-libs/libsodium )
 	solr? ( net-misc/curl dev-libs/expat )
 	sqlite? ( dev-db/sqlite:* )
 	!libressl? ( dev-libs/openssl:0 )
+	suid? ( acct-group/mail )
 	libressl? ( dev-libs/libressl )
 	tcpd? ( sys-apps/tcp-wrappers )
 	textcat? ( app-text/libexttextcat )
@@ -86,8 +87,8 @@ pkg_setup() {
 src_prepare() {
 	default
 	# bug 657108
-	# elibtoolize
-	eautoreconf
+	elibtoolize
+	#eautoreconf
 }
 
 src_configure() {

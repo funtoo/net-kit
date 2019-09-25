@@ -5,12 +5,11 @@ EAPI=6
 MOZ_ESR=0
 
 # Can be updated using scripts/get_langs.sh from mozilla overlay
-# Missing when bumped : be
-MOZ_LANGS=( ach af an ar as ast az bg bn-BD bn-IN br bs ca cs cy da de
-el en en-GB en-US en-ZA eo es-AR es-CL es-ES es-MX et eu fa fi fr fy-NL
-ga-IE gd gl gu-IN he hi-IN hr hsb hu hy-AM id is it ja kk km kn ko lt
-lv mai mk ml mr ms nb-NO nl nn-NO or pa-IN pl pt-BR pt-PT rm ro ru si sk sl
-son sq sr sv-SE ta te th tr uk uz vi xh zh-CN zh-TW )
+MOZ_LANGS=(ach af an ar ast az be bg bn br bs ca cak cs cy da de dsb el en en-CA
+en-GB en-US eo es-AR es-CL es-ES es-MX et eu fa ff fi fr fy-NL ga-IE gd gl gn gu-IN
+he hi-IN hr hsb hu hy-AM ia id is it ja ka kab kk km kn ko lij lt lv mk mr ms my
+nb-NO nl nn-NO oc pa-IN pl pt-BR pt-PT rm ro ru si sk sl son sq sr sv-SE ta te
+th tr uk ur uz vi xh zh-CN zh-TW )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_beta/b}" # Handle beta for SRC_URI
@@ -24,7 +23,7 @@ MOZ_P="${MOZ_PN}-${MOZ_PV}"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/mozilla.org/${MOZ_PN}/releases/"
 
-inherit eutils pax-utils xdg-utils gnome2-utils mozlinguas-v2 nsplugins
+inherit mozlinguas-v2 nsplugins pax-utils xdg-utils
 
 DESCRIPTION="Firefox Web Browser"
 SRC_URI="${SRC_URI}
@@ -154,10 +153,6 @@ src_install() {
 	pax-mark mr "${ED}"${MOZILLA_FIVE_HOME}/{firefox,firefox-bin,plugin-container}
 }
 
-pkg_preinst() {
-	gnome2_icon_savelist
-}
-
 pkg_postinst() {
 	if ! has_version 'gnome-base/gconf' || ! has_version 'gnome-base/orbit' \
 		|| ! has_version 'net-misc/curl'; then
@@ -171,9 +166,9 @@ pkg_postinst() {
 
 	# Update mimedb for the new .desktop file
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }

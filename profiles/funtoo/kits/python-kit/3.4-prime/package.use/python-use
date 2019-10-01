@@ -8,6 +8,7 @@
 =net-irc/irker-2.9 python_single_target_python2_7
 =net-wireless/kismet-2018.08_beta1-r3 python_single_target_python2_7
 =net-wireless/kismet-9999 python_single_target_python3_6 python_targets_python3_6
+=www-servers/nginx-unit-1.11.0 python_single_target_python2_7
 mail-client/claws-mail python_single_target_python2_7
 mail-filter/tmda python_single_target_python2_7
 net-analyzer/bro python_single_target_python2_7

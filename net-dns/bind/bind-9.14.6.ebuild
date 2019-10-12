@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # Re dlz/mysql and threads, needs to be verified..
@@ -12,7 +12,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
+PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 
 inherit python-r1 eutils autotools toolchain-funcs flag-o-matic multilib db-use user systemd
 
@@ -28,7 +28,7 @@ RRL_PV="${MY_PV}"
 
 DESCRIPTION="BIND - Berkeley Internet Name Domain - Name Server"
 HOMEPAGE="http://www.isc.org/software/bind"
-SRC_URI="https://www.isc.org/downloads/file/${MY_P}/?version=tar-gz -> ${P}.tar.gz
+SRC_URI="https://downloads.isc.org/isc/bind9/${PV}/${P}.tar.gz
 	doc? ( mirror://gentoo/dyndns-samples.tbz2 )"
 #	sdb-ldap? (
 #		http://ftp.disconnected-by-peer.at/pub/bind-sdb-ldap-${SDB_LDAP_VER}.patch.bz2
@@ -36,15 +36,16 @@ SRC_URI="https://www.isc.org/downloads/file/${MY_P}/?version=tar-gz -> ${P}.tar.
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 # -berkdb by default re bug 602682
-IUSE="-berkdb +caps dlz dnstap doc dnsrps fixed-rrset geoip gost gssapi ipv6
-json ldap libressl lmdb mysql odbc postgres python rpz seccomp selinux ssl static-libs
+IUSE="+berkdb +caps +dlz dnstap doc dnsrps fixed-rrset geoip gost gssapi idn ipv6
+json ldap libidn2 libressl lmdb mysql odbc postgres python rpz seccomp selinux ssl static-libs
 +threads urandom xml +zlib"
 # sdb-ldap - patch broken
 # no PKCS11 currently as it requires OpenSSL to be patched, also see bug 409687
 
-REQUIRED_USE="
+REQUIRED_USE="idn? ( !libidn2 )
+	libidn2? ( !idn )
 	postgres? ( dlz )
 	berkdb? ( dlz )
 	mysql? ( dlz !threads )
@@ -61,9 +62,11 @@ DEPEND="
 		!libressl? ( dev-libs/openssl:0[-bindist] )
 		libressl? ( dev-libs/libressl )
 	)
-	mysql? ( dev-db/mysql-connector-c:0= )
+	mysql? ( >=virtual/mysql-4.0 )
 	odbc? ( >=dev-db/unixODBC-2.2.6 )
 	ldap? ( net-nds/openldap )
+	idn? ( <net-dns/idnkit-2:= )
+	libidn2? ( net-dns/libidn2 )
 	postgres? ( dev-db/postgresql:= )
 	caps? ( >=sys-libs/libcap-2.1.0 )
 	xml? ( dev-libs/libxml2 )
@@ -150,7 +153,6 @@ src_configure() {
 		--without-readline
 		$(use_enable caps linux-caps)
 		$(use_enable dnsrps)
-		$(use_enable dnstap)
 		$(use_enable fixed-rrset)
 		$(use_enable ipv6)
 		$(use_enable rpz rpz-nsdname)
@@ -164,6 +166,8 @@ src_configure() {
 		$(use_with dlz dlz-stub)
 		$(use_with gost)
 		$(use_with gssapi)
+		$(use_with idn idnkit)
+		$(use_with libidn2)
 		$(use_with json libjson)
 		$(use_with ldap dlz-ldap)
 		$(use_with mysql dlz-mysql)

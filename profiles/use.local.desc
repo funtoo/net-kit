@@ -1666,15 +1666,6 @@ net-p2p/xmr-stak:devfee - Enable payment of devfee to the developer
 net-p2p/xmr-stak:hwloc - Enable CPU affinity support via hwloc
 net-p2p/xmr-stak:opencl - Enable OpenCL support
 net-p2p/xmr-stak:webserver - Enable internal webserver
-net-proxy/haproxy:51degrees - Device Detection using 51 Degrees
-net-proxy/haproxy:device-atlas - Use dev-libs/device-atlas-api-c library
-net-proxy/haproxy:net_ns - Enable network namespace support (CONFIG_NET_NS)
-net-proxy/haproxy:pcre-jit - Use JIT support for PCRE
-net-proxy/haproxy:pcre2 - Enable PCRE2 RegEx support
-net-proxy/haproxy:pcre2-jit - Use JIT support for PCRE2
-net-proxy/haproxy:slz - Use dev-libs/libslz compression library
-net-proxy/haproxy:tools - Install additional tools (halog, iprange)
-net-proxy/haproxy:wurfl - Device Detection using WURFL
 net-proxy/privoxy:client-tags - Enable support for client-specific tags
 net-proxy/privoxy:compression - Allow privoxy to compress buffered content before sending to the client, if it supports it
 net-proxy/privoxy:editor - Enable the web-based actions file editor

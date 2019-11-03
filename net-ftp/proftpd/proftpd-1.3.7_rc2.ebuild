@@ -1,24 +1,26 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit multilib systemd
+EAPI=7
+inherit multilib systemd tmpfiles
 
 MOD_CASE="0.7"
-MOD_CLAMAV="0.11rc"
+MOD_CLAMAV="0.14rc2"
 MOD_DISKUSE="0.9"
 MOD_GSS="1.3.6"
 MOD_MSG="0.4.1"
 MOD_VROOT="0.9.4"
+#PKG_VER="$P:$PN:$PV:$PR:$PVR:$PF"
+#PKG_VER="$P"
 
 DESCRIPTION="An advanced and very configurable FTP server"
 HOMEPAGE="http://www.proftpd.org/
 	http://www.castaglia.org/proftpd/
 	http://www.thrallingpenguin.com/resources/mod_clamav.htm
 	http://gssmod.sourceforge.net/"
-SRC_URI="ftp://ftp.proftpd.org/distrib/source/${P/_/}.tar.gz
+SRC_URI="ftp://ftp.proftpd.org/distrib/source/${P/_/}.tar.gz -> ${PN}-${PVR}.tar.gz
 	case? ( http://www.castaglia.org/${PN}/modules/${PN}-mod-case-${MOD_CASE}.tar.gz )
-	clamav? ( https://secure.thrallingpenguin.com/redmine/attachments/download/1/mod_clamav-${MOD_CLAMAV}.tar.gz )
+	clamav? ( https://github.com/jbenden/mod_clamav/archive/v0.14rc2.tar.gz )
 	diskuse? ( http://www.castaglia.org/${PN}/modules/${PN}-mod-diskuse-${MOD_DISKUSE}.tar.gz )
 	kerberos? ( mirror://sourceforge/gssmod/mod_gss-${MOD_GSS}.tar.gz )
 	msg? ( http://www.castaglia.org/${PN}/modules/${PN}-mod-msg-${MOD_MSG}.tar.gz )
@@ -27,14 +29,19 @@ LICENSE="GPL-2"
 
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
-IUSE="acl authfile ban +caps case clamav copy ctrls deflate diskuse doc dso dynmasq exec ifsession ifversion ident ipv6
+IUSE="acl authfile ban +caps case clamav copy ctrls deflate diskuse dso dynmasq exec ifsession ifversion ident ipv6
 	kerberos ldap libressl log_forensic memcache msg mysql ncurses nls pam +pcre postgres qos radius
-	ratio readme rewrite selinux sftp shaper sitemisc snmp softquota sqlite ssl tcpd test unique_id vroot xinetd"
+	ratio readme rewrite selinux sftp shaper sitemisc snmp sodium softquota sqlite ssl tcpd test unique_id vroot"
 # TODO: geoip
 REQUIRED_USE="ban? ( ctrls )
 	msg? ( ctrls )
 	sftp? ( ssl )
-	shaper? ( ctrls )"
+	shaper? ( ctrls )
+
+	mysql? ( ssl )
+	postgres? ( ssl )
+	sqlite? ( ssl )
+"
 
 CDEPEND="acl? ( virtual/acl )
 	caps? ( sys-libs/libcap )
@@ -42,7 +49,7 @@ CDEPEND="acl? ( virtual/acl )
 	kerberos? ( virtual/krb5 )
 	ldap? ( net-nds/openldap )
 	memcache? ( >=dev-libs/libmemcached-0.41 )
-	mysql? ( virtual/mysql )
+	mysql? ( dev-db/mysql-connector-c:0= )
 	nls? ( virtual/libiconv )
 	ncurses? ( sys-libs/ncurses:0= )
 	ssl? (
@@ -52,8 +59,9 @@ CDEPEND="acl? ( virtual/acl )
 	pam? ( virtual/pam )
 	pcre? ( dev-libs/libpcre )
 	postgres? ( dev-db/postgresql:= )
+	sodium? ( dev-libs/libsodium:0= )
 	sqlite? ( dev-db/sqlite:3 )
-	xinetd? ( virtual/inetd )"
+"
 DEPEND="${CDEPEND}
 	test? ( dev-libs/check )"
 RDEPEND="${CDEPEND}
@@ -61,8 +69,13 @@ RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-ftp )"
 
 S="${WORKDIR}/${P/_/}"
+#S="${WORKDIR}/${PN}"
 
-PATCHES=("${FILESDIR}"/${PN}-1.3.6-use-trace.patch)
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.3.6-use-trace.patch
+# Must be verif not work with new version
+#	"${FILESDIR}"/${PN}-1.3.6-sighup-crash.patch
+)
 
 RESTRICT=test # tests corrupt memory. need to be fixed upstream first
 
@@ -86,7 +99,7 @@ src_prepare() {
 
 	if use clamav ; then
 		cp -v "${WORKDIR}"/mod_clamav-${MOD_CLAMAV}/mod_clamav.{c,h} contrib || die
-		eapply "${WORKDIR}"/mod_clamav-${MOD_CLAMAV}/${PN}.patch
+#		eapply "${WORKDIR}"/mod_clamav-${MOD_CLAMAV}/${PN}.patch
 	fi
 
 	if use diskuse; then
@@ -220,6 +233,7 @@ src_configure() {
 		$(use_enable ssl openssl) \
 		$(use_enable pam auth-pam) \
 		$(use_enable pcre) \
+		$(use_enable sodium) \
 		$(use_enable test tests) \
 		--enable-trace \
 		$(use_enable userland_GNU shadow) \
@@ -240,18 +254,25 @@ src_install() {
 	insinto /etc/proftpd
 	doins "${FILESDIR}"/proftpd.conf.sample
 
-	if use xinetd ; then
-		insinto /etc/xinetd.d
-		newins "${FILESDIR}"/proftpd.xinetd proftpd
-	fi
+	insinto /etc/xinetd.d
+	newins "${FILESDIR}"/proftpd.xinetd proftpd
+
+	insinto /etc/logrotate.d
+	newins "${FILESDIR}"/${PN}.logrotate ${PN}
 
 	dodoc ChangeLog CREDITS INSTALL NEWS README* RELEASE_NOTES
-	if use doc ; then
-		dohtml doc/*.html doc/contrib/*.html doc/howto/*.html doc/modules/*.html
-		docinto rfc
-		dodoc doc/rfc/*.txt
-	fi
+
+	docinto html
+	dodoc doc/*.html doc/contrib/*.html doc/howto/*.html doc/modules/*.html
+
+	docinto rfc
+	dodoc doc/rfc/*.txt
 
 	systemd_dounit       "${FILESDIR}"/${PN}.service
 	systemd_newtmpfilesd "${FILESDIR}"/${PN}-tmpfiles.d.conf ${PN}.conf
+}
+
+pkg_postinst() {
+	# Create /var/run files at package merge time: bug #650000
+	tmpfiles_process ${PN}.conf
 }

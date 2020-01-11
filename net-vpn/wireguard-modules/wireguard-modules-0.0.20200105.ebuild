@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 MODULES_OPTIONAL_USE="module"
 inherit linux-mod bash-completion-r1
@@ -11,53 +11,49 @@ HOMEPAGE="https://www.wireguard.com/"
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://git.zx2c4.com/WireGuard"
+	EGIT_REPO_URI="https://git.zx2c4.com/wireguard-linux-compat"
 	KEYWORDS=""
 else
-	SRC_URI="https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
-	S="${WORKDIR}/WireGuard-${PV}"
+	SRC_URI="https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat-${PV}.tar.xz"
+	S="${WORKDIR}/wireguard-linux-compat-${PV}"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="debug +module +tools module-src"
+IUSE="debug +module module-src"
 
-DEPEND="tools? ( net-libs/libmnl )"
-RDEPEND="${DEPEND}"
+DEPEND=""
+RDEPEND="${DEPEND} !<virtual/wireguard-1"
 
 MODULE_NAMES="wireguard(kernel/drivers/net:src)"
 BUILD_TARGETS="module"
-CONFIG_CHECK="NET INET NET_UDP_TUNNEL CRYPTO_BLKCIPHER"
+CONFIG_CHECK="NET INET NET_UDP_TUNNEL CRYPTO_ALGAPI"
 
 pkg_setup() {
 	if use module; then
 		linux-mod_pkg_setup
-		kernel_is -lt 3 10 0 && die "This version of ${PN} requires Linux >= 3.10"
+		if kernel_is -ge 5 6 0; then
+			eerror
+			eerror "WireGuard has been merged upstream in Linux 5.6. Therefore,"
+			eerror "you no longer need this compatibility ebuild. Instead, simply"
+			eerror "enable CONFIG_WIREGUARD=y in your kernel configuration."
+			eerror
+			die "Use CONFIG_WIREGUARD=y for kernels >= 5.6, and do not use this package."
+		elif kernel_is -lt 3 10 0; then
+			die "This version of ${PN} requires Linux >= 3.10."
+		fi
 	fi
 }
 
 src_compile() {
-	BUILD_PARAMS="KERNELDIR=${KERNEL_DIR}"
+	BUILD_PARAMS="KERNELDIR=${KV_OUT_DIR}"
 	use debug && BUILD_PARAMS="CONFIG_WIREGUARD_DEBUG=y ${BUILD_PARAMS}"
 	use module && linux-mod_src_compile
-	use tools && emake RUNSTATEDIR="${EPREFIX}/run" -C src/tools CC="$(tc-getCC)" LD="$(tc-getLD)"
 }
 
 src_install() {
 	use module && linux-mod_src_install
-	if use tools; then
-		dodoc README.md
-		dodoc -r contrib/examples
-		emake \
-			WITH_BASHCOMPLETION=yes \
-			WITH_SYSTEMDUNITS=yes \
-			WITH_WGQUICK=yes \
-			DESTDIR="${D}" \
-			BASHCOMPDIR="$(get_bashcompdir)" \
-			PREFIX="${EPREFIX}/usr" \
-			-C src/tools install
-	fi
 	use module-src && emake DESTDIR="${D}" PREFIX="${EPREFIX}/usr" -C src dkms-install
 }
 
@@ -66,45 +62,15 @@ pkg_postinst() {
 		einfo
 		einfo "You have enabled the module-src USE flag without the module USE"
 		einfo "flag. This means that sources are installed to"
-		einfo "${ROOT}usr/src/wireguard instead of having the"
+		einfo "${ROOT}/usr/src/wireguard instead of having the"
 		einfo "kernel module compiled. You will need to compile the module"
 		einfo "yourself. Most likely, you don't want this USE flag, and should"
 		einfo "rather use USE=module"
 		einfo
 	fi
-	use module && linux-mod_pkg_postinst
 
-	einfo
-	einfo "This software is experimental and has not yet been released."
-	einfo "As such, it may contain significant issues. Please do not file"
-	einfo "bug reports with Gentoo, but rather direct them upstream to:"
-	einfo
-	einfo "    team@wireguard.com    security@wireguard.com"
-	einfo
-
-	if use tools; then
-		einfo
-		einfo "After installing WireGuard, if you'd like to try sending some packets through"
-		einfo "WireGuard, you may use, for testing purposes only, the insecure client.sh"
-		einfo "test example script:"
-		einfo
-		einfo "  \$ bzcat ${ROOT}usr/share/doc/${PF}/examples/ncat-client-server/client.sh.bz2 | sudo bash -"
-		einfo
-		einfo "This will automatically setup interface wg0, through a very insecure transport"
-		einfo "that is only suitable for demonstration purposes. You can then try loading the"
-		einfo "hidden website or sending pings:"
-		einfo
-		einfo "  \$ chromium http://192.168.4.1"
-		einfo "  \$ ping 192.168.4.1"
-		einfo
-		einfo "If you'd like to redirect your internet traffic, you can run it with the"
-		einfo "\"default-route\" argument. You may not use this server for any abusive or illegal"
-		einfo "purposes. It is for quick testing only."
-		einfo
-		einfo "More info on getting started can be found at: https://www.wireguard.com/quickstart/"
-		einfo
-	fi
 	if use module; then
+		linux-mod_pkg_postinst
 		local old new
 		if [[ $(uname -r) != "${KV_FULL}" ]]; then
 			ewarn

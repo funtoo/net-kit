@@ -1,4 +1,3 @@
-dev-lang
 dev-libs
 mail-client
 mail-filter
@@ -24,7 +23,5 @@ net-vpn
 net-wireless
 virtual
 www-apps
-www-client
 www-misc
-www-plugins
 www-servers

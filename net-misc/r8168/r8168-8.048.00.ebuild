@@ -1,16 +1,17 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit linux-info linux-mod eutils
 
 DESCRIPTION="r8168 driver for Realtek 8111/8168 PCI-E NICs"
-HOMEPAGE="http://www.realtek.com.tw"
-SRC_URI="http://12244.wpc.azureedge.net/8012244/drivers/rtdrivers/cn/nic/0010-${P}.tar.bz2 -> ${P}.tar.bz2"
+HOMEPAGE="https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software"
+SRC_URI="${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
+RESTRICT="fetch"
 
 MODULE_NAMES="r8168(net:${S}/src)"
 BUILD_TARGETS="modules"
@@ -18,9 +19,11 @@ BUILD_TARGETS="modules"
 CONFIG_CHECK="!R8169"
 ERROR_R8169="${P} requires Realtek 8169 PCI Gigabit Ethernet adapter (CONFIG_R8169) to be DISABLED"
 
-PATCHES=(
-	"${FILESDIR}"/linux-4.15-2.patch
-)
+pkg_nofetch() {
+	einfo "Please download ${SRC_URI} from:"
+	einfo "  ${HOMEPAGE}"
+	einfo "using the \"GBE Ethernet LINUX driver r8168 for kernel up to 4.15\" link."
+}
 
 pkg_setup() {
 	linux-mod_pkg_setup

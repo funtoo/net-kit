@@ -38,6 +38,12 @@ DEPEND="${CDEPEND}
 
 DOCS="AUTHORS ChangeLog* NEW* PLUGIN* README* TODO*"
 
+src_prepare() {
+	sed -i 's/ enchant/ enchant-2/g' configure || die "Sed failed!"
+	sed -i 's,enchant/,enchant-2/,g' src/compose.c || die "Sed failed!"
+	default
+}
+
 src_configure() {
 	local htmldir="${EPREFIX}"/usr/share/doc/${PF}/html
 	econf \

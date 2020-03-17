@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit gnome2-utils xdg-utils
+inherit gnome2-utils xdg-utils flag-o-matic
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org
@@ -23,13 +23,13 @@ SLOT="0"
 IUSE="+dbus debug webui +X"
 REQUIRED_USE="dbus? ( X )"
 
+#	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[qt5(+),X?]
 RDEPEND="
 	>=dev-libs/boost-1.62.0-r1:=
 	dev-qt/qtcore:5
 	dev-qt/qtnetwork:5[ssl]
-	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[qt5(+),X?]
 	dev-qt/qtxml:5
-	=net-libs/libtorrent-rasterbar-1.1*:0=
+	>=net-libs/libtorrent-rasterbar-1.1.10:0=
 	sys-libs/zlib
 	dbus? ( dev-qt/qtdbus:5 )
 	X? (
@@ -45,7 +45,8 @@ DEPEND="${RDEPEND}
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
 src_configure() {
-	econf --with-qtsingleapplication=system \
+	append-cxxflags -std=c++14
+	econf \
 	$(use_enable dbus qt-dbus) \
 	$(use_enable debug) \
 	$(use_enable webui) \

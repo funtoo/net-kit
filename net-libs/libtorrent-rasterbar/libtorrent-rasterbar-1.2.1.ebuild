@@ -61,7 +61,7 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cxxflags -std=c++11 # bug 634506
+	append-cxxflags -std=c++14 # bug 634506
 
 	local myeconfargs=(
 		$(use_enable debug)

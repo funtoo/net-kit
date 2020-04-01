@@ -41,6 +41,7 @@ RDEPEND="${PYTHON_DEPS}
 	!gnome-extra/nautilus-dropbox
 	gnome? ( gnome-base/nautilus
 	dev-libs/glib:2
+	dev-libs/libffi
 	dev-python/pygtk:2[${PYTHON_USEDEP}]
 	x11-libs/gtk+:2
 	x11-libs/libnotify

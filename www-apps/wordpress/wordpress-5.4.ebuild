@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit webapp
 
@@ -10,7 +10,7 @@ HOMEPAGE="https://wordpress.org/"
 SRC_URI="https://wordpress.org/${P/_rc/-RC}.tar.gz"
 
 LICENSE="GPL-2+"
-KEYWORDS="~amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="*"
 
 RDEPEND="virtual/httpd-php
 	|| ( dev-lang/php[mysql] dev-lang/php[mysqli] )"

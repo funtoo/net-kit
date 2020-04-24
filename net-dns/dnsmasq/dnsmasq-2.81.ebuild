@@ -12,7 +12,7 @@ SRC_URI="http://www.thekelleys.org.uk/dnsmasq/${P}.tar.xz"
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd"
+KEYWORDS="*"
 
 IUSE="auth-dns conntrack dbus +dhcp dhcp-tools dnssec +dumpfile id idn libidn2"
 IUSE+=" +inotify ipv6 lua nls script selinux static tftp"
@@ -96,7 +96,7 @@ src_prepare() {
 	default
 
 	sed -i -r 's:lua5.[0-9]+:lua:' Makefile
-	sed -i "s:%%PREFIX%%:${EPREFIX}/usr:" dnsmasq.conf.example
+	sed -i "s:%%PREFIX%%:${EPREFIX}/usr:" dnsmasq.conf.example || die
 }
 
 src_configure() {

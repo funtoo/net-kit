@@ -2,10 +2,10 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{6,7,8}} )
+PYTHON_COMPAT=( python2+ )
 PYTHON_REQ_USE="tk"
 
-inherit python-single-r1 systemd toolchain-funcs autotools
+inherit python-single-r1 systemd toolchain-funcs user autotools
 
 DESCRIPTION="the legendary remote-mail retrieval and forwarding utility"
 HOMEPAGE="http://www.fetchmail.info/"
@@ -17,7 +17,7 @@ KEYWORDS="*"
 IUSE="ssl nls kerberos tk socks libressl"
 REQUIRED_USE="tk? ( ${PYTHON_REQUIRED_USE} )"
 
-RDEPEND="acct-user/fetchmail
+RDEPEND="
 	ssl? (
 		!libressl? ( >=dev-libs/openssl-1.0.2:= )
 		libressl?  ( dev-libs/libressl:= )
@@ -47,6 +47,8 @@ PATCHES=(
 S="${WORKDIR}/fetchmail-RELEASE_6-4-3"
 
 pkg_setup() {
+	enewgroup ${PN}
+	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
 	use tk && python-single-r1_pkg_setup
 }
 
@@ -78,6 +80,10 @@ src_compile() {
 }
 
 src_install() {
+	keepdir /var/lib/${PN}
+	fowners ${PN}:${PN} /var/lib/${PN}
+	fperms 700 /var/lib/${PN}
+
 	default
 
 	newinitd "${FILESDIR}"/fetchmail.initd fetchmail

@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,11 +10,10 @@ SRC_URI="https://www.opensmtpd.org/archives/${P/_}.tar.gz"
 
 LICENSE="ISC BSD BSD-1 BSD-2 BSD-4"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="libressl pam +mta"
+KEYWORDS=""
+IUSE="pam +mta"
 
-DEPEND="!libressl? ( dev-libs/openssl:0 )
-		libressl? ( dev-libs/libressl )
+DEPEND="dev-libs/libressl
 		elibc_musl? ( sys-libs/fts-standalone )
 		sys-libs/zlib
 		pam? ( virtual/pam )
@@ -39,10 +37,6 @@ DEPEND="!libressl? ( dev-libs/openssl:0 )
 RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${P/_}
-PATCHES=(
-	"${FILESDIR}/${P}-fix-crash-on-auth.patch"
-	"${FILESDIR}/${P}-openssl_1.1.patch"
-)
 
 src_configure() {
 	tc-export AR
@@ -60,7 +54,6 @@ src_configure() {
 src_install() {
 	default
 	newinitd "${FILESDIR}"/smtpd.initd smtpd
-	systemd_dounit "${FILESDIR}"/smtpd.{service,socket}
 	use pam && newpamd "${FILESDIR}"/smtpd.pam smtpd
 	dosym /usr/sbin/smtpctl /usr/sbin/makemap
 	dosym /usr/sbin/smtpctl /usr/sbin/newaliases

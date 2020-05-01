@@ -1,16 +1,15 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-PYTHON_COMPAT=(python{2_7,3_5,3_6,3_7})
-inherit bash-completion-r1 distutils-r1 git-r3 readme.gentoo-r1
+PYTHON_COMPAT=( python2+ )
+inherit bash-completion-r1 distutils-r1 readme.gentoo-r1
 
 DESCRIPTION="Download videos from YouTube.com (and more sites...)"
-HOMEPAGE="https://rg3.github.com/youtube-dl/"
-EGIT_REPO_URI="https://github.com/rg3/youtube-dl"
+HOMEPAGE="http://ytdl-org.github.io/youtube-dl/"
+SRC_URI="https://github.com/ytdl-org/youtube-dl/releases/download/2020.03.24/youtube-dl-2020.03.24.tar.gz -> youtube-dl-2020.03.24.tar.gz"
 LICENSE="public-domain"
 
-KEYWORDS=""
+KEYWORDS="*"
 RESTRICT="test"
 SLOT="0"
 DEPEND="
@@ -23,15 +22,15 @@ RDEPEND="
 		dev-python/pycrypto[${PYTHON_USEDEP}]
 	)
 "
+S="${WORKDIR}/${PN}"
 
 src_compile() {
 	distutils-r1_src_compile
-
-	emake ${PN}.{bash-completion,fish,zsh}
 }
 
 python_install_all() {
-	dodoc README.md
+	dodoc README.txt
+	doman ${PN}.1
 
 	newbashcomp ${PN}.bash-completion ${PN}
 

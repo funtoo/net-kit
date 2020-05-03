@@ -1,14 +1,13 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} )
-PYTHON_REQ_USE="threads"
+PYTHON_COMPAT=( python3+ )
+PYTHON_REQ_USE="threads(+)"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 flag-o-matic
+inherit autotools distutils-r1
 
 MY_PV=$(ver_rs 1-2 '_')
 MY_P=${PN/-rasterbar}-${MY_PV}
@@ -18,11 +17,13 @@ HOMEPAGE="https://libtorrent.org https://github.com/arvidn/libtorrent"
 SRC_URI="https://github.com/arvidn/libtorrent/archive/${MY_P}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
-SLOT="0/9"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+SLOT="0/10"
+KEYWORDS="*"
 IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	dev-libs/boost:=[threads]
@@ -61,16 +62,17 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cxxflags -std=c++14 # bug 634506
 
 	local myeconfargs=(
 		$(use_enable debug)
 		$(use_enable debug export-all)
-		$(use_enable dht dht $(usex debug logging $(usex ('yes' 'no'))))
+		$(use_enable debug logging)
+		$(use_enable dht)
 		$(use_enable examples)
 		$(use_enable ssl encryption)
 		$(use_enable static-libs static)
 		$(use_enable test tests)
+		--with-boost="${EPREFIX}/usr"
 		--with-libiconv
 	)
 	econf "${myeconfargs[@]}"
@@ -79,7 +81,7 @@ src_configure() {
 		python_configure() {
 			econf "${myeconfargs[@]}" \
 				--enable-python-binding \
-				--with-boost-python="${EPYTHON#python}"
+				--with-boost-python="boost_${EPYTHON/./}"
 		}
 		distutils-r1_src_configure
 	fi

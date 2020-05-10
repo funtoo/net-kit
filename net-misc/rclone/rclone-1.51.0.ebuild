@@ -1,21 +1,15 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-inherit golang-build bash-completion-r1
-EGO_PN="github.com/ncw/${PN}"
+EAPI=7
 
-if [[ ${PV} == *9999* ]]; then
-	inherit golang-vcs
-else
-	KEYWORDS="~amd64 ~arm ~x86"
-	EGIT_COMMIT="v${PV}"
-	SRC_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-	inherit golang-vcs-snapshot
-fi
+inherit golang-build bash-completion-r1 golang-vcs-snapshot
+
+EGO_PN="github.com/rclone/${PN}"
 
 DESCRIPTION="A program to sync files to and from various cloud storage providers"
 HOMEPAGE="https://rclone.org/"
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.51.0/rclone-v1.51.0.tar.gz -> rclone-v1.51.0.tar.gz"
+KEYWORDS="*"
 
 LICENSE="MIT"
 SLOT="0"

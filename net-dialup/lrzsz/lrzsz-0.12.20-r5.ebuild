@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +10,7 @@ SRC_URI="https://www.ohse.de/uwe/releases/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="*"
 IUSE="nls"
 
 DEPEND="nls? ( virtual/libintl )"
@@ -33,6 +32,14 @@ src_prepare() {
 	# Autoheader does not like seeing this file.
 	rm -f acconfig.h || die
 
+	mv configure.{in,ac} || die
+	mv Makefile.{in,ac} || die
+
+	sed -e 's:AM_GNU_GETTEXT::g' -i configure.ac
+	sed -e 's:all-@USE_INCLUDED_LIBINTL@::g' -i Makefile.ac
+	sed -e 's:all-@USE_INCLUDED_LIBINTL@::g' -i intl/Makefile.in
+	sed -e 's:all-@USE_NLS@::g' -i po/Makefile.in.in
+	sed -e 's:install-data-@USE_NLS@::g' -i po/Makefile.in.in
 	eautoreconf
 }
 
@@ -40,6 +47,8 @@ src_configure() {
 	tc-export CC
 	append-flags -Wstrict-prototypes
 	econf $(use_enable nls)
+
+	sed -e 's/@INTLLIBS@//g' -i src/Makefile
 }
 
 src_test() {

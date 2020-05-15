@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,11 +6,11 @@ inherit cmake-utils xdg-utils
 
 DESCRIPTION="Desktop Syncing Client for Nextcloud"
 HOMEPAGE="https://github.com/nextcloud/desktop"
-SRC_URI="https://github.com/nextcloud/desktop/archive/v${PV/_/-}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/nextcloud/desktop/archive/v2.6.4.tar.gz -> nextcloud-2.6.4.tar.gz"
 
 LICENSE="CC-BY-3.0 GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="*"
 IUSE="doc dolphin nautilus shibboleth test"
 
 COMMON_DEPEND=">=dev-db/sqlite-3.4:3
@@ -23,6 +22,7 @@ COMMON_DEPEND=">=dev-db/sqlite-3.4:3
 	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5[ssl]
 	dev-qt/qtsql:5
+	dev-qt/qtsvg:5
 	dev-qt/qtwebengine:5[widgets]
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5

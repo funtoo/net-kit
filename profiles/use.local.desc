@@ -1377,9 +1377,6 @@ net-misc/networkmanager:resolvconf - Use net-dns/openresolv for managing DNS inf
 net-misc/networkmanager:teamd - Enable Teamd control support
 net-misc/networkmanager:wext - Enable support for the deprecated Wext (Wireless Extensions) API; needed for some older drivers (e.g. ipw2200, ndiswrapper)
 net-misc/networkmanager:wifi - Enable support for wifi and 802.1x security
-net-misc/nextcloud-client:dolphin - Install the kde-apps/dolphin extension
-net-misc/nextcloud-client:nautilus - Install the gnome-base/nautilus extension
-net-misc/nextcloud-client:shibboleth - Build support for Shibboleth single sign-on
 net-misc/ntpclient:debug - Enable analysis code path and debugging of NTP protocol.
 net-misc/ntpclient:embedded - Build a very small ntpclient, from OpenWRT project.
 net-misc/ntpclient:obsolete - Enable obsolete features, to use with kernel versions older than 3.0

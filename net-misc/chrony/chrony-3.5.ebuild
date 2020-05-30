@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -10,8 +9,8 @@ SRC_URI="https://download.tuxfamily.org/${PN}/${P/_/-}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc ~x86"
-IUSE="caps +cmdmon html ipv6 libedit +ntp +phc pps readline +refclock +rtc seccomp selinux +adns"
+KEYWORDS="*"
+IUSE="caps +cmdmon html ipv6 libedit +ntp +phc pps readline +refclock +rtc seccomp selinux +adns sechash samba"
 REQUIRED_USE="
 	?? ( libedit readline )
 "
@@ -36,9 +35,9 @@ RESTRICT=test
 
 S="${WORKDIR}/${P/_/-}"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-3.5-systemd-gentoo.patch
-)
+#PATCHES=(
+#	"${FILESDIR}"/${PN}-3.5-systemd-gentoo.patch
+#)
 
 src_prepare() {
 	default
@@ -62,6 +61,15 @@ src_configure() {
 		CHRONY_EDITLINE+=" $(usex libedit '' --without-editline)"
 	fi
 
+	#--without-nettle       Don't use nettle even if it is available
+	#--disable-privdrop     Disable support for dropping root privileges
+	#--without-libcap       Don't use libcap even if it is available
+	#--enable-scfilter      Enable support for system call filtering
+	#--without-seccomp      Don't use seccomp even if it is available
+	#--without-clock-gettime Don't use clock_gettime() even if it is available
+	#--disable-timestamping Disable support for SW/HW timestamping
+	#--with-ntp-era=SECONDS Specify earliest assumed NTP time in seconds
+
 	# not an autotools generated script
 	local CHRONY_CONFIGURE="
 	./configure \
@@ -75,10 +83,11 @@ src_configure() {
 		$(usex pps '' --disable-pps) \
 		$(usex refclock '' --disable-refclock) \
 		$(usex rtc '' --disable-rtc) \
+		$(usex sechash '' --disable-sechash) \
+		$(use samba --enable-ntp-signd) \
 		${CHRONY_EDITLINE} \
 		${EXTRA_ECONF} \
 		--chronysockdir=/run/chrony \
-		--disable-sechash \
 		--docdir=/usr/share/doc/${PF} \
 		--mandir=/usr/share/man \
 		--prefix=/usr \
@@ -104,7 +113,7 @@ src_install() {
 	newconfd "${FILESDIR}"/chronyd.conf chronyd
 
 	insinto /etc/${PN}
-	newins examples/chrony.conf.example1 chrony.conf
+	newins "${FILESDIR}"/chrony.conf chrony.conf
 
 	docinto examples
 	dodoc examples/*.example*

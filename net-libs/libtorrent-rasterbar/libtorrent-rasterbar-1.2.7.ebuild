@@ -14,7 +14,7 @@ MY_P=${PN/-rasterbar}-${MY_PV}
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="https://libtorrent.org https://github.com/arvidn/libtorrent"
-SRC_URI="https://github.com/arvidn/libtorrent/archive/libtorrent-1_2_6.tar.gz -> libtorrent-rasterbar-1.2.6.tar.gz"
+SRC_URI="https://github.com/arvidn/libtorrent/archive/libtorrent_1_2_7.tar.gz -> libtorrent-rasterbar-1.2.7.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/10"

@@ -1,7 +1,6 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 inherit db-use eutils toolchain-funcs multilib pam systemd
 
@@ -10,6 +9,7 @@ REQUIRED_USE="
 	arc? ( dkim spf )
 	dane? ( ssl !gnutls )
 	dmarc? ( dkim spf )
+	dkim? ( ssl !gnutls )
 	gnutls? ( ssl )
 	pkcs11? ( ssl )
 	spf? ( exiscan-acl )
@@ -23,17 +23,19 @@ REQUIRED_USE="
 # #661164) or b) mask the usage of USE=dane with USE=gnutls.  Both are
 # incorrect, but b) is the only "correct" view from repoman.
 
-COMM_URI="https://downloads.exim.org/exim4$([[ ${PV} == *_rc* ]] && echo /test)"
+SDIR=$([[ ${PV} == *_rc* ]]   && echo /test
+       [[ ${PV} == *.*.*.* ]] && echo /fixes)
+COMM_URI="https://downloads.exim.org/exim4${SDIR}"
 
 DESCRIPTION="A highly configurable, drop-in replacement for sendmail"
 SRC_URI="${COMM_URI}/${P//rc/RC}.tar.xz
 	mirror://gentoo/system_filter.exim.gz
 	doc? ( ${COMM_URI}/${PN}-pdf-${PV//rc/RC}.tar.xz )"
-HOMEPAGE="http://www.exim.org/"
+HOMEPAGE="https://www.exim.org/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~x86-solaris"
+KEYWORDS="*"
 
 COMMON_DEPEND=">=sys-apps/sed-4.0.5
 	( >=sys-libs/db-3.2:= <sys-libs/db-6:= )
@@ -45,10 +47,14 @@ COMMON_DEPEND=">=sys-apps/sed-4.0.5
 	ssl? (
 		!libressl? ( dev-libs/openssl:0= )
 		libressl? ( dev-libs/libressl:= )
-	)
-	gnutls? (
-		net-libs/gnutls:0=[pkcs11?]
-		dev-libs/libtasn1
+		gnutls? (
+			net-libs/gnutls:0=[pkcs11?]
+			dev-libs/libtasn1
+		)
+		!gnutls? (
+			!libressl? ( dev-libs/openssl:0= )
+			libressl? ( dev-libs/libressl:= )
+		)
 	)
 	ldap? ( >=net-nds/openldap-2.0.7 )
 	nis? (
@@ -102,19 +108,21 @@ RDEPEND="${COMMON_DEPEND}
 S=${WORKDIR}/${P//rc/RC}
 
 src_prepare() {
-	epatch "${FILESDIR}"/exim-4.14-tail.patch
-	epatch "${FILESDIR}"/exim-4.92-localscan_dlopen.patch
-	epatch "${FILESDIR}"/exim-4.69-r1.27021.patch
-	epatch "${FILESDIR}"/exim-4.74-radius-db-ENV-clash.patch # 287426
-	epatch "${FILESDIR}"/exim-4.82-makefile-freebsd.patch # 235785
-	epatch "${FILESDIR}"/exim-4.89-as-needed-ldflags.patch # 352265, 391279
-	epatch "${FILESDIR}"/exim-4.76-crosscompile.patch # 266591
-	epatch "${FILESDIR}"/exim-4.92-fix-eval-expansion-32bit.patch #687554
+	# Legacy patches which need a respin for -p1
+	eapply -p0 "${FILESDIR}"/exim-4.14-tail.patch
+	eapply -p0 "${FILESDIR}"/exim-4.74-radius-db-ENV-clash.patch # 287426
+	eapply     "${FILESDIR}"/exim-4.93-as-needed-ldflags.patch # 352265, 391279
+	eapply -p0 "${FILESDIR}"/exim-4.76-crosscompile.patch # 266591
+	eapply     "${FILESDIR}"/exim-4.69-r1.27021.patch
+	eapply     "${FILESDIR}"/exim-4.93-localscan_dlopen.patch
+	eapply -p2 "${FILESDIR}"/exim-4.93-radius.patch # 720364
+	eapply     "${FILESDIR}"/exim-4.93-CVE-2020-12783.patch # 722484
+	eapply     "${FILESDIR}"/exim-4.93-fno-common.patch # 723430
 
 	if use maildir ; then
-		epatch "${FILESDIR}"/exim-4.20-maildir.patch
+		eapply "${FILESDIR}"/exim-4.20-maildir.patch
 	else
-		epatch "${FILESDIR}"/exim-4.80-spool-mail-group.patch # 438606
+		eapply -p0 "${FILESDIR}"/exim-4.80-spool-mail-group.patch # 438606
 	fi
 
 	eapply_user
@@ -137,6 +145,11 @@ src_configure() {
 
 	sed -i -e 's/^buildname=.*/buildname=exim-gentoo/g' Makefile || die
 
+	if use elibc_musl; then
+		sed -i -e 's/^LIBS = -lnsl/LIBS =/g' OS/Makefile-Linux || die
+	fi
+
+	local conffile="${EPREFIX}/etc/exim/exim.conf"
 	sed -e "48i\CFLAGS=${CFLAGS}" \
 		-e "s:BIN_DIRECTORY=/usr/exim/bin:BIN_DIRECTORY=${EPREFIX}/usr/sbin:" \
 		-e "s:EXIM_USER=:EXIM_USER=${MAILUSER}:" \
@@ -144,11 +157,6 @@ src_configure() {
 		-e "s:ZCAT_COMMAND=.*$:ZCAT_COMMAND=${EPREFIX}/bin/zcat:" \
 		-e "s:COMPRESS_COMMAND=.*$:COMPRESS_COMMAND=${EPREFIX}/bin/gzip:" \
 		src/EDITME > Local/Makefile
-
-	if use elibc_musl; then
-		sed -e 's/^LIBS = -lnsl/LIBS =/g' \
-		-i OS/Makefile-Linux
-	fi
 
 	cd Local
 
@@ -160,8 +168,11 @@ src_configure() {
 	EOC
 
 	# if we use libiconv, now is the time to tell so
-	use !elibc_glibc && use !elibc_musl && \
-		echo "EXTRALIBS_EXIM=-liconv" >> Makefile
+	if use !elibc_glibc && use !elibc_musl ; then
+		cat >> Makefile <<- EOC
+			EXTRALIBS_EXIM=-liconv
+		EOC
+	fi
 
 	# support for IPv6
 	if use ipv6; then
@@ -181,6 +192,7 @@ src_configure() {
 
 	#
 	# mail storage formats
+	#
 
 	# mailstore is Exim's traditional storage format
 	cat >> Makefile <<- EOC
@@ -209,16 +221,17 @@ src_configure() {
 	local DB_VERS="5.3 5.1 4.8 4.7 4.6 4.5 4.4 4.3 4.2 3.2"
 	cat >> Makefile <<- EOC
 		USE_DB=yes
-		CFLAGS+=-I$(db_includedir ${DB_VERS})
-		DBMLIB=-l$(db_libname ${DB_VERS})
 		LOOKUP_CDB=yes
 		LOOKUP_PASSWD=yes
 		LOOKUP_DSEARCH=yes
+		# keep include in CFLAGS because exim.h -> dbstuff.h -> db.h
+		CFLAGS += -I$(db_includedir ${DB_VERS})
+		DBMLIB = -l$(db_libname ${DB_VERS})
 	EOC
 
 	if ! use dnsdb; then
 		# DNSDB lookup is enabled by default
-		sed -i "s:^LOOKUP_DNSDB=yes:# LOOKUP_DNSDB=yes:" Makefile
+		sed -i -e 's:^LOOKUP_DNSDB=yes:# LOOKUP_DNSDB=yes:' Makefile || die
 	fi
 
 	if use ldap; then
@@ -272,17 +285,18 @@ src_configure() {
 		EOC
 	fi
 
-	#
 	# Exim monitor, enabled by default, controlled via X USE-flag,
 	# disable if not requested, bug #46778
 	if use X; then
 		cp ../exim_monitor/EDITME eximon.conf || die
-	else
-		sed -i -e '/^EXIM_MONITOR=/s/^/# /' Makefile
+		cat >> Makefile <<- EOC
+			EXIM_MONITOR=eximon.bin
+		EOC
 	fi
 
 	#
 	# features
+	#
 
 	# content scanning support
 	if use exiscan-acl; then
@@ -329,14 +343,17 @@ src_configure() {
 
 	# starttls support (ssl)
 	if use ssl; then
-		echo "SUPPORT_TLS=yes" >> Makefile
 		if use gnutls; then
 			echo "USE_GNUTLS=yes" >> Makefile
-			echo "USE_GNUTLS_PC=gnutls" >> Makefile
+			echo "USE_GNUTLS_PC=gnutls $(use dane && echo gnutls-dane)" \
+				>> Makefile
 			use pkcs11 || echo "AVOID_GNUTLS_PKCS11=yes" >> Makefile
 		else
+			echo "USE_OPENSSL=yes" >> Makefile
 			echo "USE_OPENSSL_PC=openssl" >> Makefile
 		fi
+	else
+		echo "DISABLE_TLS=yes" >> Makefile
 	fi
 
 	# TCP wrappers
@@ -376,9 +393,16 @@ src_configure() {
 	fi
 
 	# DANE
-	if use dane; then
+	if use !dane; then
+		# DANE is enabled by default
+		sed -i -e 's:^SUPPORT_DANE=yes:# SUPPORT_DANE=yes:' Makefile || die
+	fi
+
+	# DMARC
+	if use dmarc; then
 		cat >> Makefile <<- EOC
-			SUPPORT_DANE=yes
+			SUPPORT_DMARC=yes
+			EXTRALIBS_EXIM += -lopendmarc
 		EOC
 	fi
 
@@ -392,6 +416,7 @@ src_configure() {
 
 	#
 	# experimental features
+	#
 
 	# Authenticated Receive Chain
 	if use arc; then
@@ -411,14 +436,6 @@ src_configure() {
 		EOC
 	fi
 
-	# DMARC
-	if use dmarc; then
-		cat >> Makefile <<- EOC
-			EXPERIMENTAL_DMARC=yes
-			EXTRALIBS_EXIM += -lopendmarc
-		EOC
-	fi
-
 	# Delivery Sender Notifications extra information in fail message
 	if use dsn; then
 		cat >> Makefile <<- EOC
@@ -428,6 +445,7 @@ src_configure() {
 
 	#
 	# authentication (SMTP AUTH)
+	#
 
 	# standard bits
 	cat >> Makefile <<- EOC
@@ -499,7 +517,7 @@ src_install () {
 		dosbin $i
 	done
 
-	dodoc "${S}"/doc/*
+	dodoc -r "${S}"/doc/.
 	doman "${S}"/doc/exim.8
 	use dsn && dodoc "${S}"/README.DSN
 	use doc && dodoc "${WORKDIR}"/${PN}-pdf-${PV//rc/RC}/doc/*.pdf
@@ -540,15 +558,22 @@ src_install () {
 }
 
 pkg_postinst() {
-	if [[ ! -f ${EROOT}etc/exim/exim.conf ]] ; then
-		einfo "${EROOT}etc/exim/system_filter.exim is a sample system_filter."
-		einfo "${EROOT}etc/exim/auth_conf.sub contains the configuration sub for using smtp auth."
-		einfo "Please create ${EROOT}etc/exim/exim.conf from ${EROOT}etc/exim/exim.conf.dist."
+	if [[ ! -f ${EROOT}/etc/exim/exim.conf ]] ; then
+		einfo "${EROOT}/etc/exim/system_filter.exim is a sample system_filter."
+		einfo "${EROOT}/etc/exim/auth_conf.sub contains the configuration sub"
+		einfo "for using smtp auth."
+		einfo "Please create ${EROOT}/etc/exim/exim.conf from"
+		einfo "  ${EROOT}/etc/exim/exim.conf.dist."
+	fi
+	if use dmarc ; then
+		einfo "DMARC support requires ${EROOT}/etc/exim/opendmarc.tlds"
+		einfo "you can populate this file with the contents downloaded from"
+		einfo "  https://publicsuffix.org/list/public_suffix_list.dat"
 	fi
 	if use dcc ; then
 		einfo "DCC support is experimental, you can find some limited"
 		einfo "documentation at the bottom of this prerelease message:"
-		einfo "http://article.gmane.org/gmane.mail.exim.devel/3579"
+		einfo "  http://article.gmane.org/gmane.mail.exim.devel/3579"
 	fi
 	use srs && einfo "SRS support is experimental"
 	if use dmarc ; then

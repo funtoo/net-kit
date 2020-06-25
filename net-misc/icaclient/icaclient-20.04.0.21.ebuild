@@ -1,10 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 # eutils inherit required for make_wrapper call
-inherit desktop eutils multilib xdg-utils
+inherit desktop eutils xdg
 
 DESCRIPTION="ICA Client for Citrix Presentation servers"
 HOMEPAGE="https://www.citrix.com/"
@@ -14,7 +13,7 @@ SRC_URI="amd64? ( linuxx64-${PV}.tar.gz )
 LICENSE="icaclient"
 SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
-IUSE="nsplugin l10n_de l10n_es l10n_fr l10n_ja l10n_zh_CN"
+IUSE="l10n_de l10n_es l10n_fr l10n_ja l10n_zh_CN"
 RESTRICT="mirror strip userpriv fetch"
 
 ICAROOT="/opt/Citrix/ICAClient"
@@ -30,7 +29,7 @@ RDEPEND="
 	media-fonts/font-cursor-misc
 	media-fonts/font-xfree86-type1
 	media-fonts/font-misc-ethiopic
-	media-libs/alsa-lib
+media-libs/alsa-lib
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/gst-plugins-base:1.0
@@ -94,16 +93,10 @@ src_install() {
 	dodir "${ICAROOT}"
 
 	exeinto "${ICAROOT}"
-	doexe *.DLL libproxy.so wfica AuthManagerDaemon PrimaryAuthManager selfservice ServiceRecord
+	doexe *.DLL libproxy.so libAnalyticsInterfacePd.so wfica AuthManagerDaemon PrimaryAuthManager selfservice ServiceRecord
 
 	exeinto "${ICAROOT}"/lib
 	doexe lib/*.so
-
-	if use nsplugin ; then
-		exeinto "${ICAROOT}"
-		doexe npica.so
-		dosym "${ICAROOT}"/npica.so /usr/$(get_libdir)/nsbrowser/plugins/npica.so
-	fi
 
 	for dest in "${ICAROOT}"{,/nls/en{,.UTF-8}} ; do
 		insinto "${dest}"
@@ -200,21 +193,3 @@ src_install() {
 	domenu "${FILESDIR}"/*.desktop
 }
 
-pkg_preinst() {
-	local old_plugin="/usr/lib64/nsbrowser/plugins/npwrapper.npica.so"
-	if use amd64 && [[ -f ${old_plugin} ]] ; then
-		local wrapper="/usr/bin/nspluginwrapper"
-		if [[ -x ${wrapper} ]] ; then
-			einfo "Removing npica.so from wrapper."
-			${wrapper} -r ${old_plugin}
-		fi
-	fi
-}
-
-pkg_postinst() {
-	xdg_desktop_database_update
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
-}

@@ -4,7 +4,7 @@
 EAPI=6
 MOZ_ESR=""
 MOZ_LIGHTNING_VER="68.0b6"
-MOZ_LANGS=( ar ast be bg br ca cak cs cy da de dsb el en-GB en-US es-AR es-ES et eu fi fr fy-NL ga-IE gd gl he hr hsb hu hy-AM id is it ja ka kab kk ko lt ms nb-NO nl nn-NO pl pt-BR pt-PT rm ro ru si sk sl sq sr sv-SE tr uk uz vi zh-CN zh-TW )
+MOZ_LANGS=( af ar ast be bg br ca cak cs cy da de dsb el en-CA en-GB en-US es-AR es-ES et eu fa fi fr fy-NL ga-IE gd gl he hr hsb hu hy-AM id is it ja ka kab kk ko lt ms nb-NO nl nn-NO pa-IN pl pt-BR pt-PT rm ro ru si sk sl sq sr sv-SE th tr uk uz vi zh-CN zh-TW )
 
 # Convert the ebuild version to the upstream mozilla version, used by
 MOZ_PN="${PN/-bin}"

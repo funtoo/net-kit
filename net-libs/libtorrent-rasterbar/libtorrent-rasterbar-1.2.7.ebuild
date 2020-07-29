@@ -9,12 +9,9 @@ DISTUTILS_IN_SOURCE_BUILD=true
 
 inherit autotools distutils-r1
 
-MY_PV=$(ver_rs 1-2 '_')
-MY_P=${PN/-rasterbar}-${MY_PV}
-
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="https://libtorrent.org https://github.com/arvidn/libtorrent"
-SRC_URI="https://github.com/arvidn/libtorrent/archive/libtorrent_1_2_7.tar.gz -> libtorrent-rasterbar-1.2.7.tar.gz"
+SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent_1_2_7/libtorrent-rasterbar-1.2.7.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/10"
@@ -42,10 +39,8 @@ DEPEND="${RDEPEND}
 	sys-devel/libtool
 "
 
-S="${WORKDIR}/${PN/-rasterbar}-${MY_P}"
-
 src_prepare() {
-	mkdir "${S}"/build-aux/ || die
+	mkdir -p "${S}"/build-aux/ || die
 	touch "${S}"/build-aux/config.rpath || die
 	eautoreconf
 

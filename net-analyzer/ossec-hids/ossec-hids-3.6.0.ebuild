@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +10,7 @@ SRC_URI="https://github.com/ossec/ossec-hids/archive/${PV}.tar.gz -> ${P}.tar.gz
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="*"
 IUSE="agent hybrid local mysql postgres server sqlite"
 REQUIRED_USE="^^ ( agent hybrid local server )
 	?? ( mysql postgres )"
@@ -21,7 +20,10 @@ DEPEND="mysql? ( virtual/mysql )
 	postgres? ( dev-db/postgresql:= )"
 RDEPEND="${DEPEND}"
 S="${WORKDIR}/${P}/src"
-PATCHES=( "${FILESDIR}/makefile-${PV}.patch" )
+PATCHES=( 
+    "${FILESDIR}/makefile-${PV}.patch" 
+    "${FILESDIR}/gcc-fno-common-${PV}.patch"
+    )
 
 declare -a MY_OPT
 
@@ -59,5 +61,6 @@ src_install() {
 	keepdir /var/ossec/lua/{compiled,native}
 	keepdir /var/ossec/queue/{agent-info,agentless,alerts,diff,fts,ossec,rids,rootcheck,syscheck}
 	keepdir /var/ossec/{.ssh,stats,tmp,var/run}
+	newenvd - 50ossec-hids <<<'CONFIG_PROTECT="/var/ossec/etc"'
 	emake "${MY_OPT[@]}" PREFIX="${D}/var/ossec" install
 }

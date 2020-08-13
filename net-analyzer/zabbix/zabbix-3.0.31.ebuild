@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -11,7 +10,7 @@ DESCRIPTION="ZABBIX is software for monitoring of your applications, network and
 HOMEPAGE="https://www.zabbix.com/"
 MY_P=${P/_/}
 MY_PV=${PV/_/}
-SRC_URI="https://prdownloads.sourceforge.net/zabbix/${MY_P}.tar.gz"
+SRC_URI="https://cdn.zabbix.com/zabbix/sources/stable/3.0/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 WEBAPP_MANUAL_SLOT="yes"
@@ -42,8 +41,8 @@ COMMON_DEPEND="snmp? ( net-analyzer/net-snmp )
 	ssl? ( dev-libs/openssl:=[-bindist] )"
 
 RDEPEND="${COMMON_DEPEND}
-	proxy? ( net-analyzer/fping[suid] )
-	server? ( net-analyzer/fping[suid]
+	proxy? ( net-analyzer/fping )
+	server? ( net-analyzer/fping
 		app-admin/webapp-config )
 	java?	(
 		>=virtual/jre-1.4
@@ -66,7 +65,7 @@ DEPEND="${COMMON_DEPEND}
 			=dev-libs/cyrus-sasl-2*[static-libs]
 			net-libs/gnutls[static-libs]
 		)
-	mysql? ( >=virtual/mysql-5.0.3 virtual/libmysqlclient[static-libs] )
+	mysql? ( >=virtual/mysql-5.0.3[static-libs] )
 	sqlite? ( >=dev-db/sqlite-3.3.5[static-libs] )
 	postgres? ( dev-db/postgresql:*[static-libs] )
 	libxml2? ( dev-libs/libxml2[static-libs] )
@@ -238,24 +237,27 @@ src_install() {
 	fi
 
 	if use java; then
-		dodir \
-			/${ZABBIXJAVA_BASE} \
-			/${ZABBIXJAVA_BASE}/bin \
-			/${ZABBIXJAVA_BASE}/lib
-		keepdir /${ZABBIXJAVA_BASE}
-		exeinto /${ZABBIXJAVA_BASE}/bin
-		doexe src/zabbix_java/bin/zabbix-java-gateway-${MY_PV}.jar
-		exeinto /${ZABBIXJAVA_BASE}/lib
-		doexe \
-			src/zabbix_java/lib/logback-classic-0.9.27.jar \
-			src/zabbix_java/lib/logback-console.xml \
-			src/zabbix_java/lib/logback-core-0.9.27.jar \
-			src/zabbix_java/lib/logback.xml \
-			src/zabbix_java/lib/android-json-4.3_r3.1.jar \
-			src/zabbix_java/lib/slf4j-api-1.6.1.jar
-		fowners -R zabbix:zabbix /${ZABBIXJAVA_BASE}
-		doinitd "${FILESDIR}"/3.0/init.d/zabbix-jmx-proxy
-		doconfd "${FILESDIR}"/3.0/conf.d/zabbix-jmx-proxy
+	   dodir \
+	   	/${ZABBIXJAVA_BASE} \
+		/${ZABBIXJAVA_BASE}/bin \
+		/${ZABBIXJAVA_BASE}/lib
+	   keepdir /${ZABBIXJAVA_BASE}
+	   exeinto /${ZABBIXJAVA_BASE}/bin
+	   doexe src/zabbix_java/bin/zabbix-java-gateway-${MY_PV}.jar
+	   exeinto /${ZABBIXJAVA_BASE}/lib
+	   doexe \
+	   	src/zabbix_java/lib/logback-classic-0.9.27.jar \
+		src/zabbix_java/lib/logback-console.xml \
+		src/zabbix_java/lib/logback-core-0.9.27.jar \
+		src/zabbix_java/lib/logback.xml \
+		src/zabbix_java/lib/android-json-4.3_r3.1.jar \
+		src/zabbix_java/lib/slf4j-api-1.6.1.jar
+	   exeinto /${ZABBIXJAVA_BASE}/
+	   doexe \
+	   	src/zabbix_java/settings.sh \
+		src/zabbix_java/startup.sh \
+		src/zabbix_java/shutdown.sh
+	   fowners -R zabbix:zabbix /${ZABBIXJAVA_BASE}
 	fi
 }
 

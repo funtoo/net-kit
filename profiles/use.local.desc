@@ -1737,7 +1737,6 @@ net-wireless/bladerf-fpga:xA4 - bitstream for the xA4 49 kLE Cyclone V FPGA blad
 net-wireless/bladerf-fpga:xA9 - bitstream for the xA9 301 kLE Cyclone V FPGA bladerf 2.0 micro model"
 net-wireless/blueman:appindicator - Enable usage of dev-libs/libappindicator to export menu options
 net-wireless/blueman:network - Add functionality to setup (host) PAN connections using either net-dns/dnsmasq or net-misc/dhcp
-net-wireless/chirp:radioreference - support downloading data from radioreference.com (premium users only)
 net-wireless/gnuradio:analog - enable analog signal processing blocks
 net-wireless/gnuradio:atsc - enable ATSC (HDTV) transmitter and receiver blocks
 net-wireless/gnuradio:audio - enable blocks to connect to audio sources (mic-in) and sinks (speaker-out) ports on a computer

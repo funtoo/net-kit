@@ -3,17 +3,18 @@
 EAPI=7
 PYTHON_COMPAT=( python2_7 )
 
-
-inherit distutils-r1 mercurial xdg-utils
+inherit distutils-r1 xdg-utils
 
 DESCRIPTION="Free open-source tool for programming your amateur radio"
 HOMEPAGE="http://chirp.danplanet.com"
-EHG_REPO_URI="http://d-rats.com/hg/chirp.hg"
+SRC_URI="https://trac.chirp.danplanet.com/chirp_daily/daily-20200807/chirp-daily-20200807.tar.gz"
 
-KEYWORDS=""
+S="${WORKDIR}/${PN}-daily-${PV}"
+RESTRICT="test"
 
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="*"
 IUSE="radioreference"
 
 DEPEND="${PYTHON_DEPS}

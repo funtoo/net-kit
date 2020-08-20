@@ -1,34 +1,25 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python2_7 )
+EAPI=7
+PYTHON_COMPAT=( {{python_compat}} )
 
-if [[ ${PV} == "99999999" ]] ; then
-	SCM=mercurial
-	EHG_REPO_URI="http://d-rats.com/hg/chirp.hg"
-fi
-
-inherit distutils-r1 ${SCM}
+inherit distutils-r1 xdg-utils
 
 DESCRIPTION="Free open-source tool for programming your amateur radio"
 HOMEPAGE="http://chirp.danplanet.com"
+SRC_URI="{{artifacts[0].src_uri}}"
 
-if [[ ${PV} == "99999999" ]] ; then
-	KEYWORDS=""
-else
-	KEYWORDS="~amd64 ~x86"
-	SRC_URI="http://trac.${PN}.danplanet.com/${PN}_daily/daily-${PV}/${PN}-daily-${PV}.tar.gz"
-	S="${WORKDIR}/${PN}-daily-${PV}"
-	RESTRICT="test"
-fi
+S="${WORKDIR}/${PN}-daily-${PV}"
+RESTRICT="test"
+
 LICENSE="GPL-3"
 SLOT="0"
+KEYWORDS="*"
 IUSE="radioreference"
 
 DEPEND="${PYTHON_DEPS}
 	dev-python/pyserial[${PYTHON_USEDEP}]
-	dev-libs/libxml2[python]"
+	dev-libs/libxml2[python,${PYTHON_USEDEP}]"
 RDEPEND="${DEPEND}
 	dev-python/pygtk[${PYTHON_USEDEP}]
 	radioreference? ( dev-python/suds[${PYTHON_USEDEP}] )"

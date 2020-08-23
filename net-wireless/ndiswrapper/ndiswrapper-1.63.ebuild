@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,10 +5,10 @@ inherit linux-mod readme.gentoo-r1 toolchain-funcs
 
 DESCRIPTION="Wrapper for using Windows drivers for some wireless cards"
 HOMEPAGE="http://ndiswrapper.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/stable/${P}.tar.gz"
+SRC_URI="http://downloads.sourceforge.net/project/ndiswrapper/stable/ndiswrapper-1.63.tar.gz"
 
 LICENSE="GPL-2"
-KEYWORDS="amd64 x86"
+KEYWORDS="*"
 IUSE="debug usb"
 
 DEPEND="sys-apps/pciutils"
@@ -26,13 +25,6 @@ DOC_CONTENTS="
 	configuration, and installation information.
 "
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-1.59-cflags.patch
-	"${FILESDIR}"/${PN}-1.61-kernel-4.11.patch
-	"${FILESDIR}"/${PN}-1.61-kernel-4.13.patch
-	"${FILESDIR}"/${PN}-1.61-kernel-4.15.patch
-)
-
 MODULE_NAMES="ndiswrapper(misc:${S}/driver)"
 BUILD_TARGETS="all"
 MODULESD_NDISWRAPPER_ALIASES=("wlan0 ndiswrapper")
@@ -43,6 +35,10 @@ pkg_pretend() {
 	ERROR_USB="You need to enable USB support in your kernel to use usb support in ndiswrapper."
 	ERROR_WEXT_PRIV="Your kernel does not support WEXT_PRIV. To enable it you need to enable a wireless driver that enables it, for example PRISM54 or IPW2200"
 	linux-mod_pkg_setup
+}
+src_prepare() {
+	default
+	sed -i 's#CFLAGS = -g -Wall#CFLAGS +=#g' ${S}/utils/Makefile
 }
 
 src_compile() {

@@ -8,7 +8,7 @@ EGO_PN="github.com/rclone/${PN}"
 
 DESCRIPTION="A program to sync files to and from various cloud storage providers"
 HOMEPAGE="https://rclone.org/"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.52.3/rclone-v1.52.3.tar.gz"
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.53.0/rclone-v1.53.0.tar.gz"
 KEYWORDS="*"
 
 LICENSE="MIT"

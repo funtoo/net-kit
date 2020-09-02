@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
-import json
-from re import match
-
 async def generate(hub, **pkginfo):
-	github_user = 'roundcube'
-	github_repo = 'roundcubemail'
-	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases")
-	json_list = json.loads(json_data)
+	github_user = 'nm-l2tp'
+	github_repo = 'NetworkManager-l2tp'
+	json_list = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True)
 	for release in json_list:
-		if release['prerelease'] or release['draft']:
+		if 'prerelease' in release and release['prerelease'] is not False:
+			continue
+		if 'draft' in release and release['draft'] is not False:
 			continue
 		version = release['tag_name']
 		url = release['tarball_url']

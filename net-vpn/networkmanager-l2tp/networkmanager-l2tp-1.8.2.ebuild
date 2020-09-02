@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -10,11 +9,11 @@ inherit eutils gnome.org autotools
 
 DESCRIPTION="NetworkManager L2TP plugin"
 HOMEPAGE="https://github.com/nm-l2tp/network-manager-l2tp"
-SRC_URI="https://github.com/nm-l2tp/${MY_PN}/releases/download/${PV}/${MY_P}.tar.xz"
+SRC_URI="https://api.github.com/repos/nm-l2tp/NetworkManager-l2tp/tarball/1.8.2 -> networkmanager-l2tp-1.8.2.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
 IUSE="gnome static-libs"
 
 RDEPEND="
@@ -23,10 +22,14 @@ RDEPEND="
 	net-dialup/ppp[eap-tls]
 	net-dialup/xl2tpd
 	>=dev-libs/glib-2.32
-	net-vpn/libreswan
+	|| (
+		net-vpn/strongswan
+		net-vpn/libreswan
+	)
 	gnome? (
 		x11-libs/gtk+:3
-		gnome-base/libgnome-keyring
+		app-crypt/libsecret
+		gnome-extra/nm-applet
 	)"
 
 BDEPEND="${RDEPEND}
@@ -35,6 +38,11 @@ BDEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 S="${WORKDIR}/${MY_P}"
+
+src_unpack() {
+	unpack "${A}"
+	mv ${WORKDIR}/nm-l2tp-NetworkManager* $S || die
+}
 
 src_prepare() {
 	eautoreconf

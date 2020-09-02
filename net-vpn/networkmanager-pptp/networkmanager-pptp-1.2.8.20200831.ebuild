@@ -11,7 +11,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/NetworkManager/VPN"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="*"
-IUSE="gtk"
+IUSE="gnome"
 SRC_URI="https://gitlab.gnome.org/GNOME/NetworkManager-pptp/-/archive/558fb963bc0fb6a508a147f184342ec8676ef1d8/NetworkManager-pptp-558fb963bc0fb6a508a147f184342ec8676ef1d8.tar.gz -> networkmanager-pptp-1.2.8.20200831.tar.gz"
 S="$WORKDIR/NetworkManager-pptp-558fb963bc0fb6a508a147f184342ec8676ef1d8"
 RDEPEND="
@@ -20,7 +20,7 @@ RDEPEND="
 	>=dev-libs/glib-2.32:2
 	net-dialup/ppp:=
 	net-dialup/pptpclient
-	gtk? (
+	gnome? (
 		>=net-libs/libnma-1.2.0
 		>=app-crypt/libsecret-0.18
 		>=x11-libs/gtk+-3.4:3
@@ -51,7 +51,8 @@ src_configure() {
 	gnome3_src_configure \
 		--disable-more-warnings \
 		--disable-static \
-		--with-dist-version=Gentoo \
-		$(use_with gtk gnome) \
+		--with-dist-version=Funtoo \
+		--without-nm-glib \
+		$(use_with gnome gnome) \
 		${myconf}
 }

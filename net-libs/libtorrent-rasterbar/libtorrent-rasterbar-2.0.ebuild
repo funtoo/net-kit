@@ -11,7 +11,7 @@ inherit autotools distutils-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="https://libtorrent.org https://github.com/arvidn/libtorrent"
-SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent-1.2.10/libtorrent-rasterbar-1.2.10.tar.gz"
+SRC_URI="https://api.github.com/repos/arvidn/libtorrent/tarball/2.0 -> libtorrent-rasterbar-2.0.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/10"

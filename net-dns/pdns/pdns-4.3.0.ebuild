@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -11,50 +10,48 @@ SRC_URI="https://downloads.powerdns.com/releases/${P/_/-}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="" # ~amd64 ~x86
+KEYWORDS="*"
 
 # other possible flags:
 # db2: we lack the dep
 # oracle: dito (need Oracle Client Libraries)
 # xdb: (almost) dead, surely not supported
 
-IUSE="debug doc geoip ldap libressl lua luajit lua-records mydns mysql opendbx postgres protobuf remote sodium sqlite systemd tools tinydns test"
+IUSE="debug doc geoip ldap libressl luajit lua-records mydns mysql postgres protobuf remote sodium sqlite systemd tools tinydns test pkcs11 gss-tsig zeromq"
 
-REQUIRED_USE="lua-records? ( lua ) mydns? ( mysql )"
+REQUIRED_USE="mydns? ( mysql )"
 
 RDEPEND="
 	libressl? ( dev-libs/libressl:= )
 	!libressl? ( dev-libs/openssl:= )
 	>=dev-libs/boost-1.35:=
-	lua? (
-		!luajit? ( dev-lang/lua:= )
-		luajit? ( dev-lang/luajit:= )
-	)
+	!luajit? ( dev-lang/lua:= )
+	luajit? ( dev-lang/luajit:= )
 	lua-records? ( >=net-misc/curl-7.21.3 )
-	mysql? ( dev-db/mysql-connector-c )
-	postgres? ( dev-db/postgresql:= )
-	ldap? ( >=net-nds/openldap-2.0.27-r4 app-crypt/mit-krb5 )
-	sqlite? ( dev-db/sqlite:3 )
-	opendbx? ( dev-db/opendbx )
-	geoip? ( >=dev-cpp/yaml-cpp-0.5.1:= dev-libs/geoip )
-	sodium? ( dev-libs/libsodium:= )
-	tinydns? ( >=dev-db/tinycdb-0.77 )
-	protobuf? ( dev-libs/protobuf )"
+        mysql? ( dev-db/mysql-connector-c )
+        postgres? ( dev-db/postgresql:= )
+        ldap? ( >=net-nds/openldap-2.0.27-r4 app-crypt/mit-krb5 )
+        sqlite? ( dev-db/sqlite:3 )
+        geoip? ( >=dev-cpp/yaml-cpp-0.5.1:= dev-libs/geoip )
+        sodium? ( dev-libs/libsodium:= )
+        tinydns? ( >=dev-db/tinycdb-0.77 )
+	zeromq? ( >=net-libs/zeromq-4.3.1 )
+        protobuf? ( dev-libs/protobuf )"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig
-	doc? ( app-doc/doxygen )"
+        doc? ( app-doc/doxygen )"
 
 S="${WORKDIR}"/${P/_/-}
 
+PATCHES=( "${FILESDIR}"/${P}-boost-1.73-compatibility.patch )
+
 src_configure() {
-	local dynmodules="pipe bind" # the default backends, always enabled
+	local dynmodules="pipe bind remote" # the default backends, always enabled
 
 	#use db2 && dynmodules+=" db2"
 	use ldap && dynmodules+=" ldap"
-	use lua && dynmodules+=" lua"
 	use mydns && dynmodules+=" mydns"
 	use mysql && dynmodules+=" gmysql"
-	use opendbx && dynmodules+=" opendbx"
 	#use oracle && dynmodules+=" goracle oracle"
 	use postgres && dynmodules+=" gpgsql"
 	use remote && dynmodules+=" remote"
@@ -70,14 +67,18 @@ src_configure() {
 		--with-modules= \
 		--with-dynmodules="${dynmodules}" \
 		--with-mysql-lib=/usr/$(get_libdir) \
+		--with-lua=$(usex luajit luajit lua) \
 		$(use_enable debug verbose-logging) \
 		$(use_enable lua-records) \
 		$(use_enable test unit-tests) \
 		$(use_enable tools) \
 		$(use_enable systemd) \
 		$(use_with sodium libsodium) \
-		$(use_with lua lua $(usex luajit luajit lua)) \
 		$(use_with protobuf) \
+                $(use_enable pkcs11 experimental-pkcs11) \
+		$(use_enable gss-tsig experimental-gss-tsig) \
+		$(use_enable zeromq remotebackend-zeromq) \
+
 		${myconf}
 }
 
@@ -123,8 +124,8 @@ src_install() {
 }
 
 pkg_preinst() {
-	enewgroup pdns
-	enewuser pdns -1 -1 /var/empty pdns
+        enewgroup pdns
+        enewuser pdns -1 -1 /var/empty pdns
 }
 
 pkg_postinst() {
@@ -153,4 +154,18 @@ pkg_postinst() {
 
 		break
 	done
+	if use postgres; then
+		for old in ${REPLACING_VERSIONS}; do
+			ver_test ${old} -lt 4.1.11-r1 || continue
+
+			echo
+			ewarn "PowerDNS 4.1.11 contains a security fix for the PostgreSQL backend."
+			ewarn "This security fix needs to be applied manually to the database schema."
+			ewarn "Please refer to the official security advisory for more information:"
+			ewarn
+			ewarn "  https://doc.powerdns.com/authoritative/security-advisories/powerdns-advisory-2019-06.html"
+
+			break
+		done
+	fi
 }

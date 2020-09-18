@@ -36,6 +36,12 @@ RDEPEND="
 		)
 	)
 	spell? ( dev-lang/php[curl,spell] )
+        dev-php/PEAR-Net_Socket
+        dev-php/PEAR-Auth_SASL
+        dev-php/PEAR-Net_IDNA2
+        dev-php/PEAR-Mail_Mime
+        dev-php/PEAR-Net_SMTP
+        dev-php/PEAR-Crypt_GPG
 "
 
 src_unpack() {

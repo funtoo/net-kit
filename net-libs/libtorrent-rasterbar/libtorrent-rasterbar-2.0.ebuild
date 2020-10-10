@@ -13,7 +13,7 @@ SRC_URI="https://github.com/arvidn/libtorrent/releases/download/2.0/libtorrent-r
 
 LICENSE="BSD"
 SLOT="0/11"
-KEYWORDS="*"
+KEYWORDS=""
 IUSE="debug +dht doc examples gnutls libressl python +ssl static-libs test"
 
 REQUIRED_USE="

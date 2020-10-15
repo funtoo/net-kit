@@ -792,7 +792,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://proxy.golang.org/github.com/kkdai/bstream/@v/v0.0.0-20161212061736-f391b8402d23.mod -> github.com%2Fkkdai%2Fbstream%2F@v%2Fv0.0.0-20161212061736-f391b8402d23.mod
+SRC_URI="https://proxy.golang.org/github.com/davecgh/go-spew/@v/v1.1.1.zip -> github.com%2Fdavecgh%2Fgo-spew%2F@v%2Fv1.1.1.zip
 	${EGO_SUM_SRC_URI}"
 
 

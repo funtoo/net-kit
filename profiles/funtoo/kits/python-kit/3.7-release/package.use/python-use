@@ -29,6 +29,9 @@
 =net-misc/python-x2go-0.5.0.6 python_single_target_python2_7
 =net-misc/s3cmd-1.6.1 python_single_target_python2_7
 =net-p2p/bittornado-0.3.18-r4 python_single_target_python2_7
+=net-vpn/openconnect-7.08-r1 python_single_target_python2_7
+=net-vpn/openconnect-8.02 python_single_target_python2_7
+=net-vpn/openconnect-9999 python_single_target_python2_7
 =www-servers/varnish-4.0.5 python_single_target_python2_7
 =www-servers/varnish-4.1.8 python_single_target_python2_7
 mail-client/alot python_single_target_python2_7
@@ -110,7 +113,6 @@ net-proxy/http-replicator python_single_target_python2_7
 net-voip/telepathy-haze python_single_target_python2_7
 net-voip/telepathy-rakia python_single_target_python2_7
 net-voip/telepathy-salut python_single_target_python2_7
-net-vpn/openconnect python_single_target_python2_7
 net-vpn/tinc python_single_target_python2_7
 net-wireless/aircrack-ng python_single_target_python2_7
 net-wireless/airpwn python_single_target_python2_7

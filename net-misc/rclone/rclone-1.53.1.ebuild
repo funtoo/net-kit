@@ -792,7 +792,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://proxy.golang.org/github.com/calebcase/tmpfile/@v/v1.0.2.zip -> github.com%2Fcalebcase%2Ftmpfile%2F@v%2Fv1.0.2.zip
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.53.1/rclone-v1.53.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 

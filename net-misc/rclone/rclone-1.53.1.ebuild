@@ -792,7 +792,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://proxy.golang.org/github.com/gogo/protobuf/@v/v1.2.1.mod -> github.com%2Fgogo%2Fprotobuf%2F@v%2Fv1.2.1.mod
+SRC_URI="https://proxy.golang.org/github.com/bradfitz/iter/@v/v0.0.0-20140124041915-454541ec3da2.mod -> github.com%2Fbradfitz%2Fiter%2F@v%2Fv0.0.0-20140124041915-454541ec3da2.mod
 	${EGO_SUM_SRC_URI}"
 
 

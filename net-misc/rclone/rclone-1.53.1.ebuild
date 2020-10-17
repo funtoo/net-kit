@@ -792,7 +792,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://proxy.golang.org/github.com/aead/siphash/@v/v1.0.1.mod -> github.com%2Faead%2Fsiphash%2F@v%2Fv1.0.1.mod
+SRC_URI="https://proxy.golang.org/golang.org/x/crypto/@v/v0.0.0-20191011191535-87dc89f01550.mod -> golang.org%2Fx%2Fcrypto%2F@v%2Fv0.0.0-20191011191535-87dc89f01550.mod
 	${EGO_SUM_SRC_URI}"
 
 

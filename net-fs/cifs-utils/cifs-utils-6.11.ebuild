@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -11,7 +10,7 @@ SRC_URI="https://ftp.samba.org/pub/linux-cifs/${PN}/${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-linux"
+KEYWORDS="*"
 IUSE="+acl +ads +caps creds pam"
 
 RDEPEND="
@@ -27,12 +26,14 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 PDEPEND="
-	acl? ( >=net-fs/samba-4.0.0_alpha1 )
+	acl? ( >=net-fs/samba-4.0.0 )
 "
 
 REQUIRED_USE="acl? ( ads )"
 
 DOCS="doc/linux-cifs-client-guide.odt"
+
+PATCHES=( "${FILESDIR}/${PN}-6.10-ln_in_destdir.patch" )
 
 pkg_setup() {
 	linux-info_pkg_setup
@@ -62,6 +63,7 @@ src_prepare() {
 
 src_configure() {
 	local myeconfargs=(
+		--enable-smbinfo
 		$(use_enable acl cifsacl cifsidmap)
 		$(use_enable ads cifsupcall)
 		$(use_with caps libcap)
@@ -77,8 +79,7 @@ src_install() {
 	default
 
 	# remove empty directories
-	find "${ED}" -type d -print0 | xargs --null rmdir \
-		--ignore-fail-on-non-empty &>/dev/null
+	find "${ED}" -type d -empty -delete || die
 
 	if use acl ; then
 		dodir /etc/cifs-utils

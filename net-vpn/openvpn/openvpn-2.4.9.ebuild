@@ -6,13 +6,13 @@ EAPI=6
 inherit autotools flag-o-matic user systemd linux-info
 
 DESCRIPTION="Robust and highly flexible tunneling application compatible with many OSes"
-SRC_URI="https://swupdate.openvpn.net/community/releases/${P}.tar.gz
+SRC_URI="https://github.com/OpenVPN/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
 	test? ( https://raw.githubusercontent.com/OpenVPN/${PN}/v${PV}/tests/unit_tests/${PN}/mock_msg.h )"
 HOMEPAGE="https://openvpn.net/"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh ~sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS="*"
 
 IUSE="down-root examples inotify iproute2 libressl lz4 +lzo mbedtls pam"
 IUSE+=" pkcs11 +plugins selinux +ssl static systemd test userland_BSD"
@@ -45,11 +45,6 @@ RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-openvpn )"
 
 CONFIG_CHECK="~TUN"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-external-cmocka.patch"
-	"${FILESDIR}/${PN}-2.4.5-libressl-macro-fix.patch"
-)
 
 pkg_setup()  {
 	linux-info_pkg_setup

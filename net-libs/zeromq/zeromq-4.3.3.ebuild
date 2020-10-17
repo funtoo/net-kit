@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -11,7 +10,7 @@ SRC_URI="https://github.com/zeromq/libzmq/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"
-KEYWORDS="amd64 arm arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
+KEYWORDS="*"
 IUSE="doc drafts pgm +sodium static-libs test unwind elibc_Darwin"
 
 RDEPEND="
@@ -25,8 +24,6 @@ DEPEND="${RDEPEND}
 		app-text/xmlto
 	)
 	pgm? ( virtual/pkgconfig )"
-
-PATCHES=( "${FILESDIR}"/${P}-fix-test_security_zap.patch )
 
 src_prepare() {
 	sed \

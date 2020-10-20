@@ -1,6 +1,4 @@
 =mail-client/thunderbird-52.9.1 python_single_target_python2_7
-=net-analyzer/net-snmp-5.7.3-r6 python_single_target_python2_7
-=net-analyzer/net-snmp-5.8-r2 python_single_target_python2_7
 =net-analyzer/ospd-1.0.0 python_single_target_python2_7
 =net-analyzer/prelude-correlator-3.0.1-r1 python_single_target_python2_7
 =net-analyzer/prelude-correlator-3.1.0 python_single_target_python2_7

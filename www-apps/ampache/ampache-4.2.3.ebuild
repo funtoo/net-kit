@@ -1,4 +1,3 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -10,7 +9,7 @@ HOMEPAGE="http://www.ampache.org/"
 SRC_URI="https://github.com/ampache/ampache/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
-KEYWORDS="amd64 ~ppc ~sparc x86"
+KEYWORDS="*"
 IUSE="aac flac mp3 ogg transcode"
 
 RDEPEND="dev-lang/php[gd,hash,iconv,mysql,pdo,session,unicode,xml,zlib]
@@ -30,7 +29,7 @@ src_install() {
 	doman docs/man/man1/ampache.1
 	rm -rf docs/man || die "Unable to remove local man dir"
 
-	dodoc docs/*
+	dodoc docs/*.md
 	rm -rf docs/ || die "Unable to remove local docs dir"
 
 	insinto "${MY_HTDOCSDIR}"

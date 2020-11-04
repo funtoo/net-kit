@@ -1,7 +1,6 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 inherit autotools eutils flag-o-matic systemd user
 
 MY_PV="${PV/_rc/-rc}"
@@ -14,7 +13,7 @@ SRC_URI="https://www.memcached.org/files/${MY_P}.tar.gz
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 ~hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos"
+KEYWORDS="*"
 IUSE="debug sasl seccomp selinux slabs-reassign test" # hugetlbfs later
 
 RDEPEND=">=dev-libs/libevent-1.4:=
@@ -23,15 +22,20 @@ RDEPEND=">=dev-libs/libevent-1.4:=
 	seccomp? ( sys-libs/libseccomp )
 	selinux? ( sec-policy/selinux-memcached )"
 DEPEND="${RDEPEND}
-		test? ( virtual/perl-Test-Harness >=dev-perl/Cache-Memcached-1.24 )"
+	test? ( virtual/perl-Test-Harness >=dev-perl/Cache-Memcached-1.24 )"
 
 S="${WORKDIR}/${MY_P}"
 
+RESTRICT="!test? ( test )"
+
+PATCHES=(
+	"${FILESDIR}/${PN}-1.2.2-fbsd.patch"
+	"${FILESDIR}/${PN}-1.4.0-fix-as-needed-linking.patch"
+	"${FILESDIR}/${PN}-1.4.4-as-needed.patch"
+	"${FILESDIR}/${PN}-1.4.17-EWOULDBLOCK.patch"
+)
+
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-1.2.2-fbsd.patch"
-	epatch "${FILESDIR}/${PN}-1.4.0-fix-as-needed-linking.patch"
-	epatch "${FILESDIR}/${PN}-1.4.4-as-needed.patch"
-	epatch "${FILESDIR}/${PN}-1.4.17-EWOULDBLOCK.patch"
 	sed -i -e 's,-Werror,,g' configure.ac || die
 	sed -i -e 's,AM_CONFIG_HEADER,AC_CONFIG_HEADERS,' configure.ac || die
 	eautoreconf
@@ -82,8 +86,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	enewuser memcached -1 -1 /dev/null daemon
-
+    enewuser memcached -1 -1 /dev/null daemon
 	elog "With this version of Memcached Gentoo now supports multiple instances."
 	elog "To enable this you should create a symlink in /etc/init.d/ for each instance"
 	elog "to /etc/init.d/memcached and create the matching conf files in /etc/conf.d/"

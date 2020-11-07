@@ -1,9 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{5,6,7} )
+PYTHON_COMPAT=( python3+ )
 
 inherit cmake-utils python-single-r1 readme.gentoo-r1 systemd user
 
@@ -11,20 +10,14 @@ GTEST_VER="1.8.1"
 GTEST_URL="https://github.com/google/googletest/archive/${GTEST_VER}.tar.gz -> gtest-${GTEST_VER}.tar.gz"
 DESCRIPTION="An advanced IRC Bouncer"
 
-if [[ ${PV} == *9999* ]]; then
-	inherit git-r3
-	EGIT_REPO_URI=${EGIT_REPO_URI:-"https://github.com/znc/znc.git"}
-	SRC_URI=""
-else
-	MY_PV=${PV/_/-}
-	MY_P=${PN}-${MY_PV}
-	SRC_URI="
-		https://znc.in/releases/archive/${MY_P}.tar.gz
-		test? ( ${GTEST_URL} )
+MY_PV=${PV/_/-}
+MY_P=${PN}-${MY_PV}
+SRC_URI="
+	https://znc.in/releases/archive/${MY_P}.tar.gz
+	test? ( ${GTEST_URL} )
 	"
-	KEYWORDS="amd64 arm x86"
-	S=${WORKDIR}/${MY_P}
-fi
+KEYWORDS="*"
+S=${WORKDIR}/${MY_P}
 
 HOMEPAGE="https://znc.in"
 LICENSE="Apache-2.0"

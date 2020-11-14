@@ -1,9 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit db-use flag-o-matic multilib multilib-minimal ssl-cert eapi7-ver toolchain-funcs autotools user systemd
+inherit db-use flag-o-matic multilib multilib-minimal ssl-cert eapi7-ver toolchain-funcs autotools user
 
 BIS_PN=rfc2307bis.schema
 BIS_PV=20140524
@@ -18,7 +17,7 @@ SRC_URI="ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${P}.tgz
 
 LICENSE="OPENLDAP GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x86-solaris"
+KEYWORDS="*"
 
 IUSE_DAEMON="crypt samba slp tcpd experimental minimal"
 IUSE_BACKEND="+berkdb"
@@ -758,17 +757,11 @@ multilib_src_install() {
 		cp "${configfile}" "${configfile}".default || die
 		eend
 
-		# install our own init scripts and systemd unit files
+		# install our own init scripts files
 		einfo "Install init scripts"
 		sed -e "s,/usr/lib/,/usr/$(get_libdir)/," "${FILESDIR}"/slapd-initd-2.4.40-r2 > "${T}"/slapd || die
 		doinitd "${T}"/slapd
 		newconfd "${FILESDIR}"/slapd-confd-2.4.28-r1 slapd
-
-		einfo "Install systemd service"
-		sed -e "s,/usr/lib/,/usr/$(get_libdir)/," "${FILESDIR}"/slapd.service > "${T}"/slapd.service || die
-		systemd_dounit "${T}"/slapd.service
-		systemd_install_serviced "${FILESDIR}"/slapd.service.conf
-		systemd_newtmpfilesd "${FILESDIR}"/slapd.tmpfilesd slapd.conf
 
 		# If built without SLP, we don't need to be before avahi
 		if ! use slp ; then

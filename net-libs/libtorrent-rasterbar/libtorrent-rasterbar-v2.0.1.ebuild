@@ -9,7 +9,7 @@ inherit cmake-utils python-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="https://libtorrent.org https://github.com/arvidn/libtorrent"
-SRC_URI="https://github.com/arvidn/libtorrent/releases/download/2.0/libtorrent-rasterbar-2.0.0.tar.gz -> libtorrent-rasterbar-2.0.tar.gz"
+SRC_URI="https://github.com/arvidn/libtorrent/releases/download/v2.0.1/libtorrent-rasterbar-2.0.1.tar.gz -> libtorrent-rasterbar-v2.0.1.tar.gz"
 
 LICENSE="BSD"
 SLOT="0/11"

@@ -5,11 +5,12 @@ DESCRIPTION=C++ BitTorrent implementation focusing on efficiency and scalability
 EAPI=7
 HOMEPAGE=https://libtorrent.org https://github.com/arvidn/libtorrent
 IUSE=debug +dht doc examples gnutls libressl python +ssl static-libs test python_targets_python3_7 python_targets_python3_9 python_targets_python3_8
+KEYWORDS=*
 LICENSE=BSD
 RDEPEND=dev-libs/boost:=[threads] examples? ( !net-p2p/mldonkey ) python? ( python_targets_python3_7? ( dev-lang/python:3.7[threads(+)] ) python_targets_python3_9? ( dev-lang/python:3.9[threads(+)] ) python_targets_python3_8? ( dev-lang/python:3.8[threads(+)] ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] dev-libs/boost:=[python,python_targets_python3_7(-)?,python_targets_python3_9(-)?,python_targets_python3_8(-)?,-python_single_target_python3_7(-),-python_single_target_python3_9(-),-python_single_target_python3_8(-)] ) ssl? ( gnutls? ( net-libs/gnutls:0= ) !gnutls? ( !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:= ) ) )
 REQUIRED_USE=python? ( || ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 ) ) gnutls? ( ssl ) libressl? ( ssl )
 RESTRICT=!test? ( test )
 SLOT=0/11
-SRC_URI=https://github.com/arvidn/libtorrent/releases/download/v2.0.1/libtorrent-rasterbar-2.0.1.tar.gz -> libtorrent-rasterbar-v2.0.1.tar.gz
+SRC_URI=https://github.com/arvidn/libtorrent/releases/download/v2.0.1/libtorrent-rasterbar-2.0.1.tar.gz -> libtorrent-rasterbar-2.0.1.tar.gz
 _eclasses_=cmake-utils	2b36e0ed4585e0b246ddd9d2ca07f3a4	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multibuild	b2c915190b051f55a23b9354b9849847	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=85c6920483ab9914f35479f4b1daf404
+_md5_=7fa5f81a404431eff4497c4f94f0f62b

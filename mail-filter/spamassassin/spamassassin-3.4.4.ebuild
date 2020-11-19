@@ -1,7 +1,6 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit perl-functions systemd toolchain-funcs user
 
@@ -13,8 +12,9 @@ SRC_URI="mirror://apache/spamassassin/source/${MY_P}.tar.bz2"
 
 LICENSE="Apache-2.0 GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 s390 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS="*"
 IUSE="berkdb cron ipv6 ldap libressl mysql postgres qmail sqlite ssl test"
+RESTRICT="!test? ( test )"
 
 # The Makefile.PL script checks for dependencies, but only fails if a
 # required (i.e. not optional) dependency is missing. We therefore
@@ -41,9 +41,10 @@ REQDEPEND="dev-lang/perl:=
 # We still need the old Digest-SHA1 because razor2 has not been ported
 # to Digest-SHA.
 OPTDEPEND="app-crypt/gnupg
+	dev-perl/BSD-Resource
 	dev-perl/Digest-SHA1
 	dev-perl/Encode-Detect
-	dev-perl/Geo-IP
+	|| ( dev-perl/GeoIP2 dev-perl/Geo-IP )
 	dev-perl/HTTP-Date
 	dev-perl/Mail-DKIM
 	dev-perl/Mail-SPF
@@ -77,7 +78,17 @@ DEPEND="${REQDEPEND}
 	)"
 RDEPEND="${REQDEPEND} ${OPTDEPEND}"
 
-PATCHES=( "${FILESDIR}/spamassassin-3.4.2-bug_7632.patch" )
+PATCHES=(
+	"${FILESDIR}/mention-geoip.cf-in-init.pre.patch"
+)
+
+# There are a few renames and use-dependent ones in src_istall as well.
+DOCS=(
+	NOTICE TRADEMARK CREDITS UPGRADE USAGE sql/README.bayes
+	sql/README.awl procmailrc.example sample-nonspam.txt
+	sample-spam.txt spamd/PROTOCOL spamd/README.vpopmail
+	spamd-apache2/README.apache
+)
 
 src_prepare() {
 	default
@@ -85,18 +96,18 @@ src_prepare() {
 	# The sa_compile test does some weird stuff like hopping around in
 	# the directory tree and calling "make" to create a dist tarball
 	# from ${S}. It fails, and is more trouble than it's worth...
-	perl_rm_files t/sa_compile.t || die 'failed to remove sa_compile test'
+	perl_rm_files t/sa_compile.t
 
 	# The spamc tests (which need the networked spamd daemon) fail for
 	# irrelevant reasons. It's too hard to disable them (unlike the
 	# spamd tests themselves -- see src_test), so use a crude
 	# workaround.
-	perl_rm_files t/spamc_*.t || die 'failed to remove spamc tests'
+	perl_rm_files t/spamc_*.t
 
-	# Upstream bug 7622: this thing needs network access but doesn't
-	# respect the 'run_net_tests' setting.
-	perl_rm_files t/urilocalbl_geoip.t \
-		|| die 'failed to remove urilocalbl_geoip tests'
+	# Disable plugin by default
+	sed -i -e 's/^loadplugin/\#loadplugin/g' \
+		"rules/init.pre" \
+		|| die "failed to disable plugins by default"
 }
 
 src_configure() {
@@ -129,8 +140,7 @@ src_compile() {
 }
 
 src_install () {
-	emake install
-	einstalldocs
+	default
 
 	# Create the stub dir used by sa-update and friends
 	keepdir /var/lib/spamassassin
@@ -145,37 +155,25 @@ src_install () {
 
 	dosym mail/spamassassin /etc/spamassassin
 
-	# Disable plugin by default
-	sed -i -e 's/^loadplugin/\#loadplugin/g' \
-		"${ED}/etc/mail/spamassassin/init.pre" \
-		|| die "failed to disable plugins by default"
-
 	# Add the init and config scripts.
 	newinitd "${FILESDIR}/3.4.1-spamd.init-r3" spamd
 	newconfd "${FILESDIR}/3.4.1-spamd.conf-r1" spamd
 
 	systemd_newunit "${FILESDIR}/${PN}.service-r4" "${PN}.service"
 	systemd_install_serviced "${FILESDIR}/${PN}.service.conf-r2" \
-							 "${PN}.service"
+		"${PN}.service"
 
 	use postgres && dodoc sql/*_pg.sql
 	use mysql && dodoc sql/*_mysql.sql
-
-	dodoc NOTICE TRADEMARK CREDITS UPGRADE USAGE sql/README.bayes \
-		sql/README.awl procmailrc.example sample-nonspam.txt \
-		sample-spam.txt spamd/PROTOCOL spamd/README.vpopmail \
-		spamd-apache2/README.apache
+	use qmail && dodoc spamc/README.qmail
 
 	# Rename some files so that they don't clash with others.
 	newdoc spamd/README README.spamd
 	newdoc sql/README README.sql
 	newdoc ldap/README README.ldap
 
-	if use qmail; then
-		dodoc spamc/README.qmail
-	fi
-
 	insinto /etc/mail/spamassassin/
+	doins "${FILESDIR}"/geoip.cf
 	insopts -m0400
 	newins "${FILESDIR}"/secrets.cf secrets.cf.example
 
@@ -190,12 +188,12 @@ src_install () {
 	if use cron; then
 		# Install the cron job if they want it.
 		exeinto /etc/cron.daily
-		newexe "${FILESDIR}/update-spamassassin-rules.cron" \
+		newexe "${FILESDIR}/update-spamassassin-rules-r1.cron" \
 			   update-spamassassin-rules
 	fi
 
 	# Remove perllocal.pod to avoid file collisions (bug #603338).
-	perl_delete_localpod || die "failed to remove perllocal.pod"
+	perl_delete_localpod
 
 	# The perl-module eclass calls three other functions to clean
 	# up in src_install. The first fixes references to ${D} in the
@@ -203,7 +201,7 @@ src_install () {
 	# perl_delete_emptybsdir and perl_remove_temppath, don't seem
 	# to be needed: there are no empty directories, *.bs files, or
 	# ${D} paths remaining in our installed image.
-	perl_fix_packlist || die "failed to fix paths in packlist"
+	perl_fix_packlist
 }
 
 src_test() {
@@ -218,6 +216,24 @@ pkg_preinst() {
 	# The spamd daemon runs as this user. Use a real home directory so
 	# that it can hold SA configuration.
 	enewuser spamd -1 -1 /home/spamd
+
+	if use mysql || use postgres ; then
+		local _awlwarn=0
+		local _v
+		for _v in ${REPLACING_VERSIONS}; do
+			if ver_test "${_v}" -lt "3.4.3"; then
+				_awlwarn=1
+				break
+			fi
+		done
+		if [[ ${_awlwarn} == 1 ]] ; then
+			ewarn 'If you used AWL before 3.4.3, the SQL schema has changed.'
+			ewarn 'You will need to manually ALTER your tables for them to'
+			ewarn 'continue working.  See the UPGRADE documentation for'
+			ewarn 'details.'
+			ewarn
+		fi
+	fi
 }
 
 pkg_postinst() {
@@ -237,10 +253,64 @@ pkg_postinst() {
 	elog '  https://wiki.gentoo.org/wiki/SpamAssassin'
 	elog
 
+	if use mysql || use postgres ; then
+		local _v
+		for _v in ${REPLACING_VERSIONS}; do
+			if ver_test "${_v}" -lt "3.4.3"; then
+				ewarn
+				ewarn 'If you used AWL before 3.4.3, the SQL schema has changed.'
+				ewarn 'You will need to manually ALTER your tables for them to'
+				ewarn 'continue working.  See the UPGRADE documentation for'
+				ewarn 'details.'
+				ewarn
+
+				# show this only once
+				break
+			fi
+		done
+	fi
+
 	ewarn 'If this version of SpamAssassin causes permissions issues'
 	ewarn 'with your user configurations or bayes databases, then you'
 	ewarn 'may need to set SPAMD_RUN_AS_ROOT=true in your OpenRC service'
 	ewarn 'configuration file, or remove the --username and --groupname'
 	ewarn 'flags from the SPAMD_OPTS variable in your systemd service'
 	ewarn 'configuration file.'
+
+	if [[ ! ~spamd -ef "${ROOT}/var/lib/spamd" ]] ; then
+		ewarn "The spamd user's home folder has been moved to a new location."
+		elog
+		elog "The acct-user/spamd package should have relocated it for you,"
+		elog "but may have failed because your spamd daemon was running."
+		elog
+		elog "To fix this:"
+		elog " - Stop your spamd daemon"
+		elog " - emerge -1 acct-user/spamd"
+		elog " - Restart your spamd daemon"
+		elog " - Remove the old home folder if you want"
+		elog "     rm -rf \"${ROOT}/home/spamd\""
+	fi
+	if [[ -e "${ROOT}/home/spamd" ]] ; then
+		ewarn
+		ewarn "The spamd user's home folder has been moved to a new location."
+		elog
+		elog "  Old Home: ${ROOT}/home/spamd"
+		elog "  New Home: ${ROOT}/var/lib/spamd"
+		elog
+		elog "You may wish to migrate your data to the new location:"
+		elog " - Stop your spamd daemon"
+		elog " - Re-emerge acct-user/spamd to ensure the home folder has been"
+		elog "   updated to the new location, now that the daemon isn't running:"
+		elog "     # emerge -1 acct-user/spamd"
+		elog "     # echo ~spamd"
+		elog " - Migrate the contents from the old location to the new home"
+		elog "   For example:"
+		elog "     # cp -Rpi \"${ROOT}/home/spamd/\" \"${ROOT}/var/lib/\""
+		elog " - Remove the old home folder"
+		elog "     # rm -rf \"${ROOT}/home/spamd\""
+		elog " - Restart your spamd daemon"
+		elog
+		elog "If you do not wish to migrate data, you should remove the old"
+		elog "home folder from your system as it is not used."
+	fi
 }

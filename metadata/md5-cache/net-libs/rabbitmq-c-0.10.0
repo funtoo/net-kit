@@ -1,0 +1,16 @@
+BDEPEND=dev-util/ninja dev-util/cmake
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=doc? ( app-doc/doxygen ) tools? ( app-text/xmlto )
+DESCRIPTION=RabbitMQ C client
+EAPI=7
+HOMEPAGE=https://github.com/alanxz/rabbitmq-c
+IUSE=doc libressl test +ssl static-libs tools
+KEYWORDS=*
+LICENSE=MIT
+RDEPEND=ssl? ( libressl? ( dev-libs/libressl:= ) !libressl? ( dev-libs/openssl:0= ) ) tools? ( dev-libs/popt )
+REQUIRED_USE=test? ( static-libs )
+RESTRICT=!test? ( test )
+SLOT=0/4
+SRC_URI=https://github.com/alanxz/rabbitmq-c/archive/v0.10.0.tar.gz -> rabbitmq-c-0.10.0.tar.gz
+_eclasses_=cmake	7b250250bd1c3cc90800ed668fb87825	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	xdg-utils	14d00d009167652b1fa363e55effe213
+_md5_=b0e46c0574a9dce22066ca1301b0dcaa

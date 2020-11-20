@@ -1,20 +1,16 @@
-# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-inherit autotools eutils
+EAPI=7
+inherit autotools
 
 DESCRIPTION="A set of tools to collect and process netflow data"
 HOMEPAGE="https://github.com/phaag/nfdump"
-SRC_URI="
-	${HOMEPAGE}/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	${HOMEPAGE}/commit/ff0e855bd1f51bed9fc5d8559c64d3cfb475a5d8.patch -> ${P}-security.patch
-"
+SRC_URI="https://github.com/phaag/nfdump/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
-SLOT="0/${PV}"
-KEYWORDS="amd64 x86"
-IUSE="compat15 debug ftconv nfprofile nftrack readpcap sflow"
+SLOT="0/1.6.15"
+KEYWORDS="*"
+IUSE="debug doc ftconv nfprofile nftrack readpcap sflow static-libs"
 
 COMMON_DEPEND="
 	app-arch/bzip2
@@ -26,23 +22,29 @@ COMMON_DEPEND="
 "
 DEPEND="
 	${COMMON_DEPEND}
+"
+BDEPEND="
 	sys-devel/flex
 	virtual/yacc
+	doc? ( app-doc/doxygen )
 "
 RDEPEND="
 	${COMMON_DEPEND}
-	dev-lang/perl
 "
-
-DOCS=( AUTHORS ChangeLog NEWS README )
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.6.19-compiler.patch
+	"${FILESDIR}"/${PN}-1.6.19-libft.patch
+)
+DOCS=( AUTHORS ChangeLog README.md )
 
 src_prepare() {
-	epatch \
-		"${FILESDIR}"/${PN}-1.6.14-libft.patch \
-		"${FILESDIR}"/${PN}-1.6.14-libnfdump.patch \
-		"${DISTDIR}"/${P}-security.patch
+	default
 
 	eautoreconf
+
+	if use doc; then
+		doxygen -u doc/Doxyfile.in || die
+	fi
 }
 
 src_configure() {
@@ -51,8 +53,18 @@ src_configure() {
 		$(use ftconv && echo "--enable-ftconv --with-ftpath=/usr") \
 		$(use nfprofile && echo --enable-nfprofile) \
 		$(use nftrack && echo --enable-nftrack) \
-		$(use_enable compat15) \
 		$(use_enable debug devel) \
 		$(use_enable readpcap) \
-		$(use_enable sflow)
+		$(use_enable sflow) \
+		$(use_enable static-libs static)
+}
+
+src_install() {
+	default
+
+	find "${ED}" -name '*.la' -delete || die
+
+	if use doc; then
+		dodoc -r doc/html
+	fi
 }

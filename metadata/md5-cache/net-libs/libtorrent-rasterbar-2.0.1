@@ -8,9 +8,9 @@ IUSE=debug +dht doc examples gnutls libressl python +ssl static-libs test
 KEYWORDS=*
 LICENSE=BSD
 RDEPEND=>=dev-libs/boost-1.72:=[threads] examples? ( !net-p2p/mldonkey dev-util/patchelf ) python? ( || ( dev-lang/python:3.8[threads(+)] dev-lang/python:3.9[threads(+)] dev-lang/python:3.7[threads(+)] ) || ( ( dev-lang/python:3.8[threads(+)] dev-libs/boost:=[python,python_targets_python3_8(-),python_single_target_python3_8(+)] ) ( dev-lang/python:3.9[threads(+)] dev-libs/boost:=[python,python_targets_python3_9(-),python_single_target_python3_9(+)] ) ( dev-lang/python:3.7[threads(+)] dev-libs/boost:=[python,python_targets_python3_7(-),python_single_target_python3_7(+)] ) ) ) ssl? ( gnutls? ( net-libs/gnutls:0= ) !gnutls? ( !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:= ) ) )
-REQUIRED_USE=python? ( I-DO-NOT-EXIST-IN-PYTHON-ANY-R1 ) gnutls? ( ssl ) libressl? ( ssl )
+REQUIRED_USE=gnutls? ( ssl ) libressl? ( ssl )
 RESTRICT=!test? ( test )
 SLOT=0/11
 SRC_URI=https://github.com/arvidn/libtorrent/releases/download/v2.0.1/libtorrent-rasterbar-2.0.1.tar.gz -> libtorrent-rasterbar-2.0.1.tar.gz
 _eclasses_=cmake-utils	2b36e0ed4585e0b246ddd9d2ca07f3a4	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=6352868d69f72d12ef11a8219cff407f
+_md5_=efc6839fec7a8b51abc4cde3c26d69fd

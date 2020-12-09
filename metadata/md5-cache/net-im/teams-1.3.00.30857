@@ -9,4 +9,4 @@ RDEPEND=>=media-libs/alsa-lib-1.0.16 >=app-accessibility/at-spi2-atk-2.5.3 >=dev
 SLOT=0
 SRC_URI=https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.3.00.30857_amd64.deb
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	pax-utils	db85a3c508cf82c45f24b2723791cc93	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=066984cfd1aadab28f5899b852c93cfd
+_md5_=2ff91629b4f780c87d85f6fa377d540e

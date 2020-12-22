@@ -1,4 +1,6 @@
 =mail-client/thunderbird-52.9.1 python_single_target_python2_7
+=net-analyzer/nmap-7.70 python_single_target_python2_7
+=net-analyzer/nmap-9999 python_single_target_python2_7
 =net-analyzer/ospd-1.0.0 python_single_target_python2_7
 =net-analyzer/prelude-correlator-3.0.1-r1 python_single_target_python2_7
 =net-analyzer/prelude-correlator-3.1.0 python_single_target_python2_7
@@ -38,7 +40,6 @@ net-analyzer/gsm-receiver python_single_target_python2_7
 net-analyzer/linkchecker python_single_target_python2_7
 net-analyzer/mk-livestatus python_single_target_python2_7
 net-analyzer/namebench python_single_target_python2_7
-net-analyzer/nmap python_single_target_python2_7
 net-analyzer/pbgpp python_single_target_python2_7
 net-dns/dnsimple-dyndns python_single_target_python2_7
 net-dns/hash-slinger python_single_target_python2_7

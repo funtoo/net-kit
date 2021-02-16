@@ -1,29 +1,35 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit cmake-utils gnome2-utils readme.gentoo-r1 systemd user xdg-utils
+inherit cmake-utils user xdg-utils
 
-if [[ ${PV} == 9999 ]]; then
-	inherit git-r3
-	EGIT_REPO_URI="https://github.com/transmission/transmission"
-else
-	SRC_URI="https://github.com/transmission/transmission-releases/raw/master/${P}.tar.xz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux"
-fi
 
 DESCRIPTION="A fast, easy, and free BitTorrent client"
 HOMEPAGE="https://transmissionbt.com/"
+SRC_URI="https://github.com/transmission/transmission-releases/raw/master/transmission-3.00.tar.xz -> transmission-3.00.tar.xz"
 
 # web/LICENSE is always GPL-2 whereas COPYING allows either GPL-2 or GPL-3 for the rest
 # transmission in licenses/ is for mentioning OpenSSL linking exception
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 systemd test"
+KEYWORDS="*"
+IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 test"
 RESTRICT="!test? ( test )"
 
+BDEPEND="
+	virtual/pkgconfig
+	nls? (
+		gtk? (
+			dev-util/intltool
+			sys-devel/gettext
+		)
+		qt5? (
+			dev-qt/linguist-tools:5
+		)
+	)
+"
 RDEPEND="
 	dev-libs/libb64:0=
 	>=dev-libs/libevent-2.0.10:=
@@ -36,6 +42,7 @@ RDEPEND="
 	>=net-libs/miniupnpc-1.7:=
 	>=net-misc/curl-7.16.3[ssl]
 	sys-libs/zlib:=
+	nls? ( virtual/libintl )
 	gtk? (
 		>=dev-libs/dbus-glib-0.100
 		>=dev-libs/glib-2.32:2
@@ -49,10 +56,8 @@ RDEPEND="
 		dev-qt/qtnetwork:5
 		dev-qt/qtdbus:5
 	)
-	systemd? ( >=sys-apps/systemd-209:= )
 "
 DEPEND="${RDEPEND}
-	virtual/pkgconfig
 	nls? (
 		virtual/libintl
 		gtk? (
@@ -65,12 +70,14 @@ DEPEND="${RDEPEND}
 	)
 "
 
-src_unpack() {
-	if [[ ${PV} == 9999 ]]; then
-		git-r3_src_unpack
-	else
-		unpack ${P}.tar.gz
-	fi
+
+# Need the following to fix linguas issue shipped with Transmission.
+# Removes invalid pt_PT from CMakeLists.txt as pt_PT.po does not 
+# exist but pt.po does and causes build failure.
+
+src_prepare() {
+	sed -i -e '/pt_PT/d' po/CMakeLists.txt
+	cmake-utils_src_prepare
 }
 
 src_configure() {
@@ -93,58 +100,43 @@ src_configure() {
 		-DWITH_CRYPTO=$(usex mbedtls polarssl openssl)
 		-DWITH_INOTIFY=ON
 		-DWITH_LIBAPPINDICATOR=$(usex ayatana ON OFF)
-		-DWITH_SYSTEMD=$(usex systemd ON OFF)
+		-DWITH_SYSTEMD=OFF
 	)
 
 	cmake-utils_src_configure
 }
-
-DISABLE_AUTOFORMATTING=1
-DOC_CONTENTS="\
-If you use transmission-daemon, please, set 'rpc-username' and
-'rpc-password' (in plain text, transmission-daemon will hash it on
-start) in settings.json file located at /var/lib/transmission/config or
-any other appropriate config directory.
-
-Since µTP is enabled by default, transmission needs large kernel buffers for
-the UDP socket. You can append following lines into /etc/sysctl.conf:
-
-net.core.rmem_max = 4194304
-net.core.wmem_max = 1048576
-
-and run sysctl -p"
 
 src_install() {
 	cmake-utils_src_install
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
-	systemd_dounit daemon/transmission-daemon.service
-	systemd_install_serviced "${FILESDIR}"/transmission-daemon.service.conf
 
-	readme.gentoo_create_doc
-}
+	insinto /usr/lib/sysctl.d
+	doins "${FILESDIR}"/60-transmission.conf
 
-pkg_preinst() {
-	gnome2_icon_savelist
+	if [[ ${EUID} == 0 ]]; then
+		diropts -o transmission -g transmission
+	fi
+	keepdir /var/lib/transmission
+
 }
 
 pkg_postrm() {
-	xdg_desktop_database_update
-	gnome2_icon_cache_update
+	if use gtk || use qt5; then
+		xdg_desktop_database_update
+		xdg_icon_cache_update
+	fi
+}
+
+pkg_preinst() {
+	enewgroup transmission
+	enewuser transmission -1 -1 /var/lib/transmission transmission
 }
 
 pkg_postinst() {
-	xdg_desktop_database_update
-	gnome2_icon_cache_update
-
-	enewgroup transmission
-	enewuser transmission -1 -1 /var/lib/transmission transmission
-
-	if [[ ! -e "${EROOT%/}"/var/lib/transmission ]]; then
-		mkdir -p "${EROOT%/}"/var/lib/transmission || die
-		chown transmission:transmission "${EROOT%/}"/var/lib/transmission || die
+	if use gtk || use qt5; then
+		xdg_desktop_database_update
+		xdg_icon_cache_update
 	fi
-
-	readme.gentoo_print_elog
 }

@@ -1,25 +1,19 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
 
+PYTHON_COMPAT=( python3+ )
 inherit autotools fcaps linux-info python-r1 systemd user
-
-if [[ ${PV} == *9999 ]] ; then
-	EGIT_REPO_URI="https://github.com/netdata/${PN}.git"
-	inherit git-r3
-else
-	SRC_URI="https://github.com/netdata/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~x86"
-fi
 
 DESCRIPTION="Linux real time system monitoring, done right!"
 HOMEPAGE="https://github.com/netdata/netdata https://my-netdata.io/"
-
 LICENSE="GPL-3+ MIT BSD"
+SRC_URI="https://github.com/netdata/netdata/releases/download/v1.29.3/netdata-v1.29.3.tar.gz"
+
 SLOT="0"
-IUSE="caps +compression cpu_flags_x86_sse2 cups ipmi mysql nfacct nodejs postgres +python tor xen"
+KEYWORDS="*"
+IUSE="caps +compression cpu_flags_x86_sse2 cups dbengine ipmi jsonc mysql nfacct nodejs postgres prometheus +python tor xen"
+
 REQUIRED_USE="
 	mysql? ( python )
 	python? ( ${PYTHON_REQUIRED_USE} )
@@ -35,19 +29,31 @@ RDEPEND="
 	)
 	net-analyzer/tcpdump
 	net-analyzer/traceroute
+	net-libs/libwebsockets
 	net-misc/curl
 	net-misc/wget
 	sys-apps/util-linux
 	virtual/awk
 	caps? ( sys-libs/libcap )
 	cups? ( net-print/cups )
+	dbengine? (
+	app-arch/lz4
+	dev-libs/judy
+	dev-libs/openssl:=
+	)
+	dev-libs/libuv
 	compression? ( sys-libs/zlib )
 	ipmi? ( sys-libs/freeipmi )
+	jsonc? ( dev-libs/json-c:= )
 	nfacct? (
 		net-firewall/nfacct
 		net-libs/libmnl
 	)
 	nodejs? ( net-libs/nodejs )
+	prometheus? (
+	dev-libs/protobuf:=
+	app-arch/snappy
+	)
 	python? (
 		${PYTHON_DEPS}
 		dev-python/pyyaml[${PYTHON_USEDEP}]
@@ -73,6 +79,8 @@ DEPEND="${RDEPEND}
 FILECAPS=(
 	'cap_dac_read_search,cap_sys_ptrace+ep' 'usr/libexec/netdata/plugins.d/apps.plugin'
 )
+
+S="${WORKDIR}/${PN}-v${PV}"
 
 pkg_setup() {
 	linux-info_pkg_setup
@@ -103,14 +111,11 @@ src_install() {
 
 	rm -rf "${D}/var/cache" || die
 
-	# Remove unneeded .keep files
-	find "${ED}" -name ".keep" -delete || die
-
-	fowners -Rc ${NETDATA_USER}:${NETDATA_GROUP} /var/log/netdata
 	keepdir /var/log/netdata
-	fowners -Rc ${NETDATA_USER}:${NETDATA_GROUP} /var/lib/netdata
+	fowners -Rc ${NETDATA_USER}:${NETDATA_GROUP} /var/log/netdata
 	keepdir /var/lib/netdata
 	keepdir /var/lib/netdata/registry
+	fowners -Rc ${NETDATA_USER}:${NETDATA_GROUP} /var/lib/netdata
 
 	fowners -Rc root:${NETDATA_GROUP} /usr/share/${PN}
 

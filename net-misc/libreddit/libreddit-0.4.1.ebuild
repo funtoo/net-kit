@@ -137,8 +137,8 @@ rand_core-0.5.1
 rand_core-0.6.2
 rand_hc-0.2.0
 rand_hc-0.3.0
-regex-1.4.3
-regex-syntax-0.6.22
+regex-1.4.4
+regex-syntax-0.6.23
 ring-0.16.20
 route-recognizer-0.2.0
 rustc_version-0.2.3
@@ -175,7 +175,6 @@ tap-1.0.1
 textwrap-0.11.0
 thiserror-1.0.24
 thiserror-impl-1.0.24
-thread_local-1.1.3
 tide-0.16.0
 time-0.2.25
 time-macros-0.1.1
@@ -216,7 +215,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.4.0 -> libreddit-v0.4.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.4.1 -> libreddit-v0.4.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -5,5 +5,5 @@ HOMEPAGE=https://github.com/bb010g/betterdiscordctl
 KEYWORDS=*
 LICENSE=MIT
 SLOT=0
-SRC_URI=https://github.com/bb010g/betterdiscordctl/archive/v1.7.0.tar.gz
-_md5_=41ce157fe6b4d095cd182baf3dc849e7
+SRC_URI=https://github.com/bb010g/betterdiscordctl/archive/v1.7.0.tar.gz -> betterdiscordctl-1.7.0.tar.gz
+_md5_=aa08723724eb07498698fc7ffaefb6b7

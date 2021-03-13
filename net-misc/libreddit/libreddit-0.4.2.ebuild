@@ -92,7 +92,7 @@ hashbrown-0.9.1
 hermit-abi-0.1.18
 hkdf-0.10.0
 hmac-0.10.1
-http-client-6.3.4
+http-client-6.3.5
 http-types-2.10.0
 httparse-1.3.5
 ident_case-1.0.1
@@ -181,7 +181,7 @@ time-macros-0.1.1
 time-macros-impl-0.1.1
 tinyvec-1.1.1
 tinyvec_macros-0.1.0
-typenum-1.12.0
+typenum-1.13.0
 unicode-bidi-0.3.4
 unicode-normalization-0.1.17
 unicode-width-0.1.8
@@ -215,7 +215,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.4.1 -> libreddit-v0.4.1.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.4.2 -> libreddit-v0.4.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

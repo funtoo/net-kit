@@ -137,7 +137,7 @@ rand_core-0.5.1
 rand_core-0.6.2
 rand_hc-0.2.0
 rand_hc-0.3.0
-regex-1.4.4
+regex-1.4.5
 regex-syntax-0.6.23
 ring-0.16.20
 route-recognizer-0.2.0

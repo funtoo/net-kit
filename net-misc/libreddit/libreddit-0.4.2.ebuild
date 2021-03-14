@@ -170,7 +170,7 @@ stdweb-internal-runtime-0.1.5
 strsim-0.9.3
 subtle-2.4.0
 sval-1.0.0-alpha.5
-syn-1.0.63
+syn-1.0.64
 tap-1.0.1
 textwrap-0.11.0
 thiserror-1.0.24

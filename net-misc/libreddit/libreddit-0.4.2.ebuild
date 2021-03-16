@@ -104,7 +104,7 @@ js-sys-0.3.48
 kv-log-macro-1.0.7
 lazy_static-1.4.0
 lexical-core-0.7.5
-libc-0.2.88
+libc-0.2.89
 log-0.4.14
 matches-0.1.8
 maybe-uninit-2.0.0
@@ -176,7 +176,7 @@ textwrap-0.11.0
 thiserror-1.0.24
 thiserror-impl-1.0.24
 tide-0.16.0
-time-0.2.25
+time-0.2.26
 time-macros-0.1.1
 time-macros-impl-0.1.1
 tinyvec-1.1.1
@@ -191,7 +191,7 @@ untrusted-0.7.1
 url-2.2.1
 value-bag-1.0.0-alpha.6
 vec-arena-1.0.0
-version_check-0.9.2
+version_check-0.9.3
 waker-fn-1.1.0
 wasi-0.9.0+wasi-snapshot-preview1
 wasi-0.10.2+wasi-snapshot-preview1

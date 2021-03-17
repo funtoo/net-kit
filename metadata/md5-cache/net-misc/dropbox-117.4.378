@@ -11,6 +11,6 @@ RDEPEND=python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-
 REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python3_9 python_single_target_python3_8 )
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://www.github.com/funtoo/dropbox-python-setup/tarball/1.1 -> dropbox-python-setup-1.1.tar.gz x86? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86-117.4.378.tar.gz ) amd64? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86_64-117.4.378.tar.gz ) gnome? ( https://linux.dropbox.com/packages/nautilus-dropbox-2020.03.04.tar.bz2 )
+SRC_URI=https://www.github.com/funtoo/dropbox-python-setup/tarball/1.1 -> dropbox-python-setup-1.1.tar.gz x86? ( https://clientupdates.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86-117.4.378.tar.gz ) amd64? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86_64-117.4.378.tar.gz ) gnome? ( https://linux.dropbox.com/packages/nautilus-dropbox-2020.03.04.tar.bz2 )
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	gnome.org	532d56d07b9eace4831aaa817d2b756a	gnome3	fe2aa61bf7cc35d026458d06f875ef53	gnome3-utils	2f3d0409b97e36d3c12f0eee11e755e7	libtool	f143db5a74ccd9ca28c1234deffede96	ltprune	22f9f14d105434e9c400ccac3bbb64ae	multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-single-r1	ce99dfba1cad0514af51a32b2b6964af	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=b328093f81ec3f37589a9159252055fb
+_md5_=e3426bbf4b6081a0eb76e4e1a04b23f9

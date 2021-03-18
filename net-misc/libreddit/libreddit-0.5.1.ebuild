@@ -63,10 +63,10 @@ idna-0.2.2
 indexmap-1.6.2
 instant-0.1.9
 itoa-0.4.7
-js-sys-0.3.48
+js-sys-0.3.49
 lazy_static-1.4.0
 lexical-core-0.7.5
-libc-0.2.89
+libc-0.2.90
 lock_api-0.4.2
 log-0.4.14
 matches-0.1.8
@@ -148,12 +148,12 @@ url-2.2.1
 version_check-0.9.3
 waker-fn-1.1.0
 want-0.3.0
-wasm-bindgen-0.2.71
-wasm-bindgen-backend-0.2.71
-wasm-bindgen-macro-0.2.71
-wasm-bindgen-macro-support-0.2.71
-wasm-bindgen-shared-0.2.71
-web-sys-0.3.48
+wasm-bindgen-0.2.72
+wasm-bindgen-backend-0.2.72
+wasm-bindgen-macro-0.2.72
+wasm-bindgen-macro-support-0.2.72
+wasm-bindgen-shared-0.2.72
+web-sys-0.3.49
 webpki-0.21.4
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.5.0 -> libreddit-v0.5.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.5.1 -> libreddit-v0.5.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -53,7 +53,7 @@ h2-0.3.1
 hashbrown-0.9.1
 hermit-abi-0.1.18
 http-0.2.3
-http-body-0.4.0
+http-body-0.4.1
 httparse-1.3.5
 httpdate-0.3.2
 hyper-0.14.4
@@ -116,7 +116,7 @@ slab-0.4.2
 smallvec-1.6.1
 socket2-0.3.19
 spin-0.5.2
-standback-0.2.15
+standback-0.2.16
 static_assertions-1.1.0
 stdweb-0.4.20
 stdweb-derive-0.5.3

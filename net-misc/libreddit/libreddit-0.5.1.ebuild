@@ -131,10 +131,10 @@ time-macros-0.1.1
 time-macros-impl-0.1.1
 tinyvec-1.1.1
 tinyvec_macros-0.1.0
-tokio-1.3.0
+tokio-1.4.0
 tokio-macros-1.1.0
 tokio-rustls-0.22.0
-tokio-util-0.6.4
+tokio-util-0.6.5
 tower-service-0.3.1
 tracing-0.1.25
 tracing-core-0.1.17

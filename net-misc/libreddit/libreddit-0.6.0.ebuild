@@ -116,7 +116,7 @@ slab-0.4.2
 smallvec-1.6.1
 socket2-0.3.19
 spin-0.5.2
-standback-0.2.16
+standback-0.2.17
 static_assertions-1.1.0
 stdweb-0.4.20
 stdweb-derive-0.5.3
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.5.1 -> libreddit-v0.5.1.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.6.0 -> libreddit-v0.6.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

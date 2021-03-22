@@ -1,33 +1,36 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3+ )
 
-inherit python-any-r1 systemd user
+inherit python-any-r1 user
 
 DESCRIPTION="RabbitMQ is a high-performance AMQP-compliant message broker written in Erlang"
 HOMEPAGE="https://www.rabbitmq.com/"
 SRC_URI="https://github.com/rabbitmq/rabbitmq-server/releases/download/v${PV}/rabbitmq-server-${PV}.tar.xz"
 
-LICENSE="GPL-2 MPL-1.1"
+LICENSE="GPL-2 MPL-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="*"
 IUSE=""
 RESTRICT="test"
 
-RDEPEND=">=dev-lang/erlang-19.3[ssl]"
+RDEPEND=">=dev-lang/erlang-22.3[ssl]
+	<dev-lang/erlang-24[ssl]"
 DEPEND="${RDEPEND}
 	app-arch/zip
 	app-arch/unzip
 	app-text/docbook-xml-dtd:4.5
 	app-text/xmlto
-	>=dev-lang/elixir-1.6.6
-	<dev-lang/elixir-1.7.0
+	>=dev-lang/elixir-1.8.0
+	<dev-lang/elixir-1.12.0
 	dev-libs/libxslt
 	$(python_gen_any_dep 'dev-python/simplejson[${PYTHON_USEDEP}]')
 "
+src_prepare() {
+	default
+}
 
 pkg_setup() {
 	enewgroup rabbitmq
@@ -49,7 +52,7 @@ src_install() {
 
 	einfo "Installing Erlang modules to ${targetdir}"
 	insinto "${targetdir}"
-	doins -r deps/rabbit/ebin deps/rabbit/escript deps/rabbit/include deps/rabbit/priv plugins
+	doins -r deps/rabbit/ebin deps/rabbit/include deps/rabbit/priv escript plugins
 
 	einfo "Installing server scripts to /usr/sbin"
 	rm -v deps/rabbit/scripts/*.bat
@@ -60,8 +63,7 @@ src_install() {
 	done
 
 	# install the init script
-	newinitd "${FILESDIR}"/rabbitmq-server.init-r3 rabbitmq
-	systemd_dounit "${FILESDIR}/rabbitmq.service"
+	newinitd "${FILESDIR}"/rabbitmq-server.init-r4 rabbitmq
 
 	# install documentation
 	dodoc deps/rabbit/docs/*.example
@@ -76,30 +78,4 @@ src_install() {
 	# create the mnesia directory
 	diropts -m 0770 -o rabbitmq -g rabbitmq
 	keepdir /var/lib/rabbitmq{,/mnesia}
-}
-
-pkg_preinst() {
-	if has_version "<=net-misc/rabbitmq-server-1.8.0"; then
-		elog "IMPORTANT UPGRADE NOTICE:"
-		elog
-		elog "RabbitMQ is now running as an unprivileged user instead of root."
-		elog "Therefore you need to fix the permissions for RabbitMQs Mnesia database."
-		elog "Please run the following commands as root:"
-		elog
-		elog "  usermod -d /var/lib/rabbitmq rabbitmq"
-		elog "  chown rabbitmq:rabbitmq -R /var/lib/rabbitmq"
-		elog
-	elif has_version "<net-misc/rabbitmq-server-2.1.1"; then
-		elog "IMPORTANT UPGRADE NOTICE:"
-		elog
-		elog "Please read release notes before upgrading:"
-		elog
-		elog "https://www.rabbitmq.com/release-notes/README-3.0.0.txt"
-	fi
-	if has_version "<net-misc/rabbitmq-server-3.3.0"; then
-		elog
-		elog "This release changes the behaviour of the default guest user:"
-		elog
-		elog "https://www.rabbitmq.com/access-control.html"
-	fi
 }

@@ -72,7 +72,7 @@ log-0.4.14
 matches-0.1.8
 memchr-2.3.4
 mio-0.7.10
-miow-0.3.6
+miow-0.3.7
 nom-6.1.2
 ntapi-0.3.6
 num_cpus-1.13.0

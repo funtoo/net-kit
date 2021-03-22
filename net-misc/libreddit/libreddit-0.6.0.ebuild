@@ -71,7 +71,7 @@ lock_api-0.4.2
 log-0.4.14
 matches-0.1.8
 memchr-2.3.4
-mio-0.7.10
+mio-0.7.11
 miow-0.3.7
 nom-6.1.2
 ntapi-0.3.6
@@ -107,8 +107,8 @@ security-framework-2.1.2
 security-framework-sys-2.1.1
 semver-0.9.0
 semver-parser-0.7.0
-serde-1.0.124
-serde_derive-1.0.124
+serde-1.0.125
+serde_derive-1.0.125
 serde_json-1.0.64
 sha1-0.6.0
 signal-hook-registry-1.3.0

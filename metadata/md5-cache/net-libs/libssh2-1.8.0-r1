@@ -9,5 +9,5 @@ LICENSE=BSD
 RDEPEND=!gcrypt? ( !libressl? ( >=dev-libs/openssl-1.0.1h-r2:0=[-mgorny(-)] ) libressl? ( dev-libs/libressl:0=[-mgorny(-)] ) ) gcrypt? ( >=dev-libs/libgcrypt-1.5.3:0[-mgorny(-)] ) zlib? ( >=sys-libs/zlib-1.2.8-r1[-mgorny(-)] )
 SLOT=0
 SRC_URI=https://www.libssh2.org/download/libssh2-1.8.0.tar.gz
-_eclasses_=multibuild	b2c915190b051f55a23b9354b9849847	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multilib-build	5c1d48ed515f98242029611de215c727	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
+_eclasses_=multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	multilib-build	5c1d48ed515f98242029611de215c727	multilib-minimal	8bddda43703ba94d8341f4e247f97566	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=385a3f8d1aeeb95399d1cfe3f0bbbbb3

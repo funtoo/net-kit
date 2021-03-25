@@ -49,7 +49,7 @@ futures-macro-0.3.13
 futures-sink-0.3.13
 futures-task-0.3.13
 futures-util-0.3.13
-h2-0.3.1
+h2-0.3.2
 hashbrown-0.9.1
 hermit-abi-0.1.18
 http-0.2.3
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.6.0 -> libreddit-v0.6.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.7.0 -> libreddit-v0.7.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

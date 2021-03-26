@@ -82,8 +82,8 @@ parking-2.0.0
 parking_lot-0.11.1
 parking_lot_core-0.8.3
 percent-encoding-2.1.0
-pin-project-1.0.5
-pin-project-internal-1.0.5
+pin-project-1.0.6
+pin-project-internal-1.0.6
 pin-project-lite-0.2.6
 pin-utils-0.1.0
 proc-macro-hack-0.5.19

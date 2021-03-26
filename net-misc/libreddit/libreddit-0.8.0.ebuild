@@ -56,7 +56,7 @@ http-0.2.3
 http-body-0.4.1
 httparse-1.3.5
 httpdate-0.3.2
-hyper-0.14.4
+hyper-0.14.5
 hyper-rustls-0.22.1
 ident_case-1.0.1
 idna-0.2.2
@@ -114,7 +114,7 @@ sha1-0.6.0
 signal-hook-registry-1.3.0
 slab-0.4.2
 smallvec-1.6.1
-socket2-0.3.19
+socket2-0.4.0
 spin-0.5.2
 standback-0.2.17
 static_assertions-1.1.0
@@ -123,7 +123,7 @@ stdweb-derive-0.5.3
 stdweb-internal-macros-0.2.9
 stdweb-internal-runtime-0.1.5
 strsim-0.9.3
-syn-1.0.64
+syn-1.0.65
 tap-1.0.1
 textwrap-0.11.0
 time-0.2.26

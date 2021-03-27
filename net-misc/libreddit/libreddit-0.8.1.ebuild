@@ -103,8 +103,8 @@ ryu-1.0.5
 schannel-0.1.19
 scopeguard-1.1.0
 sct-0.6.0
-security-framework-2.1.2
-security-framework-sys-2.1.1
+security-framework-2.2.0
+security-framework-sys-2.2.0
 semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.125
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.8.0 -> libreddit-v0.8.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.8.1 -> libreddit-v0.8.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -25,7 +25,7 @@ cached_proc_macro_types-0.1.0
 cc-1.0.67
 cfg-if-1.0.0
 clap-2.33.3
-const_fn-0.4.5
+const_fn-0.4.6
 cookie-0.15.0
 core-foundation-0.9.1
 core-foundation-sys-0.8.2

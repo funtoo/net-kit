@@ -4,7 +4,7 @@ EAPI=7
 
 DESCRIPTION="A manager for BetterDiscord on Linux"
 HOMEPAGE="https://github.com/bb010g/betterdiscordctl"
-SRC_URI="https://github.com/bb010g/betterdiscordctl/archive/v1.7.0.tar.gz -> betterdiscordctl-1.7.0.tar.gz"
+SRC_URI="https://github.com/bb010g/betterdiscordctl/archive/v1.7.1.tar.gz -> betterdiscordctl-1.7.1.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

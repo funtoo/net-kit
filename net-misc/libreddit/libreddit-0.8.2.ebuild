@@ -63,7 +63,7 @@ idna-0.2.2
 indexmap-1.6.2
 instant-0.1.9
 itoa-0.4.7
-js-sys-0.3.49
+js-sys-0.3.50
 lazy_static-1.4.0
 lexical-core-0.7.5
 libc-0.2.91
@@ -148,12 +148,12 @@ url-2.2.1
 version_check-0.9.3
 waker-fn-1.1.0
 want-0.3.0
-wasm-bindgen-0.2.72
-wasm-bindgen-backend-0.2.72
-wasm-bindgen-macro-0.2.72
-wasm-bindgen-macro-support-0.2.72
-wasm-bindgen-shared-0.2.72
-web-sys-0.3.49
+wasm-bindgen-0.2.73
+wasm-bindgen-backend-0.2.73
+wasm-bindgen-macro-0.2.73
+wasm-bindgen-macro-support-0.2.73
+wasm-bindgen-shared-0.2.73
+web-sys-0.3.50
 webpki-0.21.4
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0

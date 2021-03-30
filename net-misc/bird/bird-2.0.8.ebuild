@@ -1,15 +1,14 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 DESCRIPTION="A routing daemon implementing OSPF, RIPv2 & BGP for IPv4 & IPv6"
 HOMEPAGE="http://bird.network.cz"
-SRC_URI="ftp://bird.network.cz/pub/${PN}/${P}.tar.gz"
+SRC_URI="https://bird.network.cz/download/bird-2.0.8.tar.gz -> bird-2.0.8.tar.gz"
 LICENSE="GPL-2"
 
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86 ~x64-macos"
+KEYWORDS="*"
 IUSE="+client debug"
 
 RDEPEND="client? ( sys-libs/ncurses )
@@ -31,6 +30,6 @@ src_install() {
 	fi
 	dobin birdcl
 	dosbin bird
-	newinitd "${FILESDIR}/initd-v4-${PN}-1.3.8" bird
+	newinitd "${FILESDIR}/initd-${PN}-2" bird
 	dodoc doc/bird.conf.example
 }

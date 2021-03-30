@@ -66,7 +66,7 @@ itoa-0.4.7
 js-sys-0.3.50
 lazy_static-1.4.0
 lexical-core-0.7.5
-libc-0.2.91
+libc-0.2.92
 lock_api-0.4.2
 log-0.4.14
 matches-0.1.8

@@ -88,7 +88,7 @@ pin-project-lite-0.2.6
 pin-utils-0.1.0
 proc-macro-hack-0.5.19
 proc-macro-nested-0.1.7
-proc-macro2-1.0.24
+proc-macro2-1.0.25
 quote-1.0.9
 radium-0.5.3
 redox_syscall-0.2.5

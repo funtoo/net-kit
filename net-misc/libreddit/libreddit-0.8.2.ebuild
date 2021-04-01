@@ -88,7 +88,7 @@ pin-project-lite-0.2.6
 pin-utils-0.1.0
 proc-macro-hack-0.5.19
 proc-macro-nested-0.1.7
-proc-macro2-1.0.25
+proc-macro2-1.0.26
 quote-1.0.9
 radium-0.5.3
 redox_syscall-0.2.5
@@ -123,7 +123,7 @@ stdweb-derive-0.5.3
 stdweb-internal-macros-0.2.9
 stdweb-internal-runtime-0.1.5
 strsim-0.9.3
-syn-1.0.67
+syn-1.0.68
 tap-1.0.1
 textwrap-0.11.0
 time-0.2.26

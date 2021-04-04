@@ -129,7 +129,7 @@ textwrap-0.11.0
 time-0.2.26
 time-macros-0.1.1
 time-macros-impl-0.1.1
-tinyvec-1.1.1
+tinyvec-1.2.0
 tinyvec_macros-0.1.0
 tokio-1.4.0
 tokio-macros-1.1.0

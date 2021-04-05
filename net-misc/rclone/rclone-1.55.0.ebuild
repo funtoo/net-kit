@@ -1102,7 +1102,7 @@ HOMEPAGE="https://rclone.org/"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT"
 SLOT="0"
-IUSE=""
+IUSE="+mount"
 
 S="${WORKDIR}/${PN}-v${PV}"
 
@@ -1125,4 +1125,8 @@ src_install() {
 	./rclone genautocomplete zsh ${PN}.zsh || die
 	insinto /usr/share/zsh/site-functions
 	newins ${PN}.zsh _${PN}
+
+	use mount && insinto /usr/bin && \
+		doins ${FILESDIR}/rclonefs && \
+		fperms +x /usr/bin/rclonefs
 }

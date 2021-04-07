@@ -52,7 +52,7 @@ futures-util-0.3.13
 h2-0.3.2
 hashbrown-0.9.1
 hermit-abi-0.1.18
-http-0.2.3
+http-0.2.4
 http-body-0.4.1
 httparse-1.3.6
 httpdate-0.3.2

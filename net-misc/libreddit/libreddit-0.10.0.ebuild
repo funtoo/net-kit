@@ -123,7 +123,7 @@ stdweb-derive-0.5.3
 stdweb-internal-macros-0.2.9
 stdweb-internal-runtime-0.1.5
 strsim-0.9.3
-syn-1.0.68
+syn-1.0.69
 tap-1.0.1
 textwrap-0.11.0
 time-0.2.26

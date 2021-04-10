@@ -39,16 +39,16 @@ fastrand-1.4.0
 fnv-1.0.7
 form_urlencoded-1.0.1
 funty-1.1.0
-futures-0.3.13
-futures-channel-0.3.13
-futures-core-0.3.13
-futures-executor-0.3.13
-futures-io-0.3.13
+futures-0.3.14
+futures-channel-0.3.14
+futures-core-0.3.14
+futures-executor-0.3.14
+futures-io-0.3.14
 futures-lite-1.11.3
-futures-macro-0.3.13
-futures-sink-0.3.13
-futures-task-0.3.13
-futures-util-0.3.13
+futures-macro-0.3.14
+futures-sink-0.3.14
+futures-task-0.3.14
+futures-util-0.3.14
 h2-0.3.2
 hashbrown-0.9.1
 hermit-abi-0.1.18
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.10.0 -> libreddit-v0.10.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.10.1 -> libreddit-v0.10.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

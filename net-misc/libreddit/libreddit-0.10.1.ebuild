@@ -102,7 +102,7 @@ rustls-native-certs-0.5.0
 ryu-1.0.5
 schannel-0.1.19
 scopeguard-1.1.0
-sct-0.6.0
+sct-0.6.1
 security-framework-2.2.0
 security-framework-sys-2.2.0
 semver-0.9.0

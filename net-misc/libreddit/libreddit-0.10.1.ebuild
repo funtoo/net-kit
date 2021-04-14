@@ -11,7 +11,7 @@ askama_escape-0.10.1
 askama_shared-0.11.1
 async-mutex-1.4.0
 async-recursion-0.3.2
-async-trait-0.1.48
+async-trait-0.1.49
 autocfg-1.0.1
 base-x-0.2.8
 base64-0.13.0
@@ -91,7 +91,7 @@ proc-macro-nested-0.1.7
 proc-macro2-1.0.26
 quote-1.0.9
 radium-0.5.3
-redox_syscall-0.2.5
+redox_syscall-0.2.6
 regex-1.4.5
 regex-syntax-0.6.23
 ring-0.16.20

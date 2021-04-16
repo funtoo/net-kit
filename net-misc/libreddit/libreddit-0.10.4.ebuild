@@ -11,7 +11,7 @@ askama_escape-0.10.1
 askama_shared-0.11.1
 async-mutex-1.4.0
 async-recursion-0.3.2
-async-trait-0.1.48
+async-trait-0.1.49
 autocfg-1.0.1
 base-x-0.2.8
 base64-0.13.0
@@ -39,16 +39,16 @@ fastrand-1.4.0
 fnv-1.0.7
 form_urlencoded-1.0.1
 funty-1.1.0
-futures-0.3.13
-futures-channel-0.3.13
-futures-core-0.3.13
-futures-executor-0.3.13
-futures-io-0.3.13
+futures-0.3.14
+futures-channel-0.3.14
+futures-core-0.3.14
+futures-executor-0.3.14
+futures-io-0.3.14
 futures-lite-1.11.3
-futures-macro-0.3.13
-futures-sink-0.3.13
-futures-task-0.3.13
-futures-util-0.3.13
+futures-macro-0.3.14
+futures-sink-0.3.14
+futures-task-0.3.14
+futures-util-0.3.14
 h2-0.3.2
 hashbrown-0.9.1
 hermit-abi-0.1.18
@@ -91,7 +91,7 @@ proc-macro-nested-0.1.7
 proc-macro2-1.0.26
 quote-1.0.9
 radium-0.5.3
-redox_syscall-0.2.5
+redox_syscall-0.2.6
 regex-1.4.5
 regex-syntax-0.6.23
 ring-0.16.20
@@ -102,7 +102,7 @@ rustls-native-certs-0.5.0
 ryu-1.0.5
 schannel-0.1.19
 scopeguard-1.1.0
-sct-0.6.0
+sct-0.6.1
 security-framework-2.2.0
 security-framework-sys-2.2.0
 semver-0.9.0
@@ -134,7 +134,7 @@ tinyvec_macros-0.1.0
 tokio-1.5.0
 tokio-macros-1.1.0
 tokio-rustls-0.22.0
-tokio-util-0.6.5
+tokio-util-0.6.6
 tower-service-0.3.1
 tracing-0.1.25
 tracing-core-0.1.17
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.10.3 -> libreddit-v0.10.3.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.10.4 -> libreddit-v0.10.4.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

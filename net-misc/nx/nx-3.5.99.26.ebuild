@@ -1,21 +1,19 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 inherit autotools toolchain-funcs
 
 DESCRIPTION="NX compression technology core libraries"
-HOMEPAGE="http://www.x2go.org/doku.php/wiki:libs:nx-libs"
+HOMEPAGE="https://github.com/ArcticaProject/nx-libs"
 
-SRC_URI="http://code.x2go.org/releases/source/nx-libs/nx-libs-${PV}-1-full.tar.gz"
+SRC_URI="https://github.com/ArcticaProject/nx-libs/archive/3.5.99.26.tar.gz -> nx-3.5.99.26.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="*"
 IUSE="elibc_glibc"
 
-RDEPEND="
-	dev-libs/libxml2
+RDEPEND="dev-libs/libxml2
 	>=media-libs/libpng-1.2.8:0=
 	>=sys-libs/zlib-1.2.3
 	virtual/jpeg:*
@@ -31,8 +29,7 @@ RDEPEND="
 	x11-libs/libXrandr
 	x11-libs/libXrender
 	x11-libs/libXtst
-	x11-libs/pixman
-"
+	x11-libs/pixman"
 
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto
@@ -41,10 +38,14 @@ DEPEND="${RDEPEND}
 	x11-misc/imake"
 
 BDEPEND="
-	virtual/pkgconfig
-"
+	virtual/pkgconfig"
 
-S="${WORKDIR}/nx-libs-${PV}-1"
+S="${WORKDIR}/nx-libs-${PV}"
+
+PATCHES=(
+	# https://github.com/ArcticaProject/nx-libs/pull/1012
+	"${FILESDIR}/${PN}-3.5.99.26-binutils-2.36.patch"
+)
 
 src_prepare() {
 	default
@@ -63,7 +64,9 @@ src_prepare() {
 		eautoreconf
 		popd || die
 	done
+}
 
+src_configure() {
 	# From xorg-x11-6.9.0-r3.ebuild
 	pushd nx-X11 || die
 	HOSTCONF="config/cf/host.def"
@@ -75,9 +78,8 @@ src_prepare() {
 	echo "#define SharedLibraryLoadFlags -shared ${LDFLAGS}" >> ${HOSTCONF}
 	# Disable SunRPC, #370767
 	echo "#define HasSecureRPC NO" >> ${HOSTCONF}
-}
+	popd || die
 
-src_configure() {
 	local subdir
 	for subdir in nxcomp nxdialog nxcompshad nxproxy ; do
 		pushd ${subdir} || die
@@ -104,7 +106,7 @@ src_compile() {
 
 	mkdir -p nx-X11/exports/lib/ || die
 	local nxlib
-	for nxlib in libNX_X11.so{,.6{,.3.0}} ; do
+	for nxlib in libNX_X11.so{,.6,.6.3.0} ; do
 		ln -s ../../lib/src/.libs/${nxlib} nx-X11/exports/lib/${nxlib} || die
 	done
 
@@ -115,8 +117,9 @@ src_compile() {
 	emake -C nx-X11 BuildDependsOnly
 	# Parallel make issue resurfaced, upstream working on autotools switch
 	emake -j1 -C nx-X11 World \
-		USRLIBDIR="/usr/$(get_libdir)/${PN}/X11" \
-		SHLIBDIR="/usr/$(get_libdir)"
+		USRLIBDIR="${EPREFIX}/usr/$(get_libdir)/${PN}/X11" \
+		SHLIBDIR="${EPREFIX}/usr/$(get_libdir)" \
+		ETCDIR_NX="${EPREFIX}/etc/nxagent"
 
 	emake -C nxproxy
 }
@@ -124,10 +127,11 @@ src_compile() {
 src_install() {
 	emake \
 		DESTDIR="${D}" \
-		PREFIX="/usr" \
-		NXLIBDIR="/usr/$(get_libdir)/${PN}" \
-		SHLIBDIR="/usr/$(get_libdir)" \
-		USRLIBDIR="/usr/$(get_libdir)/${PN}/X11" \
+		PREFIX="${EPREFIX}/usr" \
+		NXLIBDIR="${EPREFIX}/usr/$(get_libdir)/${PN}" \
+		SHLIBDIR="${EPREFIX}/usr/$(get_libdir)" \
+		USRLIBDIR="${EPREFIX}/usr/$(get_libdir)/${PN}/X11" \
+		ETCDIR_NX="${EPREFIX}/etc/nxagent" \
 		install
 
 	# Already provided by mesa & related packages

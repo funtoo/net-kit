@@ -506,8 +506,8 @@ EGO_SUM=(
 	"github.com/pkg/errors v0.9.1"
 	"github.com/pkg/errors v0.9.1/go.mod"
 	"github.com/pkg/profile v1.2.1/go.mod"
-	"github.com/pkg/sftp v1.13.0"
-	"github.com/pkg/sftp v1.13.0/go.mod"
+	"github.com/pkg/sftp v1.12.0"
+	"github.com/pkg/sftp v1.12.0/go.mod"
 	"github.com/pmezard/go-difflib v1.0.0"
 	"github.com/pmezard/go-difflib v1.0.0/go.mod"
 	"github.com/posener/complete v1.1.1/go.mod"
@@ -691,6 +691,7 @@ EGO_SUM=(
 	"golang.org/x/crypto v0.0.0-20200117160349-530e935923ad/go.mod"
 	"golang.org/x/crypto v0.0.0-20200302210943-78000ba7a073/go.mod"
 	"golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9/go.mod"
+	"golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a/go.mod"
 	"golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0/go.mod"
 	"golang.org/x/crypto v0.0.0-20201112155050-0c6587e931a9/go.mod"
 	"golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad/go.mod"
@@ -1093,7 +1094,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.55.0/rclone-v1.55.0.tar.gz
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.55.1/rclone-v1.55.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 

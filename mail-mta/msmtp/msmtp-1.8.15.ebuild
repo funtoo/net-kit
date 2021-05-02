@@ -1,4 +1,3 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,11 +6,11 @@ inherit fcaps multilib user
 
 DESCRIPTION="An SMTP client and SMTP plugin for mail user agents such as Mutt"
 HOMEPAGE="https://marlam.de/msmtp/"
-SRC_URI="https://marlam.de/msmtp/releases/${P}.tar.xz"
+SRC_URI="https://marlam.de/msmtp/releases/msmtp-1.8.15.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="alpha amd64 ~arm ~arm64 ia64 ppc ppc64 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="*"
 IUSE="daemon doc gnome-keyring idn +mta nls sasl ssl vim-syntax"
 
 # fcaps.eclass unconditionally defines "filecaps" USE flag which we need for
@@ -22,10 +21,10 @@ REQUIRED_USE="daemon? ( filecaps )"
 # https://marlam.de/msmtp/news/openssl-discouraged/
 DEPEND="
 	gnome-keyring? ( app-crypt/libsecret )
+	idn? ( net-dns/libidn2:= )
 	nls? ( virtual/libintl )
 	sasl? ( virtual/gsasl )
 	ssl? ( net-libs/gnutls[idn?] )
-	!ssl? ( idn? ( net-dns/libidn2:= ) )
 "
 
 RDEPEND="${DEPEND}
@@ -46,7 +45,7 @@ RDEPEND="${DEPEND}
 	)
 "
 
-BDEPEND="${DEPEND}
+BDEPEND="
 	doc? ( virtual/texi2dvi )
 	nls? ( sys-devel/gettext )
 	virtual/pkgconfig
@@ -56,7 +55,8 @@ DOCS="AUTHORS ChangeLog NEWS README THANKS doc/msmtprc*"
 
 src_prepare() {
 	# Use default Gentoo location for mail aliases
-	sed -i 's:/etc/aliases:/etc/mail/aliases:' scripts/find_alias/find_alias_for_msmtp.sh || die
+	sed 's:/etc/aliases:/etc/mail/aliases:' \
+		-i scripts/find_alias/find_alias_for_msmtp.sh || die
 
 	default
 }
@@ -97,9 +97,7 @@ src_install() {
 	fi
 
 	if use mta ; then
-		dodir /usr/sbin
 		dosym ../bin/msmtp /usr/sbin/sendmail
-		dosym msmtp /usr/bin/sendmail
 		dosym ../bin/msmtp /usr/$(get_libdir)/sendmail
 	fi
 
@@ -125,7 +123,7 @@ pkg_preinst() {
 
 pkg_postinst() {
 	if [[ -z ${REPLACING_VERSIONS} ]]; then
-		einfo "Please edit ${EROOT%/}/etc/msmtprc before first use."
+		einfo "Please edit ${EROOT}/etc/msmtprc before first use."
 		einfo "In addition, per user configuration files can be placed"
 		einfo "as '~/.msmtprc'.  See the msmtprc-user.example file under"
 		einfo "/usr/share/doc/${PF}/ for an example."

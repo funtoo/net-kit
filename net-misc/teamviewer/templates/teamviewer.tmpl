@@ -1,22 +1,21 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-MY_PN=${PN}${PV/\.*}
-inherit desktop gnome2-utils systemd
+MY_MAJOR="$(ver_cut 1)"
+MY_P="${PN}${MY_MAJOR}"
+inherit desktop xdg
 
 DESCRIPTION="All-In-One Solution for Remote Access and Support over the Internet"
 HOMEPAGE="https://www.teamviewer.com"
-SRC_URI="amd64? ( https://dl.tvcdn.de/download/linux/version_${PV/\.*}x/${PN}_${PV}_amd64.tar.xz )
-		x86? ( https://dl.tvcdn.de/download/linux/version_${PV/\.*}x/${PN}_${PV}_i386.tar.xz )"
+
+SRC_URI="amd64? ( {{artifacts["amd64"].src_uri}} )
+	x86? ( {{artifacts["x86"].src_uri}} )"
 
 LICENSE="TeamViewer MIT"
-SLOT="${PV/\.*}"
+SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
-IUSE=""
 
-DEPEND="sys-apps/sed"
 RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
@@ -28,12 +27,15 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
 	sys-apps/dbus
+	!sys-auth/consolekit
 "
+
+# For consolekit incompatibility see https://forums.gentoo.org/viewtopic-p-8332956.html#8332956
 
 RESTRICT="bindist mirror"
 
 # Silence QA messages
-QA_PREBUILT="opt/${MY_PN}/*"
+QA_PREBUILT="opt/${MY_P}/*"
 
 S="${WORKDIR}"/teamviewer
 
@@ -42,13 +44,10 @@ src_prepare() {
 
 	# Switch operation mode from 'portable' to 'installed'
 	sed -e "s/TAR_NI/TAR_IN/g" -i tv_bin/script/tvw_config || die
-
-	sed -e "/^ExecStart/s/${PN}/${MY_PN}/" \
-		-i tv_bin/script/teamviewerd.service || die
 }
 
 src_install() {
-	local dst="/opt/${MY_PN}" # install destination
+	local dst="/opt/${MY_P}" # install destination
 
 	# Quirk:
 	# Remove Intel 80386 32-bit ELF binary 'libdepend' present in all
@@ -62,13 +61,13 @@ src_install() {
 	doins -r tv_bin
 
 	# Set permissions for executables and libraries
+	local exe
 	for exe in $(find tv_bin -type f -executable -or -name '*.so'); do
 		fperms 755 ${dst}/${exe}
 	done
 
 	# No slotting here, binary expects this service path
-	newinitd "${FILESDIR}"/teamviewerd14.init teamviewerd
-	systemd_dounit tv_bin/script/teamviewerd.service
+	newinitd "${FILESDIR}"/teamviewerd15.init teamviewerd
 
 	insinto /usr/share/dbus-1/services
 	doins tv_bin/script/com.teamviewer.TeamViewer.service
@@ -77,53 +76,59 @@ src_install() {
 	insinto /usr/share/polkit-1/actions
 	doins tv_bin/script/com.teamviewer.TeamViewer.policy
 
+	local size
 	for size in 16 24 32 48 256; do
-		newicon -s ${size} tv_bin/desktop/teamviewer_${size}.png TeamViewer.png
+		newicon -s ${size} tv_bin/desktop/teamviewer_${size}.png teamviewer.png
 	done
 
-	# Install documents (NOTE: using 'dodoc -r doc' instead of loop will
-	# have the undesired result of installing subdirectory 'doc' in /usr/
-	# share/doc/teamviewer-<version>)
-	for doc in $(find doc -type f); do
-		dodoc ${doc}
-	done
+	dodoc -r doc
 
-	keepdir /etc/${MY_PN}
-	dosym ../../etc/${MY_PN} ${dst}/config
+	# Make docs available in expected location
+	dosym ../../usr/share/doc/${PF}/doc ${dst}/doc
+
+	# We need to keep docs uncompressed, bug #778617
+	docompress -x /usr/share/doc/${PF}/*
+
+	keepdir /etc/${MY_P}
+	dosym ../../etc/${MY_P} ${dst}/config
 
 	# Create directory and symlink for log files (NOTE: according to Team-
 	# Viewer devs, all paths are hard-coded in the binaries; therefore
 	# using the same path as the DEB/RPM archives, i.e. '/var/log/teamviewer
 	# <major-version>')
-	keepdir /var/log/${MY_PN}
-	dosym ../../var/log/${MY_PN} ${dst}/logfiles
+	keepdir /var/log/${MY_P}
+	dosym ../../var/log/${MY_P} ${dst}/logfiles
 
 	dodir /opt/bin
 	dosym ${dst}/tv_bin/teamviewerd /opt/bin/teamviewerd
 	dosym ${dst}/tv_bin/script/teamviewer /opt/bin/teamviewer
 
-	make_desktop_entry teamviewer "TeamViewer ${SLOT}" TeamViewer
+	make_desktop_entry teamviewer "TeamViewer ${MY_MAJOR}" teamviewer
 }
 
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_pkg_postinst
 
-	elog "Please note that parallel installation of multiple versions of"
-	elog "TeamViewer is currently not supported at runtime. Bug #621818"
-	elog ""
-	elog "Before using TeamViewer, you need to start its daemon:"
-	elog "OpenRC:"
-	elog "# /etc/init.d/teamviewerd start"
-	elog "# rc-update add teamviewerd default"
-	elog
-	elog "Systemd:"
-	elog "# systemctl start teamviewerd.service"
-	elog "# systemctl enable teamviewerd.service"
-	elog
-	elog "To display additional command line options simply run:"
-	elog "$ teamviewer help"
-}
+	if [[ -z "${REPLACING_VERSIONS}" ]]; then
+		# This is a new installation
 
-pkg_postrm() {
-	gnome2_icon_cache_update
+		elog "Please note that parallel installation of multiple versions of"
+		elog "TeamViewer is currently not supported at runtime. Bug #621818"
+		elog ""
+		elog "Before using TeamViewer, you need to start its daemon:"
+		elog "OpenRC:"
+		elog "# /etc/init.d/teamviewerd start"
+		elog "# rc-update add teamviewerd default"
+		elog
+		elog "Systemd:"
+		elog "# systemctl start teamviewerd.service"
+		elog "# systemctl enable teamviewerd.service"
+		elog
+		elog "To display additional command line options simply run:"
+		elog "$ teamviewer help"
+		elog
+		elog "Most likely TeamViewer will work normally only on systems with systemd"
+		elog "or elogind. See this thread for additional info:"
+		elog "https://forums.gentoo.org/viewtopic-p-8332956.html#8332956"
+	fi
 }

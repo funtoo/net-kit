@@ -39,22 +39,22 @@ fastrand-1.4.1
 fnv-1.0.7
 form_urlencoded-1.0.1
 funty-1.1.0
-futures-0.3.14
-futures-channel-0.3.14
-futures-core-0.3.14
-futures-executor-0.3.14
-futures-io-0.3.14
+futures-0.3.15
+futures-channel-0.3.15
+futures-core-0.3.15
+futures-executor-0.3.15
+futures-io-0.3.15
 futures-lite-1.11.3
-futures-macro-0.3.14
-futures-sink-0.3.14
-futures-task-0.3.14
-futures-util-0.3.14
+futures-macro-0.3.15
+futures-sink-0.3.15
+futures-task-0.3.15
+futures-util-0.3.15
 h2-0.3.3
 hashbrown-0.9.1
 hermit-abi-0.1.18
 http-0.2.4
 http-body-0.4.2
-httparse-1.4.0
+httparse-1.4.1
 httpdate-1.0.0
 hyper-0.14.7
 hyper-rustls-0.22.1
@@ -63,7 +63,7 @@ idna-0.2.3
 indexmap-1.6.2
 instant-0.1.9
 itoa-0.4.7
-js-sys-0.3.50
+js-sys-0.3.51
 lazy_static-1.4.0
 lexical-core-0.7.6
 libc-0.2.94
@@ -77,7 +77,7 @@ nom-6.1.2
 ntapi-0.3.6
 num_cpus-1.13.0
 once_cell-1.7.2
-openssl-probe-0.1.2
+openssl-probe-0.1.4
 parking-2.0.0
 parking_lot-0.11.1
 parking_lot_core-0.8.3
@@ -107,8 +107,8 @@ security-framework-2.2.0
 security-framework-sys-2.2.0
 semver-0.9.0
 semver-parser-0.7.0
-serde-1.0.125
-serde_derive-1.0.125
+serde-1.0.126
+serde_derive-1.0.126
 serde_json-1.0.64
 sha1-0.6.0
 signal-hook-registry-1.3.0
@@ -131,10 +131,10 @@ time-macros-0.1.1
 time-macros-impl-0.1.1
 tinyvec-1.2.0
 tinyvec_macros-0.1.0
-tokio-1.5.0
-tokio-macros-1.1.0
+tokio-1.6.0
+tokio-macros-1.2.0
 tokio-rustls-0.22.0
-tokio-util-0.6.6
+tokio-util-0.6.7
 tower-service-0.3.1
 tracing-0.1.26
 tracing-core-0.1.18
@@ -148,12 +148,12 @@ url-2.2.2
 version_check-0.9.3
 waker-fn-1.1.0
 want-0.3.0
-wasm-bindgen-0.2.73
-wasm-bindgen-backend-0.2.73
-wasm-bindgen-macro-0.2.73
-wasm-bindgen-macro-support-0.2.73
-wasm-bindgen-shared-0.2.73
-web-sys-0.3.50
+wasm-bindgen-0.2.74
+wasm-bindgen-backend-0.2.74
+wasm-bindgen-macro-0.2.74
+wasm-bindgen-macro-support-0.2.74
+wasm-bindgen-shared-0.2.74
+web-sys-0.3.51
 webpki-0.21.4
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.12.0 -> libreddit-v0.12.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.13.1 -> libreddit-v0.13.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

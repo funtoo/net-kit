@@ -25,7 +25,7 @@ cached_proc_macro_types-0.1.0
 cc-1.0.67
 cfg-if-1.0.0
 clap-2.33.3
-const_fn-0.4.7
+const_fn-0.4.8
 cookie-0.15.0
 core-foundation-0.9.1
 core-foundation-sys-0.8.2
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.0 -> libreddit-v0.14.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.2 -> libreddit-v0.14.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

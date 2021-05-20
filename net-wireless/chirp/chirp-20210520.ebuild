@@ -7,7 +7,7 @@ inherit distutils-r1 xdg-utils
 
 DESCRIPTION="Free open-source tool for programming your amateur radio"
 HOMEPAGE="http://chirp.danplanet.com"
-SRC_URI="https://trac.chirp.danplanet.com/chirp_daily/daily-20210429/chirp-daily-20210429.tar.gz"
+SRC_URI="https://trac.chirp.danplanet.com/chirp_daily/daily-20210520/chirp-daily-20210520.tar.gz"
 
 S="${WORKDIR}/${PN}-daily-${PV}"
 RESTRICT="test"

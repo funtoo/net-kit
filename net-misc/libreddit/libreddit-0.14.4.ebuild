@@ -88,7 +88,7 @@ pin-project-lite-0.2.6
 pin-utils-0.1.0
 proc-macro-hack-0.5.19
 proc-macro-nested-0.1.7
-proc-macro2-1.0.26
+proc-macro2-1.0.27
 quote-1.0.9
 radium-0.5.3
 redox_syscall-0.2.8
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.3 -> libreddit-v0.14.3.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.4 -> libreddit-v0.14.4.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -56,7 +56,7 @@ http-0.2.4
 http-body-0.4.2
 httparse-1.4.1
 httpdate-1.0.0
-hyper-0.14.7
+hyper-0.14.8
 hyper-rustls-0.22.1
 ident_case-1.0.1
 idna-0.2.3
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.4 -> libreddit-v0.14.4.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.5 -> libreddit-v0.14.5.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

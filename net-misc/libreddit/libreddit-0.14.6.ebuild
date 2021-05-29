@@ -22,7 +22,7 @@ bytes-1.0.1
 cached-0.23.0
 cached_proc_macro-0.6.0
 cached_proc_macro_types-0.1.0
-cc-1.0.67
+cc-1.0.68
 cfg-if-1.0.0
 clap-2.33.3
 const_fn-0.4.8
@@ -55,7 +55,7 @@ hermit-abi-0.1.18
 http-0.2.4
 http-body-0.4.2
 httparse-1.4.1
-httpdate-1.0.0
+httpdate-1.0.1
 hyper-0.14.8
 hyper-rustls-0.22.1
 ident_case-1.0.1
@@ -66,7 +66,7 @@ itoa-0.4.7
 js-sys-0.3.51
 lazy_static-1.4.0
 lexical-core-0.7.6
-libc-0.2.94
+libc-0.2.95
 lock_api-0.4.4
 log-0.4.14
 matches-0.1.8
@@ -165,7 +165,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.5 -> libreddit-v0.14.5.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.6 -> libreddit-v0.14.6.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

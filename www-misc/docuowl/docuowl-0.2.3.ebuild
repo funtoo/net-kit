@@ -61,7 +61,7 @@ go-module_set_globals
 
 DESCRIPTION="Docuowl generates a static single-page documentation from Markdown files"
 HOMEPAGE="https://github.com/docuowl/docuowl"
-SRC_URI="https://api.github.com/repos/docuowl/docuowl/tarball/v0.2.2 -> docuowl-0.2.2.tar.gz
+SRC_URI="https://api.github.com/repos/docuowl/docuowl/tarball/v0.2.3 -> docuowl-0.2.3.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT"

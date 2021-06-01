@@ -6,7 +6,7 @@ inherit cmake-utils xdg-utils
 
 DESCRIPTION="Desktop Syncing Client for Nextcloud"
 HOMEPAGE="https://github.com/nextcloud/desktop"
-SRC_URI="https://api.github.com/repos/nextcloud/desktop/tarball/v3.2.1 -> nextcloud-desktop-3.2.1.tar.gz"
+SRC_URI="https://api.github.com/repos/nextcloud/desktop/tarball/v3.2.2 -> nextcloud-desktop-3.2.2.tar.gz"
 
 LICENSE="CC-BY-3.0 GPL-2"
 SLOT="0"

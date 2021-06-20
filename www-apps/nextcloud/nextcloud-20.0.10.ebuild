@@ -1,21 +1,22 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils webapp
+inherit webapp
 
 DESCRIPTION="Personal cloud that runs on your own server"
-HOMEPAGE="http://nextcloud.com"
-SRC_URI="http://download.nextcloud.com/server/releases/${P}.tar.bz2"
+HOMEPAGE="https://nextcloud.com/"
+SRC_URI="https://download.nextcloud.com/server/releases/nextcloud-20.0.10.tar.bz2"
 LICENSE="AGPL-3"
 
-KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+curl mysql postgres +sqlite"
+KEYWORDS="*"
+IUSE="+curl +imagemagick mysql postgres +sqlite"
 REQUIRED_USE="|| ( mysql postgres sqlite )"
 
 DEPEND=""
-RDEPEND="dev-lang/php[curl?,filter,gd,hash,intl,json,mysql?,pdo,posix,postgres?,session,simplexml,sqlite?,truetype,xmlreader,xmlwriter,zip]
+RDEPEND="
+	dev-lang/php[curl?,filter,gd,hash(+),intl,json,mysql?,pdo,posix,postgres?,session,simplexml,sqlite?,truetype,xmlreader,xmlwriter,zip]
+	imagemagick? ( dev-php/pecl-imagick )
 	virtual/httpd-php"
 
 S=${WORKDIR}/${PN}

@@ -66,17 +66,17 @@ itoa-0.4.7
 js-sys-0.3.51
 lazy_static-1.4.0
 lexical-core-0.7.6
-libc-0.2.96
+libc-0.2.97
 lock_api-0.4.4
 log-0.4.14
 matches-0.1.8
 memchr-2.4.0
-mio-0.7.11
+mio-0.7.13
 miow-0.3.7
 nom-6.1.2
 ntapi-0.3.6
 num_cpus-1.13.0
-once_cell-1.7.2
+once_cell-1.8.0
 openssl-probe-0.1.4
 parking-2.0.0
 parking_lot-0.11.1
@@ -89,7 +89,7 @@ proc-macro-nested-0.1.7
 proc-macro2-1.0.27
 quote-1.0.9
 radium-0.5.3
-redox_syscall-0.2.8
+redox_syscall-0.2.9
 regex-1.5.4
 regex-syntax-0.6.25
 ring-0.16.20
@@ -124,12 +124,12 @@ strsim-0.9.3
 syn-1.0.73
 tap-1.0.1
 textwrap-0.11.0
-time-0.2.26
+time-0.2.27
 time-macros-0.1.1
-time-macros-impl-0.1.1
+time-macros-impl-0.1.2
 tinyvec-1.2.0
 tinyvec_macros-0.1.0
-tokio-1.6.1
+tokio-1.7.1
 tokio-macros-1.2.0
 tokio-rustls-0.22.0
 tokio-util-0.6.7
@@ -163,7 +163,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.8 -> libreddit-v0.14.8.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.14.9 -> libreddit-v0.14.9.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

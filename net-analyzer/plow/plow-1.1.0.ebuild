@@ -85,7 +85,7 @@ go-module_set_globals
 
 DESCRIPTION="HTTP(S) benchmarking tool, written in Golang"
 HOMEPAGE="https://github.com/six-ddc/plow"
-SRC_URI="https://api.github.com/repos/six-ddc/plow/tarball/v1.0.1 -> plow-1.0.1.tar.gz
+SRC_URI="https://api.github.com/repos/six-ddc/plow/tarball/v1.1.0 -> plow-1.1.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT"

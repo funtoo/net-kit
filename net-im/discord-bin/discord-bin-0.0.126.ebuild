@@ -8,13 +8,13 @@ inherit desktop eutils unpacker pax-utils xdg
 
 DESCRIPTION="All-in-one voice and text chat for gamers"
 HOMEPAGE="https://discordapp.com"
-SRC_URI="{{artifacts[0].src_uri}}"
+SRC_URI="https://dl-canary.discordapp.net/apps/linux/0.0.126/discord-canary-0.0.126.deb"
 RESTRICT="mirror bindist"
 LICENSE="all-rights-reserved"
 SLOT="0"
 S="${WORKDIR}"
 
-KEYWORDS="{{keywords}}"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND="
@@ -60,17 +60,17 @@ QA_PREBUILT="
 src_prepare() {
 	default
 
-	mv -v "${S}/usr/share/{{release_name}}" "${S}/usr/share/discord"
-	mv -v "${S}/usr/share/discord/{{binary_name}}" "${S}/usr/share/discord/Discord"
-	mv -v "${S}/usr/share/discord/{{release_name}}.desktop" "${S}/usr/share/discord/discord.desktop"
+	mv -v "${S}/usr/share/discord-canary" "${S}/usr/share/discord"
+	mv -v "${S}/usr/share/discord/DiscordCanary" "${S}/usr/share/discord/Discord"
+	mv -v "${S}/usr/share/discord/discord-canary.desktop" "${S}/usr/share/discord/discord.desktop"
 
 	sed -i \
-		-e "s:/usr/share/{{release_name}}/Discord.*:/opt/discord/Discord:g" \
-		-e "s:{{release_name}}:discord:g" \
+		-e "s:/usr/share/discord-canary/Discord.*:/opt/discord/Discord:g" \
+		-e "s:discord-canary:discord:g" \
 		usr/share/discord/discord.desktop || die
 	install -d "${S}/opt"
 	mv -v "${S}/usr/share/discord" "${S}/opt/discord" || die
-	rm -v "${S}/usr/bin/{{release_name}}"
+	rm -v "${S}/usr/bin/discord-canary"
 }
 
 

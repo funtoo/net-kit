@@ -2,14 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit autotools linux-info systemd
+inherit autotools flag-o-matic linux-info systemd
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://git.kernel.org/pub/scm/network/wireless/iwd.git"
 	inherit git-r3
 else
 	SRC_URI="https://www.kernel.org/pub/linux/network/wireless/${P}.tar.xz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~x86"
 fi
 
 DESCRIPTION="Wireless daemon for linux"
@@ -88,6 +88,7 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cflags "-fsigned-char"
 	econf --sysconfdir=/etc/iwd --localstatedir=/var \
 		$(use_enable client) \
 		$(use_enable monitor) \

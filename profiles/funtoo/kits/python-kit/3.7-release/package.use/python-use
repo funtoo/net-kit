@@ -13,6 +13,8 @@
 =net-irc/irker-2.18-r1 python_single_target_python2_7
 =net-irc/irker-2.9 python_single_target_python2_7
 =net-irc/limnoria-20150523 python_single_target_python2_7
+=net-mail/getmail-5.6 python_single_target_python2_7
+=net-mail/getmail-5.8 python_single_target_python2_7
 =net-mail/mailman-2.1.29 python_single_target_python2_7
 =net-mail/notmuch-0.23.7 python_single_target_python2_7
 =net-mail/rss2email-2.71-r1 python_single_target_python2_7
@@ -64,7 +66,6 @@ net-libs/openpgm python_single_target_python2_7
 net-libs/xrootd python_single_target_python2_7
 net-mail/archivemail python_single_target_python2_7
 net-mail/automx python_single_target_python2_7
-net-mail/getmail python_single_target_python2_7
 net-mail/libpst python_single_target_python2_7
 net-mail/offlineimap python_single_target_python2_7
 net-mail/queue-repair python_single_target_python2_7

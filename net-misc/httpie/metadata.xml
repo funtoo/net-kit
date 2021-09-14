@@ -19,7 +19,7 @@
 		servers.
 	</longdescription>
 	<upstream>
-		<remote-id type="github">jakubroztocil/httpie</remote-id>
+		<remote-id type="github">httpie/httpie</remote-id>
 		<remote-id type="pypi">httpie</remote-id>
 	</upstream>
 </pkgmetadata>

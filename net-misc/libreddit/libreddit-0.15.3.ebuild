@@ -17,7 +17,7 @@ base-x-0.2.8
 base64-0.13.0
 bitflags-1.3.2
 bitvec-0.19.5
-bumpalo-3.7.0
+bumpalo-3.7.1
 bytes-1.1.0
 cached-0.23.0
 cached_proc_macro-0.6.1
@@ -57,17 +57,17 @@ http-0.2.4
 http-body-0.4.3
 httparse-1.5.1
 httpdate-1.0.1
-hyper-0.14.12
+hyper-0.14.13
 hyper-rustls-0.22.1
 ident_case-1.0.1
 idna-0.2.3
 indexmap-1.7.0
 instant-0.1.10
 itoa-0.4.8
-js-sys-0.3.54
+js-sys-0.3.55
 lazy_static-1.4.0
 lexical-core-0.7.6
-libc-0.2.101
+libc-0.2.102
 lock_api-0.4.5
 log-0.4.14
 matches-0.1.9
@@ -108,12 +108,12 @@ semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.130
 serde_derive-1.0.130
-serde_json-1.0.67
+serde_json-1.0.68
 sha1-0.6.0
 signal-hook-registry-1.4.0
 slab-0.4.4
 smallvec-1.6.1
-socket2-0.4.1
+socket2-0.4.2
 spin-0.5.2
 standback-0.2.17
 static_assertions-1.1.0
@@ -128,31 +128,31 @@ textwrap-0.11.0
 time-0.2.27
 time-macros-0.1.1
 time-macros-impl-0.1.2
-tinyvec-1.3.1
+tinyvec-1.4.0
 tinyvec_macros-0.1.0
 tokio-1.11.0
 tokio-macros-1.3.0
 tokio-rustls-0.22.0
 tokio-util-0.6.8
 tower-service-0.3.1
-tracing-0.1.26
-tracing-core-0.1.19
+tracing-0.1.28
+tracing-core-0.1.20
 try-lock-0.2.3
 unicode-bidi-0.3.6
 unicode-normalization-0.1.19
-unicode-width-0.1.8
+unicode-width-0.1.9
 unicode-xid-0.2.2
 untrusted-0.7.1
 url-2.2.2
 version_check-0.9.3
 waker-fn-1.1.0
 want-0.3.0
-wasm-bindgen-0.2.77
-wasm-bindgen-backend-0.2.77
-wasm-bindgen-macro-0.2.77
-wasm-bindgen-macro-support-0.2.77
-wasm-bindgen-shared-0.2.77
-web-sys-0.3.54
+wasm-bindgen-0.2.78
+wasm-bindgen-backend-0.2.78
+wasm-bindgen-macro-0.2.78
+wasm-bindgen-macro-support-0.2.78
+wasm-bindgen-shared-0.2.78
+web-sys-0.3.55
 webpki-0.21.4
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
@@ -164,7 +164,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.15.2 -> libreddit-v0.15.2.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.15.3 -> libreddit-v0.15.3.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

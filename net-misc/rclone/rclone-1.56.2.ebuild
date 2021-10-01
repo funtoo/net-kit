@@ -901,8 +901,9 @@ EGO_SUM=(
 	"golang.org/x/sys v0.0.0-20210320140829-1e4c9ba3b0c4/go.mod"
 	"golang.org/x/sys v0.0.0-20210330210617-4fbd30eecc44/go.mod"
 	"golang.org/x/sys v0.0.0-20210403161142-5e06dd20ab57/go.mod"
-	"golang.org/x/sys v0.0.0-20210423185535-09eb48e85fd7"
 	"golang.org/x/sys v0.0.0-20210423185535-09eb48e85fd7/go.mod"
+	"golang.org/x/sys v0.0.0-20210818153620-00dd8d7831e7"
+	"golang.org/x/sys v0.0.0-20210818153620-00dd8d7831e7/go.mod"
 	"golang.org/x/term v0.0.0-20201117132131-f5c789dd3221/go.mod"
 	"golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod"
 	"golang.org/x/term v0.0.0-20210406210042-72f3dc4e9b72"
@@ -1153,7 +1154,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.56.1/rclone-v1.56.1.tar.gz
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.56.2/rclone-v1.56.2.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 

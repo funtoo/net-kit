@@ -5,10 +5,10 @@ EAPI=7
 inherit go-module
 
 EGO_SUM=(
-	"github.com/AdhityaRamadhanus/fasthttpcors v0.0.0-20170121111917-d4c07198763a"
-	"github.com/AdhityaRamadhanus/fasthttpcors v0.0.0-20170121111917-d4c07198763a/go.mod"
-	"github.com/BurntSushi/toml v0.3.1"
-	"github.com/BurntSushi/toml v0.3.1/go.mod"
+	"github.com/!adhitya!ramadhanus/fasthttpcors v0.0.0-20170121111917-d4c07198763a"
+	"github.com/!adhitya!ramadhanus/fasthttpcors v0.0.0-20170121111917-d4c07198763a/go.mod"
+	"github.com/!burnt!sushi/toml v0.3.1"
+	"github.com/!burnt!sushi/toml v0.3.1/go.mod"
 	"github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15"
 	"github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15/go.mod"
 	"github.com/andybalholm/brotli v1.0.2/go.mod"

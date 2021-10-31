@@ -8,7 +8,7 @@ DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org
 	  https://github.com/qbittorrent"
 
-SRC_URI="https://github.com/qbittorrent/qBittorrent/archive/release-4.3.8.tar.gz -> qbittorrent-4.3.8.tar.gz"
+SRC_URI="https://github.com/qbittorrent/qBittorrent/archive/release-4.4.0rc1.tar.gz -> qbittorrent-4.4.0rc1.tar.gz"
 KEYWORDS="*"
 S="${WORKDIR}/qBittorrent-release-${PV}"
 

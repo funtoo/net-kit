@@ -102,8 +102,8 @@ EGO_SUM=(
 	"github.com/!puerkito!bio/goquery v1.4.1/go.mod"
 	"github.com/!puerkito!bio/goquery v1.5.1/go.mod"
 	"github.com/!puerkito!bio/goquery v1.7.0/go.mod"
-	"github.com/!rhymen/go-whatsapp v0.1.2-0.20210615184944-2b8a3e9b8aa2"
-	"github.com/!rhymen/go-whatsapp v0.1.2-0.20210615184944-2b8a3e9b8aa2/go.mod"
+	"github.com/!rhymen/go-whatsapp v0.1.2-0.20211102134409-31a2e740845c"
+	"github.com/!rhymen/go-whatsapp v0.1.2-0.20211102134409-31a2e740845c/go.mod"
 	"github.com/!roaring!bitmap/roaring v0.4.23/go.mod"
 	"github.com/!roaring!bitmap/roaring v0.8.0/go.mod"
 	"github.com/!severe!cloud/vksdk/v2 v2.10.0"
@@ -1768,7 +1768,7 @@ go-module_set_globals
 
 DESCRIPTION="Bridges between a growing number of protocols"
 HOMEPAGE="https://github.com/42wim/matterbridge"
-SRC_URI="https://api.github.com/repos/42wim/matterbridge/tarball/v1.23.1 -> matterbridge-1.23.1.tar.gz
+SRC_URI="https://api.github.com/repos/42wim/matterbridge/tarball/v1.23.2 -> matterbridge-1.23.2.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="Apache-2.0"

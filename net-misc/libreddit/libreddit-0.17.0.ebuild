@@ -23,7 +23,7 @@ bytes-1.1.0
 cached-0.26.2
 cached_proc_macro-0.7.1
 cached_proc_macro_types-0.1.0
-cc-1.0.71
+cc-1.0.72
 cfg-if-1.0.0
 clap-2.33.3
 const_fn-0.4.8
@@ -67,7 +67,7 @@ itoa-0.4.8
 js-sys-0.3.55
 lazy_static-1.4.0
 lexical-core-0.7.6
-libc-0.2.105
+libc-0.2.107
 lock_api-0.4.5
 log-0.4.14
 matches-0.1.9
@@ -87,7 +87,7 @@ pin-project-lite-0.2.7
 pin-utils-0.1.0
 proc-macro-hack-0.5.19
 proc-macro-nested-0.1.7
-proc-macro2-1.0.30
+proc-macro2-1.0.32
 quote-1.0.10
 radium-0.5.3
 redox_syscall-0.2.10
@@ -108,7 +108,7 @@ semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.130
 serde_derive-1.0.130
-serde_json-1.0.68
+serde_json-1.0.70
 sha1-0.6.0
 signal-hook-registry-1.4.0
 slab-0.4.5
@@ -122,18 +122,18 @@ stdweb-derive-0.5.3
 stdweb-internal-macros-0.2.9
 stdweb-internal-runtime-0.1.5
 strsim-0.10.0
-syn-1.0.80
+syn-1.0.81
 tap-1.0.1
 textwrap-0.11.0
 time-0.2.27
 time-macros-0.1.1
 time-macros-impl-0.1.2
-tinyvec-1.5.0
+tinyvec-1.5.1
 tinyvec_macros-0.1.0
-tokio-1.12.0
-tokio-macros-1.5.0
+tokio-1.13.0
+tokio-macros-1.5.1
 tokio-rustls-0.22.0
-tokio-util-0.6.8
+tokio-util-0.6.9
 tower-service-0.3.1
 tracing-0.1.29
 tracing-core-0.1.21
@@ -164,7 +164,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.16.0 -> libreddit-v0.16.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.17.0 -> libreddit-v0.17.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

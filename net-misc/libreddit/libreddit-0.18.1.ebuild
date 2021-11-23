@@ -17,7 +17,7 @@ autocfg-1.0.1
 base-x-0.2.8
 base64-0.13.0
 bitflags-1.3.2
-bitvec-0.19.5
+bitvec-0.19.6
 bumpalo-3.8.0
 bytes-1.1.0
 cached-0.26.2
@@ -30,7 +30,6 @@ const_fn-0.4.8
 cookie-0.15.1
 core-foundation-0.9.2
 core-foundation-sys-0.8.3
-ct-logs-0.8.0
 darling-0.13.0
 darling_core-0.13.0
 darling_macro-0.13.0
@@ -56,9 +55,9 @@ hermit-abi-0.1.19
 http-0.2.5
 http-body-0.4.4
 httparse-1.5.1
-httpdate-1.0.1
-hyper-0.14.14
-hyper-rustls-0.22.1
+httpdate-1.0.2
+hyper-0.14.15
+hyper-rustls-0.23.0
 ident_case-1.0.1
 idna-0.2.3
 indexmap-1.7.0
@@ -67,7 +66,7 @@ itoa-0.4.8
 js-sys-0.3.55
 lazy_static-1.4.0
 lexical-core-0.7.6
-libc-0.2.107
+libc-0.2.108
 lock_api-0.4.5
 log-0.4.14
 matches-0.1.9
@@ -96,19 +95,20 @@ regex-syntax-0.6.25
 ring-0.16.20
 route-recognizer-0.3.1
 rustc_version-0.2.3
-rustls-0.19.1
-rustls-native-certs-0.5.0
+rustls-0.20.2
+rustls-native-certs-0.6.1
+rustls-pemfile-0.2.1
 ryu-1.0.5
 schannel-0.1.19
 scopeguard-1.1.0
-sct-0.6.1
+sct-0.7.0
 security-framework-2.4.2
 security-framework-sys-2.4.2
 semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.130
 serde_derive-1.0.130
-serde_json-1.0.70
+serde_json-1.0.71
 sha1-0.6.0
 signal-hook-registry-1.4.0
 slab-0.4.5
@@ -130,9 +130,9 @@ time-macros-0.1.1
 time-macros-impl-0.1.2
 tinyvec-1.5.1
 tinyvec_macros-0.1.0
-tokio-1.13.0
-tokio-macros-1.5.1
-tokio-rustls-0.22.0
+tokio-1.14.0
+tokio-macros-1.6.0
+tokio-rustls-0.23.1
 tokio-util-0.6.9
 tower-service-0.3.1
 tracing-0.1.29
@@ -153,7 +153,7 @@ wasm-bindgen-macro-0.2.78
 wasm-bindgen-macro-support-0.2.78
 wasm-bindgen-shared-0.2.78
 web-sys-0.3.55
-webpki-0.21.4
+webpki-0.22.0
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
 winapi-x86_64-pc-windows-gnu-0.4.0
@@ -164,7 +164,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.17.0 -> libreddit-v0.17.0.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.18.1 -> libreddit-v0.18.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

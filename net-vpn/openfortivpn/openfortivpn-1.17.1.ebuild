@@ -1,27 +1,28 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 inherit autotools linux-info
 
-DESCRIPTION="A Fortinet compatible VPN client"
+DESCRIPTION="Fortinet compatible VPN client"
 HOMEPAGE="https://github.com/adrienverge/openfortivpn"
-SRC_URI="https://github.com/adrienverge/openfortivpn/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://api.github.com/repos/adrienverge/openfortivpn/tarball/refs/tags/v1.17.1 -> openfortivpn-1.17.1.tar.gz"
 
 LICENSE="GPL-3-with-openssl-exception openssl"
 SLOT="0"
-KEYWORDS="amd64"
-IUSE="libressl"
+KEYWORDS="*"
 
 DEPEND="
 	net-dialup/ppp
-	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl:0= )
+	dev-libs/openssl:0=
 "
 RDEPEND="${DEPEND}"
 
 CONFIG_CHECK="~PPP ~PPP_ASYNC"
+
+post_src_unpack() {
+	mv "${WORKDIR}"/adrienverge-openfortivpn-* "${S}" || die
+}
 
 src_prepare() {
 	default

@@ -6,7 +6,7 @@ inherit webapp
 
 DESCRIPTION="A browser-based multilingual IMAP client with an application-like user interface"
 HOMEPAGE="https://roundcube.net"
-SRC_URI="https://api.github.com/repos/roundcube/roundcubemail/tarball/1.4.12 -> roundcube-1.4.12.tar.gz"
+SRC_URI="https://api.github.com/repos/roundcube/roundcubemail/tarball/1.5.1 -> roundcube-1.5.1.tar.gz"
 
 # roundcube is GPL-licensed, the rest of the licenses here are
 # for bundled PEAR components, googiespell and utf8.class.php

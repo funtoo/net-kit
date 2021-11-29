@@ -39,16 +39,16 @@ fastrand-1.5.0
 fnv-1.0.7
 form_urlencoded-1.0.1
 funty-1.1.0
-futures-0.3.17
-futures-channel-0.3.17
-futures-core-0.3.17
-futures-executor-0.3.17
-futures-io-0.3.17
+futures-0.3.18
+futures-channel-0.3.18
+futures-core-0.3.18
+futures-executor-0.3.18
+futures-io-0.3.18
 futures-lite-1.12.0
-futures-macro-0.3.17
-futures-sink-0.3.17
-futures-task-0.3.17
-futures-util-0.3.17
+futures-macro-0.3.18
+futures-sink-0.3.18
+futures-task-0.3.18
+futures-util-0.3.18
 h2-0.3.7
 hashbrown-0.11.2
 hermit-abi-0.1.19
@@ -85,7 +85,6 @@ percent-encoding-2.1.0
 pin-project-lite-0.2.7
 pin-utils-0.1.0
 proc-macro-hack-0.5.19
-proc-macro-nested-0.1.7
 proc-macro2-1.0.32
 quote-1.0.10
 radium-0.5.3
@@ -98,7 +97,7 @@ rustc_version-0.2.3
 rustls-0.20.2
 rustls-native-certs-0.6.1
 rustls-pemfile-0.2.1
-ryu-1.0.5
+ryu-1.0.6
 schannel-0.1.19
 scopeguard-1.1.0
 sct-0.7.0
@@ -108,7 +107,7 @@ semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.130
 serde_derive-1.0.130
-serde_json-1.0.71
+serde_json-1.0.72
 sha1-0.6.0
 signal-hook-registry-1.4.0
 slab-0.4.5
@@ -122,7 +121,7 @@ stdweb-derive-0.5.3
 stdweb-internal-macros-0.2.9
 stdweb-internal-runtime-0.1.5
 strsim-0.10.0
-syn-1.0.81
+syn-1.0.82
 tap-1.0.1
 textwrap-0.11.0
 time-0.2.27
@@ -164,7 +163,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.19.1 -> libreddit-v0.19.1.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.20.1 -> libreddit-v0.20.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

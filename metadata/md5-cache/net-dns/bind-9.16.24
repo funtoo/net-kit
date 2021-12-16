@@ -11,6 +11,6 @@ RDEPEND=berkdb? ( sys-libs/db:= ) !libressl? ( dev-libs/openssl:=[-bindist] ) li
 REQUIRED_USE=postgres? ( dlz ) berkdb? ( dlz ) mysql? ( dlz ) odbc? ( dlz ) ldap? ( dlz ) dnsrps? ( dlz ) python? ( || ( python_targets_python3_7 python_targets_python3_9 python_targets_python3_8 ) )
 RESTRICT=test
 SLOT=0
-SRC_URI=https://downloads.isc.org/isc/bind9/9.16.23/bind-9.16.23.tar.xz doc? ( mirror://gentoo/dyndns-samples.tbz2 )
+SRC_URI=https://downloads.isc.org/isc/bind9/9.16.24/bind-9.16.24.tar.xz doc? ( mirror://gentoo/dyndns-samples.tbz2 )
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	db-use	501a5d0963e0d17f30260023f292ae8e	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	multibuild	b2c915190b051f55a23b9354b9849847	multilib	d410501a125f99ffb560b0c523cd3d1e	python-r1	5bbb250a8d0b8f4496dcef8e8c1c1a8a	python-utils-r1	263e4bbfa6a84be6dc6272a6702aedca	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	e68863263b1e8611dacf381bec5c8b2b
-_md5_=2e80fc19fb626675dac8106f6bc925b1
+_md5_=5a962673da416dc041f7cac22af9aefe

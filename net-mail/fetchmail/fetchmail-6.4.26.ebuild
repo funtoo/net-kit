@@ -9,7 +9,7 @@ inherit python-single-r1 systemd toolchain-funcs user autotools
 
 DESCRIPTION="the legendary remote-mail retrieval and forwarding utility"
 HOMEPAGE="http://www.fetchmail.info/"
-SRC_URI="https://gitlab.com/fetchmail/fetchmail/-/archive/RELEASE_6-4-25/fetchmail-RELEASE_6-4-25.tar.gz -> fetchmail-6.4.25.tar.gz"
+SRC_URI="https://gitlab.com/fetchmail/fetchmail/-/archive/RELEASE_6-4-26/fetchmail-RELEASE_6-4-26.tar.gz -> fetchmail-6.4.26.tar.gz"
 
 LICENSE="GPL-2 public-domain"
 SLOT="0"
@@ -44,7 +44,7 @@ HTML_DOCS="*.html"
 PATCHES=(
 	"${FILESDIR}"/${PN}-6.3.26-python-optional.patch
 )
-S="${WORKDIR}/fetchmail-RELEASE_6-4-25"
+S="${WORKDIR}/fetchmail-RELEASE_6-4-26"
 
 pkg_setup() {
 	enewgroup ${PN}

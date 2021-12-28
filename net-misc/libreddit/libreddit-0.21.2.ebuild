@@ -157,7 +157,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.21.1 -> libreddit-v0.21.1.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.21.2 -> libreddit-v0.21.2.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -13,7 +13,6 @@ async-recursion-0.3.2
 async-rwlock-1.3.0
 async-trait-0.1.52
 autocfg-1.0.1
-base-x-0.2.8
 base64-0.13.0
 bitflags-1.3.2
 bumpalo-3.8.0
@@ -24,14 +23,12 @@ cached_proc_macro_types-0.1.0
 cc-1.0.72
 cfg-if-1.0.0
 clap-2.34.0
-const_fn-0.4.8
-cookie-0.15.1
+cookie-0.16.0-rc.1
 core-foundation-0.9.2
 core-foundation-sys-0.8.3
 darling-0.13.1
 darling_core-0.13.1
 darling_macro-0.13.1
-discard-1.0.4
 event-listener-2.5.1
 fastrand-1.6.0
 fnv-1.0.7
@@ -82,15 +79,13 @@ parking_lot_core-0.8.5
 percent-encoding-2.1.0
 pin-project-lite-0.2.7
 pin-utils-0.1.0
-proc-macro-hack-0.5.19
-proc-macro2-1.0.35
-quote-1.0.10
+proc-macro2-1.0.36
+quote-1.0.14
 redox_syscall-0.2.10
 regex-1.5.4
 regex-syntax-0.6.25
 ring-0.16.20
 route-recognizer-0.3.1
-rustc_version-0.2.3
 rustls-0.20.2
 rustls-native-certs-0.6.1
 rustls-pemfile-0.2.1
@@ -100,28 +95,19 @@ scopeguard-1.1.0
 sct-0.7.0
 security-framework-2.4.2
 security-framework-sys-2.4.2
-semver-0.9.0
-semver-parser-0.7.0
 serde-1.0.132
 serde_derive-1.0.132
 serde_json-1.0.73
-sha1-0.6.0
 signal-hook-registry-1.4.0
 slab-0.4.5
 smallvec-1.7.0
 socket2-0.4.2
 spin-0.5.2
-standback-0.2.17
-stdweb-0.4.20
-stdweb-derive-0.5.3
-stdweb-internal-macros-0.2.9
-stdweb-internal-runtime-0.1.5
 strsim-0.10.0
 syn-1.0.84
 textwrap-0.11.0
-time-0.2.27
-time-macros-0.1.1
-time-macros-impl-0.1.2
+time-0.3.5
+time-macros-0.2.3
 tinyvec-1.5.1
 tinyvec_macros-0.1.0
 tokio-1.15.0
@@ -157,7 +143,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.21.2 -> libreddit-v0.21.2.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.21.4 -> libreddit-v0.21.4.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

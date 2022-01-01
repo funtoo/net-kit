@@ -9,7 +9,7 @@ DESCRIPTION="A high-throughput distributed messaging system"
 HOMEPAGE="http://kafka.apache.org/"
 
 # pick recommended scala version
-SCALA_VERSION=2.12
+SCALA_VERSION=2.13
 MY_PN="kafka"
 MY_P="${MY_PN}_${SCALA_VERSION}-${PV}"
 SRC_URI="mirror://apache/kafka/${PV}/${MY_P}.tgz"

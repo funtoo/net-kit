@@ -38,7 +38,7 @@ BDEPEND="python? (
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv "${WORKDIR}"/{{github_user}}-{{github_repo}}* "${S}" || die
+		mv "${WORKDIR}"/arvidn-libtorrent* "${S}" || die
 	fi
 }
 

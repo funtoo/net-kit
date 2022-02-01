@@ -7,8 +7,8 @@ inherit desktop eutils xdg
 DESCRIPTION="Official desktop client for Telegram (binary package)"
 HOMEPAGE="https://desktop.telegram.org"
 SRC_URI="
-	https://github.com/telegramdesktop/tdesktop/archive/v3.4.8.tar.gz -> tdesktop-3.4.8.tar.gz
-	https://github.com/telegramdesktop/tdesktop/releases/download/v3.4.8/tsetup.3.4.8.tar.xz
+	https://github.com/telegramdesktop/tdesktop/archive/v3.5.0.tar.gz -> tdesktop-3.5.0.tar.gz
+	https://github.com/telegramdesktop/tdesktop/releases/download/v3.5.0/tsetup.3.5.0.tar.xz
 "
 
 LICENSE="GPL-3-with-openssl-exception"

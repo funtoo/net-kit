@@ -1,12 +1,13 @@
 BDEPEND=virtual/pkgconfig
 DEFINED_PHASES=install setup
-DESCRIPTION=Gorgeous metric viz, dashboards & editors for Graphite, InfluxDB & OpenTSDB
+DESCRIPTION=Multi-platform analytics and interactive visualization web application
 EAPI=7
 HOMEPAGE=https://grafana.org
+IUSE=systemd
 KEYWORDS=~amd64
-LICENSE=Apache-2.0
-RDEPEND=media-libs/fontconfig
+LICENSE=AGPL-3
+RDEPEND=media-libs/fontconfig systemd? ( sys-apps/systemd:= )
 SLOT=0
-SRC_URI=https://dl.grafana.com/oss/release/grafana-6.1.6.linux-amd64.tar.gz -> grafana-bin-6.1.6.tar.gz
+SRC_URI=https://dl.grafana.com/oss/release/grafana-8.3.4.linux-amd64.tar.gz
 _eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	e68863263b1e8611dacf381bec5c8b2b
-_md5_=d98abd8ebb335f7ba998d427ecdbf763
+_md5_=e71f81264a52e03641356af70d8a9c1a

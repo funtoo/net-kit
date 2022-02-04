@@ -1,26 +1,27 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
+EAPI=7
 
 inherit user systemd
 
 MY_PN=${PN/-bin/}
-S=${WORKDIR}/${MY_PN}-${PV}
+MY_PV=${PV/_beta/-beta}
+S=${WORKDIR}/${MY_PN}-${MY_PV}
 
-DESCRIPTION="Gorgeous metric viz, dashboards & editors for Graphite, InfluxDB & OpenTSDB"
+DESCRIPTION="Multi-platform analytics and interactive visualization web application"
 HOMEPAGE="https://grafana.org"
-SRC_URI="https://dl.grafana.com/oss/release/grafana-${PV}.linux-amd64.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://dl.grafana.com/oss/release/grafana-8.3.4.linux-amd64.tar.gz"
 
-LICENSE="Apache-2.0"
+LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="systemd"
 
 DEPEND=""
 RDEPEND="${DEPEND}
-	media-libs/fontconfig"
+	media-libs/fontconfig
+	systemd? ( sys-apps/systemd:= )"
 
-QA_EXECSTACK="usr/share/grafana/tools/phantomjs/phantomjs"
 QA_PREBUILT="usr/bin/grafana-* ${QA_EXECSTACK}"
 QA_PRESTRIPPED=${QA_PREBUILT}
 
@@ -42,15 +43,9 @@ src_install() {
 	dobin bin/grafana-cli
 	dobin bin/grafana-server
 
-	exeinto /usr/share/grafana/tools/phantomjs
-	doexe tools/phantomjs/phantomjs
-
-	insinto /usr/share/grafana/tools/phantomjs
-	doins tools/phantomjs/render.js
-
 	newconfd "${FILESDIR}"/grafana.confd grafana
 	newinitd "${FILESDIR}"/grafana.initd.3 grafana
-	systemd_newunit "${FILESDIR}"/grafana.service grafana.service
+	use systemd && systemd_newunit "${FILESDIR}"/grafana.service grafana.service
 
 	keepdir /var/{lib,log}/grafana
 	keepdir /var/lib/grafana/{dashboards,plugins}
@@ -67,4 +62,9 @@ postinst() {
 	elog "You may add your own custom configuration for app-admin/logrotate if you"
 	elog "wish to use external rotation of logs. In this case, you also need to make"
 	elog "sure the built-in rotation is turned off."
+	elog
+	elog "As of version 7.0.0, ${MY_PN} uses a separate plugin to render panels and dashboards to PNGs"
+	elog
+	elog "If you want this functionality simply run:"
+	elog "grafana-cli plugins install grafana-image-renderer"
 }

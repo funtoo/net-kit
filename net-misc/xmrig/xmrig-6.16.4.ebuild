@@ -6,7 +6,7 @@ inherit cmake
 
 DESCRIPTION="RandomX, CryptoNight, KawPow, AstroBWT, and Argon2 CPU/GPU miner"
 HOMEPAGE="https://github.com/xmrig/xmrig"
-SRC_URI="https://api.github.com/repos/xmrig/xmrig/tarball/v6.16.3 -> xmrig-6.16.3.tar.gz"
+SRC_URI="https://api.github.com/repos/xmrig/xmrig/tarball/v6.16.4 -> xmrig-6.16.4.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"

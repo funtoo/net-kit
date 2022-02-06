@@ -101,7 +101,6 @@ net-voip/telepathy-salut python_single_target_python2_7
 net-vpn/tinc python_single_target_python2_7
 net-wireless/aircrack-ng python_single_target_python2_7
 net-wireless/airpwn python_single_target_python2_7
-net-wireless/chirp python_single_target_python2_7
 net-wireless/cpyrit-cuda python_single_target_python2_7
 net-wireless/cpyrit-opencl python_single_target_python2_7
 net-wireless/gnuradio python_single_target_python2_7

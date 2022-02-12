@@ -6,7 +6,7 @@ inherit autotools flag-o-matic
 DESCRIPTION="utilities for editing and replaying previously captured network traffic"
 HOMEPAGE="http://tcpreplay.appneta.com/ https://github.com/appneta/tcpreplay"
 LICENSE="BSD GPL-3"
-SRC_URI="https://github.com/appneta/tcpreplay/releases/download/v4.4.0/tcpreplay-4.4.0.tar.xz -> tcpreplay-4.4.0.tar.xz"
+SRC_URI="https://github.com/appneta/tcpreplay/releases/download/v4.4.1/tcpreplay-4.4.1.tar.xz -> tcpreplay-4.4.1.tar.xz"
 
 SLOT="0"
 KEYWORDS="*"

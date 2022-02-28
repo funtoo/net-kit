@@ -7,7 +7,7 @@ inherit cmake
 SRC_URI="https://github.com/FreeRDP/FreeRDP/releases/download/2.6.0/freerdp-2.6.0.tar.gz -> freerdp-2.6.0.tar.gz"
 KEYWORDS="*"
 
-DESCRIPTION="Free implementation of the Remote Desktop Protocol"
+DESCRIPTION="FreeRDP is a free remote desktop protocol library and clients"
 HOMEPAGE="http://www.freerdp.com/"
 
 LICENSE="Apache-2.0"

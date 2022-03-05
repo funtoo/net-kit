@@ -1,9 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
-#PERL_EXPORT_PHASE_FUNCTIONS=no
-inherit eutils perl-module toolchain-funcs
+EAPI=7
+inherit perl-module toolchain-funcs
 
 DESCRIPTION="Port Scanning Attack Detection daemon"
 SRC_URI="https://www.cipherdyne.org/psad/download/${P}.tar.bz2"
@@ -11,7 +9,7 @@ HOMEPAGE="https://www.cipherdyne.org/psad/"
 
 SLOT="0"
 LICENSE="GPL-2"
-KEYWORDS="alpha amd64 ppc ~sparc x86"
+KEYWORDS="*"
 
 DEPEND="virtual/perl-ExtUtils-MakeMaker"
 RDEPEND="
@@ -25,9 +23,13 @@ RDEPEND="
 	virtual/mailx
 	virtual/perl-Storable
 "
+PATCHES=(
+	"${FILESDIR}"/${PN}-2.2.4-var-run.patch
+	"${FILESDIR}"/${PN}-initd.patch
+)
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-2.2.4-var-run.patch
+	default
 
 	sed -i \
 		-e 's|/usr/bin/gcc|$(CC)|g' \
@@ -61,7 +63,7 @@ src_compile() {
 }
 
 src_install() {
-	newbin pscan psad-pscan
+	newbin misc/pscan psad-pscan
 
 	insinto /usr
 	dosbin kmsgsd psad psadwatchd
@@ -74,9 +76,10 @@ src_install() {
 
 	newinitd init-scripts/psad-init.gentoo psad
 
-	doman *.8
+	doman doc/*.8
 
-	dodoc BENCHMARK CREDITS Change* FW_EXAMPLE_RULES README SCAN_LOG
+	dodoc doc/BENCHMARK CREDITS Change* doc/FW_EXAMPLE_RULES README \
+		doc/README.SYSLOG doc/SCAN_LOG
 
 	insinto /etc/psad/snort_rules
 	doins deps/snort_rules/*

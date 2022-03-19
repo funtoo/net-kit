@@ -9,7 +9,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 KEYWORDS="*"
 
-RDEPEND="net-libs/nodejs[npm]"
+RDEPEND="net-libs/nodejs[npm(+)]"
 DEPEND="${RDEPEND} \
 app-arch/unzip"
 

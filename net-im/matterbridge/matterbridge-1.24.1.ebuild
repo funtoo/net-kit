@@ -8,7 +8,7 @@ go-module_set_globals
 
 DESCRIPTION="Bridges between a growing number of protocols"
 HOMEPAGE="https://github.com/42wim/matterbridge"
-SRC_URI="https://api.github.com/repos/42wim/matterbridge/tarball/v1.24.0 -> matterbridge-1.24.0.tar.gz"
+SRC_URI="https://api.github.com/repos/42wim/matterbridge/tarball/v1.24.1 -> matterbridge-1.24.1.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"

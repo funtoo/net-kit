@@ -9,7 +9,7 @@ askama_derive-0.11.2
 askama_escape-0.10.3
 askama_shared-0.12.2
 async-recursion-1.0.0
-async-trait-0.1.52
+async-trait-0.1.53
 async_once-0.2.6
 autocfg-1.1.0
 base64-0.13.0
@@ -49,7 +49,7 @@ http-0.2.6
 http-body-0.4.4
 httparse-1.6.0
 httpdate-1.0.2
-hyper-0.14.17
+hyper-0.14.18
 hyper-rustls-0.23.0
 ident_case-1.0.1
 idna-0.2.3
@@ -58,20 +58,20 @@ instant-0.1.12
 itoa-1.0.1
 js-sys-0.3.56
 lazy_static-1.4.0
-libc-0.2.119
+libc-0.2.121
 lock_api-0.4.6
-log-0.4.14
+log-0.4.16
 matches-0.1.9
 memchr-2.4.1
 mime-0.3.16
 mime_guess-2.0.4
 minimal-lexical-0.2.1
-mio-0.8.1
+mio-0.8.2
 miow-0.3.7
-nom-7.1.0
+nom-7.1.1
 ntapi-0.3.7
 num_cpus-1.13.1
-num_threads-0.1.4
+num_threads-0.1.5
 once_cell-1.10.0
 openssl-probe-0.1.5
 os_str_bytes-6.0.0
@@ -82,8 +82,8 @@ percent-encoding-2.1.0
 pin-project-lite-0.2.8
 pin-utils-0.1.0
 proc-macro2-1.0.36
-quote-1.0.15
-redox_syscall-0.2.11
+quote-1.0.17
+redox_syscall-0.2.12
 regex-1.5.5
 regex-syntax-0.6.25
 ring-0.16.20
@@ -106,17 +106,17 @@ smallvec-1.8.0
 socket2-0.4.4
 spin-0.5.2
 strsim-0.10.0
-syn-1.0.86
+syn-1.0.89
 textwrap-0.15.0
 thiserror-1.0.30
 thiserror-impl-1.0.30
-time-0.3.7
-time-macros-0.2.3
+time-0.3.9
+time-macros-0.2.4
 tinyvec-1.5.1
 tinyvec_macros-0.1.0
 tokio-1.17.0
 tokio-macros-1.7.0
-tokio-rustls-0.23.2
+tokio-rustls-0.23.3
 tokio-util-0.6.9
 tower-service-0.3.1
 tracing-0.1.32
@@ -154,7 +154,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.22.3 -> libreddit-v0.22.3.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.22.5 -> libreddit-v0.22.5.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

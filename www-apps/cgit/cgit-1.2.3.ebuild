@@ -1,30 +1,33 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
+
+PYTHON_COMPAT=( python3+ )
 
 WEBAPP_MANUAL_SLOT="yes"
 
-inherit webapp eutils multilib user toolchain-funcs
+inherit python-single-r1 toolchain-funcs user webapp
 
 [[ -z "${CGIT_CACHEDIR}" ]] && CGIT_CACHEDIR="/var/cache/${PN}/"
 
-GIT_V="2.18.0"
-
 DESCRIPTION="a fast web-interface for git repositories"
 HOMEPAGE="https://git.zx2c4.com/cgit/about"
-SRC_URI="mirror://kernel/software/scm/git/git-${GIT_V}.tar.xz
-	https://git.zx2c4.com/cgit/snapshot/${P}.tar.xz"
+SRC_URI="
+	https://git.zx2c4.com/cgit/snapshot/cgit-1.2.3.tar.xz
+	https://www.kernel.org/pub/software/scm/git/git-2.25.1.tar.xz
+"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 arm x86"
+KEYWORDS="*"
 IUSE="doc +highlight +lua +jit"
 
-RDEPEND="
+RESTRICT="test"
+
+RDEPEND="${PYTHON_DEPS}
+	dev-libs/openssl:0=
 	dev-vcs/git
 	sys-libs/zlib
-	dev-libs/openssl:0
 	virtual/httpd-cgi
 	highlight? ( || ( dev-python/pygments app-text/highlight ) )
 	lua? ( jit? ( dev-lang/luajit ) !jit? ( dev-lang/lua ) )
@@ -39,27 +42,32 @@ DEPEND="${RDEPEND}
 pkg_setup() {
 	webapp_pkg_setup
 	enewuser "${PN}"
+	enewgroup "${PN}"
 }
 
 src_prepare() {
-	rmdir git || die
-	mv "${WORKDIR}"/git-"${GIT_V}" git || die
+	python_setup
 
-	echo "prefix = ${EPREFIX}/usr" >> cgit.conf
-	echo "libdir = ${EPREFIX}/usr/$(get_libdir)" >> cgit.conf
-	echo "CGIT_SCRIPT_PATH = ${MY_CGIBINDIR}" >> cgit.conf
-	echo "CGIT_DATA_PATH = ${MY_HTDOCSDIR}" >> cgit.conf
-	echo "CACHE_ROOT = ${CGIT_CACHEDIR}" >> cgit.conf
-	echo "DESTDIR = ${D}" >> cgit.conf
+	rmdir git || die
+	mv "${WORKDIR}"/git-2.25.1 git || die
+
+	echo "prefix = ${EPREFIX}/usr" >> cgit.conf || die "echo prefix failed"
+	echo "libdir = ${EPREFIX}/usr/$(get_libdir)" >> cgit.conf || die "echo libdir failed"
+	echo "CGIT_SCRIPT_PATH = ${MY_CGIBINDIR}" >> cgit.conf || die "echo CGIT_SCRIPT_PATH failed"
+	echo "CGIT_DATA_PATH = ${MY_HTDOCSDIR}" >> cgit.conf || die "echo CGIT_DATA_PATH failed"
+	echo "CACHE_ROOT = ${CGIT_CACHEDIR}" >> cgit.conf || die "echo CACHE_ROOT failed"
+	echo "DESTDIR = ${D}" >> cgit.conf || die "echo DESTDIR failed"
 	if use lua; then
 		if use jit; then
-			echo "LUA_PKGCONFIG = luajit" >> cgit.conf
+			echo "LUA_PKGCONFIG = luajit" >> cgit.conf || die "echo LUA_PKGCONFIG failed"
 		else
-			echo "LUA_PKGCONFIG = lua" >> cgit.conf
+			echo "LUA_PKGCONFIG = lua" >> cgit.conf || die "echo LUA_PKGCONFIG failed"
 		fi
 	else
-		echo "NO_LUA = 1" >> cgit.conf
+		echo "NO_LUA = 1" >> cgit.conf || die "echo NO_LUA failed"
 	fi
+
+	eapply_user
 }
 
 src_compile() {
@@ -84,6 +92,7 @@ src_install() {
 	keepdir "${CGIT_CACHEDIR}"
 	fowners ${PN}:${PN} "${CGIT_CACHEDIR}"
 	fperms 700 "${CGIT_CACHEDIR}"
+	python_fix_shebang .
 }
 
 pkg_postinst() {

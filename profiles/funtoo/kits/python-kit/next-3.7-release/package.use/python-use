@@ -126,8 +126,6 @@ net-wireless/python-wifi python_single_target_python2_7
 net-wireless/rfcat python_single_target_python2_7
 net-wireless/uhd python_single_target_python2_7
 net-wireless/wifi-radar python_single_target_python2_7
-www-apps/blohg python_single_target_python2_7
-www-apps/blohg-tumblelog python_single_target_python2_7
 www-apps/curator python_single_target_python2_7
 www-apps/ownpaste python_single_target_python2_7
 www-apps/prewikka python_single_target_python2_7

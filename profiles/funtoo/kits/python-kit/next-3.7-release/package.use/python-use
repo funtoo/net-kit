@@ -4,7 +4,6 @@
 =net-analyzer/scapy-2.3.2-r1 python_single_target_python2_7
 =net-dialup/freeradius-3.0.15 python_single_target_python2_7
 =net-firewall/ufw-0.34_pre805-r2 python_single_target_python2_7
-=net-im/pidgin-2.13.0 python_single_target_python2_7
 =net-irc/irker-2.11 python_single_target_python2_7
 =net-irc/irker-2.12 python_single_target_python2_7
 =net-irc/irker-2.13 python_single_target_python2_7

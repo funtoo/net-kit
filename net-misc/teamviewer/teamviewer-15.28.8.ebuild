@@ -9,8 +9,8 @@ inherit desktop xdg
 DESCRIPTION="All-In-One Solution for Remote Access and Support over the Internet"
 HOMEPAGE="https://www.teamviewer.com"
 
-SRC_URI="amd64? ( https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.28.7_amd64.tar.xz )
-	x86? ( https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.28.7_i386.tar.xz )"
+SRC_URI="amd64? ( https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.28.8_amd64.tar.xz )
+	x86? ( https://dl.teamviewer.com/download/linux/version_15x/teamviewer_15.28.8_i386.tar.xz )"
 
 LICENSE="TeamViewer MIT"
 SLOT="0"

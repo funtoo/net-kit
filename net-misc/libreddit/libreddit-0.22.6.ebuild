@@ -21,13 +21,13 @@ cached_proc_macro-0.12.0
 cached_proc_macro_types-0.1.0
 cc-1.0.73
 cfg-if-1.0.0
-clap-3.1.6
+clap-3.1.8
 cookie-0.16.0
 core-foundation-0.9.3
 core-foundation-sys-0.8.3
-darling-0.13.1
-darling_core-0.13.1
-darling_macro-0.13.1
+darling-0.13.2
+darling_core-0.13.2
+darling_macro-0.13.2
 fastrand-1.7.0
 fnv-1.0.7
 form_urlencoded-1.0.1
@@ -41,7 +41,7 @@ futures-macro-0.3.21
 futures-sink-0.3.21
 futures-task-0.3.21
 futures-util-0.3.21
-h2-0.3.12
+h2-0.3.13
 hashbrown-0.11.2
 hashbrown-0.12.0
 hermit-abi-0.1.19
@@ -53,13 +53,13 @@ hyper-0.14.18
 hyper-rustls-0.23.0
 ident_case-1.0.1
 idna-0.2.3
-indexmap-1.8.0
+indexmap-1.8.1
 instant-0.1.12
 itoa-1.0.1
 js-sys-0.3.56
 lazy_static-1.4.0
 libc-0.2.121
-lock_api-0.4.6
+lock_api-0.4.7
 log-0.4.16
 matches-0.1.9
 memchr-2.4.1
@@ -77,13 +77,13 @@ openssl-probe-0.1.5
 os_str_bytes-6.0.0
 parking-2.0.0
 parking_lot-0.12.0
-parking_lot_core-0.9.1
+parking_lot_core-0.9.2
 percent-encoding-2.1.0
 pin-project-lite-0.2.8
 pin-utils-0.1.0
 proc-macro2-1.0.36
 quote-1.0.17
-redox_syscall-0.2.12
+redox_syscall-0.2.13
 regex-1.5.5
 regex-syntax-0.6.25
 ring-0.16.20
@@ -101,12 +101,12 @@ serde-1.0.136
 serde_derive-1.0.136
 serde_json-1.0.79
 signal-hook-registry-1.4.0
-slab-0.4.5
+slab-0.4.6
 smallvec-1.8.0
 socket2-0.4.4
 spin-0.5.2
 strsim-0.10.0
-syn-1.0.89
+syn-1.0.90
 textwrap-0.15.0
 thiserror-1.0.30
 thiserror-impl-1.0.30
@@ -117,10 +117,11 @@ tinyvec_macros-0.1.0
 tokio-1.17.0
 tokio-macros-1.7.0
 tokio-rustls-0.23.3
-tokio-util-0.6.9
+tokio-util-0.7.1
 tower-service-0.3.1
 tracing-0.1.32
-tracing-core-0.1.23
+tracing-attributes-0.1.20
+tracing-core-0.1.24
 try-lock-0.2.3
 unicase-2.6.0
 unicode-bidi-0.3.7
@@ -142,19 +143,19 @@ webpki-0.22.0
 winapi-0.3.9
 winapi-i686-pc-windows-gnu-0.4.0
 winapi-x86_64-pc-windows-gnu-0.4.0
-windows-sys-0.32.0
-windows_aarch64_msvc-0.32.0
-windows_i686_gnu-0.32.0
-windows_i686_msvc-0.32.0
-windows_x86_64_gnu-0.32.0
-windows_x86_64_msvc-0.32.0
+windows-sys-0.34.0
+windows_aarch64_msvc-0.34.0
+windows_i686_gnu-0.34.0
+windows_i686_msvc-0.34.0
+windows_x86_64_gnu-0.34.0
+windows_x86_64_msvc-0.34.0
 "
 
 inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.22.5 -> libreddit-v0.22.5.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.22.6 -> libreddit-v0.22.6.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -11,4 +11,4 @@ RESTRICT=mirror strip preserve-libs
 SLOT=0
 SRC_URI=https://cdn.zoom.us/prod/5.10.0.2450/zoom_x86_64.pkg.tar.xz -> zoom-5.10.0.2450_x86_64.pkg.tar.xz
 _eclasses_=unpacker	3cd8bad0d31e525cd26be1bfa4e61631	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=b55843ec4435a510cf5431725e446f72
+_md5_=2be428143d4a61f04accc55d3fe44756

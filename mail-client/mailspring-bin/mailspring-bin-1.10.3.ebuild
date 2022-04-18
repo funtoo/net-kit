@@ -6,7 +6,7 @@ inherit unpacker xdg
 
 DESCRIPTION="A beautiful, fast and fully open source mail client for Mac, Windows and Linux"
 HOMEPAGE="https://getmailspring.com/"
-SRC_URI="https://github.com/Foundry376/Mailspring/releases/download/1.10.2/mailspring-1.10.2-amd64.deb -> mailspring-bin-1.10.2.deb"
+SRC_URI="https://github.com/Foundry376/Mailspring/releases/download/1.10.3/mailspring-1.10.3-amd64.deb -> mailspring-bin-1.10.3.deb"
 S="${WORKDIR}"
 
 LICENSE="GPL-3"

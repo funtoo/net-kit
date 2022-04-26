@@ -10,6 +10,6 @@ LICENSE=Apache-2.0
 RDEPEND=dev-libs/openssl:0= sys-libs/zlib:0 alsa? ( media-libs/alsa-lib ) cups? ( net-print/cups ) usb? ( virtual/libudev:0= sys-apps/util-linux:0= dev-libs/dbus-glib:0= virtual/libusb:1= ) X? ( x11-libs/libXcursor x11-libs/libXext x11-libs/libXi x11-libs/libXrender xinerama? ( x11-libs/libXinerama ) xv? ( x11-libs/libXv ) ) ffmpeg? ( media-video/ffmpeg:0= ) !ffmpeg? ( x11-libs/cairo:0= ) gstreamer? ( media-libs/gstreamer:1.0 media-libs/gst-plugins-base:1.0 x11-libs/libXrandr ) jpeg? ( virtual/jpeg:0 ) openh264? ( media-libs/openh264:0= ) pulseaudio? ( media-sound/pulseaudio ) server? ( X? ( x11-libs/libXcursor x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrandr x11-libs/libXtst xinerama? ( x11-libs/libXinerama ) ) ) smartcard? ( sys-apps/pcsc-lite ) systemd? ( sys-apps/systemd:0= ) wayland? ( dev-libs/wayland x11-libs/libxkbcommon ) X? ( x11-libs/libX11 x11-libs/libxkbfile )
 RESTRICT=!test? ( test )
 SLOT=0/2
-SRC_URI=https://github.com/FreeRDP/FreeRDP/releases/download/2.6.1/freerdp-2.6.1.tar.gz -> freerdp-2.6.1.tar.gz
+SRC_URI=https://github.com/FreeRDP/FreeRDP/releases/download/2.7.0/freerdp-2.7.0.tar.gz -> freerdp-2.7.0.tar.gz
 _eclasses_=cmake	ac7cb516f6a288b6a82bc0649ce49878	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=f74e6c53e5ff4634676f0d36810da08b
+_md5_=69c4e4d0020350fce674504b598e2f8b

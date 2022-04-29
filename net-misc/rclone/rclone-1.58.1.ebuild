@@ -649,6 +649,8 @@ EGO_SUM=(
 	"github.com/vivint/infectious v0.0.0-20200605153912-25a574ae18a3"
 	"github.com/vivint/infectious v0.0.0-20200605153912-25a574ae18a3/go.mod"
 	"github.com/willf/bitset v1.1.9/go.mod"
+	"github.com/winfsp/cgofuse v1.5.0"
+	"github.com/winfsp/cgofuse v1.5.0/go.mod"
 	"github.com/xanzy/ssh-agent v0.3.1"
 	"github.com/xanzy/ssh-agent v0.3.1/go.mod"
 	"github.com/youmark/pkcs8 v0.0.0-20201027041543-1326539a0a0a"
@@ -715,6 +717,8 @@ EGO_SUM=(
 	"golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod"
 	"golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3"
 	"golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3/go.mod"
+	"golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29"
+	"golang.org/x/crypto v0.0.0-20220331220935-ae2d96664a29/go.mod"
 	"golang.org/x/exp v0.0.0-20190121172915-509febef88a4/go.mod"
 	"golang.org/x/exp v0.0.0-20190306152737-a1d7652674e8/go.mod"
 	"golang.org/x/exp v0.0.0-20190510132918-efd6b22b2522/go.mod"
@@ -1205,7 +1209,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.58.0/rclone-v1.58.0.tar.gz
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.58.1/rclone-v1.58.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 

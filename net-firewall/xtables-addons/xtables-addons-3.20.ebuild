@@ -1,31 +1,31 @@
-# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 MODULES_OPTIONAL_USE=modules
 MODULES_OPTIONAL_USE_IUSE_DEFAULT=1
-inherit eutils linux-info linux-mod multilib
+inherit eutils linux-info linux-mod toolchain-funcs
 
 DESCRIPTION="iptables extensions not yet accepted in the main kernel"
-HOMEPAGE="http://xtables-addons.sourceforge.net/"
-SRC_URI="mirror://sourceforge/xtables-addons/${P}.tar.xz"
+HOMEPAGE="https://inai.de/projects/xtables-addons/"
+SRC_URI="https://inai.de/files/xtables-addons/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="*"
 
-MODULES="quota2 psd pknock lscan length2 ipv4options ipp2p iface gradm geoip fuzzy condition tarpit sysrq logmark ipmark echo dnetmap dhcpmac delude chaos account"
+MODULES="quota2 psd pknock lscan length2 ipv4options ipp2p iface gradm geoip fuzzy condition tarpit sysrq proto logmark ipmark echo dnetmap dhcpmac delude chaos account"
 
 for mod in ${MODULES}; do
 	IUSE="${IUSE} xtables_addons_${mod}"
 done
 
-DEPEND=">=net-firewall/iptables-1.4.5"
+DEPEND=">=net-firewall/iptables-1.6.0"
 
 RDEPEND="${DEPEND}
 	xtables_addons_geoip? (
 		app-arch/unzip
+		dev-perl/Net-CIDR-Lite
 		dev-perl/Text-CSV_XS
 		virtual/perl-Getopt-Long
 	)
@@ -53,7 +53,7 @@ XA_check4internal_module() {
 	fi
 }
 
-pkg_setup()	{
+pkg_setup() {
 	if use modules; then
 		get_version
 		check_modules_supported
@@ -65,7 +65,7 @@ pkg_setup()	{
 			SKIP_IPV6_MODULES="ip6table_rawpost"
 			ewarn "No IPV6 support in kernel. Disabling: ${SKIP_IPV6_MODULES}"
 		fi
-		kernel_is -lt 3 7 && die "${P} requires kernel version >= 3.7, if you have older kernel please use 1.x version instead"
+		kernel_is -lt 4 18 && die "${P} requires kernel version >= 4.18"
 	fi
 }
 

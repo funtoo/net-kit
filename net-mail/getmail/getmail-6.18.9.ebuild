@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="A mail retriever with reliable Maildir and mbox delivery"
 HOMEPAGE="https://www.getmail6.org/ https://github.com/getmail6/getmail6"
-SRC_URI="https://api.github.com/repos/getmail6/getmail6/tarball/v6.18.8 -> getmail6-6.18.8.tar.gz"
+SRC_URI="https://api.github.com/repos/getmail6/getmail6/tarball/v6.18.9 -> getmail6-6.18.9.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

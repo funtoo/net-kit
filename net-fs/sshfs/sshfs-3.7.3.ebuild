@@ -6,7 +6,7 @@ inherit meson
 
 DESCRIPTION="Fuse-filesystem utilizing the sftp service"
 HOMEPAGE="https://github.com/libfuse/sshfs"
-SRC_URI="https://api.github.com/repos/libfuse/sshfs/tarball/sshfs-3.7.2 -> sshfs-3.7.2.tar.gz"
+SRC_URI="https://api.github.com/repos/libfuse/sshfs/tarball/sshfs-3.7.3 -> sshfs-3.7.3.tar.gz"
 
 LICENSE="GPL-2"
 KEYWORDS="*"

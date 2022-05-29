@@ -54,11 +54,11 @@ http-0.2.7
 http-body-0.4.5
 httparse-1.7.1
 httpdate-1.0.2
-hyper-0.14.18
+hyper-0.14.19
 hyper-rustls-0.23.0
 ident_case-1.0.1
 idna-0.2.3
-indexmap-1.8.1
+indexmap-1.8.2
 instant-0.1.12
 itoa-1.0.2
 js-sys-0.3.57
@@ -75,10 +75,10 @@ mio-0.8.3
 nom-7.1.1
 num_cpus-1.13.1
 num_threads-0.1.6
-once_cell-1.11.0
+once_cell-1.12.0
 opaque-debug-0.3.0
 openssl-probe-0.1.5
-os_str_bytes-6.0.1
+os_str_bytes-6.1.0
 parking-2.0.0
 parking_lot-0.12.0
 parking_lot_core-0.9.3
@@ -167,7 +167,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.22.8 -> libreddit-v0.22.8.tar.gz
+SRC_URI="https://api.github.com/repos/spikecodes/libreddit/tarball/v0.22.9 -> libreddit-v0.22.9.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

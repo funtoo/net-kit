@@ -6,7 +6,7 @@ inherit autotools flag-o-matic user systemd linux-info
 
 DESCRIPTION="Robust and highly flexible tunneling application compatible with many OSes"
 
-SRC_URI="https://github.com/OpenVPN/openvpn/archive/4bac15c56a54350076925391dc317c0139c7b5b0.tar.gz -> openvpn-2.5.6-4bac15c.tar.gz"
+SRC_URI="https://github.com/OpenVPN/openvpn/archive/4cffa0056f705c1c71f5640a9c95fa8b0aa9a539.tar.gz -> openvpn-2.5.7-4cffa00.tar.gz"
 HOMEPAGE="https://openvpn.net/"
 
 LICENSE="GPL-2"
@@ -52,7 +52,7 @@ pkg_setup()  {
 
 src_unpack() {
     default
-    mv "openvpn-4bac15c56a54350076925391dc317c0139c7b5b0" "${S}" || die
+    mv "openvpn-4cffa0056f705c1c71f5640a9c95fa8b0aa9a539" "${S}" || die
 }
 
 src_prepare() {

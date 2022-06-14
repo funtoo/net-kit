@@ -1,11 +1,10 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit rpm pax-utils systemd
+inherit rpm systemd
 
-MY_P="NessusAgent-${PV}-es7"
+MY_P="NessusAgent-${PV}-es8"
 
 DESCRIPTION="A remote security scanner for Linux - agent component"
 HOMEPAGE="https://www.tenable.com/"
@@ -13,15 +12,15 @@ SRC_URI="${MY_P}.x86_64.rpm"
 
 LICENSE="GPL-2 Nessus-EULA"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="*"
 
 RESTRICT="mirror fetch strip"
 
 QA_PREBUILT="opt/nessus_agent/bin/nasl
 	opt/nessus_agent/bin/nessus-mkrand
-	opt/nessus_agent/lib/nessus/libjemalloc.so.${PV}
+	opt/nessus_agent/lib/nessus/libjemalloc.so.*
 	opt/nessus_agent/lib/nessus/libnessus-glibc-fix.so
-	opt/nessus_agent/lib/nessus/plugins/ovaldi64-rhel7.inc
+	opt/nessus_agent/lib/nessus/iconv/*.so
 	opt/nessus_agent/sbin/nessus-check-signature
 	opt/nessus_agent/sbin/nessus-service
 	opt/nessus_agent/sbin/nessuscli
@@ -38,8 +37,6 @@ src_install() {
 	# Using doins -r would strip executable bits from all binaries
 	cp -pPR "${S}"/opt "${D}"/ || die "Failed to copy files"
 
-	pax-mark m "${D}"/opt/nessus_agent/sbin/nessusd
-
 	# Make sure these originally empty directories do not vanish,
 	# Nessus will not run properly without them
 	keepdir /opt/nessus_agent/com/nessus/CA
@@ -53,6 +50,12 @@ src_install() {
 }
 
 pkg_postinst() {
+	# Actually update Nessus core components. According to upstream packages,
+	# harmless to invoke on fresh installations too - and it may make life easier
+	# for people who had restored Nessus state from backups, had it lying around
+	# from older installations and so on.
+	"${EROOT}"/opt/nessus_agent/sbin/nessuscli install "${EROOT}"/opt/nessus_agent/var/nessus/plugins-core.tar.gz
+
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
 		elog "In order to link the agent to Tenable.io or an instance of Nessus Manager,"
 		elog "obtain an appropriate linking key and run"
@@ -60,5 +63,7 @@ pkg_postinst() {
 		elog "  /opt/nessus_agent/sbin/nessuscli agent link --key=<key> --host=<host> --port=<port> [optional parameters]"
 		elog ""
 		elog "This can be done before the agent is started."
+	else
+		elog "Please restart the nessusagent service to complete the update process"
 	fi
 }

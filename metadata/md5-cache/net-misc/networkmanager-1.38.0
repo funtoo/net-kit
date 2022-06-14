@@ -4,7 +4,7 @@ DEPEND=sys-apps/util-linux elogind? ( >=sys-auth/elogind-219 ) >=virtual/libudev
 DESCRIPTION=A set of co-operative tools that make networking simple and straightforward
 EAPI=7
 HOMEPAGE=https://wiki.gnome.org/Projects/NetworkManager
-IUSE=audit bluetooth +concheck connection-sharing debug dhclient dhcpcd elogind gnutls +gtk-doc +introspection iptables iwd psl libedit lto +nss nftables +modemmanager ofono ovs policykit +ppp resolvconf selinux syslog teamd test +tools vala +wext +wifi kernel_linux test
+IUSE=audit bluetooth +concheck connection-sharing debug dhclient dhcpcd elogind gnutls +gtk-doc +introspection +iptables iwd psl libedit lto +nss -nftables +modemmanager ofono ovs policykit +ppp resolvconf selinux syslog teamd test +tools vala +wext +wifi kernel_linux test
 KEYWORDS=*
 LICENSE=GPL-2+ LGPL-2.1+
 RDEPEND=sys-apps/util-linux elogind? ( >=sys-auth/elogind-219 ) >=virtual/libudev-175:= sys-apps/dbus net-libs/libndp >=dev-libs/glib-2.40:2 introspection? ( >=dev-libs/gobject-introspection-0.10.3:= ) selinux? ( sys-libs/libselinux ) audit? ( sys-process/audit ) teamd? ( >=dev-libs/jansson-2.7:= >=net-misc/libteam-1.9 ) policykit? ( >=sys-auth/polkit-0.106 ) nss? ( >=dev-libs/nss-3.11:= ) gnutls? ( >=net-libs/gnutls-2.12:= ) ppp? ( >=net-dialup/ppp-2.4.5:=[ipv6] ) modemmanager? ( net-misc/mobile-broadband-provider-info >=net-misc/modemmanager-0.7.991:0= ) bluetooth? ( >=net-wireless/bluez-5 ) ofono? ( net-misc/ofono ) dhclient? ( >=net-misc/dhcp-4[client] ) dhcpcd? ( >=net-misc/dhcpcd-9.3.3 ) ovs? ( >=dev-libs/jansson-2.7:= ) resolvconf? ( virtual/resolvconf ) connection-sharing? ( net-dns/dnsmasq[dbus,dhcp] iptables? ( net-firewall/iptables ) nftables? ( net-firewall/nftables ) ) psl? ( net-libs/libpsl ) concheck? ( net-misc/curl ) tools? ( >=dev-libs/newt-0.52.15 libedit? ( dev-libs/libedit ) !libedit? ( sys-libs/readline:= ) ) || ( net-misc/iputils[arping(+)] net-analyzer/arping ) wifi? ( !iwd? ( >=net-wireless/wpa_supplicant-0.7.3-r3[dbus] ) iwd? ( net-wireless/iwd ) )
@@ -13,4 +13,4 @@ RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=mirror://gnome/sources/NetworkManager/1.38/NetworkManager-1.38.0.tar.xz
 _eclasses_=eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	gnome.org	532d56d07b9eace4831aaa817d2b756a	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	meson	2fbe03e3b496f82fd941bcdb9d351c91	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	c6ddaeb7a3e68d2564fa886420d0ae41	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	udev	7752f306eec7b286d00bdb47b763e7ac	user	e68863263b1e8611dacf381bec5c8b2b	vala	5178ebf692407ebb88b1ceaa76872d9d	virtualx	401b718cc14d43a5a7fbe062c4851ba5
-_md5_=d3b13b22f792cd60f50341034736bc92
+_md5_=aa8873c705a08d38c6ab1668ec80bae8

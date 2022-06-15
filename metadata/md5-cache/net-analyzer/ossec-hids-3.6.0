@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install setup test
-DEPEND=mysql? ( virtual/mysql ) sqlite? ( dev-db/sqlite:3 ) postgres? ( dev-db/postgresql:= )
+DEPEND=mysql? ( virtual/mysql ) sqlite? ( dev-db/sqlite:3 ) postgres? ( dev-db/postgresql:= ) sys-apps/shadow
 DESCRIPTION=Open Source Host-based Intrusion Detection System
 EAPI=7
 HOMEPAGE=https://www.ossec.net/
@@ -10,5 +10,5 @@ RDEPEND=mysql? ( virtual/mysql ) sqlite? ( dev-db/sqlite:3 ) postgres? ( dev-db/
 REQUIRED_USE=^^ ( agent hybrid local server ) ?? ( mysql postgres )
 SLOT=0
 SRC_URI=https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz -> ossec-hids-3.6.0.tar.gz
-_eclasses_=user	e68863263b1e8611dacf381bec5c8b2b
+_eclasses_=user	875055ddd565382c728563992ae3abf7
 _md5_=a685ed794f79ba81e646bbf7e0baac7d

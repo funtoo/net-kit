@@ -3,7 +3,7 @@
 EAPI=7
 
 KEYWORDS="*"
-SRC_URI="https://www.freedesktop.org/software/libqmi/libqmi-1.30.6.tar.xz"
+SRC_URI="https://www.freedesktop.org/software/libqmi/libqmi-1.30.8.tar.xz"
 
 DESCRIPTION="Qualcomm MSM (Mobile Station Modem) Interface (QMI) modem protocol library"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/libqmi/ https://gitlab.freedesktop.org/mobile-broadband/libqmi"

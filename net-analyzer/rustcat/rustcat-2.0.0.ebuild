@@ -62,7 +62,6 @@ DESCRIPTION="Modern port listener & Reverse Shell"
 HOMEPAGE="https://github.com/robiot/rustcat"
 SRC_URI="https://api.github.com/repos/robiot/rustcat/tarball/v2.0.0 -> rustcat-2.0.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
-RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="*"

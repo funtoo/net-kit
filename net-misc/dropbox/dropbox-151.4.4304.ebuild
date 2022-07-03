@@ -17,7 +17,6 @@ SRC_URI="https://www.github.com/funtoo/dropbox-python-setup/tarball/1.1 -> dropb
 LICENSE="CC-BY-ND-3.0 FTL MIT LGPL-2 openssl dropbox"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-RESTRICT="mirror"
 IUSE="gnome"
 
 pkg_setup() {

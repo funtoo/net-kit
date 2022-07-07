@@ -4,9 +4,9 @@ EAPI="7"
 
 inherit autotools
 
-DESCRIPTION="A brokerless kernel"
+DESCRIPTION="ZeroMQ core engine in C++, implements ZMTP/3.1"
 HOMEPAGE="http://www.zeromq.org/"
-SRC_URI="https://github.com/zeromq/libzmq/releases/download/v${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/zeromq/libzmq/tarball/4097855ddaaa65ed7b5e8cb86d143842a594eebd -> libzmq-4.3.4-4097855.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"
@@ -24,6 +24,12 @@ DEPEND="${RDEPEND}
 		app-text/xmlto
 	)
 	pgm? ( virtual/pkgconfig )"
+
+post_src_unpack() {
+	if [ ! -d "${S}" ]; then
+		mv zeromq-libzmq-* "${S}" || die
+	fi
+}
 
 src_prepare() {
 	sed \

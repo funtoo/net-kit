@@ -4,7 +4,7 @@ EAPI=7
 
 inherit toolchain-funcs user
 
-SRC_URI="https://roy.marples.name/downloads/dhcpcd/dhcpcd-9.4.1.tar.xz"
+SRC_URI="https://roy.marples.name/downloads/dhcpcd/dhcpcd-9.4.1.tar.xz -> dhcpcd-9.4.1.tar.xz"
 KEYWORDS="*"
 
 DESCRIPTION="A fully featured, yet light weight RFC2131 compliant DHCP client"

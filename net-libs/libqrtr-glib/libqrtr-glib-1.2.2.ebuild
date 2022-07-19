@@ -6,7 +6,7 @@ inherit meson
 
 DESCRIPTION="Qualcomm IPC Router protocol helper library"
 HOMEPAGE="https://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib"
-SRC_URI="https://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib/-/archive/1.2.2/libqrtr-glib-1.2.2.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/mobile-broadband/libqrtr-glib/-/archive/1.2.2/libqrtr-glib-1.2.2.tar.bz2 -> libqrtr-glib-1.2.2.tar.bz2"
 
 LICENSE="LGPL-2"
 SLOT="0/0"	# soname of libqrtr-glib.so

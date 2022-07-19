@@ -33,11 +33,15 @@ CDEPEND="
 	pam? ( sys-libs/pam )
 	pkcs11? ( >=dev-libs/pkcs11-helper-1.11 )
 	systemd? ( sys-apps/systemd )
+	dev-python/docutils
 "
 
 
 
-DEPEND="${CDEPEND}"
+DEPEND="
+	${CDEPEND}
+	dev-python/docutils
+"
 
 RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-openvpn )"

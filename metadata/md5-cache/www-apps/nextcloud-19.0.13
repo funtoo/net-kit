@@ -9,6 +9,6 @@ LICENSE=AGPL-3
 RDEPEND=dev-lang/php[curl?,filter,gd,hash(+),intl,json,mysql?,pdo,posix,postgres?,session,simplexml,sqlite?,truetype,xmlreader,xmlwriter,zip] imagemagick? ( dev-php/pecl-imagick ) virtual/httpd-php >=app-admin/webapp-config-1.50.15
 REQUIRED_USE=|| ( mysql postgres sqlite )
 SLOT=19.0.13
-SRC_URI=https://download.nextcloud.com/server/releases/nextcloud-19.0.13.tar.bz2
+SRC_URI=https://download.nextcloud.com/server/releases/nextcloud-19.0.13.tar.bz2 -> nextcloud-19.0.13.tar.bz2
 _eclasses_=webapp	16783e418aca3ffa461d68310bf7ab12
-_md5_=ea04a282693f94dd7e046816012fbc31
+_md5_=b13a5ed6eefdd9e0dd79456689868a25

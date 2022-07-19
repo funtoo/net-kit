@@ -5,7 +5,7 @@ inherit desktop xdg-utils
 
 DESCRIPTION="Desktop chat client for Slack and Discord (not web-based)."
 HOMEPAGE="https://cancel.fm/ripcord"
-SRC_URI="https://cancel.fm/dl/Ripcord-0.4.29-x86_64.AppImage"
+SRC_URI="https://cancel.fm/dl/Ripcord-0.4.29-x86_64.AppImage -> Ripcord-0.4.29-x86_64.AppImage"
 
 LICENSE="Ripcord"
 SLOT="0"

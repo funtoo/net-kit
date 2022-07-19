@@ -6,7 +6,7 @@ inherit bash-completion-r1 distutils-r1 readme.gentoo-r1
 
 DESCRIPTION="Download videos from YouTube.com (and more sites...)"
 HOMEPAGE="http://ytdl-org.github.io/youtube-dl/"
-SRC_URI="https://github.com/ytdl-org/youtube-dl/releases/download/2021.12.17/youtube-dl-2021.12.17.tar.gz"
+SRC_URI="https://github.com/ytdl-org/youtube-dl/releases/download/2021.12.17/youtube-dl-2021.12.17.tar.gz -> youtube-dl-2021.12.17.tar.gz"
 LICENSE="public-domain"
 
 KEYWORDS="*"

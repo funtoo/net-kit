@@ -8,7 +8,7 @@ inherit python-single-r1
 
 DESCRIPTION="ConnMan User Interface written with EFL & python"
 HOMEPAGE="https://phab.enlightenment.org/w/projects/econnman/ https://www.enlightenment.org/"
-SRC_URI="https://download.enlightenment.org/rel/apps/econnman/econnman-1.1.tar.xz"
+SRC_URI="https://download.enlightenment.org/rel/apps/econnman/econnman-1.1.tar.xz -> econnman-1.1.tar.xz"
 
 LICENSE="LGPL-3"
 SLOT="0"

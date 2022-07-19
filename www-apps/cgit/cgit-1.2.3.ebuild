@@ -13,8 +13,8 @@ inherit python-single-r1 toolchain-funcs user webapp
 DESCRIPTION="a fast web-interface for git repositories"
 HOMEPAGE="https://git.zx2c4.com/cgit/about"
 SRC_URI="
-	https://git.zx2c4.com/cgit/snapshot/cgit-1.2.3.tar.xz
-	https://www.kernel.org/pub/software/scm/git/git-2.25.1.tar.xz
+	https://git.zx2c4.com/cgit/snapshot/cgit-1.2.3.tar.xz -> cgit-1.2.3.tar.xz
+	https://www.kernel.org/pub/software/scm/git/git-2.25.1.tar.xz -> git-2.25.1.tar.xz
 "
 
 LICENSE="GPL-2"

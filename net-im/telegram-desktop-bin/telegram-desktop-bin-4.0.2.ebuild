@@ -8,7 +8,7 @@ DESCRIPTION="Official desktop client for Telegram (binary package)"
 HOMEPAGE="https://desktop.telegram.org"
 SRC_URI="
 	https://github.com/telegramdesktop/tdesktop/archive/v4.0.2.tar.gz -> tdesktop-4.0.2.tar.gz
-	https://github.com/telegramdesktop/tdesktop/releases/download/v4.0.2/tsetup.4.0.2.tar.xz
+	https://github.com/telegramdesktop/tdesktop/releases/download/v4.0.2/tsetup.4.0.2.tar.xz -> tsetup.4.0.2.tar.xz
 "
 
 LICENSE="GPL-3-with-openssl-exception"

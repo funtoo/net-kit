@@ -38,19 +38,16 @@ EGO_SUM=(
 	"github.com/pmezard/go-difflib v1.0.0"
 	"github.com/pmezard/go-difflib v1.0.0/go.mod"
 	"github.com/prashantv/gostub v1.1.0"
-	"github.com/prashantv/gostub v1.1.0/go.mod"
 	"github.com/rivo/uniseg v0.2.0"
 	"github.com/rivo/uniseg v0.2.0/go.mod"
 	"github.com/stretchr/objx v0.1.0/go.mod"
 	"github.com/stretchr/testify v1.4.0/go.mod"
 	"github.com/stretchr/testify v1.6.0/go.mod"
-	"github.com/stretchr/testify v1.7.0/go.mod"
 	"github.com/stretchr/testify v1.7.1"
-	"github.com/stretchr/testify v1.7.1/go.mod"
 	"github.com/valyala/bytebufferpool v1.0.0"
 	"github.com/valyala/bytebufferpool v1.0.0/go.mod"
-	"github.com/valyala/fasthttp v1.37.0"
-	"github.com/valyala/fasthttp v1.37.0/go.mod"
+	"github.com/valyala/fasthttp v1.38.0"
+	"github.com/valyala/fasthttp v1.38.0/go.mod"
 	"github.com/valyala/tcplisten v1.0.0/go.mod"
 	"go.uber.org/automaxprocs v1.5.1"
 	"go.uber.org/automaxprocs v1.5.1/go.mod"
@@ -85,14 +82,13 @@ EGO_SUM=(
 	"gopkg.in/yaml.v2 v2.4.0/go.mod"
 	"gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod"
 	"gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b"
-	"gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b/go.mod"
 )
 
 go-module_set_globals
 
 DESCRIPTION="HTTP(S) benchmarking tool, written in Golang"
 HOMEPAGE="https://github.com/six-ddc/plow"
-SRC_URI="https://api.github.com/repos/six-ddc/plow/tarball/v1.2.0 -> plow-1.2.0.tar.gz
+SRC_URI="https://api.github.com/repos/six-ddc/plow/tarball/v1.3.0 -> plow-1.3.0.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="MIT"

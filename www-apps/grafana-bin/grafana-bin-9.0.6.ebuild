@@ -10,7 +10,7 @@ S=${WORKDIR}/${MY_PN}-${MY_PV}
 
 DESCRIPTION="Multi-platform analytics and interactive visualization web application"
 HOMEPAGE="https://grafana.org"
-SRC_URI="https://dl.grafana.com/oss/release/grafana-9.0.5.linux-amd64.tar.gz -> grafana-9.0.5.linux-amd64.tar.gz"
+SRC_URI="https://dl.grafana.com/oss/release/grafana-9.0.6.linux-amd64.tar.gz -> grafana-9.0.6.linux-amd64.tar.gz"
 
 LICENSE="AGPL-3"
 SLOT="0"

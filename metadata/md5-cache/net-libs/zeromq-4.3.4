@@ -1,0 +1,14 @@
+BDEPEND=>=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install prepare test
+DEPEND=!elibc_Darwin? ( unwind? ( sys-libs/libunwind ) ) sodium? ( dev-libs/libsodium:= ) pgm? ( =net-libs/openpgm-5.2.122 ) !elibc_Darwin? ( sys-apps/util-linux ) doc? ( app-text/asciidoc app-text/xmlto ) pgm? ( virtual/pkgconfig )
+DESCRIPTION=ZeroMQ core engine in C++, implements ZMTP/3.1
+EAPI=7
+HOMEPAGE=http://www.zeromq.org/
+IUSE=doc drafts pgm +sodium static-libs test unwind elibc_Darwin
+KEYWORDS=*
+LICENSE=LGPL-3
+RDEPEND=!elibc_Darwin? ( unwind? ( sys-libs/libunwind ) ) sodium? ( dev-libs/libsodium:= ) pgm? ( =net-libs/openpgm-5.2.122 )
+SLOT=0/5
+SRC_URI=https://github.com/zeromq/libzmq/tarball/4097855ddaaa65ed7b5e8cb86d143842a594eebd -> libzmq-4.3.4-4097855.tar.gz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=561079525546b26600feb361f3f0f728

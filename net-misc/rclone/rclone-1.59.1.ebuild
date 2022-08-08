@@ -597,8 +597,8 @@ EGO_SUM=(
 	"github.com/stretchr/testify v1.7.1/go.mod"
 	"github.com/stretchr/testify v1.7.2"
 	"github.com/stretchr/testify v1.7.2/go.mod"
-	"github.com/t3rm1n4l/go-mega v0.0.0-20200416171014-ffad7fcb44b8"
-	"github.com/t3rm1n4l/go-mega v0.0.0-20200416171014-ffad7fcb44b8/go.mod"
+	"github.com/t3rm1n4l/go-mega v0.0.0-20220725095014-c4e0c2b5debf"
+	"github.com/t3rm1n4l/go-mega v0.0.0-20220725095014-c4e0c2b5debf/go.mod"
 	"github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07/go.mod"
 	"github.com/tinylib/msgp v1.0.2/go.mod"
 	"github.com/tklauser/go-sysconf v0.3.10"
@@ -1216,7 +1216,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.59.0/rclone-v1.59.0.tar.gz -> rclone-v1.59.0.tar.gz
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.59.1/rclone-v1.59.1.tar.gz -> rclone-v1.59.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 

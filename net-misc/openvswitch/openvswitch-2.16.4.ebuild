@@ -1,37 +1,34 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
+PYTHON_COMPAT=( python3+ )
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6} )
-
-inherit autotools eutils linux-info linux-mod python-r1 systemd
+inherit autotools linux-info linux-mod python-r1 systemd tmpfiles
 
 DESCRIPTION="Production quality, multilayer virtual switch"
 HOMEPAGE="https://www.openvswitch.org"
-SRC_URI="https://www.openvswitch.org/releases/${P}.tar.gz"
+SRC_URI="https://www.openvswitch.org/releases/openvswitch-2.16.4.tar.gz -> openvswitch-2.16.4.tar.gz"
 
 LICENSE="Apache-2.0 GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="debug modules monitor +ssl"
+KEYWORDS="*"
+IUSE="debug modules monitor +ssl systemd"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
 	ssl? ( dev-libs/openssl:0= )
 	${PYTHON_DEPS}
-	~dev-python/ovs-2.10.0[${PYTHON_USEDEP}]
-	|| (
-		dev-python/twisted[conch,${PYTHON_USEDEP}]
-		dev-python/twisted-web[${PYTHON_USEDEP}]
-	)
+	dev-python/ovs[${PYTHON_USEDEP}]
+	dev-python/twisted[conch,${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]
 	debug? ( dev-lang/perl )"
 DEPEND="${RDEPEND}
-	sys-apps/util-linux[caps]
-	virtual/pkgconfig"
+	sys-apps/util-linux[caps]"
+BDEPEND="virtual/pkgconfig"
 
-PATCHES="${FILESDIR}/xcp-interface-reconfigure-2.3.2.patch"
+PATCHES="
+	"${FILESDIR}/xcp-interface-reconfigure-2.3.2.patch"
+"
 
 CONFIG_CHECK="~NET_CLS_ACT ~NET_CLS_U32 ~NET_SCH_INGRESS ~NET_ACT_POLICE ~IPV6 ~TUN"
 MODULE_NAMES="openvswitch(net:${S}/datapath/linux)"
@@ -40,9 +37,8 @@ BUILD_TARGETS="all"
 pkg_setup() {
 	if use modules ; then
 		CONFIG_CHECK+=" ~!OPENVSWITCH"
-		kernel_is ge 3 10 0 || die "Linux >= 3.10.0 and <= 4.8 required for userspace modules"
-		# docs state 4.17.x code states 4.15.x
-		kernel_is le 4 15 999 || die "Linux >= 3.10.0 and <= 4.12 required for userspace modules"
+		kernel_is ge 3 10 0 || die "Linux >= 3.10.0 and <= 5.8 required for userspace modules"
+		kernel_is le 5 8 999 || die "Linux >= 3.10.0 and <= 5.8 required for userspace modules"
 		linux-mod_pkg_setup
 	else
 		CONFIG_CHECK+=" ~OPENVSWITCH"
@@ -97,24 +93,26 @@ src_install() {
 			sed -e '1s|^.*$|#!/usr/bin/python|' -i utilities/"${SCRIPT}"
 			python_foreach_impl python_doscript utilities/"${SCRIPT}"
 		done
-		rm -r "${ED%/}"/usr/share/openvswitch/python || die
+		rm -r "${ED}"/usr/share/openvswitch/python || die
 	fi
 
 	keepdir /var/{lib,log}/openvswitch
 	keepdir /etc/ssl/openvswitch
 	fperms 0750 /etc/ssl/openvswitch
 
-	rm -rf "${ED%/}"/var/run || die
+	rm -rf "${ED}"/var/run || die
 
 	newconfd "${FILESDIR}/ovsdb-server_conf2" ovsdb-server
 	newconfd "${FILESDIR}/ovs-vswitchd.confd-r2" ovs-vswitchd
 	newinitd "${FILESDIR}/ovsdb-server-r1" ovsdb-server
 	newinitd "${FILESDIR}/ovs-vswitchd-r1" ovs-vswitchd
 
-	systemd_newunit "${FILESDIR}/ovsdb-server-r3.service" ovsdb-server.service
-	systemd_newunit "${FILESDIR}/ovs-vswitchd-r3.service" ovs-vswitchd.service
-	systemd_newunit rhel/usr_lib_systemd_system_ovs-delete-transient-ports.service ovs-delete-transient-ports.service
-	systemd_newtmpfilesd "${FILESDIR}/openvswitch.tmpfiles" openvswitch.conf
+	if use systemd ; then
+		systemd_newunit "${FILESDIR}/ovsdb-server-r3.service" ovsdb-server.service
+		systemd_newunit "${FILESDIR}/ovs-vswitchd-r3.service" ovs-vswitchd.service
+		systemd_newunit rhel/usr_lib_systemd_system_ovs-delete-transient-ports.service ovs-delete-transient-ports.service
+		newtmpfiles "${FILESDIR}/openvswitch.tmpfiles" openvswitch.conf
+	fi
 
 	insinto /etc/logrotate.d
 	newins rhel/etc_logrotate.d_openvswitch openvswitch
@@ -125,6 +123,8 @@ src_install() {
 pkg_postinst() {
 	use modules && linux-mod_pkg_postinst
 
+	tmpfiles_process openvswitch.conf
+
 	# only needed on non-systemd, but helps anyway
 	elog "Use the following command to create an initial database for ovsdb-server:"
 	elog "   emerge --config =${CATEGORY}/${PF}"
@@ -133,15 +133,15 @@ pkg_postinst() {
 }
 
 pkg_config() {
-	local db="${EROOT%/}"/var/lib/openvswitch/conf.db
+	local db="${EROOT%}"/var/lib/openvswitch/conf.db
 	if [[ -e "${db}" ]] ; then
 		einfo "Database '${db}' already exists, doing schema migration..."
 		einfo "(if the migration fails, make sure that ovsdb-server is not running)"
 		ovsdb-tool convert "${db}" \
-			"${EROOT%/}"/usr/share/openvswitch/vswitch.ovsschema || die "converting database failed"
+			"${EROOT}"/usr/share/openvswitch/vswitch.ovsschema || die "converting database failed"
 	else
 		einfo "Creating new database '${db}'..."
 		ovsdb-tool create "${db}" \
-			"${EROOT%/}"/usr/share/openvswitch/vswitch.ovsschema || die "creating database failed"
+			"${EROOT}"/usr/share/openvswitch/vswitch.ovsschema || die "creating database failed"
 	fi
 }

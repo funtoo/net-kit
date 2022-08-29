@@ -8,7 +8,7 @@ inherit gnome3 user
 
 DESCRIPTION="NetworkManager OpenVPN plugin"
 HOMEPAGE="https://wiki.gnome.org/Projects/NetworkManager"
-SRC_URI="https://gitlab.gnome.org/GNOME/NetworkManager-openvpn/-/archive/1.8.18/NetworkManager-openvpn-1.8.18.tar.gz -> networkmanager-openvpn-1.8.18.tar.gz"
+SRC_URI="https://gitlab.gnome.org/GNOME/NetworkManager-openvpn/-/archive/1.10.0/NetworkManager-openvpn-1.10.0.tar.gz -> networkmanager-openvpn-1.10.0.tar.gz"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="*"

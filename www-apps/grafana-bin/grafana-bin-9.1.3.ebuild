@@ -11,8 +11,8 @@ S=${WORKDIR}/${MY_PN}-${MY_PV}
 DESCRIPTION="Multi-platform analytics and interactive visualization web application"
 HOMEPAGE="https://grafana.org"
 SRC_URI="
-	amd64? ( https://dl.grafana.com/oss/release/grafana-9.1.2.linux-amd64.tar.gz -> grafana-9.1.2.linux-amd64.tar.gz )
-	arm64? ( https://dl.grafana.com/oss/release/grafana-9.1.2.linux-arm64.tar.gz -> grafana-9.1.2.linux-arm64.tar.gz )
+	amd64? ( https://dl.grafana.com/oss/release/grafana-9.1.3.linux-amd64.tar.gz -> grafana-9.1.3.linux-amd64.tar.gz )
+	arm64? ( https://dl.grafana.com/oss/release/grafana-9.1.3.linux-arm64.tar.gz -> grafana-9.1.3.linux-arm64.tar.gz )
 "
 
 LICENSE="AGPL-3"

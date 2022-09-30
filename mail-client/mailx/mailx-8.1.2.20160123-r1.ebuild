@@ -1,9 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils
+inherit eutils flag-o-matic
 
 DP="bsd-${PN}_${PV%.*}-0.${PV##*.}cvs"
 DPT="${DP}.orig.tar.bz2"
@@ -18,7 +17,7 @@ S="${WORKDIR}/${DP/_/-}.orig"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="*"
 IUSE=""
 
 DEPEND=">=net-libs/liblockfile-1.03
@@ -30,13 +29,13 @@ RDEPEND="${DEPEND}
 	!mail-client/nail
 	!net-mail/mailutils"
 
-src_prepare() {
-	eapply "${WORKDIR}/debian/patches"
-	eapply "${FILESDIR}/${PN}-8.1.2.20050715-offsetof.patch"
-	eapply_user
-}
+PATCHES=(
+	"${WORKDIR}/debian/patches"
+	"${FILESDIR}/${PN}-8.1.2.20050715-offsetof.patch"
+)
 
 src_compile() {
+	append-cflags "-fcommon"
 	emake CC=$(tc-getCC) EXTRAFLAGS="${CFLAGS}"
 }
 

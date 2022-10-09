@@ -6,7 +6,7 @@ inherit cmake
 
 DESCRIPTION="Header-only C++ binding for libzmq"
 HOMEPAGE="https://github.com/zeromq/cppzmq"
-SRC_URI="https://github.com/zeromq/cppzmq/tarball/dd663fafd830466d34cba278c2cfd0f92eb67614 -> cppzmq-4.8.1-dd663fa.tar.gz"
+SRC_URI="https://github.com/zeromq/cppzmq/tarball/d67b6352b87a238775cd17e4376b980d07fa7939 -> cppzmq-4.9.0-d67b635.tar.gz"
 
 SLOT="0"
 LICENSE="MIT"

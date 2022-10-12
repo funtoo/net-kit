@@ -8,5 +8,5 @@ RDEPEND=dev-libs/atk dev-libs/expat dev-libs/glib:2 dev-libs/nspr dev-libs/nss m
 RESTRICT=bindist
 SLOT=0
 SRC_URI=https://dl-canary.discordapp.net/apps/linux/0.0.139/discord-canary-0.0.139.deb -> discord-canary-0.0.139.deb
-_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	pax-utils	db85a3c508cf82c45f24b2723791cc93	unpacker	3cd8bad0d31e525cd26be1bfa4e61631	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	pax-utils	db85a3c508cf82c45f24b2723791cc93	unpacker	1cae8d330d7e2eb64488d3a858fdee0b	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
 _md5_=415a60b02a4d02808c40de1d7fe40efd

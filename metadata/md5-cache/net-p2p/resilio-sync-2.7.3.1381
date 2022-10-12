@@ -9,5 +9,5 @@ RDEPEND=acct-user/rslsync virtual/tmpfiles
 RESTRICT=bindist
 SLOT=0
 SRC_URI=amd64? ( http://download-cdn.resilio.com/2.7.3.1381/Debian/resilio-sync_2.7.3.1381-1_amd64.deb ) x86? ( http://download-cdn.resilio.com/2.7.3.1381/Debian/resilio-sync_2.7.3.1381-1_i386.deb ) arm64? ( http://download-cdn.resilio.com/2.7.3.1381/Debian/resilio-sync_2.7.3.1381-1_arm64.deb ) arm? ( http://download-cdn.resilio.com/2.7.3.1381/Debian/resilio-sync_2.7.3.1381-1_armhf.deb )
-_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	pax-utils	db85a3c508cf82c45f24b2723791cc93	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	unpacker	3cd8bad0d31e525cd26be1bfa4e61631
+_eclasses_=multilib	d410501a125f99ffb560b0c523cd3d1e	pax-utils	db85a3c508cf82c45f24b2723791cc93	readme.gentoo-r1	22ae82e140bdd95d17a34fd5fd733190	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	96a7c72c5b059d0b75854baf84950ce3	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	unpacker	1cae8d330d7e2eb64488d3a858fdee0b
 _md5_=c6037dc5730ec4419cbf365595e9c1c0

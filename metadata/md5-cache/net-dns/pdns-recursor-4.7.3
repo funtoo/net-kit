@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig >=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DEFINED_PHASES=configure install postinst preinst prepare setup
+DEPEND=lua_single_target_luajit? ( dev-lang/luajit:= ) lua_single_target_lua5-1? ( dev-lang/lua:5.1 ) lua_single_target_lua5-2? ( dev-lua/lua:5.2 ) lua_single_target_lua5-3? ( dev-lua/lua:5.3 ) lua_single_target_lua5-4? ( dev-lua/lua:5.4 ) dnstap? ( dev-libs/fstrm ) snmp? ( net-analyzer/net-snmp ) sodium? ( dev-libs/libsodium:= ) elibc_glibc? ( arm? ( >=sys-libs/glibc-2.34 ) x86? ( >=sys-libs/glibc-2.34 ) ) dev-libs/openssl:= dev-libs/boost:=[context] sys-apps/shadow
+DESCRIPTION=The PowerDNS Recursor
+EAPI=7
+HOMEPAGE=https://www.powerdns.com/
+IUSE=debug dnstap snmp sodium test lua_single_target_luajit lua_single_target_lua5-1 lua_single_target_lua5-2 lua_single_target_lua5-3 lua_single_target_lua5-4
+KEYWORDS=*
+LICENSE=GPL-2
+RDEPEND=lua_single_target_luajit? ( dev-lang/luajit:= ) lua_single_target_lua5-1? ( dev-lang/lua:5.1 ) lua_single_target_lua5-2? ( dev-lua/lua:5.2 ) lua_single_target_lua5-3? ( dev-lua/lua:5.3 ) lua_single_target_lua5-4? ( dev-lua/lua:5.4 ) dnstap? ( dev-libs/fstrm ) snmp? ( net-analyzer/net-snmp ) sodium? ( dev-libs/libsodium:= ) elibc_glibc? ( arm? ( >=sys-libs/glibc-2.34 ) x86? ( >=sys-libs/glibc-2.34 ) ) dev-libs/openssl:= dev-libs/boost:=[context] !<net-dns/pdns-2.9.20-r1
+REQUIRED_USE=^^ ( lua_single_target_luajit lua_single_target_lua5-1 lua_single_target_lua5-2 lua_single_target_lua5-3 lua_single_target_lua5-4 )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://downloads.powerdns.com/releases/pdns-recursor-4.7.3.tar.bz2 -> pdns-recursor-4.7.3.tar.bz2
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	libtool	f143db5a74ccd9ca28c1234deffede96	lua-single	d51249bd993b9dda6dde2d2276b8dc90	lua-utils	28bbf8186b61ef178869ccad634359d2	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
+_md5_=175565e4593513ac8b1dcc5eed0bafd4

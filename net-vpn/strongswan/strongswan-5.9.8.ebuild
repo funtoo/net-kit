@@ -1,44 +1,52 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
-inherit linux-info systemd user
+inherit linux-info user
 
 DESCRIPTION="IPsec-based VPN solution, supporting IKEv1/IKEv2 and MOBIKE"
 HOMEPAGE="https://www.strongswan.org/"
-SRC_URI="https://download.strongswan.org/${P}.tar.bz2"
+SRC_URI="https://download.strongswan.org/strongswan-5.9.8.tar.bz2 -> strongswan-5.9.8.tar.bz2"
 
 LICENSE="GPL-2 RSA DES"
 SLOT="0"
-KEYWORDS="amd64 arm ppc ~ppc64 x86"
-IUSE="+caps curl +constraints debug dhcp eap farp gcrypt +gmp ldap mysql networkmanager +non-root +openssl selinux sqlite systemd pam pkcs11"
+KEYWORDS="*"
+IUSE="+caps curl +constraints debug dhcp eap farp gcrypt +gmp ldap mysql networkmanager +non-root +openssl selinux sqlite pam pkcs11"
 
-STRONGSWAN_PLUGINS_STD="led lookip systime-fix unity vici"
-STRONGSWAN_PLUGINS_OPT="aesni blowfish ccm chapoly ctr forecast gcm ha ipseckey newhope ntru padlock rdrand save-keys unbound whitelist"
+STRONGSWAN_PLUGINS_STD="gcm led lookip systime-fix unity vici"
+STRONGSWAN_PLUGINS_OPT_DISABLE="kdf"
+STRONGSWAN_PLUGINS_OPT="addrblock aesni blowfish bypass-lan ccm chapoly ctr error-notify forecast
+ha ipseckey newhope ntru padlock rdrand save-keys unbound whitelist
+xauth-noauth"
 for mod in $STRONGSWAN_PLUGINS_STD; do
 	IUSE="${IUSE} +strongswan_plugins_${mod}"
+done
+
+for mod in $STRONGSWAN_PLUGINS_OPT_DISABLE; do
+	IUSE="${IUSE} strongswan_plugins_${mod}"
 done
 
 for mod in $STRONGSWAN_PLUGINS_OPT; do
 	IUSE="${IUSE} strongswan_plugins_${mod}"
 done
 
-COMMON_DEPEND="!net-misc/openswan
+COMMON_DEPEND="
+	dev-libs/glib:2
 	gmp? ( >=dev-libs/gmp-4.1.5:= )
-	gcrypt? ( dev-libs/libgcrypt:0 )
+	gcrypt? ( dev-libs/libgcrypt:= )
 	caps? ( sys-libs/libcap )
 	curl? ( net-misc/curl )
-	ldap? ( net-nds/openldap )
-	openssl? ( >=dev-libs/openssl-0.9.8:=[-bindist] )
+	ldap? ( net-nds/openldap:= )
+	openssl? ( >=dev-libs/openssl-0.9.8:=[-bindist(-)] )
 	mysql? ( dev-db/mysql-connector-c:= )
-	sqlite? ( >=dev-db/sqlite-3.3.1 )
-	systemd? ( sys-apps/systemd )
+	sqlite? ( >=dev-db/sqlite-3.3.1:3 )
 	networkmanager? ( net-misc/networkmanager )
 	pam? ( sys-libs/pam )
-	strongswan_plugins_unbound? ( net-dns/unbound:= net-libs/ldns )"
+	strongswan_plugins_unbound? ( net-dns/unbound:= net-libs/ldns:= )"
+
 DEPEND="${COMMON_DEPEND}
 	virtual/linux-sources
 	sys-kernel/linux-headers"
+
 RDEPEND="${COMMON_DEPEND}
 	virtual/logger
 	sys-apps/iproute2
@@ -95,6 +103,7 @@ pkg_setup() {
 		enewgroup ${UGID}
 		enewuser ${UGID} -1 -1 -1 ${UGID}
 	fi
+
 }
 
 src_configure() {
@@ -126,6 +135,12 @@ src_configure() {
 		fi
 	done
 
+	for mod in $STRONGSWAN_PLUGINS_OPT_DISABLE; do
+		if ! use strongswan_plugins_${mod}; then
+			myconf+=" --disable-${mod}"
+		fi
+	done
+
 	for mod in $STRONGSWAN_PLUGINS_OPT; do
 		if use strongswan_plugins_${mod}; then
 			myconf+=" --enable-${mod}"
@@ -134,10 +149,12 @@ src_configure() {
 
 	econf \
 		--disable-static \
+		--disable-systemd \
 		--enable-ikev1 \
 		--enable-ikev2 \
 		--enable-swanctl \
 		--enable-socket-dynamic \
+		--enable-cmd \
 		$(use_enable curl) \
 		$(use_enable constraints) \
 		$(use_enable ldap) \
@@ -168,10 +185,8 @@ src_configure() {
 		$(use_enable pam xauth-pam) \
 		$(use_enable pkcs11) \
 		$(use_enable sqlite) \
-		$(use_enable systemd) \
 		$(use_with caps capabilities libcap) \
 		--with-piddir=/run \
-		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)" \
 		${myconf}
 }
 
@@ -202,7 +217,7 @@ src_install() {
 		/etc/ipsec.d/private \
 		/etc/ipsec.d/reqs
 
-	dodoc NEWS README TODO || die
+	dodoc NEWS README TODO
 
 	# shared libs are used only internally and there are no static libs,
 	# so it's safe to get rid of the .la files
@@ -272,18 +287,13 @@ pkg_postinst() {
 	if use non-root; then
 		elog
 		elog "${PN} has been installed without superuser privileges (USE=non-root)."
-		elog "This imposes several limitations mainly to the IKEv1 daemon 'pluto'"
-		elog "but also a few to the IKEv2 daemon 'charon'."
+		elog "This imposes a few limitations mainly to the daemon 'charon' in"
+		elog "regards of the use of iptables."
 		elog
-		elog "Please carefully read: http://wiki.strongswan.org/wiki/nonRoot"
+		elog "Please carefully read: http://wiki.strongswan.org/projects/strongswan/wiki/ReducedPrivileges"
 		elog
-		elog "pluto uses a helper script by default to insert/remove routing and"
-		elog "policy rules upon connection start/stop which requires superuser"
-		elog "privileges. charon in contrast does this internally and can do so"
-		elog "even with reduced (user) privileges."
-		elog
-		elog "Thus if you require IKEv1 (pluto) or need to specify a custom updown"
-		elog "script to pluto or charon which requires superuser privileges, you"
+		elog "Thus if you require to specify a custom updown"
+		elog "script to charon which requires superuser privileges, you"
 		elog "can work around this limitation by using sudo to grant the"
 		elog "user \"ipsec\" the appropriate rights."
 		elog "For example (the default case):"
@@ -296,9 +306,9 @@ pkg_postinst() {
 	elog
 	elog "Make sure you have _all_ required kernel modules available including"
 	elog "the appropriate cryptographic algorithms. A list is available at:"
-	elog "  http://wiki.strongswan.org/projects/strongswan/wiki/KernelModules"
+	elog "  https://wiki.strongswan.org/projects/strongswan/wiki/KernelModules"
 	elog
 	elog "The up-to-date manual is available online at:"
-	elog "  http://wiki.strongswan.org/"
+	elog "  https://wiki.strongswan.org/"
 	elog
 }

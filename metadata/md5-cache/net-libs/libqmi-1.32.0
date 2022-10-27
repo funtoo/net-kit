@@ -9,6 +9,6 @@ KEYWORDS=*
 LICENSE=LGPL-2
 RDEPEND=>=dev-libs/glib-2.56 >=dev-libs/libgudev-232 mbim? ( >=net-libs/libmbim-1.18.0 ) qrtr? ( >=net-libs/libqrtr-glib-1.0.0:= )
 SLOT=0/5.8
-SRC_URI=https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/archive/1.30.8/libqmi-1.30.8.tar.bz2 -> libqmi-1.30.8.tar.bz2
+SRC_URI=https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/archive/1.32.0/libqmi-1.32.0.tar.bz2 -> libqmi-1.32.0.tar.bz2
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=32655756993c76315111c733ecd71675
+_md5_=c5fee76cf3209afcb743df7a9d7cb5d5

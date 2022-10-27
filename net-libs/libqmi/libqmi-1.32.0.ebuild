@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="Qualcomm MSM (Mobile Station Modem) Interface (QMI) modem protocol library"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/libqmi/ https://gitlab.freedesktop.org/mobile-broadband/libqmi"
-SRC_URI="https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/archive/1.30.8/libqmi-1.30.8.tar.bz2 -> libqmi-1.30.8.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/archive/1.32.0/libqmi-1.32.0.tar.bz2 -> libqmi-1.32.0.tar.bz2"
 
 LICENSE="LGPL-2"
 SLOT="0/5.8"	# soname of libqmi-glib.so

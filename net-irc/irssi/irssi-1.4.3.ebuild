@@ -11,7 +11,7 @@ MY_P="${P/_/-}"
 
 DESCRIPTION="A modular textUI IRC client with IPv6 support"
 HOMEPAGE="https://irssi.org/"
-SRC_URI="https://github.com/irssi/irssi/releases/download/1.4.2/irssi-1.4.2.tar.xz -> irssi-1.4.2.tar.xz"
+SRC_URI="https://github.com/irssi/irssi/releases/download/1.4.3/irssi-1.4.3.tar.xz -> irssi-1.4.3.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"

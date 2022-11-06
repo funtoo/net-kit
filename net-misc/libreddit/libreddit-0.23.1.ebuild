@@ -182,7 +182,7 @@ KEYWORDS="*"
 src_unpack() {
 	cargo_src_unpack
 	rm -rf ${S}
-	mv ${WORKDIR}/spikecodes-libreddit-* ${S} || die
+	mv ${WORKDIR}/libreddit-libreddit-* ${S} || die
 }
 
 src_install() {

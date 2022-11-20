@@ -1,6 +1,6 @@
 BDEPEND=dev-util/ninja >=dev-util/cmake-3.9.6
 DEFINED_PHASES=compile configure install postinst prepare setup test
-DEPEND=virtual/pkgconfig || ( dev-lang/python:3.10 >=dev-lang/python-2.7.5-r2:2.7 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 >=dev-python/pypy3-7.3.0:0 ) app-arch/bzip2 dev-cpp/websocketpp dev-libs/boost:= dev-libs/leveldb:= dev-libs/libmaxminddb:= dev-libs/openssl:0=[-bindist] net-libs/miniupnpc:= sys-libs/zlib:= virtual/libiconv nat-pmp? ( net-libs/libnatpmp:= ) tbb? ( dev-cpp/tbb:= ) sys-apps/shadow
+DEPEND=virtual/pkgconfig || ( >=dev-lang/python-2.7.5-r2:2.7 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 >=dev-python/pypy3-7.3.0:0 dev-lang/python:3.10 ) app-arch/bzip2 dev-cpp/websocketpp dev-libs/boost:= dev-libs/leveldb:= dev-libs/libmaxminddb:= dev-libs/openssl:0=[-bindist] net-libs/miniupnpc:= sys-libs/zlib:= virtual/libiconv nat-pmp? ( net-libs/libnatpmp:= ) tbb? ( dev-cpp/tbb:= ) sys-apps/shadow
 DESCRIPTION=Cross-platform Direct Connect client
 EAPI=7
 HOMEPAGE=https://airdcpp-web.github.io/

@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install prepare setup test
-DEPEND=>=dev-libs/boost-1.54.0:= >=dev-libs/openssl-1.0.2:= mysql? ( dev-db/mysql-connector-c:= ) test? ( net-misc/curl || ( dev-lang/python:3.10 dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 ) ) sys-devel/make >=dev-util/cmake-3.9.6 virtual/pkgconfig
+DEPEND=>=dev-libs/boost-1.54.0:= >=dev-libs/openssl-1.0.2:= mysql? ( dev-db/mysql-connector-c:= ) test? ( net-misc/curl || ( dev-lang/python:3.8 dev-lang/python:3.9 dev-lang/python:3.7 dev-lang/python:3.10 ) ) sys-devel/make >=dev-util/cmake-3.9.6 virtual/pkgconfig
 DESCRIPTION=An unidentifiable mechanism that helps you bypass GFW
 EAPI=6
 HOMEPAGE=https://github.com/trojan-gfw/trojan

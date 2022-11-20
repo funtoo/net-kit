@@ -1,4 +1,4 @@
-BDEPEND=|| ( ( dev-lang/python:3.10 dev-util/scons[python_targets_python3_10(-),python_single_target_python3_10(+)] ) ( dev-lang/python:3.8 dev-util/scons[python_targets_python3_8(-),python_single_target_python3_8(+)] ) ( dev-lang/python:3.9 dev-util/scons[python_targets_python3_9(-),python_single_target_python3_9(+)] ) ( dev-lang/python:3.7 dev-util/scons[python_targets_python3_7(-),python_single_target_python3_7(+)] ) )
+BDEPEND=|| ( ( dev-lang/python:3.8 dev-util/scons[python_targets_python3_8(-),python_single_target_python3_8(+)] ) ( dev-lang/python:3.9 dev-util/scons[python_targets_python3_9(-),python_single_target_python3_9(+)] ) ( dev-lang/python:3.7 dev-util/scons[python_targets_python3_7(-),python_single_target_python3_7(+)] ) ( dev-lang/python:3.10 dev-util/scons[python_targets_python3_10(-),python_single_target_python3_10(+)] ) )
 DEFINED_PHASES=compile install prepare setup test
 DEPEND=dev-libs/apr:1= dev-libs/apr-util:1= !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) sys-libs/zlib:0= kerberos? ( virtual/krb5 ) >=dev-util/scons-2.3.0
 DESCRIPTION=HTTP client library

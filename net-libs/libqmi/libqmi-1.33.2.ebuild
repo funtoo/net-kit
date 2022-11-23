@@ -6,7 +6,7 @@ inherit meson
 
 DESCRIPTION="Qualcomm MSM (Mobile Station Modem) Interface (QMI) modem protocol library"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/libqmi/ https://gitlab.freedesktop.org/mobile-broadband/libqmi"
-SRC_URI="https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/archive/1.33.1/libqmi-1.33.1.tar.bz2 -> libqmi-1.33.1.tar.bz2"
+SRC_URI="https://gitlab.freedesktop.org/mobile-broadband/libqmi/-/archive/1.33.2/libqmi-1.33.2.tar.bz2 -> libqmi-1.33.2.tar.bz2"
 
 LICENSE="LGPL-2"
 SLOT="0/5.8"	# soname of libqmi-glib.so

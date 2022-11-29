@@ -10,4 +10,4 @@ RESTRICT=bindist
 SLOT=0
 SRC_URI=https://dl.discordapp.net/apps/linux/0.0.21/discord-0.0.21.deb -> discord-0.0.21.deb
 _eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	pax-utils	db85a3c508cf82c45f24b2723791cc93	unpacker	1cae8d330d7e2eb64488d3a858fdee0b	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=9eda1e80a5b3a4eeba5ceb318345502d
+_md5_=413712ee1da3e42080403f2c7a643bc7

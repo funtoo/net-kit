@@ -9,4 +9,4 @@ RESTRICT=bindist
 SLOT=0
 SRC_URI=https://dl-canary.discordapp.net/apps/linux/0.0.143/discord-canary-0.0.143.deb -> discord-canary-0.0.143.deb
 _eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	pax-utils	db85a3c508cf82c45f24b2723791cc93	unpacker	1cae8d330d7e2eb64488d3a858fdee0b	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=b4b80f5fdc8c163165d2c2c984291081
+_md5_=4b1b6e20331628a73c898212adf8c63d

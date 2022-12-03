@@ -7,7 +7,7 @@ inherit autotools python-r1 systemd tmpfiles
 
 DESCRIPTION="Production quality, multilayer virtual switch"
 HOMEPAGE="https://www.openvswitch.org"
-SRC_URI="https://www.openvswitch.org/releases/openvswitch-2.13.9.tar.gz -> openvswitch-2.13.9.tar.gz"
+SRC_URI="https://www.openvswitch.org/releases/openvswitch-3.0.2.tar.gz -> openvswitch-3.0.2.tar.gz"
 
 LICENSE="Apache-2.0 GPL-2"
 SLOT="0"
@@ -26,16 +26,11 @@ DEPEND="${RDEPEND}
 	sys-apps/util-linux[caps]"
 BDEPEND="virtual/pkgconfig"
 
-PATCHES="
-	"${FILESDIR}/xcp-interface-reconfigure-2.3.2.patch"
-"
-
 CONFIG_CHECK="~NET_CLS_ACT ~NET_CLS_U32 ~NET_SCH_INGRESS ~NET_ACT_POLICE ~IPV6 ~TUN"
 MODULE_NAMES="openvswitch(net:${S}/datapath/linux)"
 BUILD_TARGETS="all"
 
 src_prepare() {
-	sed -i -e '/^SUBDIRS/d' datapath/Makefile.in || die "sed failed"
 	eautoreconf
 	default
 }

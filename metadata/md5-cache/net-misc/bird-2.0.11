@@ -8,5 +8,5 @@ KEYWORDS=*
 LICENSE=GPL-2
 RDEPEND=client? ( sys-libs/ncurses ) client? ( sys-libs/readline )
 SLOT=0
-SRC_URI=https://bird.network.cz/download/bird-2.0.9.tar.gz -> bird-2.0.9.tar.gz
-_md5_=250d24b3d0bedd4d8305393f3ac670b4
+SRC_URI=https://bird.network.cz/download/bird-2.0.11.tar.gz -> bird-2.0.11.tar.gz
+_md5_=89ad4bdd0ddb69292461ab92f547e1d5

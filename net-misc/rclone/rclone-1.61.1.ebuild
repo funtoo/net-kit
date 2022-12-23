@@ -1556,7 +1556,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.61.0/rclone-v1.61.0.tar.gz -> rclone-v1.61.0.tar.gz
+SRC_URI="https://github.com/rclone/rclone/releases/download/v1.61.1/rclone-v1.61.1.tar.gz -> rclone-v1.61.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 

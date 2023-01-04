@@ -4,15 +4,14 @@ EAPI=7
 
 CRATES="
 adler32-1.2.0
-aho-corasick-0.7.19
+aho-corasick-0.7.20
 alloc-no-stdlib-2.0.4
 alloc-stdlib-0.2.2
 askama-0.11.1
 askama_derive-0.11.2
 askama_escape-0.10.3
 askama_shared-0.12.2
-async-recursion-1.0.0
-async-trait-0.1.58
+async-trait-0.1.59
 async_once-0.2.6
 autocfg-1.1.0
 base64-0.13.1
@@ -22,13 +21,13 @@ brotli-3.3.4
 brotli-decompressor-2.3.2
 bstr-0.2.17
 bumpalo-3.11.1
-bytes-1.2.1
+bytes-1.3.0
 cached-0.40.0
 cached_proc_macro-0.15.0
 cached_proc_macro_types-0.1.0
-cc-1.0.76
+cc-1.0.77
 cfg-if-1.0.0
-clap-4.0.24
+clap-4.0.29
 clap_lex-0.3.0
 cookie-0.16.1
 core-foundation-0.9.3
@@ -39,10 +38,11 @@ crypto-common-0.1.6
 darling-0.13.4
 darling_core-0.13.4
 darling_macro-0.13.4
-digest-0.10.5
+digest-0.10.6
 fastrand-1.8.0
 fnv-1.0.7
 form_urlencoded-1.1.0
+fs_extra-1.2.0
 futures-0.3.25
 futures-channel-0.3.25
 futures-core-0.3.25
@@ -62,15 +62,15 @@ http-body-0.4.5
 httparse-1.8.0
 httpdate-1.0.2
 hyper-0.14.23
-hyper-rustls-0.23.0
+hyper-rustls-0.23.2
 ident_case-1.0.1
 idna-0.3.0
-indexmap-1.9.1
+indexmap-1.9.2
 instant-0.1.12
 itoa-1.0.4
 js-sys-0.3.60
 lazy_static-1.4.0
-libc-0.2.137
+libc-0.2.138
 libflate-1.2.0
 libflate_lz77-1.1.0
 lipsum-0.8.2
@@ -85,15 +85,16 @@ nom-7.1.1
 num_cpus-1.14.0
 once_cell-1.16.0
 openssl-probe-0.1.5
-os_str_bytes-6.4.0
+os_str_bytes-6.4.1
 parking-2.0.0
 parking_lot-0.12.1
-parking_lot_core-0.9.4
+parking_lot_core-0.9.5
 percent-encoding-2.2.0
 pin-project-lite-0.2.9
 pin-utils-0.1.0
 ppv-lite86-0.2.17
 proc-macro2-1.0.47
+quick-error-1.2.3
 quote-1.0.21
 rand-0.8.5
 rand_chacha-0.3.1
@@ -101,6 +102,7 @@ rand_core-0.6.4
 redox_syscall-0.2.16
 regex-1.7.0
 regex-syntax-0.6.28
+remove_dir_all-0.5.3
 ring-0.16.20
 rle-decode-fast-1.0.3
 route-recognizer-0.3.1
@@ -110,16 +112,19 @@ rust-embed-utils-7.3.0
 rustls-0.20.7
 rustls-native-certs-0.6.2
 rustls-pemfile-1.0.1
+rusty-forkfork-0.4.0
 ryu-1.0.11
 same-file-1.0.6
 schannel-0.1.20
 scopeguard-1.1.0
 sct-0.7.0
+sealed_test-1.0.0
+sealed_test_derive-1.0.0
 security-framework-2.7.0
 security-framework-sys-2.6.1
-serde-1.0.147
-serde_derive-1.0.147
-serde_json-1.0.87
+serde-1.0.149
+serde_derive-1.0.149
+serde_json-1.0.89
 sha2-0.10.6
 signal-hook-registry-1.4.0
 slab-0.4.7
@@ -127,7 +132,8 @@ smallvec-1.10.0
 socket2-0.4.7
 spin-0.5.2
 strsim-0.10.0
-syn-1.0.103
+syn-1.0.105
+tempfile-3.3.0
 thiserror-1.0.37
 thiserror-impl-1.0.37
 time-0.3.17
@@ -135,15 +141,16 @@ time-core-0.1.0
 time-macros-0.2.6
 tinyvec-1.6.0
 tinyvec_macros-0.1.0
-tokio-1.21.2
-tokio-macros-1.8.0
+tokio-1.23.0
+tokio-macros-1.8.2
 tokio-rustls-0.23.4
 tokio-util-0.7.4
+toml-0.5.9
 tower-service-0.3.2
 tracing-0.1.37
 tracing-core-0.1.30
 try-lock-0.2.3
-typenum-1.15.0
+typenum-1.16.0
 unicase-2.6.0
 unicode-bidi-0.3.8
 unicode-ident-1.0.5
@@ -151,6 +158,7 @@ unicode-normalization-0.1.22
 untrusted-0.7.1
 url-2.3.1
 version_check-0.9.4
+wait-timeout-0.2.0
 waker-fn-1.1.0
 walkdir-2.3.2
 want-0.3.0
@@ -186,7 +194,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.25.2 -> libreddit-v0.25.2.tar.gz
+SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.27.0 -> libreddit-v0.27.0.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

@@ -1,11 +1,8 @@
-# Copyright 1999-2005 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-
 # owner of amuleweb process (must be existing)
-AMULEUSER="p2p"
+AMULEUSER="amule"
 
 # home directory for amuleweb (from where to read configuration) (must be existing)
-AMULEHOME="/home/p2p"
+AMULEHOME="/var/lib/amule"
 
 # log file (/dev/null for nowhere)
 LOG=/var/log/amuleweb.log

@@ -141,7 +141,7 @@ time-core-0.1.0
 time-macros-0.2.6
 tinyvec-1.6.0
 tinyvec_macros-0.1.0
-tokio-1.23.0
+tokio-1.23.1
 tokio-macros-1.8.2
 tokio-rustls-0.23.4
 tokio-util-0.7.4
@@ -194,7 +194,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.27.0 -> libreddit-v0.27.0.tar.gz
+SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.27.1 -> libreddit-v0.27.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

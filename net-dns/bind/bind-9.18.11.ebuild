@@ -14,7 +14,7 @@ RRL_PV="${MY_PV}"
 
 DESCRIPTION="Berkeley Internet Name Domain - Name Server"
 HOMEPAGE="https://www.isc.org/software/bind"
-SRC_URI="https://downloads.isc.org/isc/bind9/9.18.10/bind-9.18.10.tar.xz -> bind-9.18.10.tar.xz
+SRC_URI="https://downloads.isc.org/isc/bind9/9.18.11/bind-9.18.11.tar.xz -> bind-9.18.11.tar.xz
 	doc? ( https://distfiles.gentoo.org/distfiles/dyndns-samples.tbz2 -> dyndns-samples.tbz2 )"
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"

@@ -495,7 +495,7 @@ go-module_set_globals
 
 DESCRIPTION="Open Source Continuous File Synchronization"
 HOMEPAGE="https://github.com/syncthing/syncthing"
-SRC_URI="https://api.github.com/repos/syncthing/syncthing/tarball/v1.23.0 -> syncthing-v1.23.0.tar.gz
+SRC_URI="https://api.github.com/repos/syncthing/syncthing/tarball/v1.23.1 -> syncthing-v1.23.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0 Unlicense"

@@ -6,7 +6,7 @@ inherit autotools flag-o-matic user systemd linux-info tmpfiles
 
 DESCRIPTION="Robust and highly flexible tunneling application compatible with many OSes"
 
-SRC_URI="https://github.com/OpenVPN/openvpn/archive/9c08cfacc470152e8ac2a774713c6fc1d8683e27.tar.gz -> openvpn-2.5.8-9c08cfa.tar.gz"
+SRC_URI="https://github.com/OpenVPN/openvpn/archive/029d561ca9f8f560cb2007b650ebfb28a2c8dc8d.tar.gz -> openvpn-2.5.9-029d561.tar.gz"
 HOMEPAGE="https://openvpn.net/"
 
 LICENSE="GPL-2"
@@ -54,7 +54,7 @@ pkg_setup()  {
 
 src_unpack() {
     default
-    mv "openvpn-9c08cfacc470152e8ac2a774713c6fc1d8683e27" "${S}" || die
+    mv "openvpn-029d561ca9f8f560cb2007b650ebfb28a2c8dc8d" "${S}" || die
 }
 
 src_prepare() {

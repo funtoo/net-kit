@@ -10,6 +10,6 @@ LICENSE=GPL-2
 RDEPEND=kernel_linux? ( iproute2? ( sys-apps/iproute2[-minimal] ) ) lz4? ( app-arch/lz4 ) lzo? ( >=dev-libs/lzo-1.07 ) mbedtls? ( net-libs/mbedtls:= ) openssl? ( >=dev-libs/openssl-0.9.8:0= ) pam? ( sys-libs/pam ) pkcs11? ( >=dev-libs/pkcs11-helper-1.11 ) systemd? ( sys-apps/systemd ) dev-python/docutils selinux? ( sec-policy/selinux-openvpn ) virtual/tmpfiles
 REQUIRED_USE=static? ( !plugins !pkcs11 ) pkcs11? ( !mbedtls ) !plugins? ( !pam !down-root ) inotify? ( plugins )
 SLOT=0
-SRC_URI=https://github.com/OpenVPN/openvpn/archive/9c08cfacc470152e8ac2a774713c6fc1d8683e27.tar.gz -> openvpn-2.5.8-9c08cfa.tar.gz
+SRC_URI=https://github.com/OpenVPN/openvpn/archive/029d561ca9f8f560cb2007b650ebfb28a2c8dc8d.tar.gz -> openvpn-2.5.9-029d561.tar.gz
 _eclasses_=autotools	5223f703a2e9c194fcda924f8c4b6baf	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	tmpfiles	6f14f7c8fb6f63585daa89581247c82c	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	user	875055ddd565382c728563992ae3abf7
-_md5_=098d0a89daa6109ee473a82f0af325ba
+_md5_=6caa65cba113bc0def7f41407f9d5bab

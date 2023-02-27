@@ -40,6 +40,8 @@ darling-0.14.2
 darling_core-0.14.2
 darling_macro-0.14.2
 digest-0.10.6
+errno-0.2.8
+errno-dragonfly-0.1.2
 fastrand-1.8.0
 fnv-1.0.7
 form_urlencoded-1.1.0
@@ -69,12 +71,14 @@ ident_case-1.0.1
 idna-0.3.0
 indexmap-1.9.2
 instant-0.1.12
+io-lifetimes-1.0.5
 itoa-1.0.5
 js-sys-0.3.60
 lazy_static-1.4.0
 libc-0.2.139
 libflate-1.2.0
 libflate_lz77-1.1.0
+linux-raw-sys-0.1.4
 lipsum-0.8.2
 lock_api-0.4.9
 log-0.4.17
@@ -105,13 +109,13 @@ rand_core-0.6.4
 redox_syscall-0.2.16
 regex-1.7.1
 regex-syntax-0.6.28
-remove_dir_all-0.5.3
 ring-0.16.20
 rle-decode-fast-1.0.3
 route-recognizer-0.3.1
 rust-embed-6.4.2
 rust-embed-impl-6.3.1
 rust-embed-utils-7.3.0
+rustix-0.36.8
 rustls-0.20.8
 rustls-native-certs-0.6.2
 rustls-pemfile-1.0.2
@@ -137,7 +141,7 @@ socket2-0.4.7
 spin-0.5.2
 strsim-0.10.0
 syn-1.0.107
-tempfile-3.3.0
+tempfile-3.4.0
 thiserror-1.0.38
 thiserror-impl-1.0.38
 time-0.3.17
@@ -180,6 +184,8 @@ winapi-i686-pc-windows-gnu-0.4.0
 winapi-util-0.1.5
 winapi-x86_64-pc-windows-gnu-0.4.0
 windows-sys-0.42.0
+windows-sys-0.45.0
+windows-targets-0.42.1
 windows_aarch64_gnullvm-0.42.1
 windows_aarch64_msvc-0.42.1
 windows_i686_gnu-0.42.1
@@ -193,7 +199,7 @@ inherit cargo
 
 DESCRIPTION="An alternative private front-end to Reddit"
 HOMEPAGE="https://github.com/spikecodes/libreddit"
-SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.29.3 -> libreddit-v0.29.3.tar.gz
+SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.29.4 -> libreddit-v0.29.4.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
 LICENSE="GPL3"

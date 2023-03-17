@@ -1,36 +1,34 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit flag-o-matic multilib multilib-minimal autotools pam java-pkg-opt-2 db-use systemd eapi7-ver
+inherit flag-o-matic autotools pam java-pkg-opt-2 db-use systemd
 
 SASLAUTHD_CONF_VER="2.1.26"
 
 DESCRIPTION="The Cyrus SASL (Simple Authentication and Security Layer)"
 HOMEPAGE="https://www.cyrusimap.org/sasl/"
-#SRC_URI="ftp://ftp.cyrusimap.org/cyrus-sasl/${P}.tar.gz"
 SRC_URI="https://github.com/cyrusimap/${PN}/releases/download/${P}/${P}.tar.gz"
 
 LICENSE="BSD-with-attribution"
 SLOT="2"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="*"
 IUSE="authdaemond berkdb gdbm kerberos ldapdb libressl openldap mysql pam postgres sample selinux sqlite srp ssl static-libs urandom"
 
 CDEPEND="
 	net-mail/mailbase
 	authdaemond? ( || ( net-mail/courier-imap mail-mta/courier ) )
-	berkdb? ( >=sys-libs/db-4.8.30-r1:=[${MULTILIB_USEDEP}] )
-	gdbm? ( >=sys-libs/gdbm-1.10-r1:=[${MULTILIB_USEDEP}] )
-	kerberos? ( >=virtual/krb5-0-r1[${MULTILIB_USEDEP}] )
-	openldap? ( >=net-nds/openldap-2.4.38-r1[${MULTILIB_USEDEP}] )
-	mysql? ( dev-db/mysql-connector-c:0=[${MULTILIB_USEDEP}] )
-	pam? ( >=virtual/pam-0-r1[${MULTILIB_USEDEP}] )
+	berkdb? ( >=sys-libs/db-4.8.30-r1:= )
+	gdbm? ( >=sys-libs/gdbm-1.10-r1:= )
+	kerberos? ( >=virtual/krb5-0-r1 )
+	openldap? ( >=net-nds/openldap-2.4.38-r1 )
+	mysql? ( dev-db/mysql-connector-c:0= )
+	pam? ( >=virtual/pam-0-r1 )
 	postgres? ( dev-db/postgresql:* )
-	sqlite? ( >=dev-db/sqlite-3.8.2:3[${MULTILIB_USEDEP}] )
+	sqlite? ( >=dev-db/sqlite-3.8.2:3 )
 	ssl? (
-		!libressl? ( >=dev-libs/openssl-1.0.1h-r2:0=[${MULTILIB_USEDEP}] )
-		libressl? ( dev-libs/libressl:=[${MULTILIB_USEDEP}] )
+		!libressl? ( >=dev-libs/openssl-1.0.1h-r2:0= )
+		libressl? ( dev-libs/libressl:= )
 	)
 	java? ( >=virtual/jdk-1.6:= )"
 
@@ -42,10 +40,6 @@ RDEPEND="
 
 DEPEND="${CDEPEND}"
 
-MULTILIB_WRAPPED_HEADERS=(
-	/usr/include/sasl/md5global.h
-)
-
 PATCHES=(
 	"${FILESDIR}/${PN}-2.1.27-avoid_pic_overwrite.patch"
 	"${FILESDIR}/${PN}-2.1.27-autotools_fixes.patch"
@@ -55,6 +49,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.1.26-missing-size_t.patch"
 	"${FILESDIR}/${PN}-2.1.27-doc_build_fix.patch"
 	"${FILESDIR}/${PN}-2.1.27-memmem.patch"
+	"${FILESDIR}/${PN}-2.1.27-fix-gdbm_errno-overlay-from-gdbm_close.patch" # FL-6009
 )
 
 pkg_setup() {
@@ -91,12 +86,8 @@ src_configure() {
 		append-cppflags -D_XOPEN_SOURCE -D_XOPEN_SOURCE_EXTENDED -D_BSD_SOURCE -DLDAP_DEPRECATED
 	fi
 
-	multilib-minimal_src_configure
-}
-
-multilib_src_configure() {
 	# Java support.
-	multilib_is_native_abi && use java && export JAVAC="${JAVAC} ${JAVACFLAGS}"
+	use java && export JAVAC="${JAVAC} ${JAVACFLAGS}"
 
 	local myeconfargs=(
 		--enable-login
@@ -117,12 +108,9 @@ multilib_src_configure() {
 		$(use_with pam)
 		$(use_with openldap ldap)
 		$(use_enable ldapdb)
-		$(multilib_native_use_enable sample)
+		$(use_enable sample)
 		$(use_enable kerberos gssapi)
-		$(multilib_native_use_enable java)
-		$(multilib_native_use_with mysql mysql "${EPREFIX}"/usr)
-		$(multilib_native_use_with postgres pgsql "${EPREFIX}"/usr/$(get_libdir)/postgresql)
-		$(use_with sqlite sqlite3 "${EPREFIX}"/usr/$(get_libdir))
+		$(use_enable java)
 		$(use_enable srp)
 		$(use_enable static-libs static)
 
@@ -136,7 +124,7 @@ multilib_src_configure() {
 		$(usex urandom --with-devrandom=/dev/urandom '')
 	)
 
-	if use sqlite || { multilib_is_native_abi && { use mysql || use postgres; }; } ; then
+	if use sqlite || { use mysql || use postgres; } ; then
 		myeconfargs+=( --enable-sql )
 	else
 		myeconfargs+=( --disable-sql )
@@ -160,45 +148,41 @@ multilib_src_configure() {
 	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
 }
 
-multilib_src_compile() {
+src_compile() {
 	emake
 
 	# Default location for java classes breaks OpenOffice (bug #60769).
 	# Thanks to axxo@gentoo.org for the solution.
-	if multilib_is_native_abi && use java ; then
+	if use java ; then
 		jar -cvf ${PN}.jar -C java $(find java -name "*.class")
 	fi
 }
 
-multilib_src_install() {
+src_install() {
 	default
 
-	if multilib_is_native_abi; then
-		if use sample ; then
-			docinto sample
-			dodoc "${S}"/sample/*.c
-			exeinto /usr/share/doc/${P}/sample
-			doexe sample/client sample/server
-		fi
-
-		# Default location for java classes breaks OpenOffice (bug #60769).
-		if use java; then
-			java-pkg_dojar ${PN}.jar
-			java-pkg_regso "${ED}/usr/$(get_libdir)/libjavasasl$(get_libname)"
-			# hackish, don't wanna dig through makefile
-			rm -rf "${ED}/usr/$(get_libdir)/java" || die
-			docinto "java"
-			dodoc "${S}/java/README" "${FILESDIR}/java.README.gentoo" "${S}"/java/doc/*
-			dodir "/usr/share/doc/${PF}/java/Test"
-			insinto "/usr/share/doc/${PF}/java/Test"
-			doins "${S}"/java/Test/*.java
-		fi
-
-		dosbin saslauthd/testsaslauthd
+	if use sample ; then
+		docinto sample
+		dodoc "${S}"/sample/*.c
+		exeinto /usr/share/doc/${P}/sample
+		doexe sample/client sample/server
 	fi
-}
 
-multilib_src_install_all() {
+	# Default location for java classes breaks OpenOffice (bug #60769).
+	if use java; then
+		java-pkg_dojar ${PN}.jar
+		java-pkg_regso "${ED}/usr/$(get_libdir)/libjavasasl$(get_libname)"
+		# hackish, don't wanna dig through makefile
+		rm -rf "${ED}/usr/$(get_libdir)/java" || die
+		docinto "java"
+		dodoc "${S}/java/README" "${FILESDIR}/java.README.gentoo" "${S}"/java/doc/*
+		dodir "/usr/share/doc/${PF}/java/Test"
+		insinto "/usr/share/doc/${PF}/java/Test"
+		doins "${S}"/java/Test/*.java
+	fi
+
+	dosbin saslauthd/testsaslauthd
+
 	doman man/*
 
 	keepdir /etc/sasl2

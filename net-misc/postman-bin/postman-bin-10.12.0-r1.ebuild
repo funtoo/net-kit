@@ -8,7 +8,7 @@ MY_PN="${PN/-bin/}"
 
 DESCRIPTION="Supercharge your API workflow"
 HOMEPAGE="https://www.postman.com"
-SRC_URI="{{artifacts[0].src_uri}}"
+SRC_URI="https://dl.pstmn.io/download/version/10.12.0/linux64 -> postman-bin-10.12.0.tar.gz"
 
 LICENSE="MPL-2.0"
 SLOT="0"

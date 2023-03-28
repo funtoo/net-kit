@@ -23,11 +23,9 @@
 =net-misc/httpie-0.9.4 python_single_target_python2_7
 =net-misc/omniORB-4.1.4-r2 python_single_target_python2_7
 =net-misc/omniORB-4.2.1_p2 python_single_target_python2_7
-=net-misc/pyhoca-cli-0.5.0.4 python_single_target_python2_7
 =net-misc/python-x2go-0.5.0.6 python_single_target_python2_7
 =net-misc/s3cmd-1.6.1 python_single_target_python2_7
 =net-p2p/bittornado-0.3.18-r4 python_single_target_python2_7
-=net-wireless/chirp-20221217 python_single_target_python2_7
 mail-client/alot python_single_target_python2_7
 mail-filter/spambayes python_single_target_python2_7
 mail-filter/tmda python_single_target_python2_7
@@ -68,7 +66,6 @@ net-mail/offlineimap python_single_target_python2_7
 net-mail/queue-repair python_single_target_python2_7
 net-misc/charm python_single_target_python2_7
 net-misc/chrome-remote-desktop python_single_target_python2_7
-net-misc/connman-notify python_single_target_python2_7
 net-misc/dropbox-cli python_single_target_python2_7
 net-misc/gsutil python_single_target_python2_7
 net-misc/hblink python_single_target_python2_7
@@ -77,14 +74,12 @@ net-misc/livestreamer python_single_target_python2_7
 net-misc/pssh python_single_target_python2_7
 net-misc/pulseaudio-dlna python_single_target_python2_7
 net-misc/pycnb python_single_target_python2_7
-net-misc/pyhoca-gui python_single_target_python2_7
 net-misc/pytvshows python_single_target_python2_7
 net-misc/ris-linux python_single_target_python2_7
 net-misc/seafile python_single_target_python2_7
 net-misc/switzerland python_single_target_python2_7
 net-misc/usbip python_single_target_python2_7
 net-misc/vde python_single_target_python2_7
-net-misc/wicd python_single_target_python2_7
 net-nds/nsscache python_single_target_python2_7
 net-news/rawdog python_single_target_python2_7
 net-nntp/sabnzbd python_single_target_python2_7

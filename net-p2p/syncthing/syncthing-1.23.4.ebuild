@@ -321,14 +321,13 @@ go-module_set_globals
 
 DESCRIPTION="Open Source Continuous File Synchronization"
 HOMEPAGE="https://github.com/syncthing/syncthing"
-SRC_URI="https://github.com/syncthing/syncthing/tarball/4a8c691aef82b773887c15fc4b1d08d3b4352c9b -> syncthing-1.23.4-4a8c691.tar.gz
+SRC_URI="https://api.github.com/repos/syncthing/syncthing/tarball/v1.23.4 -> syncthing-v1.23.4.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0 Unlicense"
 SLOT="0"
 KEYWORDS="*"
 IUSE="tools"
-S="${WORKDIR}/syncthing-syncthing-4a8c691"
 
 DEPEND=">=dev-lang/go-1.17"
 
@@ -352,6 +351,12 @@ pkg_setup() {
 		keepdir /var/lib/strelaysrv
 		fowners strelaysrv:strelaysrv /var/lib/strelaysrv
 	fi
+}
+
+src_unpack() {
+	go-module_src_unpack
+	rm -rf ${S}
+	mv ${WORKDIR}/syncthing-syncthing-* ${S} || die
 }
 
 src_prepare() {

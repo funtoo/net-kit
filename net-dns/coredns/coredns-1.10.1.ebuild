@@ -513,7 +513,7 @@ go-module_set_globals
 
 DESCRIPTION="CoreDNS is a DNS server/forwarder, written in Go, that chains plugins"
 HOMEPAGE="https://coredns.io/ https://github.com/coredns/coredns"
-SRC_URI="https://github.com/coredns/coredns/tarball/055b2c31a9cf28321734e5f71613ea080d216cd3 -> coredns-1.10.1-055b2c3.tar.gz
+SRC_URI="https://api.github.com/repos/coredns/coredns/tarball/v1.10.1 -> coredns-v1.10.1.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="Apache-2.0"
@@ -523,7 +523,13 @@ KEYWORDS="*"
 DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=">=dev-lang/go-1.17"
-S="${WORKDIR}/coredns-coredns-055b2c3"
+
+src_unpack() {
+	go-module_src_unpack
+	GITCOMMIT=$(ls -1 ${WORKDIR}/ | cut -d- -f3)
+	rm -rf ${S}
+	mv ${WORKDIR}/coredns-coredns-* ${S} || die
+}
 
 src_compile() {
 	CGO_ENABLE=0 go build -ldflags="-s -w -X github.com/coredns/coredns/coremain.GitCommit=${GITCOMMIT}" -o "${PN}" || die "compile failed"

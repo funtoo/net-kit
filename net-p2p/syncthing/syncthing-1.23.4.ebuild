@@ -321,14 +321,14 @@ go-module_set_globals
 
 DESCRIPTION="Open Source Continuous File Synchronization"
 HOMEPAGE="https://github.com/syncthing/syncthing"
-SRC_URI="https://github.com/syncthing/syncthing/tarball/e8dafb979cd3d8a1e35dcf3ca472c59531c8662b -> syncthing-1.23.3-e8dafb9.tar.gz
+SRC_URI="https://github.com/syncthing/syncthing/tarball/4a8c691aef82b773887c15fc4b1d08d3b4352c9b -> syncthing-1.23.4-4a8c691.tar.gz
 	${EGO_SUM_SRC_URI}"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0 Unlicense"
 SLOT="0"
 KEYWORDS="*"
 IUSE="tools"
-S="${WORKDIR}/syncthing-syncthing-e8dafb9"
+S="${WORKDIR}/syncthing-syncthing-4a8c691"
 
 DEPEND=">=dev-lang/go-1.17"
 

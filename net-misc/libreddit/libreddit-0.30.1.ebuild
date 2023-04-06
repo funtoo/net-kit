@@ -202,7 +202,7 @@ HOMEPAGE="https://github.com/spikecodes/libreddit"
 SRC_URI="https://api.github.com/repos/libreddit/libreddit/tarball/v0.30.1 -> libreddit-v0.30.1.tar.gz
 	$(cargo_crate_uris ${CRATES})"
 
-LICENSE="GPL3"
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="*"
 

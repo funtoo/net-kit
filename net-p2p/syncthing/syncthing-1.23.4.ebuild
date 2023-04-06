@@ -321,13 +321,14 @@ go-module_set_globals
 
 DESCRIPTION="Open Source Continuous File Synchronization"
 HOMEPAGE="https://github.com/syncthing/syncthing"
-SRC_URI="https://api.github.com/repos/syncthing/syncthing/tarball/v1.23.4 -> syncthing-v1.23.4.tar.gz
-	${EGO_SUM_SRC_URI}"
+SRC_URI="https://github.com/syncthing/syncthing/tarball/4a8c691aef82b773887c15fc4b1d08d3b4352c9b -> syncthing-1.23.4-4a8c691.tar.gz
+https://direct.funtoo.org/94/2a/aa/942aaa81a146a8fdc90b32ca6d6af6ccfceaf4f1defef63b98859d6c94ea27a039a4fa0be1fe6c8966633529105af7f593e74805db6877d84eab5266390e9073 -> syncthing-1.23.4-funtoo-go-bundle-cc2cdd3a7362982cbb07f3973b720bad9732d03127e3b406ed1fdf5fe793a4316a657ea32d1319d3715606002d4780ab797cef16702bb5b283836f9b8ab34268.tar.gz"
 
 LICENSE="Apache-2.0 BSD BSD-2 ISC MIT MPL-2.0 Unlicense"
 SLOT="0"
 KEYWORDS="*"
 IUSE="tools"
+S="${WORKDIR}/syncthing-syncthing-4a8c691"
 
 DEPEND=">=dev-lang/go-1.17"
 
@@ -351,12 +352,6 @@ pkg_setup() {
 		keepdir /var/lib/strelaysrv
 		fowners strelaysrv:strelaysrv /var/lib/strelaysrv
 	fi
-}
-
-src_unpack() {
-	go-module_src_unpack
-	rm -rf ${S}
-	mv ${WORKDIR}/syncthing-syncthing-* ${S} || die
 }
 
 src_prepare() {

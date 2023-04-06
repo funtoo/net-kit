@@ -45,29 +45,29 @@ EGO_SUM=(
 	"cloud.google.com/go/storage v1.8.0/go.mod"
 	"cloud.google.com/go/storage v1.10.0/go.mod"
 	"dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod"
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore v1.4.0"
-	"github.com/Azure/azure-sdk-for-go/sdk/azcore v1.4.0/go.mod"
-	"github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.2.2"
-	"github.com/Azure/azure-sdk-for-go/sdk/azidentity v1.2.2/go.mod"
-	"github.com/Azure/azure-sdk-for-go/sdk/internal v1.2.0"
-	"github.com/Azure/azure-sdk-for-go/sdk/internal v1.2.0/go.mod"
-	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.0.0"
-	"github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.0.0/go.mod"
-	"github.com/Azure/go-ntlmssp v0.0.0-20221128193559-754e69321358"
-	"github.com/Azure/go-ntlmssp v0.0.0-20221128193559-754e69321358/go.mod"
-	"github.com/AzureAD/microsoft-authentication-library-for-go v0.9.0"
-	"github.com/AzureAD/microsoft-authentication-library-for-go v0.9.0/go.mod"
-	"github.com/BurntSushi/toml v0.3.1/go.mod"
-	"github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod"
-	"github.com/Max-Sum/base32768 v0.0.0-20230304063302-18e6ce5945fd"
-	"github.com/Max-Sum/base32768 v0.0.0-20230304063302-18e6ce5945fd/go.mod"
-	"github.com/Microsoft/go-winio v0.5.2"
-	"github.com/Microsoft/go-winio v0.5.2/go.mod"
-	"github.com/ProtonMail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8"
-	"github.com/ProtonMail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8/go.mod"
-	"github.com/RoaringBitmap/roaring v0.4.7/go.mod"
-	"github.com/Unknwon/goconfig v1.0.0"
-	"github.com/Unknwon/goconfig v1.0.0/go.mod"
+	"github.com/!azure/azure-sdk-for-go/sdk/azcore v1.4.0"
+	"github.com/!azure/azure-sdk-for-go/sdk/azcore v1.4.0/go.mod"
+	"github.com/!azure/azure-sdk-for-go/sdk/azidentity v1.2.2"
+	"github.com/!azure/azure-sdk-for-go/sdk/azidentity v1.2.2/go.mod"
+	"github.com/!azure/azure-sdk-for-go/sdk/internal v1.2.0"
+	"github.com/!azure/azure-sdk-for-go/sdk/internal v1.2.0/go.mod"
+	"github.com/!azure/azure-sdk-for-go/sdk/storage/azblob v1.0.0"
+	"github.com/!azure/azure-sdk-for-go/sdk/storage/azblob v1.0.0/go.mod"
+	"github.com/!azure/go-ntlmssp v0.0.0-20221128193559-754e69321358"
+	"github.com/!azure/go-ntlmssp v0.0.0-20221128193559-754e69321358/go.mod"
+	"github.com/!azure!a!d/microsoft-authentication-library-for-go v0.9.0"
+	"github.com/!azure!a!d/microsoft-authentication-library-for-go v0.9.0/go.mod"
+	"github.com/!burnt!sushi/toml v0.3.1/go.mod"
+	"github.com/!burnt!sushi/xgb v0.0.0-20160522181843-27f122750802/go.mod"
+	"github.com/!max-!sum/base32768 v0.0.0-20230304063302-18e6ce5945fd"
+	"github.com/!max-!sum/base32768 v0.0.0-20230304063302-18e6ce5945fd/go.mod"
+	"github.com/!microsoft/go-winio v0.5.2"
+	"github.com/!microsoft/go-winio v0.5.2/go.mod"
+	"github.com/!proton!mail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8"
+	"github.com/!proton!mail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8/go.mod"
+	"github.com/!roaring!bitmap/roaring v0.4.7/go.mod"
+	"github.com/!unknwon/goconfig v1.0.0"
+	"github.com/!unknwon/goconfig v1.0.0/go.mod"
 	"github.com/a8m/tree v0.0.0-20230208161321-36ae24ddad15"
 	"github.com/a8m/tree v0.0.0-20230208161321-36ae24ddad15/go.mod"
 	"github.com/aalpar/deheap v0.0.0-20210914013432-0cc84d79dec3"
@@ -886,9 +886,8 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/releases/download/v1.62.2/rclone-v1.62.2.tar.gz -> rclone-v1.62.2.tar.gz
-	${EGO_SUM_SRC_URI}"
-
+SRC_URI="https://github.com/rclone/rclone/tarball/78d0f48b98a27031c3478f1730af9255bed339a6 -> rclone-1.62.2-78d0f48.tar.gz
+https://direct.funtoo.org/bf/65/84/bf6584c847086897389a6c1fbadce0d33804f043ae4e270d2c99c8f792338eac38543f445743f5f1ce29f63f53afe6a09cb971afb2278796c14990e0a778ab5b -> rclone-1.62.2-funtoo-go-bundle-d6b3b0fdd0a5128bd9f886ec4be84474e7f9fd24a5124ed1d4b46fc90d038bd4f74dfaa4c34165274339a565745456e7f5a2add3e10087035a5c695f8e0843e3.tar.gz"
 
 DESCRIPTION="A program to sync files to and from various cloud storage providers"
 HOMEPAGE="https://rclone.org/"
@@ -897,10 +896,8 @@ LICENSE="Apache-2.0 BSD BSD-2 ISC MIT"
 SLOT="0"
 IUSE="+mount"
 
-S="${WORKDIR}/${PN}-v${PV}"
-
-src_unpack() {
-	go-module_src_unpack
+post_src_unpack() {
+	mv ${WORKDIR}/rclone-* "${S}" || die
 }
 
 src_compile() {

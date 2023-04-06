@@ -88,16 +88,14 @@ go-module_set_globals
 
 DESCRIPTION="HTTP(S) benchmarking tool, written in Golang"
 HOMEPAGE="https://github.com/six-ddc/plow"
-SRC_URI="https://api.github.com/repos/six-ddc/plow/tarball/v1.3.1 -> plow-1.3.1.tar.gz
-	${EGO_SUM_SRC_URI}"
+SRC_URI="https://github.com/six-ddc/plow/tarball/343b7510ccfa477d9c0f3d9aeeaa0834e118c44a -> plow-1.3.1-343b751.tar.gz
+https://direct.funtoo.org/4e/a1/03/4ea10372591010ce13d98500fd5748cb86833d5601c9ad1b6cb90157d81b5785943e3f312b80d039b68a46f58d6d9070cc739925810c0ffc925bc0c45f61cac0 -> plow-1.3.1-funtoo-go-bundle-ef98e19609fc167c86d1edeb2d110699ed55edb45c39051c1d86e90461ef98431dc07a1ee6251a95ccafd679f4e63717a9e8980debc3828878738d46357aaa4c.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="*"
 
-src_unpack() {
-	go-module_src_unpack
-	rm -rf ${S}
+post_src_unpack() {
 	mv ${WORKDIR}/six-ddc-plow-* ${S} || die
 }
 

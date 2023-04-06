@@ -507,14 +507,15 @@ EGO_SUM=(
 	"sigs.k8s.io/structured-merge-diff/v4 v4.2.3/go.mod"
 	"sigs.k8s.io/yaml v1.3.0"
 	"sigs.k8s.io/yaml v1.3.0/go.mod"
+
 )
 
 go-module_set_globals
 
 DESCRIPTION="CoreDNS is a DNS server/forwarder, written in Go, that chains plugins"
 HOMEPAGE="https://coredns.io/ https://github.com/coredns/coredns"
-SRC_URI="https://api.github.com/repos/coredns/coredns/tarball/v1.10.1 -> coredns-v1.10.1.tar.gz
-	${EGO_SUM_SRC_URI}"
+SRC_URI="https://github.com/coredns/coredns/tarball/055b2c31a9cf28321734e5f71613ea080d216cd3 -> coredns-1.10.1-055b2c3.tar.gz
+https://direct.funtoo.org/63/40/f9/6340f91ef57dfd49d862581c879d9bad3b8b5af3da61a894bff0063c338d011c5767a2cb087f4edd8a2945890c552c8d91b990d69d8d580a3ee6cbf470b9531c -> coredns-1.10.1-funtoo-go-bundle-ca6f825cb0974696adb56dca9d166120706bcb5626a55535518eff7e33321659f4e8dc9a5a2abc6930e477584d57ade3ef6740631725cca784f57467a499f7cd.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -523,17 +524,7 @@ KEYWORDS="*"
 DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=">=dev-lang/go-1.17"
-
-src_unpack() {
-	go-module_src_unpack
-	GITCOMMIT=$(ls -1 ${WORKDIR}/ | cut -d- -f3)
-	rm -rf ${S}
-	mv ${WORKDIR}/coredns-coredns-* ${S} || die
-}
-
-src_compile() {
-	CGO_ENABLE=0 go build -ldflags="-s -w -X github.com/coredns/coredns/coremain.GitCommit=${GITCOMMIT}" -o "${PN}" || die "compile failed"
-}
+S="${WORKDIR}/coredns-coredns-055b2c3"
 
 src_install() {
 	dobin ${PN}

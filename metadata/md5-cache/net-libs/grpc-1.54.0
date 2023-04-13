@@ -9,7 +9,7 @@ KEYWORDS=*
 LICENSE=Apache-2.0
 RDEPEND==dev-cpp/abseil-cpp-20210324*:= >=dev-libs/re2-2021.04.01:= >=dev-libs/openssl-1.1.1:0=[-bindist(-)] >=dev-libs/protobuf-3.15.8:= dev-libs/xxhash >=net-dns/c-ares-1.15.0:= sys-libs/zlib:=
 RESTRICT=test
-SLOT=0/30.153
-SRC_URI=https://api.github.com/repos/grpc/grpc/tarball/v1.53.0 -> grpc-1.53.0.tar.gz
+SLOT=0/31.154
+SRC_URI=https://api.github.com/repos/grpc/grpc/tarball/v1.54.0 -> grpc-1.54.0.tar.gz
 _eclasses_=cmake	ac7cb516f6a288b6a82bc0649ce49878	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=b6bcf40d7bb91c3b03b5694dcdf5af5b
+_md5_=be66fc59a8a09eef18472b1ec85c5fb2

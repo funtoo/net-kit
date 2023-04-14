@@ -1,20 +1,19 @@
-# Copyright 1999-2019 Gentoo Authors
+# {{ autogen_id }}
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-# eutils: strip-linguas
-inherit eutils toolchain-funcs
+inherit flag-o-matic toolchain-funcs
 
 IUSE="nls dbus ssl +gtk"
 
 DESCRIPTION="A GTK+ Gnutella client"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.xz"
 HOMEPAGE="http://gtk-gnutella.sourceforge.net/"
+SRC_URI="{{ artifacts[0].src_uri }}"
 
 SLOT="0"
-LICENSE="GPL-2"
-KEYWORDS="amd64 ~ppc ~ppc64 x86 ~x86-fbsd"
+LICENSE="CC-BY-SA-4.0 GPL-2"
+KEYWORDS="*"
 
 RDEPEND="
 	sys-libs/binutils-libs:=
@@ -28,9 +27,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 src_prepare() {
-	eapply "${FILESDIR}/${P}-statx.patch"
-
-	strip-linguas -i po
+	filter-flags -flto
 
 	echo "# Gentoo-selected LINGUAS" > po/LINGUAS
 	for ling in ${LINGUAS}; do
@@ -48,41 +45,28 @@ src_configure() {
 	# The build script does not support the equivalent --enable
 	# options so we must construct the configuration by hand.
 
-	local myconf
-
-	if ! use nls; then
-		myconf="${myconf} --disable-nls"
-	fi
-
-	if ! use dbus; then
-		myconf="${myconf} --disable-dbus"
-	fi
-
-	if ! use ssl; then
-		myconf="${myconf} --disable-gnutls"
-	fi
-
-	if use gtk; then
-		myconf="${myconf} --gtk2"
-	else
-		myconf="${myconf} --topless"
-	fi
+	local myconf=(
+		$(usev gtk '--gtk2' '--topless')
+		$(usev !dbus '--disable-dbus' '')
+		$(usev !nls '--disable-nls' '')
+		$(usev !ssl '--disable-gnutls' '')
+	)
 
 	./build.sh \
 		--configure-only \
 		--prefix="/usr" \
-		--cc=$(tc-getCC) \
-		${myconf}
+		--cc="$(tc-getCC)" \
+		${myconf[@]} || die "configure failed"
 }
 
 src_compile() {
-	# Build system is not parallel-safe, bug 500760
+	# Build system is not parallel-safe
 	emake -j1
 }
 
 src_install() {
 	dodir /usr/bin
-	emake INSTALL_PREFIX="${D}" install || die "Install failed"
+	emake INSTALL_PREFIX="${D}" install
 	dodoc AUTHORS ChangeLog README TODO
 
 	# Touch the symbols file into the future to avoid warnings from

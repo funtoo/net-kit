@@ -5,10 +5,10 @@ DESCRIPTION=A GTK+ Gnutella client
 EAPI=7
 HOMEPAGE=http://gtk-gnutella.sourceforge.net/
 IUSE=nls dbus ssl +gtk
-KEYWORDS=amd64 ~ppc ~ppc64 x86 ~x86-fbsd
-LICENSE=GPL-2
+KEYWORDS=*
+LICENSE=CC-BY-SA-4.0 GPL-2
 RDEPEND=sys-libs/binutils-libs:= dev-libs/glib:2 sys-libs/zlib gtk? ( >=x11-libs/gtk+-2.2.1:2 ) dbus? ( >=sys-apps/dbus-0.35.2 ) ssl? ( >=net-libs/gnutls-2.2.5 ) nls? ( >=sys-devel/gettext-0.11.5 )
 SLOT=0
-SRC_URI=mirror://sourceforge/gtk-gnutella/gtk-gnutella-1.1.14.tar.xz
-_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=2267499cfb6fec5a3dcee29b167d2260
+SRC_URI=http://downloads.sourceforge.net//gtk-gnutella/1.2.2/gtk-gnutella-1.2.2.tar.xz -> gtk-gnutella-1.2.2.tar.xz
+_eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	d0939f99dd528dd0c5ec25284877bf5c	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=f05e4be5aa63b0cb5706b4bd0aa48788

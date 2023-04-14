@@ -3,10 +3,11 @@ DEPEND=>=app-arch/rpm2targz-9.0.0.3g dev-util/desktop-file-utils x11-misc/shared
 DESCRIPTION=The Bridge is an application that runs on your computer in the background and seamlessly encrypts and decrypts your mail as it enters and leaves your computer.
 EAPI=7
 HOMEPAGE=https://protonmail.com/bridge/
+IUSE=mysql odbc postgres
 KEYWORDS=amd64
 LICENSE=GPL-3
-RDEPEND=media-libs/libglvnd app-crypt/libsecret dev-qt/qtcore dev-qt/qtdeclarative dev-qt/qtmultimedia dev-qt/qtsvg dev-qt/qtquickcontrols dev-qt/qtquickcontrols2 sys-libs/glibc dev-libs/glib media-fonts/dejavu
+RDEPEND=media-libs/libglvnd app-crypt/libsecret sys-libs/glibc dev-libs/glib media-fonts/dejavu mysql? ( virtual/mysql ) odbc? ( dev-db/libiodbc ) postgres? ( dev-db/postgresql )
 SLOT=0
 SRC_URI=https://proton.me/download/bridge/protonmail-bridge-3.0.21-1.x86_64.rpm -> protonmail-bridge-bin-3.0.21.rpm
 _eclasses_=eutils	6e6c2737b59a4b982de6fb3ecefd87f8	rpm	f52cfa3a435468d86d3b49c357b9cb35	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=f76cc5e4fa742896b9aa64468444f2f6
+_md5_=5335fa6d5dbc4af0394d4eaa8b307e76

@@ -10,5 +10,5 @@ RDEPEND=app-crypt/mit-krb5 pulseaudio? ( media-sound/pulseaudio ) app-i18n/ibus 
 RESTRICT=strip preserve-libs
 SLOT=0
 SRC_URI=https://cdn.zoom.us/prod/5.14.2.2046/zoom_x86_64.pkg.tar.xz -> zoom-5.14.2.2046_x86_64.pkg.tar.xz
-_eclasses_=unpacker	1cae8d330d7e2eb64488d3a858fdee0b	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
+_eclasses_=unpacker	cbd6624f820a4289653f5dcb999bea7a	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
 _md5_=b17bb7d199ef6b135b0d401c774cef6e

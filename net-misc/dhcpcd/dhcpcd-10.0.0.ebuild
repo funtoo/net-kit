@@ -4,7 +4,7 @@ EAPI=7
 
 inherit toolchain-funcs user
 
-SRC_URI="https://roy.marples.name/downloads/dhcpcd/dhcpcd-9.4.1.tar.xz -> dhcpcd-9.4.1.tar.xz"
+SRC_URI="https://github.com/NetworkConfiguration/dhcpcd/tarball/7a97d103c5ca48d27e314260e415d8b3db1c2db7 -> dhcpcd-10.0.0-7a97d10.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="A fully featured, yet light weight RFC2131 compliant DHCP client"
@@ -19,6 +19,12 @@ DEPEND="${COMMON_DEPEND}"
 RDEPEND="
 	${COMMON_DEPEND}
 "
+
+post_src_unpack() {
+	if [ ! -d "${S}" ]; then
+		mv NetworkConfiguration-dhcpcd-* "${S}" || die
+	fi
+}
 
 src_configure() {
 	local myeconfargs=(
@@ -142,3 +148,5 @@ pkg_postinst() {
 		elog "using the dns, you need to install net-dns/bind-tools."
 	fi
 }
+
+# vim:ts=4 sw=4 noet

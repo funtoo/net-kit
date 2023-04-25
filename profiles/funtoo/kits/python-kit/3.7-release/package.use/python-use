@@ -51,7 +51,6 @@ net-im/pyicq-t python_single_target_python2_7
 net-im/spectrum2 python_single_target_python2_7
 net-im/transwhat python_single_target_python2_7
 net-im/turses python_single_target_python2_7
-net-irc/kvirc python_single_target_python2_7
 net-irc/quasselgrep python_single_target_python2_7
 net-irc/redirbot python_single_target_python2_7
 net-libs/ccnet python_single_target_python2_7

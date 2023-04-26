@@ -6,7 +6,7 @@ inherit autotools linux-info
 
 DESCRIPTION="Fortinet compatible VPN client"
 HOMEPAGE="https://github.com/adrienverge/openfortivpn"
-SRC_URI="https://api.github.com/repos/adrienverge/openfortivpn/tarball/refs/tags/v1.20.1 -> openfortivpn-1.20.1.tar.gz"
+SRC_URI="https://api.github.com/repos/adrienverge/openfortivpn/tarball/refs/tags/v1.20.2 -> openfortivpn-1.20.2.tar.gz"
 
 LICENSE="GPL-3-with-openssl-exception openssl"
 SLOT="0"

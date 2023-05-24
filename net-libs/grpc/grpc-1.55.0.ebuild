@@ -6,11 +6,11 @@ inherit cmake
 
 DESCRIPTION="Modern open source high performance RPC framework"
 HOMEPAGE="https://www.grpc.io"
-SRC_URI="https://api.github.com/repos/grpc/grpc/tarball/v1.54.2 -> grpc-1.54.2.tar.gz"
+SRC_URI="https://api.github.com/repos/grpc/grpc/tarball/v1.55.0 -> grpc-1.55.0.tar.gz"
 
 LICENSE="Apache-2.0"
 # format is 0/${CORE_SOVERSION//./}.${CPP_SOVERSION//./} , check top level CMakeLists.txt
-SLOT="0/31.154"
+SLOT="0/32.155"
 KEYWORDS="*"
 IUSE="doc examples test"
 
@@ -40,7 +40,7 @@ RESTRICT="test"
 
 fix_src_dirs() {
 	pushd "${WORKDIR}"
-	mv grpc-grpc-* grpc-1.54.2
+	mv grpc-grpc-* grpc-1.55.0
 	popd
 }
 

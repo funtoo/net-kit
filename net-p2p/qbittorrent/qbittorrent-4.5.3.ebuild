@@ -8,9 +8,8 @@ DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org
 	  https://github.com/qbittorrent"
 
-SRC_URI="https://github.com/qbittorrent/qBittorrent/archive/release-4.6.0alpha1.tar.gz -> qbittorrent-4.6.0alpha1.tar.gz"
+SRC_URI="https://github.com/qbittorrent/qBittorrent/tarball/04bd33e5b3754c7e070a9fa0cb5df294ac57b219 -> qBittorrent-4.5.3-04bd33e.tar.gz"
 KEYWORDS="*"
-S="${WORKDIR}/qBittorrent-release-${PV}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -40,6 +39,10 @@ BDEPEND="dev-qt/linguist-tools:5
 	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
+
+post_src_unpack() {
+	mv ${WORKDIR}/qbittorrent-qBittorrent* "${S}" || die
+}
 
 src_prepare() {
 	MULTIBUILD_VARIANTS=( base )

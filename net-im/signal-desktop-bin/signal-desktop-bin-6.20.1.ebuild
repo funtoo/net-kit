@@ -9,12 +9,13 @@ inherit pax-utils unpacker xdg
 DESCRIPTION="Allows you to send and receive messages of Signal Messenger on your computer"
 HOMEPAGE="https://signal.org/
 	https://github.com/signalapp/Signal-Desktop"
-SRC_URI="https://updates.signal.org/desktop/apt/pool/main/s/signal-desktop/signal-desktop_6.20.0_amd64.deb -> signal-desktop_6.20.0_amd64.deb"
+SRC_URI="https://updates.signal.org/desktop/apt/pool/s/signal-desktop/signal-desktop_6.20.1_amd64.deb -> signal-desktop_6.20.1_amd64.deb"
 
 LICENSE="GPL-3 MIT MIT-with-advertising BSD-1 BSD-2 BSD Apache-2.0 ISC openssl ZLIB APSL-2 icu Artistic-2 LGPL-2.1"
 SLOT="0"
 KEYWORDS="-* amd64"
 IUSE="+sound"
+RESTRICT="splitdebug strip"
 
 RDEPEND="
 	app-accessibility/at-spi2-atk
@@ -77,7 +78,6 @@ QA_PREBUILT="opt/Signal/signal-desktop
 	opt/Signal/resources/app.asar.unpacked/node_modules/sharp/vendor/8.10.5/lib/libvips.so.42
 	opt/Signal/resources/app.asar.unpacked/node_modules/zkgroup/libzkgroup.so"
 
-RESTRICT="splitdebug"
 
 S="${WORKDIR}"
 

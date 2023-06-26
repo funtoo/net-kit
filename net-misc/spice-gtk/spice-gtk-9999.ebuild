@@ -2,20 +2,20 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-
 GCONF_DEBUG="no"
+WANT_AUTOMAKE="1.12"
 VALA_MIN_API_VERSION="0.14"
 VALA_USE_DEPEND="vapigen"
 
-inherit autotools eutils xdg-utils vala readme.gentoo-r1
+inherit autotools eutils git-r3 readme.gentoo-r1 vala xdg-utils
 
 DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and a client GUI"
 HOMEPAGE="https://www.spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-SRC_URI="https://www.spice-space.org/download/gtk/${P}.tar.bz2"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+EGIT_REPO_URI="https://anongit.freedesktop.org/git/spice/spice-gtk.git"
+KEYWORDS=""
 IUSE="dbus gstaudio gstvideo +gtk3 +introspection lz4 mjpeg policykit pulseaudio sasl smartcard static-libs usbredir vala webdav libressl"
 
 REQUIRED_USE="?? ( pulseaudio gstaudio )"
@@ -63,7 +63,7 @@ RDEPEND="
 		>=net-libs/libsoup-2.49.91 )
 "
 DEPEND="${RDEPEND}
-	>=app-emulation/spice-protocol-0.12.14
+	~app-emulation/spice-protocol-9999
 	dev-perl/Text-CSV
 	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1.14
@@ -72,11 +72,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	vala? ( $(vala_depend) )
 "
-
-PATCHES=(
-	"${FILESDIR}"/${PN}-0.34-openssl11.patch
-	"${FILESDIR}"/${P}-libressl.patch
-)
 
 src_prepare() {
 	# bug 558558
@@ -138,7 +133,7 @@ src_compile() {
 src_install() {
 	default
 
-	dodoc AUTHORS ChangeLog NEWS README THANKS TODO
+	dodoc AUTHORS NEWS README
 
 	# Remove .la files if they're not needed
 	use static-libs || prune_libtool_files

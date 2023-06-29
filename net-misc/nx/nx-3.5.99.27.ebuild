@@ -6,7 +6,7 @@ inherit autotools toolchain-funcs
 DESCRIPTION="NX compression technology core libraries"
 HOMEPAGE="https://github.com/ArcticaProject/nx-libs"
 
-SRC_URI="https://github.com/ArcticaProject/nx-libs/archive/3.5.99.26.tar.gz -> nx-3.5.99.26.tar.gz"
+SRC_URI="https://github.com/ArcticaProject/nx-libs/archive/3.5.99.27.tar.gz -> nx-3.5.99.27.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

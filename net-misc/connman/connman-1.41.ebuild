@@ -1,8 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
-inherit autotools systemd
+EAPI=7
+inherit autotools systemd tmpfiles
 
 DESCRIPTION="Provides a daemon for managing internet connections"
 HOMEPAGE="https://01.org/connman"
@@ -10,16 +9,18 @@ SRC_URI="mirror://kernel/linux/network/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 arm ~arm64 ppc ppc64 x86"
+KEYWORDS="*"
 
-IUSE="${IUSE} bluetooth debug doc examples +ethernet iptables l2tp nftables"
+IUSE="${IUSE} bluetooth debug doc examples +ethernet iptables iwd l2tp nftables"
 IUSE="${IUSE} ofono openvpn openconnect pptp policykit tools vpnc +wifi wispr networkmanager"
 
 REQUIRED_USE="|| ( iptables nftables )"
 RDEPEND=">=dev-libs/glib-2.16
 	>=sys-apps/dbus-1.2.24
+	sys-libs/readline:0=
 	iptables? ( >=net-firewall/iptables-1.4.8 )
 	bluetooth? ( net-wireless/bluez )
+	iwd? ( net-wireless/iwd )
 	l2tp? ( net-dialup/xl2tpd )
 	nftables? (
 		>=net-libs/libnftnl-1.0.4:0=
@@ -37,11 +38,6 @@ DEPEND="${RDEPEND}
 	>=sys-kernel/linux-headers-2.6.39
 	virtual/pkgconfig"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-1.33-polkit-configure-check-fix.patch"
-	"${FILESDIR}/${PN}-1.33-resolv-conf-overwrite.patch"
-	"${FILESDIR}/${PN}-1.35-include-ifbridge-before-netinet.patch"
-)
 
 src_prepare() {
 	default
@@ -59,6 +55,7 @@ src_configure() {
 		$(use_enable examples test) \
 		$(use_enable ethernet ethernet builtin) \
 		$(use_enable wifi wifi builtin) \
+		$(use_enable iwd) \
 		$(use_enable bluetooth bluetooth builtin) \
 		$(use_enable l2tp l2tp builtin) \
 		$(use_enable ofono ofono builtin) \
@@ -73,7 +70,6 @@ src_configure() {
 		$(use_enable networkmanager nmcompat) \
 		--with-firewall=$(usex iptables "iptables" "nftables" ) \
 		--disable-iospm \
-		--disable-iwd \
 		--disable-hh2serial-gps
 }
 
@@ -88,4 +84,8 @@ src_install() {
 	keepdir /var/lib/${PN}
 	newinitd "${FILESDIR}"/${PN}.initd2 ${PN}
 	newconfd "${FILESDIR}"/${PN}.confd ${PN}
+}
+
+pkg_postinst() {
+	tmpfiles_process /usr/lib/tmpfiles.d/connman_resolvconf.conf
 }

@@ -9,7 +9,7 @@ inherit desktop gnome2-utils multilib-build pax-utils unpacker xdg-utils
 
 DESCRIPTION="Team collaboration tool"
 HOMEPAGE="http://www.slack.com/"
-SRC_URI="https://downloads.slack-edge.com/releases/linux/4.32.127/prod/x64/slack-desktop-4.32.127-amd64.deb -> slack-desktop-4.32.127-amd64.deb"
+SRC_URI="https://downloads.slack-edge.com/releases/linux/4.33.73/prod/x64/slack-desktop-4.33.73-amd64.deb -> slack-desktop-4.33.73-amd64.deb"
 
 LICENSE="all-rights-reserved"
 SLOT="0"

@@ -10,8 +10,8 @@ inherit autotools eutils gnome3-utils python-single-r1 gnome3
 DESCRIPTION="Dropbox command-line client and Funtoo-optimized installer with GUI setup"
 HOMEPAGE="http://dropbox.com/"
 SRC_URI="https://www.github.com/funtoo/dropbox-python-setup/tarball/1.1 -> dropbox-python-setup-1.1.tar.gz
-	x86? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86-178.4.4811.tar.gz -> dropbox-lnx.x86-178.4.4811.tar.gz )
-	amd64? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86_64-178.4.4811.tar.gz -> dropbox-lnx.x86_64-178.4.4811.tar.gz )
+	x86? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86-179.4.4985.tar.gz -> dropbox-lnx.x86-179.4.4985.tar.gz )
+	amd64? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86_64-179.4.4985.tar.gz -> dropbox-lnx.x86_64-179.4.4985.tar.gz )
 	gnome? ( https://linux.dropbox.com/packages/nautilus-dropbox-2022.12.05.tar.bz2 -> nautilus-dropbox-2022.12.05.tar.bz2 )"
 
 LICENSE="CC-BY-ND-3.0 FTL MIT LGPL-2 openssl dropbox"

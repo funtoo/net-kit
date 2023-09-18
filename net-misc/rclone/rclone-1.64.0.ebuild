@@ -931,7 +931,7 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/tarball/77f7bb08afff911b669a5285c4106932acbe9af9 -> rclone-1.64.0-77f7bb0.tar.gz
+SRC_URI="https://github.com/rclone/rclone/tarball/238a7e83d5dd0f958355bc4c7f9ce08f27606bb6 -> rclone-1.64.0-238a7e8.tar.gz
 https://direct.funtoo.org/07/6b/fa/076bfa8449f2784d7534bd1c215d2f0dd947b3a10c729f6e0487832db958f1dc0d13e7167d1d02a81dd6a58b494ca90505e9bcb3e3ce29be2e256e8625fa5572 -> rclone-1.64.0-funtoo-go-bundle-a2f451eb31306c07a9df8a69781034a4ab23562cf5471835ea6c5feab39c6b431a21b5376e737cabd545d5fd75dd39a20ab938bdc8bd685adaadbaa6032e1bfa.tar.gz"
 
 DESCRIPTION="A program to sync files to and from various cloud storage providers"

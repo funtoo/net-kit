@@ -7,7 +7,7 @@ inherit distutils-r1
 
 DESCRIPTION="A full-featured file system for online data storage"
 HOMEPAGE="https://github.com/s3ql/s3ql"
-SRC_URI="https://github.com/s3ql/s3ql/tarball/3046e99204b8ae27917b984259174545aa01aef0 -> s3ql-4.0.0-3046e99.tar.gz"
+SRC_URI="https://github.com/s3ql/s3ql/tarball/90066388e738b10ffdc6489c2cf34d1197fbb6c6 -> s3ql-4.0.0-9006638.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

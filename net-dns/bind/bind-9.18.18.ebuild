@@ -14,8 +14,7 @@ RRL_PV="${MY_PV}"
 
 DESCRIPTION="Berkeley Internet Name Domain - Name Server"
 HOMEPAGE="https://www.isc.org/software/bind"
-SRC_URI="https://downloads.isc.org/isc/bind9/9.18.18/bind-9.18.18.tar.xz -> bind-9.18.18.tar.xz
-	doc? ( https://distfiles.gentoo.org/distfiles/dyndns-samples.tbz2 -> dyndns-samples.tbz2 )"
+SRC_URI="https://downloads.isc.org/isc/bind9/9.18.18/bind-9.18.18.tar.xz -> bind-9.18.18.tar.xz"
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"
 SLOT="0"
@@ -126,11 +125,6 @@ src_install() {
 
 		docinto contrib
 		dodoc contrib/scripts/nanny.pl
-
-		# some handy-dandy dynamic dns examples
-		pushd "${ED}"/usr/share/doc/${PF} 1>/dev/null || die
-		tar xf "${DISTDIR}"/dyndns-samples.tbz2 || die
-		popd 1>/dev/null || die
 	fi
 
 	insinto /etc/bind

@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="High-level C binding for ØMQ"
 HOMEPAGE="http://czmq.zeromq.org"
-SRC_URI="https://github.com/zeromq/czmq/tarball/4a50c2153586cf510d6cc3fcfbb9f5ea2e02c419 -> czmq-4.2.1-4a50c21.tar.gz"
+SRC_URI="https://github.com/zeromq/czmq/tarball/92897440df667c205289a5dea32769ec67eda14e -> czmq-4.2.1-9289744.tar.gz"
 
 LICENSE="MPL-2.0"
 SLOT="0/4"

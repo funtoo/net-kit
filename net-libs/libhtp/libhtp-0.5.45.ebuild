@@ -6,7 +6,7 @@ inherit autotools multilib-minimal
 
 DESCRIPTION="LibHTP is a security-aware parser for the HTTP protocol and the related bits and pieces. "
 HOMEPAGE="https://github.com/OISF/libhtp"
-SRC_URI="https://github.com/OISF/libhtp/tarball/8bdfe7b9d04e5e948c8fbaa7472e14d884cc00af -> libhtp-0.5.45-8bdfe7b.tar.gz"
+SRC_URI="https://github.com/OISF/libhtp/tarball/dc459289bfe7ab77008f1e7ad36401f0de6d94da -> libhtp-0.5.45-dc45928.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"

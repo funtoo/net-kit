@@ -1,12 +1,11 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
-inherit linux-info prefix systemd versionator
+inherit linux-info prefix
 
-DESCRIPTION='A high-level tool for configuring Netfilter'
-HOMEPAGE="http://www.shorewall.net/"
+DESCRIPTION="A high-level tool for configuring Netfilter"
+HOMEPAGE="https://shorewall.org/"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="doc +init +ipv4 ipv6 lite4 lite6 selinux"
@@ -15,8 +14,8 @@ MY_PV=${PV/_rc/-RC}
 MY_PV=${MY_PV/_beta/-Beta}
 MY_P=${PN}-${MY_PV}
 
-MY_MAJOR_RELEASE_NUMBER=$(get_version_component_range 1-2)
-MY_MAJORMINOR_RELEASE_NUMBER=$(get_version_component_range 1-3)
+MY_MAJOR_RELEASE_NUMBER=$(ver_cut 1-2)
+MY_MAJORMINOR_RELEASE_NUMBER=$(ver_cut 1-3)
 
 # shorewall
 MY_PN_IPV4=Shorewall
@@ -56,34 +55,34 @@ MY_URL_SUFFIX=
 if [[ ${MY_PV} = *-Beta* ]] || [[ ${MY_PV} = *-RC* ]]; then
 	MY_URL_PREFIX='development/'
 
-	_tmp_last_index=$(($(get_last_version_component_index ${MY_PV})+1))
-	_tmp_suffix=$(get_version_component_range ${_tmp_last_index} ${MY_PV})
-	if [[ ${_tmp_suffix} = *Beta* ]] || [[ ${_tmp_suffix} = *RC* ]]; then
-		MY_URL_SUFFIX="-${_tmp_suffix}"
+	if [[ ${MY_PV} = *-Beta* ]] ; then
+		MY_URL_SUFFIX="-Beta${MY_PV##*-Beta}"
+	elif [[ ${MY_PV} = *-RC* ]] ; then
+		MY_URL_SUFFIX="-RC${MY_PV##*-RC}"
 	fi
 
 	# Cleaning up temporary variables
 	unset _tmp_last_index
 	unset _tmp_suffix
 else
-	KEYWORDS="alpha amd64 hppa ppc ppc64 sparc x86"
+	KEYWORDS="~alpha amd64 ~hppa ppc ppc64 sparc x86"
 fi
 
 SRC_URI="
-	http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/shorewall-core-${MY_PV}.tar.bz2
-	ipv4? ( http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/shorewall-${MY_PV}.tar.bz2 )
-	ipv6? ( http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/shorewall6-${MY_PV}.tar.bz2 )
-	lite4? ( http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/shorewall-lite-${MY_PV}.tar.bz2 )
-	lite6? ( http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/shorewall6-lite-${MY_PV}.tar.bz2 )
-	init? ( http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/shorewall-init-${MY_PV}.tar.bz2 )
-	doc? ( http://www.shorewall.net/pub/shorewall/${MY_URL_PREFIX}${MY_MAJOR_RELEASE_NUMBER}/shorewall-${MY_MAJORMINOR_RELEASE_NUMBER}${MY_URL_SUFFIX}/${MY_P_DOCS}.tar.bz2 )
+	https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-core-5.2.8.tar.bz2 -> shorewall-core-5.2.8.tar.bz2
+	ipv4? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-5.2.8.tar.bz2 -> shorewall-5.2.8.tar.bz2 )
+	ipv6? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall6-5.2.8.tar.bz2 -> shorewall6-5.2.8.tar.bz2 )
+	lite4? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-lite-5.2.8.tar.bz2 -> shorewall-lite-5.2.8.tar.bz2 )
+	lite6? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall6-lite-5.2.8.tar.bz2 -> shorewall6-lite-5.2.8.tar.bz2 )
+	init? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-init-5.2.8.tar.bz2 -> shorewall-init-5.2.8.tar.bz2 )
+	doc? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-docs-html-5.2.8.tar.bz2 -> shorewall-docs-html-5.2.8.tar.bz2 )
 "
 
 # - Shorewall6 requires Shorewall
 # - Installing Shorewall-init or just the documentation doesn't make any sense,
 #   that's why we force the user to select at least one "real" Shorewall product
 #
-# See http://shorewall.net/download.htm#Which
+# See https://shorewall.org/download.htm#Which
 REQUIRED_USE="
 	ipv6? ( ipv4 )
 	|| ( ipv4 lite4 lite6 )
@@ -102,12 +101,12 @@ RDEPEND="
 	)
 	ipv6? (
 		>=dev-perl/Socket6-0.230.0
-		>=net-firewall/iptables-1.4.20[ipv6]
-		>=sys-apps/iproute2-3.8.0[ipv6]
+		>=net-firewall/iptables-1.4.20[ipv6(+)]
+		>=sys-apps/iproute2-3.8.0[ipv6(+)]
 	)
 	lite6? (
-		>=net-firewall/iptables-1.4.20[ipv6]
-		>=sys-apps/iproute2-3.8.0[ipv6]
+		>=net-firewall/iptables-1.4.20[ipv6(+)]
+		>=sys-apps/iproute2-3.8.0[ipv6(+)]
 	)
 	init? ( >=sys-apps/coreutils-8.20 )
 	selinux? ( >=sec-policy/selinux-shorewall-2.20161023-r3 )
@@ -116,7 +115,6 @@ RDEPEND="
 	!net-firewall/shorewall-lite
 	!net-firewall/shorewall6-lite
 	!net-firewall/shorewall-init
-	!<sys-apps/systemd-214
 "
 
 S=${WORKDIR}
@@ -159,97 +157,94 @@ src_prepare() {
 	# This allows us to use patches from upstream and keeps epatch_user working
 
 	einfo "Preparing shorewallrc ..."
-	cp "${FILESDIR}"/shorewallrc-r3 "${S}"/shorewallrc.gentoo || die "Copying shorewallrc failed"
-	eprefixify "${S}"/shorewallrc.gentoo
-	sed -i \
-		-e "s|SERVICEDIR=tbs|SERVICEDIR=$(systemd_get_systemunitdir)|" \
-		"${S}"/shorewallrc.gentoo || die "Failed to update shorewallrc"
+	cp "${FILESDIR}"/shorewallrc-r3 "${S}"/shorewallrc.funtoo || die "Copying shorewallrc failed"
+	eprefixify "${S}"/shorewallrc.funtoo
 
 	# shorewall-core
 	mv "${S}"/${MY_P_CORE} "${S}"/${MY_PN_CORE} || die "Failed to move '${S}/${MY_P_CORE}' to '${S}/${MY_PN_CORE}'"
-	ebegin "Applying Gentoo-specific changes to ${MY_P_CORE} ..."
-	ln -s ../shorewallrc.gentoo ${MY_PN_CORE}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
+	ebegin "Applying Funtoo-specific changes to ${MY_P_CORE} ..."
+	ln -s ../shorewallrc.funtoo ${MY_PN_CORE}/shorewallrc.funtoo || die "Failed to symlink shorewallrc.funtoo"
 	eend 0
 
 	pushd "${S}"/${MY_PN_CORE} &>/dev/null || die
-	eapply "${FILESDIR}"/shorewall-core-5.2.1-no-gzipped-manpages.patch
+	eapply "${FILESDIR}"/5.2.8-core-no-gzipped-manpages.patch
 	popd &>/dev/null || die
 
 	# shorewall
 	if use ipv4; then
 		mv "${S}"/${MY_P_IPV4} "${S}"/${MY_PN_IPV4} || die "Failed to move '${S}/${MY_P_IPV4}' to '${S}/${MY_PN_IPV4}'"
-		ebegin "Applying Gentoo-specific changes to ${MY_P_IPV4}"
-		ln -s ../shorewallrc.gentoo ${MY_PN_IPV4}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
-		cp "${FILESDIR}"/shorewall.confd-r1 "${S}"/${MY_PN_IPV4}/default.gentoo || die "Copying shorewall.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall.initd-r3 "${S}"/${MY_PN_IPV4}/init.gentoo.sh || die "Copying shorewall.initd-r2 failed"
-		cp "${FILESDIR}"/shorewall.systemd "${S}"/${MY_PN_IPV4}/gentoo.service || die "Copying shorewall.systemd failed"
+		ebegin "Applying Funtoo-specific changes to ${MY_P_IPV4}"
+		ln -s ../shorewallrc.funtoo ${MY_PN_IPV4}/shorewallrc.funtoo || die "Failed to symlink shorewallrc.funtoo"
+		cp "${FILESDIR}"/shorewall.confd-r1 "${S}"/${MY_PN_IPV4}/default.funtoo || die "Copying shorewall.confd-r1 failed"
+		cp "${FILESDIR}"/shorewall.initd-r3 "${S}"/${MY_PN_IPV4}/init.funtoo.sh || die "Copying shorewall.initd-r2 failed"
+#		cp "${FILESDIR}"/shorewall.systemd "${S}"/${MY_PN_IPV4}.funtoo.service || die "Copying shorewall.systemd failed"
 		eend 0
 
 		pushd "${S}"/${MY_PN_IPV4} &>/dev/null || die
-		eapply "${FILESDIR}"/shorewall-5.2.1-no-gzipped-manpages.patch
+		eapply "${FILESDIR}"/5.2.8-no-gzipped-manpages.patch
 		popd &>/dev/null || die
 	fi
 
 	# shorewall6
 	if use ipv6; then
 		mv "${S}"/${MY_P_IPV6} "${S}"/${MY_PN_IPV6} || die "Failed to move '${S}/${MY_P_IPV6}' to '${S}/${MY_PN_IPV6}'"
-		ebegin "Applying Gentoo-specific changes to ${MY_P_IPV6}"
-		ln -s ../shorewallrc.gentoo ${MY_PN_IPV6}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
-		cp "${FILESDIR}"/shorewall.confd-r1 "${S}"/${MY_PN_IPV6}/default.gentoo || die "Copying shorewall.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall.initd-r3 "${S}"/${MY_PN_IPV6}/init.gentoo.sh || die "Copying shorewall.initd-r2 failed"
-		cp "${FILESDIR}"/shorewall6.systemd "${S}"/${MY_PN_IPV6}/gentoo.service || die "Copying shorewall6.systemd failed"
+		ebegin "Applying Funtoo-specific changes to ${MY_P_IPV6}"
+		ln -s ../shorewallrc.funtoo ${MY_PN_IPV6}/shorewallrc.funtoo || die "Failed to symlink shorewallrc.funtoo"
+		cp "${FILESDIR}"/shorewall.confd-r1 "${S}"/${MY_PN_IPV6}/default.funtoo || die "Copying shorewall.confd-r1 failed"
+		cp "${FILESDIR}"/shorewall.initd-r3 "${S}"/${MY_PN_IPV6}/init.funtoo.sh || die "Copying shorewall.initd-r2 failed"
+#		cp "${FILESDIR}"/shorewall6.systemd "${S}"/${MY_PN_IPV6}.funtoo.service || die "Copying shorewall6.systemd failed"
 		eend 0
 
 		pushd "${S}"/${MY_PN_IPV6} &>/dev/null || die
-		eapply "${FILESDIR}"/shorewall-5.2.1-no-gzipped-manpages.patch
+		eapply "${FILESDIR}"/5.2.8-no-gzipped-manpages.patch
 		popd &>/dev/null || die
 	fi
 
 	# shorewall-lite
 	if use lite4; then
 		mv "${S}"/${MY_P_LITE4} "${S}"/${MY_PN_LITE4} || die "Failed to move '${S}/${MY_P_LITE4}' to '${S}/${MY_PN_LITE4}'"
-		ebegin "Applying Gentoo-specific changes to ${MY_P_LITE4}"
-		ln -s ../shorewallrc.gentoo ${MY_PN_LITE4}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
-		cp "${FILESDIR}"/shorewall-lite.confd-r1 "${S}"/${MY_PN_LITE4}/default.gentoo || die "Copying shorewall-lite.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall-lite.initd-r3 "${S}"/${MY_PN_LITE4}/init.gentoo.sh || die "Copying shorewall-lite.initd-r2 failed"
-		cp "${FILESDIR}"/shorewall-lite.systemd "${S}"/${MY_PN_LITE4}/gentoo.service || die "Copying shorewall-lite.systemd failed"
+		ebegin "Applying Funtoo-specific changes to ${MY_P_LITE4}"
+		ln -s ../shorewallrc.funtoo ${MY_PN_LITE4}/shorewallrc.funtoo || die "Failed to symlink shorewallrc.funtoo"
+		cp "${FILESDIR}"/shorewall-lite.confd-r1 "${S}"/${MY_PN_LITE4}/default.funtoo || die "Copying shorewall-lite.confd-r1 failed"
+		cp "${FILESDIR}"/shorewall-lite.initd-r3 "${S}"/${MY_PN_LITE4}/init.funtoo.sh || die "Copying shorewall-lite.initd-r2 failed"
+#		cp "${FILESDIR}"/shorewall-lite.systemd "${S}"/${MY_PN_LITE4}.funtoo.service || die "Copying shorewall-lite.systemd failed"
 		eend 0
 
 		pushd "${S}"/${MY_PN_LITE4} &>/dev/null || die
-		eapply "${FILESDIR}"/shorewall-lite-5.2.1-no-gzipped-manpages.patch
+		eapply "${FILESDIR}"/5.2.8-lite-no-gzipped-manpages.patch
 		popd &>/dev/null || die
 	fi
 
 	# shorewall6-lite
 	if use lite6; then
 		mv "${S}"/${MY_P_LITE6} "${S}"/${MY_PN_LITE6} || die "Failed to move '${S}/${MY_P_LITE6}' to '${S}/${MY_PN_LITE6}'"
-		ebegin "Applying Gentoo-specific changes to ${MY_P_LITE6}"
-		ln -s ../shorewallrc.gentoo ${MY_PN_LITE6}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
-		cp "${FILESDIR}"/shorewall-lite.confd-r1 "${S}"/${MY_PN_LITE6}/default.gentoo || die "Copying shorewall-lite.confd-r1 failed"
-		cp "${FILESDIR}"/shorewall-lite.initd-r3 "${S}"/${MY_PN_LITE6}/init.gentoo.sh || die "Copying shorewall-lite.initd-r2 failed"
-		cp "${FILESDIR}"/shorewall6-lite.systemd "${S}"/${MY_PN_LITE6}/gentoo.service || die "Copying shorewall6-lite.systemd failed"
+		ebegin "Applying Funtoo-specific changes to ${MY_P_LITE6}"
+		ln -s ../shorewallrc.funtoo ${MY_PN_LITE6}/shorewallrc.funtoo || die "Failed to symlink shorewallrc.funtoo"
+		cp "${FILESDIR}"/shorewall-lite.confd-r1 "${S}"/${MY_PN_LITE6}/default.funtoo || die "Copying shorewall-lite.confd-r1 failed"
+		cp "${FILESDIR}"/shorewall-lite.initd-r3 "${S}"/${MY_PN_LITE6}/init.funtoo.sh || die "Copying shorewall-lite.initd-r2 failed"
+#		cp "${FILESDIR}"/shorewall6-lite.systemd "${S}"/${MY_PN_LITE6}.funtoo.service || die "Copying shorewall6-lite.systemd failed"
 		eend 0
 
 		pushd "${S}"/${MY_PN_LITE6} &>/dev/null || die
-		eapply "${FILESDIR}"/shorewall-lite-5.2.1-no-gzipped-manpages.patch
+		eapply "${FILESDIR}"/5.2.8-lite-no-gzipped-manpages.patch
 		popd &>/dev/null || die
 	fi
 
 	# shorewall-init
 	if use init; then
 		mv "${S}"/${MY_P_INIT} "${S}"/${MY_PN_INIT} || die "Failed to move '${S}/${MY_P_INIT}' to '${S}/${MY_PN_INIT}'"
-		ebegin "Applying Gentoo-specific changes to ${MY_P_INIT}"
-		ln -s ../shorewallrc.gentoo ${MY_PN_INIT}/shorewallrc.gentoo || die "Failed to symlink shorewallrc.gentoo"
-		cp "${FILESDIR}"/shorewall-init.confd "${S}"/${MY_PN_INIT}/default.gentoo || die "Copying shorewall-init.confd failed"
-		cp "${FILESDIR}"/shorewall-init.initd "${S}"/${MY_PN_INIT}/init.gentoo.sh || die "Copying shorewall-init.initd failed"
-		cp "${FILESDIR}"/shorewall-init.systemd "${S}"/${MY_PN_INIT}/gentoo.service || die "Copying shorewall-init.systemd failed"
-		cp "${FILESDIR}"/shorewall-init.readme "${S}"/${MY_PN_INIT}/shorewall-init.README.Gentoo.txt || die "Copying shorewall-init.systemd failed"
+		ebegin "Applying Funtoo-specific changes to ${MY_P_INIT}"
+		ln -s ../shorewallrc.funtoo ${MY_PN_INIT}/shorewallrc.funtoo || die "Failed to symlink shorewallrc.funtoo"
+		cp "${FILESDIR}"/shorewall-init.confd "${S}"/${MY_PN_INIT}/default.funtoo || die "Copying shorewall-init.confd failed"
+		cp "${FILESDIR}"/shorewall-init.initd "${S}"/${MY_PN_INIT}/init.funtoo.sh || die "Copying shorewall-init.initd failed"
+#		cp "${FILESDIR}"/shorewall-init.systemd "${S}"/${MY_PN_INIT}.funtoo.service || die "Copying shorewall-init.systemd failed"
+		cp "${FILESDIR}"/shorewall-init.readme "${S}"/${MY_PN_INIT}/shorewall-init.README.Funtoo.txt || die "Copying shorewall-init.readme failed"
 		eend 0
 
-		eprefixify "${S}"/${MY_PN_INIT}/init.gentoo.sh
+		eprefixify "${S}"/${MY_PN_INIT}/init.funtoo.sh
 
 		pushd "${S}"/${MY_PN_INIT} &>/dev/null || die
-		eapply -p2 "${FILESDIR}"/shorewall-init-01_remove-ipset-functionality-r1.patch
+		eapply -p2 "${FILESDIR}"/5.2.8-init-01_remove-ipset-functionality-r2.patch
 		popd &>/dev/null || die
 	fi
 
@@ -259,6 +254,10 @@ src_prepare() {
 	fi
 
 	eapply_user
+
+	einfo "Replacing obsolescent egrep and fgrep with grep -E and grep -F ..."
+	find -type f -exec sed -i 's/egrep/grep -E/g' {} \;
+	find -type f -exec sed -i 's/fgrep/grep -F/g' {} \;
 }
 
 src_configure() {
@@ -272,13 +271,13 @@ src_compile() {
 src_install() {
 	# shorewall-core
 	einfo "Installing ${MY_P_CORE} ..."
-	DESTDIR="${D%/}" ${MY_PN_CORE}/install.sh shorewallrc.gentoo || die "${MY_PN_CORE}/install.sh failed"
+	DESTDIR="${ED}" ${MY_PN_CORE}/install.sh shorewallrc.funtoo || die "${MY_PN_CORE}/install.sh failed"
 	dodoc "${S}"/${MY_PN_CORE}/changelog.txt "${S}"/${MY_PN_CORE}/releasenotes.txt
 
 	# shorewall
 	if use ipv4; then
 		einfo "Installing ${MY_P_IPV4} ..."
-		DESTDIR="${D%/}" ${MY_PN_IPV4}/install.sh shorewallrc.gentoo || die "${MY_PN_IPV4}/install.sh failed"
+		DESTDIR="${ED}" ${MY_PN_IPV4}/install.sh shorewallrc.funtoo || die "${MY_PN_IPV4}/install.sh failed"
 		keepdir /var/lib/shorewall
 
 		if use doc; then
@@ -289,7 +288,7 @@ src_install() {
 	# shorewall6
 	if use ipv6; then
 		einfo "Installing ${MY_P_IPV6} ..."
-		DESTDIR="${D%/}" ${MY_PN_IPV6}/install.sh shorewallrc.gentoo || die "${MY_PN_IPV6}/install.sh failed"
+		DESTDIR="${ED}" ${MY_PN_IPV6}/install.sh shorewallrc.funtoo || die "${MY_PN_IPV6}/install.sh failed"
 		keepdir /var/lib/shorewall6
 
 		if use doc; then
@@ -300,40 +299,33 @@ src_install() {
 	# shorewall-lite
 	if use lite4; then
 		einfo "Installing ${MY_P_LITE4} ..."
-		DESTDIR="${D%/}" ${MY_PN_LITE4}/install.sh shorewallrc.gentoo || die "${MY_PN_LITE4}/install.sh failed"
+		DESTDIR="${ED}" ${MY_PN_LITE4}/install.sh shorewallrc.funtoo || die "${MY_PN_LITE4}/install.sh failed"
 		keepdir /var/lib/shorewall-lite
 	fi
 
 	# shorewall6-lite
 	if use lite6; then
 		einfo "Installing ${MY_P_LITE6} ..."
-		DESTDIR="${D%/}" ${MY_PN_LITE6}/install.sh shorewallrc.gentoo || die "${MY_PN_LITE6}/install.sh failed"
+		DESTDIR="${ED}" ${MY_PN_LITE6}/install.sh shorewallrc.funtoo || die "${MY_PN_LITE6}/install.sh failed"
 		keepdir /var/lib/shorewall6-lite
 	fi
 
 	# shorewall-init
 	if use init; then
 		einfo "Installing ${MY_P_INIT} ..."
-		DESTDIR="${D%/}" ${MY_PN_INIT}/install.sh shorewallrc.gentoo || die "${MY_PN_INIT}/install.sh failed"
-		dodoc "${S}"/${MY_PN_INIT}/shorewall-init.README.Gentoo.txt
+		DESTDIR="${ED}" ${MY_PN_INIT}/install.sh shorewallrc.funtoo || die "${MY_PN_INIT}/install.sh failed"
+		dodoc "${S}"/${MY_PN_INIT}/shorewall-init.README.Funtoo.txt
 
-		if [[ -f "${D}etc/logrotate.d/shorewall-init" ]]; then
-			# On Gentoo, shorewall-init will not create shorewall-ifupdown.log,
+		if [[ -f "${ED}/etc/logrotate.d/shorewall-init" ]]; then
+			# On Funtoo, shorewall-init will not create shorewall-ifupdown.log,
 			# so we don't need a logrotate configuration file for shorewall-init
-			einfo "Removing unused \"${D}etc/logrotate.d/shorewall-init\" ..."
-			rm -rf "${D}"etc/logrotate.d/shorewall-init || die "Removing \"${D}etc/logrotate.d/shorewall-init\" failed"
+			einfo "Removing unused \"${ED}/etc/logrotate.d/shorewall-init\" ..."
+			rm -rf "${ED}"/etc/logrotate.d/shorewall-init || die "Removing \"${ED}/etc/logrotate.d/shorewall-init\" failed"
 		fi
 
-		if [[ -d "${D}etc/NetworkManager" ]]; then
-			# On Gentoo, we don't support NetworkManager
-			# so we don't need this folder at all
-			einfo "Removing unused \"${D}etc/NetworkManager\" ..."
-			rm -rf "${D}"etc/NetworkManager || die "Removing \"${D}etc/NetworkManager\" failed"
-		fi
-
-		if [[ -f "${D}usr/share/shorewall-init/ifupdown" ]]; then
-			# This script isn't supported on Gentoo
-			rm -rf "${D}"usr/share/shorewall-init/ifupdown || die "Removing \"${D}usr/share/shorewall-init/ifupdown\" failed"
+		if [[ -f "${ED}/usr/share/shorewall-init/ifupdown" ]]; then
+			# This script isn't supported on Funtoo
+			rm -rf "${ED}"/usr/share/shorewall-init/ifupdown || die "Removing \"${ED}/usr/share/shorewall-init/ifupdown\" failed"
 		fi
 	fi
 
@@ -399,7 +391,7 @@ pkg_postinst() {
 			elog "create using ${CATEGORY}/shorewall (with \"ipv4\" and or \"ipv6\" USE flag)."
 			elog ""
 			elog "To read more about ${_PRODUCTS}, please visit"
-			elog "  http://shorewall.net/CompiledPrograms.html"
+			elog "  https://shorewall.org/CompiledPrograms.html"
 			elog ""
 			elog "To activate your shorewall-lite-based firewall on system start, please add ${PRODUCTS} to your default runlevel:"
 			elog ""
@@ -428,13 +420,13 @@ pkg_postinst() {
 
 	local v
 	for v in ${REPLACING_VERSIONS}; do
-		if ! version_is_at_least ${MY_MAJOR_RELEASE_NUMBER} ${v}; then
+		if ! ver_test ${v} -ge ${MY_MAJOR_RELEASE_NUMBER}; then
 			# This is an upgrade
 
 			elog "You are upgrading from a previous major version. It is highly recommended that you read"
 			elog ""
 			elog "  - /usr/share/doc/shorewall*/releasenotes.tx*"
-			elog "  - http://shorewall.net/Shorewall-5.html#idm214"
+			elog "  - https://shorewall.org/Shorewall-5.html#idm214"
 
 			if use ipv4; then
 				elog ""
@@ -466,7 +458,7 @@ pkg_postinst() {
 		elog "before your shorewall-based firewall is ready to start."
 		elog ""
 		elog "To read more about shorewall-init, please visit"
-		elog "  http://www.shorewall.net/Shorewall-init.html"
+		elog "  https://shorewall.org/Shorewall-init.html"
 	fi
 
 	if ! has_version "net-firewall/conntrack-tools"; then

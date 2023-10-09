@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="ZeroMQ core engine in C++, implements ZMTP/3.1"
 HOMEPAGE="http://www.zeromq.org/"
-SRC_URI="https://github.com/zeromq/libzmq/tarball/7824f6762fa526c5bfb0baa23a6839ecf5988e91 -> libzmq-4.3.4-7824f67.tar.gz"
+SRC_URI="https://github.com/zeromq/libzmq/tarball/4d9c8f8ccf4f659e8397cad42f8496551f534597 -> libzmq-4.3.5-4d9c8f8.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0/5"

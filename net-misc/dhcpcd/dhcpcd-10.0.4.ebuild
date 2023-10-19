@@ -4,7 +4,7 @@ EAPI=7
 
 inherit toolchain-funcs user
 
-SRC_URI="https://github.com/NetworkConfiguration/dhcpcd/tarball/0e4a0c7b3e83c14b30731f89359754fa83ee89ac -> dhcpcd-10.0.3-0e4a0c7.tar.gz"
+SRC_URI="https://github.com/NetworkConfiguration/dhcpcd/tarball/d6948b75b186ab20f930725ec11812fc228d998d -> dhcpcd-10.0.4-d6948b7.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="A fully featured, yet light weight RFC2131 compliant DHCP client"

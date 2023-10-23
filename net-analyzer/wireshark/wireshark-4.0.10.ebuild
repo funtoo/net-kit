@@ -10,7 +10,7 @@ inherit fcaps flag-o-matic lua-single python-any-r1 qmake-utils xdg-utils cmake 
 DESCRIPTION="A network protocol analyzer formerly known as ethereal"
 HOMEPAGE="https://www.wireshark.org/"
 
-SRC_URI="https://api.github.com/repos/wireshark/wireshark/tarball/refs/tags/wireshark-4.2.0rc2 -> wireshark-4.2.0rc2.tar.gz"
+SRC_URI="https://github.com/wireshark/wireshark/tarball/f5c7c25a81ebd5e2cd431f9e2d424586c6250812 -> wireshark-4.0.10-f5c7c25.tar.gz"
 KEYWORDS="*"
 S="${WORKDIR}/${P/_/}"
 

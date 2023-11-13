@@ -6,10 +6,8 @@ inherit desktop eutils xdg
 
 DESCRIPTION="Official desktop client for Telegram (binary package)"
 HOMEPAGE="https://desktop.telegram.org"
-SRC_URI="
-	https://github.com/telegramdesktop/tdesktop/archive/v4.9.9.tar.gz -> tdesktop-4.9.9.tar.gz
-	https://github.com/telegramdesktop/tdesktop/releases/download/v4.9.9/tsetup.4.9.9.tar.xz -> tsetup.4.9.9.tar.xz
-"
+SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v4.11.7/tdesktop-4.11.7-full.tar.gz -> tdesktop-4.11.7-full.tar.gz
+https://github.com/telegramdesktop/tdesktop/releases/download/v4.11.7/tsetup.4.11.7.tar.xz -> tsetup.4.11.7.tar.xz"
 
 LICENSE="GPL-3-with-openssl-exception"
 SLOT="0"
@@ -27,6 +25,7 @@ RDEPEND="
 "
 
 S="${WORKDIR}/Telegram"
+SOURCE_DIR="${WORKDIR}/tdesktop-${PV}-full"
 
 src_install() {
 	exeinto /usr/lib/${PN}
@@ -34,14 +33,14 @@ src_install() {
 	newbin "${FILESDIR}"/${PN} "telegram-desktop"
 
 	local icon_size
-	for icon_size in 16 32 48 64 128 256 512; do
+	for icon_size in 16 32 128 256 512; do
 		newicon -s "${icon_size}" \
-			"${WORKDIR}/tdesktop-${PV}/Telegram/Resources/art/icon${icon_size}.png" \
+			"${SOURCE_DIR}/Telegram/Telegram/Images.xcassets/Icon.iconset/icon_${icon_size}x${icon_size}.png" \
 			telegram.png
 	done
 
-    sed -i '/SingleMainWindow=true/d' "${WORKDIR}/tdesktop-${PV}"/lib/xdg/org.telegram.desktop.desktop
-	domenu "${WORKDIR}/tdesktop-${PV}"/lib/xdg/org.telegram.desktop.desktop
+    sed -i '/SingleMainWindow=true/d' "${SOURCE_DIR}"/lib/xdg/org.telegram.desktop.desktop
+	domenu "${SOURCE_DIR}"/lib/xdg/org.telegram.desktop.desktop
 }
 
 pkg_postinst() {

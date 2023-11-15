@@ -19,6 +19,9 @@ DEPEND="${COMMON_DEPEND}"
 RDEPEND="
 	${COMMON_DEPEND}
 "
+PATCHES=(
+        "${FILESDIR}"/dhcpcd-10.0.5-fix-forking.patch
+)
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then

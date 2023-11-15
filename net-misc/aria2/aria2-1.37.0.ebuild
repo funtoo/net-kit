@@ -6,7 +6,7 @@ inherit bash-completion-r1
 
 DESCRIPTION="A download utility with segmented downloading with BitTorrent support"
 HOMEPAGE="https://aria2.github.io/"
-SRC_URI="https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0.tar.xz -> aria2-1.36.0.tar.xz"
+SRC_URI="https://github.com/aria2/aria2/releases/download/release-1.37.0/aria2-1.37.0.tar.xz -> aria2-1.37.0.tar.xz"
 
 LICENSE="GPL-2+-with-openssl-exception"
 KEYWORDS="*"

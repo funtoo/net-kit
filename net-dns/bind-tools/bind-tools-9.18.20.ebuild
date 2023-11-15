@@ -11,7 +11,7 @@ MY_P="${MY_PN}-${MY_PV}"
 
 DESCRIPTION="bind tools: dig, nslookup, host, nsupdate, dnssec-keygen"
 HOMEPAGE="https://www.isc.org/software/bind"
-SRC_URI="https://downloads.isc.org/isc/bind9/9.18.19/bind-9.18.19.tar.xz -> bind-9.18.19.tar.xz"
+SRC_URI="https://downloads.isc.org/isc/bind9/9.18.20/bind-9.18.20.tar.xz -> bind-9.18.20.tar.xz"
 
 LICENSE="Apache-2.0 BSD BSD-2 GPL-2 HPND ISC MPL-2.0"
 SLOT="0"

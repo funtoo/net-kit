@@ -4,7 +4,7 @@ EAPI=7
 
 inherit toolchain-funcs user
 
-SRC_URI="https://github.com/NetworkConfiguration/dhcpcd/tarball/51fe2c025e927221679f8d7054439847966d0d07 -> dhcpcd-10.0.5-51fe2c0.tar.gz"
+SRC_URI="https://github.com/NetworkConfiguration/dhcpcd/tarball/d6948b75b186ab20f930725ec11812fc228d998d -> dhcpcd-10.0.4-d6948b7.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="A fully featured, yet light weight RFC2131 compliant DHCP client"
@@ -19,9 +19,6 @@ DEPEND="${COMMON_DEPEND}"
 RDEPEND="
 	${COMMON_DEPEND}
 "
-PATCHES=(
-        "${FILESDIR}"/dhcpcd-10.0.5-fix-forking.patch
-)
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then

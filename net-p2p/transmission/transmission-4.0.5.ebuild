@@ -6,7 +6,7 @@ inherit cmake user xdg-utils
 
 DESCRIPTION="A fast, easy, and free BitTorrent client"
 HOMEPAGE="https://transmissionbt.com/"
-SRC_URI="https://direct.funtoo.org/d0/df/c2/d0dfc2aaa6a9e427b279f03900c02357df35313abfec43ff0917776deb5f471050f231a38e763fcf186babc5880ffb0a903051d6d87cb718617d7c3ea034f1bd -> transmission-4.0.4-with-submodules.tar.xz"
+SRC_URI="https://direct.funtoo.org/c1/03/74/c103740f2931429ce3a298765d9478e4ae98fb05bfddd087e8fb123fc1171154299592a3ac68ff7229b992e7fec24fe09ffa1bca83114956ed3684089faed9bf -> transmission-4.0.5-with-submodules.tar.xz"
 
 # web/LICENSE is always GPL-2 whereas COPYING allows either GPL-2 or GPL-3 for the rest
 # transmission in licenses/ is for mentioning OpenSSL linking exception

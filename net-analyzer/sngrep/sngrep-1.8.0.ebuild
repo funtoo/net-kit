@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="Ncurses SIP Messages flow viewer"
 HOMEPAGE="https://github.com/irontec/sngrep"
-SRC_URI="https://github.com/irontec/sngrep/tarball/ece9e0df1e518a18390aa6318bfa79ee8103c7c7 -> sngrep-1.7.0-ece9e0d.tar.gz"
+SRC_URI="https://github.com/irontec/sngrep/tarball/f7b36df3b79617892958b67cb4ad9313c6ce72d2 -> sngrep-1.8.0-f7b36df.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"

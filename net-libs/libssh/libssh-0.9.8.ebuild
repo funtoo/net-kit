@@ -6,7 +6,7 @@ inherit cmake-utils
 
 DESCRIPTION="Access a working SSH implementation by means of a library"
 HOMEPAGE="https://www.libssh.org/"
-SRC_URI="https://git.libssh.org/projects/libssh.git/snapshot/libssh-0.9.7.tar.xz -> libssh-0.9.7.tar.xz"
+SRC_URI="https://git.libssh.org/projects/libssh.git/snapshot/libssh-0.9.8.tar.xz -> libssh-0.9.8.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0/4" # subslot = soname major version

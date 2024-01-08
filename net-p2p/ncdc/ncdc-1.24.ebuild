@@ -6,7 +6,7 @@ inherit toolchain-funcs
 
 DESCRIPTION="Lightweight direct connect client with a friendly ncurses interface"
 HOMEPAGE="https://dev.yorhel.nl/ncdc"
-SRC_URI="https://dev.yorhel.nl/download/ncdc-1.23.1.tar.gz -> ncdc-1.23.1.tar.gz"
+SRC_URI="https://dev.yorhel.nl/download/ncdc-1.24.tar.gz -> ncdc-1.24.tar.gz"
 KEYWORDS="*"
 
 LICENSE="MIT"

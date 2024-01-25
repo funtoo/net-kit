@@ -137,8 +137,8 @@ EGO_SUM=(
 	"github.com/client9/misspell v0.3.4/go.mod"
 	"github.com/cloudflare/circl v1.1.0/go.mod"
 	"github.com/cloudflare/circl v1.3.3/go.mod"
-	"github.com/cloudflare/circl v1.3.6"
-	"github.com/cloudflare/circl v1.3.6/go.mod"
+	"github.com/cloudflare/circl v1.3.7"
+	"github.com/cloudflare/circl v1.3.7/go.mod"
 	"github.com/cloudsoda/go-smb2 v0.0.0-20231124195312-f3ec8ae2c891"
 	"github.com/cloudsoda/go-smb2 v0.0.0-20231124195312-f3ec8ae2c891/go.mod"
 	"github.com/cncf/udpa/go v0.0.0-20191209042840-269d4d468f6f/go.mod"
@@ -976,8 +976,8 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/tarball/5859a657eeb6ade1f178e38cca017aedaaf306a1 -> rclone-1.65.1-5859a65.tar.gz
-https://direct.funtoo.org/e0/16/d6/e016d62d2f97cdc4b15d1a2efdb340d8bbd7bc98814a6c05bdab76154776adac440dd9f23d1ed8a49eddcbea784576c572d6ba063a06b1105cd3a371e7bad9df -> rclone-1.65.1-funtoo-go-bundle-509622745915ea3a43fa358298f14b092da9aaf31dc91351c435aec3ebe84f8ac853356a9376319e221ff1444f68d2f20ba0f9e3c576332b52f4e93c17364501.tar.gz"
+SRC_URI="https://github.com/rclone/rclone/tarball/d7c7d0e893d931405d01788273bd0f01ff8ffb96 -> rclone-1.65.2-d7c7d0e.tar.gz
+https://direct.funtoo.org/e6/f1/de/e6f1deef422c10f60f8ef9df513fefcde4d771c34936ef9aad990170df16e84507d600f343a7a349f7f2374688862ce2332bfa7c4661c53400a6607e5f1bc3e3 -> rclone-1.65.2-funtoo-go-bundle-2c15fe16a9e349ebc888d57df153ebb77da7b0a3c2c5595d5a205e7c18084d64a64b7474c9e838ac0c3915bc0b5c422472e8bb6931bf3375dd74036255a839c8.tar.gz"
 
 DESCRIPTION="A program to sync files to and from various cloud storage providers"
 HOMEPAGE="https://rclone.org/"

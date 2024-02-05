@@ -1,27 +1,16 @@
-# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4
-inherit linux-info eutils
+EAPI=7
 
-DESCRIPTION="the low-level library for netfilter related kernel/userspace communication"
+inherit linux-info
+
+DESCRIPTION="The low-level library for netfilter related kernel/userspace communication"
 HOMEPAGE="http://www.netfilter.org/projects/libnfnetlink/"
-PATCH_BLOB=04aef8a4dedf267dd5744afb134ef8046e77f613
-PATCH_FN=${PATCH_BLOB}-musl-fix-includes.patch
-SRC_URI="http://www.netfilter.org/projects/${PN}/files/${P}.tar.bz2
-		 https://git.alpinelinux.org/cgit/aports/plain/main/libnfnetlink/musl-fix-includes.patch -> ${PATCH_FN}"
+SRC_URI="https://www.netfilter.org/pub/libnfnetlink/libnfnetlink-1.0.2.tar.bz2 -> libnfnetlink-1.0.2.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 m68k ~mips ppc ppc64 ~riscv s390 sh sparc x86"
-IUSE="static-libs"
-
-DOCS=( README )
-PATCHES=( "${DISTDIR}/${PATCH_FN}" )
-
-src_prepare() {
-	epatch "${PATCHES[@]}"
-}
+KEYWORDS="*"
 
 pkg_setup() {
 	linux-info_pkg_setup
@@ -43,11 +32,15 @@ pkg_setup() {
 	check_extra_config
 }
 
-src_configure() {
-	econf $(use_enable static-libs static)
+src_unpack() {
+	default
 }
 
 src_install() {
 	default
-	prune_libtool_files
+
+	# No static archives
+	find "${ED}" -name '*.la' -delete || die
 }
+
+# vim: noet ts=4 syn=ebuild

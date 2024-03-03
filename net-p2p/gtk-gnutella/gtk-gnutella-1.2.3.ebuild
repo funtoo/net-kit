@@ -9,7 +9,7 @@ IUSE="nls dbus ssl +gtk"
 
 DESCRIPTION="A GTK+ Gnutella client"
 HOMEPAGE="http://gtk-gnutella.sourceforge.net/"
-SRC_URI="http://downloads.sourceforge.net//gtk-gnutella/1.2.2/gtk-gnutella-1.2.2.tar.xz -> gtk-gnutella-1.2.2.tar.xz"
+SRC_URI="http://downloads.sourceforge.net//gtk-gnutella/1.2.3/gtk-gnutella-1.2.3.tar.xz -> gtk-gnutella-1.2.3.tar.xz"
 
 SLOT="0"
 LICENSE="CC-BY-SA-4.0 GPL-2"

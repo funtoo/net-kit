@@ -1,6 +1,7 @@
 app-admin
 app-benchmarks
 dev-libs
+dev-python
 mail-client
 mail-filter
 mail-mta

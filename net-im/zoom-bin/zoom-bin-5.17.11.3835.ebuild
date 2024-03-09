@@ -8,7 +8,7 @@ MY_PN="${PN/-bin/}"
 
 DESCRIPTION="Video conferencing and web conferencing service"
 HOMEPAGE="https://zoom.us"
-SRC_URI="https://cdn.zoom.us/prod/5.17.10.3512/zoom_x86_64.pkg.tar.xz -> zoom-5.17.10.3512_x86_64.pkg.tar.xz"
+SRC_URI="https://cdn.zoom.us/prod/5.17.11.3835/zoom_x86_64.pkg.tar.xz -> zoom-5.17.11.3835_x86_64.pkg.tar.xz"
 
 LICENSE="ZOOM"
 SLOT="0"

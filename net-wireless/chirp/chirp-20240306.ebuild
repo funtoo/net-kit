@@ -1,15 +1,15 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=(  )
+PYTHON_COMPAT=( python3+ )
 DISTUTILS_SINGLE_IMPL=1
 DISTUTILS_USE_PEP517=setuptools
 
 inherit distutils-r1 xdg
 
-DESCRIPTION="Official git repo for the CHIRP project"
-HOMEPAGE="https://github.com/kk7ds/chirp"
-SRC_URI="https://github.com/kk7ds/chirp/tarball/db2277044456bb9e561835caa8a3ea29dd7eae97 -> chirp-0.4.0-db22770.tar.gz"
+DESCRIPTION="A free, open-source tool for programming your radio."
+HOMEPAGE="https://chirp.danplanet.com/ http://github.com/kk7ds/chirp"
+SRC_URI="https://archive.chirpmyradio.com/chirp_next/next-20240306/chirp-20240306.tar.gz -> chirp-20240306.tar.gz"
 
 RESTRICT="test"
 

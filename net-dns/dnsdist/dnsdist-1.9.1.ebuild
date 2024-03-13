@@ -9,7 +9,7 @@ inherit flag-o-matic lua-single user
 DESCRIPTION="A highly DNS-, DoS- and abuse-aware loadbalancer"
 HOMEPAGE="https://dnsdist.org"
 
-SRC_URI="https://downloads.powerdns.com/releases/dnsdist-1.9.0.tar.bz2 -> dnsdist-1.9.0.tar.bz2"
+SRC_URI="https://downloads.powerdns.com/releases/dnsdist-1.9.1.tar.bz2 -> dnsdist-1.9.1.tar.bz2"
 KEYWORDS="*"
 
 LICENSE="GPL-2"

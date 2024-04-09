@@ -11,7 +11,7 @@ DESCRIPTION="Dropbox command-line client and Funtoo-optimized installer with GUI
 HOMEPAGE="http://dropbox.com/"
 SRC_URI="https://www.github.com/funtoo/dropbox-python-setup/tarball/1.1 -> dropbox-python-setup-1.1.tar.gz
 	x86? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86-196.4.6900.tar.gz -> dropbox-lnx.x86-196.4.6900.tar.gz )
-	amd64? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86_64-197.3.7490.tar.gz -> dropbox-lnx.x86_64-197.3.7490.tar.gz )
+	amd64? ( https://edge.dropboxstatic.com/dbx-releng/client/dropbox-lnx.x86_64-196.4.6900.tar.gz -> dropbox-lnx.x86_64-196.4.6900.tar.gz )
 	gnome? ( https://linux.dropbox.com/packages/nautilus-dropbox-2024.01.22.tar.bz2 -> nautilus-dropbox-2024.01.22.tar.bz2 )"
 
 LICENSE="CC-BY-ND-3.0 FTL MIT LGPL-2 openssl dropbox"

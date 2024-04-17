@@ -2,7 +2,7 @@
 
 EAPI=7
 
-SRC_URI="https://api.github.com/repos/neomutt/neomutt/tarball/20240329 -> neomutt-20240329.tar.gz"
+SRC_URI="https://api.github.com/repos/neomutt/neomutt/tarball/20240416 -> neomutt-20240416.tar.gz"
 KEYWORDS="*"
 
 DESCRIPTION="A small but very powerful text-based mail client"

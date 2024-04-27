@@ -9,7 +9,7 @@ inherit bash-completion-r1 distutils-r1 tmpfiles
 
 DESCRIPTION="Scans log files and bans IPs that show malicious signs"
 HOMEPAGE="https://www.fail2ban.org/"
-SRC_URI="https://api.github.com/repos/fail2ban/fail2ban/tarball/1.0.2 -> fail2ban-1.0.2.tar.gz"
+SRC_URI="https://api.github.com/repos/fail2ban/fail2ban/tarball/1.1.0 -> fail2ban-1.1.0.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"

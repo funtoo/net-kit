@@ -993,6 +993,8 @@ LICENSE="Apache-2.0 BSD BSD-2 ISC MIT"
 SLOT="0"
 IUSE="+mount"
 
+RDEPEND=">=sys-fs/fuse-3"
+
 post_src_unpack() {
 	mv ${WORKDIR}/rclone-* "${S}" || die
 }

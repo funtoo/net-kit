@@ -8,7 +8,7 @@ inherit flag-o-matic lua-single user autotools
 
 DESCRIPTION="The PowerDNS Recursor"
 HOMEPAGE="https://www.powerdns.com/"
-SRC_URI="https://downloads.powerdns.com/releases/pdns-recursor-5.0.4.tar.bz2 -> pdns-recursor-5.0.4.tar.bz2"
+SRC_URI="https://downloads.powerdns.com/releases/pdns-recursor-5.0.5.tar.bz2 -> pdns-recursor-5.0.5.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"

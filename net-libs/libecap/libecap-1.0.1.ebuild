@@ -6,7 +6,8 @@ inherit autotools toolchain-funcs
 
 DESCRIPTION="API for implementing ICAP content analysis and adaptation"
 HOMEPAGE="http://www.e-cap.org"
-SRC_URI="https://www.e-cap.org/archive/libecap-1.0.1.tar.gz -> libecap-1.0.1.tar.gz"
+SRC_URI="https://www.e-cap.org/archive/libecap-1.0.1.tar.gz -> libecap-1.0.1.tar.gz
+"
 
 LICENSE="BSD-2"
 SLOT="1"

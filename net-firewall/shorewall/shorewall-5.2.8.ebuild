@@ -68,14 +68,13 @@ else
 	KEYWORDS="~alpha amd64 ~hppa ppc ppc64 sparc x86"
 fi
 
-SRC_URI="
-	https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-core-5.2.8.tar.bz2 -> shorewall-core-5.2.8.tar.bz2
-	ipv4? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-5.2.8.tar.bz2 -> shorewall-5.2.8.tar.bz2 )
-	ipv6? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall6-5.2.8.tar.bz2 -> shorewall6-5.2.8.tar.bz2 )
-	lite4? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-lite-5.2.8.tar.bz2 -> shorewall-lite-5.2.8.tar.bz2 )
-	lite6? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall6-lite-5.2.8.tar.bz2 -> shorewall6-lite-5.2.8.tar.bz2 )
-	init? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-init-5.2.8.tar.bz2 -> shorewall-init-5.2.8.tar.bz2 )
-	doc? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-docs-html-5.2.8.tar.bz2 -> shorewall-docs-html-5.2.8.tar.bz2 )
+SRC_URI="https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-core-5.2.8.tar.bz2 -> shorewall-core-5.2.8.tar.bz2
+ipv4? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-5.2.8.tar.bz2 -> shorewall-5.2.8.tar.bz2 )
+doc? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-docs-html-5.2.8.tar.bz2 -> shorewall-docs-html-5.2.8.tar.bz2 )
+init? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-init-5.2.8.tar.bz2 -> shorewall-init-5.2.8.tar.bz2 )
+lite4? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall-lite-5.2.8.tar.bz2 -> shorewall-lite-5.2.8.tar.bz2 )
+ipv6? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall6-5.2.8.tar.bz2 -> shorewall6-5.2.8.tar.bz2 )
+lite6? ( https://shorewall.org/pub/shorewall/5.2/shorewall-5.2.8/shorewall6-lite-5.2.8.tar.bz2 -> shorewall6-lite-5.2.8.tar.bz2 )
 "
 
 # - Shorewall6 requires Shorewall

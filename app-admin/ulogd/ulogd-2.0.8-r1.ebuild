@@ -6,7 +6,8 @@ inherit flag-o-matic linux-info readme.gentoo-r1 user
 
 DESCRIPTION="A userspace logging daemon for netfilter/iptables related logging"
 HOMEPAGE="https://netfilter.org/projects/ulogd/index.html"
-SRC_URI="https://www.netfilter.org/pub/ulogd2/ulogd-2.0.8.tar.bz2 -> ulogd-2.0.8.tar.bz2"
+SRC_URI="https://www.netfilter.org/pub/ulogd2/ulogd-2.0.8.tar.bz2 -> ulogd-2.0.8.tar.bz2
+"
 
 LICENSE="GPL-2"
 SLOT="0"

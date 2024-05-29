@@ -6,7 +6,8 @@ inherit autotools linux-info
 
 DESCRIPTION="Programming interface (API) to the in-kernel connection tracking state table"
 HOMEPAGE="https://www.netfilter.org/projects/libnetfilter_conntrack/"
-SRC_URI="https://www.netfilter.org/pub/libnetfilter_conntrack/libnetfilter_conntrack-1.0.9.tar.bz2 -> libnetfilter_conntrack-1.0.9.tar.bz2"
+SRC_URI="https://www.netfilter.org/pub/libnetfilter_conntrack/libnetfilter_conntrack-1.0.9.tar.bz2 -> libnetfilter_conntrack-1.0.9.tar.bz2
+"
 
 LICENSE="GPL-2"
 SLOT="0"

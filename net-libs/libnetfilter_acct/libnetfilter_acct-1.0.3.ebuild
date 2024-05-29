@@ -6,7 +6,8 @@ inherit linux-info
 
 DESCRIPTION="Library providing interface to extended accounting infrastructure"
 HOMEPAGE="https://netfilter.org/projects/libnetfilter_acct/"
-SRC_URI="https://www.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.3.tar.bz2 -> libnetfilter_acct-1.0.3.tar.bz2"
+SRC_URI="https://www.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.3.tar.bz2 -> libnetfilter_acct-1.0.3.tar.bz2
+"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

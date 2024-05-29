@@ -6,7 +6,8 @@ inherit linux-info
 
 DESCRIPTION="Interface to packets that have been logged by the kernel packet filter"
 HOMEPAGE="https://www.netfilter.org/projects/libnetfilter_log/"
-SRC_URI="https://www.netfilter.org/pub/libnetfilter_log/libnetfilter_log-1.0.2.tar.bz2 -> libnetfilter_log-1.0.2.tar.bz2"
+SRC_URI="https://www.netfilter.org/pub/libnetfilter_log/libnetfilter_log-1.0.2.tar.bz2 -> libnetfilter_log-1.0.2.tar.bz2
+"
 
 LICENSE="GPL-2"
 SLOT="0"

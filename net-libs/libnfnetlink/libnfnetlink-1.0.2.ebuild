@@ -6,7 +6,8 @@ inherit linux-info
 
 DESCRIPTION="The low-level library for netfilter related kernel/userspace communication"
 HOMEPAGE="http://www.netfilter.org/projects/libnfnetlink/"
-SRC_URI="https://www.netfilter.org/pub/libnfnetlink/libnfnetlink-1.0.2.tar.bz2 -> libnfnetlink-1.0.2.tar.bz2"
+SRC_URI="https://www.netfilter.org/pub/libnfnetlink/libnfnetlink-1.0.2.tar.bz2 -> libnfnetlink-1.0.2.tar.bz2
+"
 
 LICENSE="GPL-2"
 SLOT="0"

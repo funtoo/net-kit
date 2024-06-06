@@ -122,8 +122,8 @@ EGO_SUM=(
 	"github.com/coredns/coredns v1.11.3/go.mod"
 	"github.com/coreos/etcd v3.3.10+incompatible/go.mod"
 	"github.com/coreos/go-etcd v2.0.0+incompatible/go.mod"
-	"github.com/coreos/go-oidc v2.2.1+incompatible"
-	"github.com/coreos/go-oidc v2.2.1+incompatible/go.mod"
+	"github.com/coreos/go-oidc/v3 v3.10.0"
+	"github.com/coreos/go-oidc/v3 v3.10.0/go.mod"
 	"github.com/coreos/go-semver v0.2.0/go.mod"
 	"github.com/coreos/go-semver v0.3.1"
 	"github.com/coreos/go-semver v0.3.1/go.mod"
@@ -185,6 +185,8 @@ EGO_SUM=(
 	"github.com/go-asn1-ber/asn1-ber v1.5.5/go.mod"
 	"github.com/go-asn1-ber/asn1-ber v1.5.7"
 	"github.com/go-asn1-ber/asn1-ber v1.5.7/go.mod"
+	"github.com/go-jose/go-jose/v4 v4.0.1"
+	"github.com/go-jose/go-jose/v4 v4.0.1/go.mod"
 	"github.com/go-kit/kit v0.8.0/go.mod"
 	"github.com/go-kit/kit v0.9.0/go.mod"
 	"github.com/go-ldap/ldap/v3 v3.4.8"
@@ -565,8 +567,6 @@ EGO_SUM=(
 	"github.com/posener/complete v1.2.3/go.mod"
 	"github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55"
 	"github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55/go.mod"
-	"github.com/pquerna/cachecontrol v0.2.0"
-	"github.com/pquerna/cachecontrol v0.2.0/go.mod"
 	"github.com/prometheus/client_golang v0.9.1/go.mod"
 	"github.com/prometheus/client_golang v0.9.2/go.mod"
 	"github.com/prometheus/client_golang v1.0.0/go.mod"
@@ -935,8 +935,6 @@ EGO_SUM=(
 	"gopkg.in/ini.v1 v1.42.0/go.mod"
 	"gopkg.in/ini.v1 v1.67.0"
 	"gopkg.in/ini.v1 v1.67.0/go.mod"
-	"gopkg.in/square/go-jose.v2 v2.6.0"
-	"gopkg.in/square/go-jose.v2 v2.6.0/go.mod"
 	"gopkg.in/urfave/cli.v1 v1.20.0/go.mod"
 	"gopkg.in/yaml.v2 v2.2.1/go.mod"
 	"gopkg.in/yaml.v2 v2.2.2/go.mod"
@@ -958,8 +956,8 @@ EGO_SKIP_TIDY=1
 DESCRIPTION="An Amazon S3 compatible object storage server"
 HOMEPAGE="https://min.io/ https://github.com/minio/minio"
 SRC_URI="
-https://api.github.com/repos/minio/minio/tarball/RELEASE.2024-06-04T19-20-08Z -> minio-RELEASE.2024-06-04T19-20-08Z.tar.gz
-https://direct.funtoo.org/ea/d0/c8/ead0c8c88bdfdf3d7b4bb30d6259d00754d545e65b18cefd71132cb02929efe300befe48e2b72eb3c117f2bb5e3cc3c4622bd858c46155be9fa5d3c755949666 -> minio-2024.06.04.19.20.08-funtoo-go-bundle-6de7acb3e2d2c2e7ab600dbe990bf387edcf148a35eac5be3bdffac9af906699045f1519c596cd06b751b4bd61c194de536e067f921e97f21211d65dca1b94b0.tar.gz"
+https://api.github.com/repos/minio/minio/tarball/RELEASE.2024-06-06T09-36-42Z -> minio-RELEASE.2024-06-06T09-36-42Z.tar.gz
+https://direct.funtoo.org/1b/a6/47/1ba6475eae6543983584b2e99a53cc260a54ec7301dbc09b0436e241312bbfdfac072a3bec6382ab008881d5ec8e8155cbdc3a825410afdc76816332d14ae287 -> minio-2024.06.06.09.36.42-funtoo-go-bundle-b401035901033b2057c887f11f0ac7832ef237d56d4ab49a2dc15801e47fb68cea0940fe671d452872c7ff531d6258aef8c4a9e30eabdc413429bc8bf114d88b.tar.gz"
 
 MY_PV="$(ver_cut 1-3)T$(ver_cut 4-7)Z"
 MY_PV=${MY_PV//./-}

@@ -7,7 +7,7 @@ inherit desktop eutils unpacker pax-utils xdg
 
 DESCRIPTION="All-in-one voice and text chat for gamers"
 HOMEPAGE="https://discordapp.com"
-SRC_URI="https://dl-canary.discordapp.net/apps/linux/0.0.420/discord-canary-0.0.420.deb -> discord-canary-0.0.420.deb"
+SRC_URI="https://dl-canary.discordapp.net/apps/linux/0.0.423/discord-canary-0.0.423.deb -> discord-canary-0.0.423.deb"
 RESTRICT="bindist"
 LICENSE="all-rights-reserved"
 SLOT="0"

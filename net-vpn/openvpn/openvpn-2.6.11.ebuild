@@ -6,10 +6,10 @@ inherit autotools flag-o-matic user linux-info tmpfiles
 
 DESCRIPTION="Robust and highly flexible tunneling application compatible with many OSes"
 
-SRC_URI="https://github.com/OpenVPN/openvpn/tarball/e44782135b4fef7680b6d5937524369103de5275 -> openvpn-2.6.10-e447821.tar.gz"
+SRC_URI="https://github.com/OpenVPN/openvpn/tarball/defed94fc9608370d706e16b752f1447f88c3883 -> openvpn-2.6.11-defed94.tar.gz"
 HOMEPAGE="https://openvpn.net/"
 
-S="${WORKDIR}/OpenVPN-openvpn-e447821"
+S="${WORKDIR}/OpenVPN-openvpn-defed94"
 
 LICENSE="GPL-2"
 SLOT="0"

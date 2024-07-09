@@ -15,7 +15,7 @@ S="${WORKDIR}/${P/_/-}"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+caps +cmdmon debug doc html libtomcrypt +nettle nss +ntp +nts +phc pps +readline +refclock +rtc samba +seccomp +sechash selinux"
+IUSE="+caps +cmdmon debug doc html libedit libtomcrypt +nettle nss +ntp +nts +phc pps +readline +refclock +rtc samba +seccomp +sechash selinux"
 # nettle > nss > libtomcrypt in configure
 REQUIRED_USE="
 	html? ( doc )
@@ -60,7 +60,7 @@ S="${WORKDIR}/mlichvar-chrony-120dfb8"
 pkg_setup() {
 	if use caps; then
 		# ensure the ntp user and group exist
-		if ! egetent group ntp; then
+		if ! egetent group ntp > /dev/null; then
 			enewgroup ntp > /dev/null
 		fi
 		if ! egetent passwd ntp > /dev/null; then

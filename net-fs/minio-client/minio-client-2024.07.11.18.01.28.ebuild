@@ -380,8 +380,8 @@ EGO_SKIP_TIDY=1
 DESCRIPTION="Fast tool to manage MinIO clusters"
 HOMEPAGE="https://min.io/ https://github.com/minio/mc"
 SRC_URI="
-https://api.github.com/repos/minio/mc/tarball/RELEASE.2024-07-08T20-59-24Z -> minio-client-RELEASE.2024-07-08T20-59-24Z.tar.gz
-https://direct.funtoo.org/dd/aa/0b/ddaa0b18c32fe9b142ffad0396bf7b678de3de0e30f8015f605fe509801f0a0872709370b6d768048acf42dda2dd3f31fd6efba7de5edaee63def5103f3ec223 -> minio-client-2024.07.08.20.59.24-funtoo-go-bundle-06fa4631d8116bddf03ebda28536928547a95da503a38cec4086dee1b6e38ebe70a51307aac43fd28930f74a3f87ceb2fbcff034a183e03b882ac0b910576463.tar.gz"
+https://api.github.com/repos/minio/mc/tarball/RELEASE.2024-07-11T18-01-28Z -> minio-client-RELEASE.2024-07-11T18-01-28Z.tar.gz
+https://direct.funtoo.org/8f/c3/df/8fc3dfbbccca30dd644c3bdaee37da46e6c98a4fa33e018396d1f5b61abd1d3dbc0528e9d102b94083973d3720040850bafe0cd1b2c11e78aa46eb0ea0cba9ef -> minio-client-2024.07.11.18.01.28-funtoo-go-bundle-06fa4631d8116bddf03ebda28536928547a95da503a38cec4086dee1b6e38ebe70a51307aac43fd28930f74a3f87ceb2fbcff034a183e03b882ac0b910576463.tar.gz"
 
 MY_PV="$(ver_cut 1-3)T$(ver_cut 4-7)Z"
 MY_PV=${MY_PV//./-}

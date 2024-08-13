@@ -28,7 +28,7 @@ def get_latest_version(hub):
 
 		if rtt[2].startswith("v") and not rtt[2].endswith("^{}"):
 			v = generic.parse(rtt[2])
-			if v.is_prerelease or isinstance(v, version.LegacyVersion):
+			if v.is_prerelease or v.__class__.__name__ == "LegacyVersion":
 				continue
 			tags.append(v)
 

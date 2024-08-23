@@ -12,7 +12,6 @@ def get_release(releases_data):
 
 async def generate(hub, **pkginfo):
 	urlamd64 = await hub.pkgtools.fetch.get_url_from_redirect("https://www.dropbox.com/download?plat=lnx.x86_64")
-	urlx86 = await hub.pkgtools.fetch.get_url_from_redirect("https://www.dropbox.com/download?plat=lnx.x86")
 	urlnaut = "https://linux.dropbox.com/packages/"
 	repo_data = await hub.pkgtools.fetch.get_page(urlnaut)
 	repo_soup = BeautifulSoup(repo_data, "html.parser")
@@ -32,15 +31,13 @@ async def generate(hub, **pkginfo):
 		python_compat="python3+",
 		github_repo=github_repo,
 		github_user=github_user,
-		artifacts=[
-			hub.pkgtools.ebuild.Artifact(url=urlamd64),
-			hub.pkgtools.ebuild.Artifact(url=urlx86),
-			hub.pkgtools.ebuild.Artifact(url=(urlnaut + naut_filename)),
-			hub.pkgtools.ebuild.Artifact(
+		artifacts={ 'amd64' : hub.pkgtools.ebuild.Artifact(url=urlamd64),
+			'gnome' : hub.pkgtools.ebuild.Artifact(url=(urlnaut + naut_filename)),
+			'global' : hub.pkgtools.ebuild.Artifact(
 				url=f"https://www.github.com/{github_user}/{github_repo}/tarball/{github_tag}",
 				final_name=f"{github_repo}-{github_tag}.tar.gz",
 			),
-		],
+		},
 	)
 	ebuild.push()
 

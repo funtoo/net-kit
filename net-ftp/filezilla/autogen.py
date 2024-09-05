@@ -21,6 +21,11 @@ async def generate(hub, **pkginfo):
     ebuild = hub.pkgtools.ebuild.BreezyBuild(
         **pkginfo,
         version=version,
-        artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=final_name)]
+        artifacts=[hub.pkgtools.ebuild.Artifact(
+            url=url, 
+            # Filezilla's download has become fascist and doesn't like our default user-agent:
+            extra_http_headers={"User-Agent" : "Wget/1.24.5"},
+            final_name=final_name)
+        ]
     )
     ebuild.push()

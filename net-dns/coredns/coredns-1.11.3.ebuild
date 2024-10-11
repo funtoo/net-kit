@@ -21,8 +21,10 @@ BDEPEND=">=dev-lang/go-1.21"
 S="${WORKDIR}/coredns-coredns-a7ed346"
 
 src_compile() {
-	FORCE_HOST_GO=yes
-	emake
+	CGO_ENABLED=0 GOTOOLCHAIN=local \
+	go build -v \
+	-ldflags="-s -w -X github.com/coredns/coredns/coremain.GitCommit=a7ed346" \
+	-o coredns
 }
 
 src_install() {

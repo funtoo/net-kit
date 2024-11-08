@@ -13,8 +13,6 @@ SLOT="0"
 KEYWORDS="*"
 IUSE=""
 
-S="${WORKDIR}/${P}"
-
 DOCS=( Changelog README )
 
 pkg_setup() {
@@ -23,11 +21,10 @@ pkg_setup() {
 
 src_prepare() {
 	default
-
-	# I don't feel like making the Makefile portable
-	[[ ${CHOST} == *-darwin* ]] \
-		&& cp "${FILESDIR}"/Makefile.Darwin.in Makefile.in
-
+	#sed -i -e 's:^\([a-z]*\)dir.*:\1dir = $(DESTDIR)/@\1dir@:g' ${S}/Makefile.in || die
+	sed -i \
+		-e 's:^libdir.*:libdir = $(DESTDIR)/@libdir@:g' \
+		-e 's:^mandir.*:mandir = $(DESTDIR)/@mandir@:g' ${S}/Makefile.in || die
 	eautoreconf
 }
 
@@ -50,4 +47,5 @@ src_configure() {
 
 src_install() {
 	addpredict /usr/share/man/man1/dotlockfile.1
+	default
 }

@@ -281,8 +281,8 @@ EGO_SUM=(
 	"github.com/gofrs/flock v0.8.1/go.mod"
 	"github.com/gogo/protobuf v1.3.2"
 	"github.com/gogo/protobuf v1.3.2/go.mod"
-	"github.com/golang-jwt/jwt/v4 v4.5.0"
-	"github.com/golang-jwt/jwt/v4 v4.5.0/go.mod"
+	"github.com/golang-jwt/jwt/v4 v4.5.1"
+	"github.com/golang-jwt/jwt/v4 v4.5.1/go.mod"
 	"github.com/golang-jwt/jwt/v5 v5.2.1"
 	"github.com/golang-jwt/jwt/v5 v5.2.1/go.mod"
 	"github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod"
@@ -525,8 +525,8 @@ EGO_SUM=(
 	"github.com/quic-go/quic-go v0.40.1/go.mod"
 	"github.com/rasky/go-xdr v0.0.0-20170124162913-1a41d1a06c93"
 	"github.com/rasky/go-xdr v0.0.0-20170124162913-1a41d1a06c93/go.mod"
-	"github.com/rclone/gofakes3 v0.0.3-0.20240807151802-e80146f8de87"
-	"github.com/rclone/gofakes3 v0.0.3-0.20240807151802-e80146f8de87/go.mod"
+	"github.com/rclone/gofakes3 v0.0.3"
+	"github.com/rclone/gofakes3 v0.0.3/go.mod"
 	"github.com/relvacode/iso8601 v1.3.0"
 	"github.com/relvacode/iso8601 v1.3.0/go.mod"
 	"github.com/rfjakob/eme v1.1.2"
@@ -1066,8 +1066,8 @@ EGO_SUM=(
 go-module_set_globals
 
 KEYWORDS="*"
-SRC_URI="https://github.com/rclone/rclone/tarball/e10e196bd1b430aa6e0eb4c09ecc98a3f09d619b -> rclone-1.68.1-e10e196.tar.gz
-https://direct.funtoo.org/cf/ac/b2/cfacb2876fb6060017a4e380f978212c8832db3118d00d7239f5f0fc5af7b09c6b9e24139603d714fc3cac3b7f0e8f04c0c2e695969e9f510d21b934d00334fb -> rclone-1.68.1-funtoo-go-bundle-91192a9bfd9a96c9c4784c235292df9886005b9b08f6101da1418ceded1ac0414ca1573c9d092e5d424c2c8804250f57f2e4c99cbfb241f7fba0e05abad9028c.tar.gz"
+SRC_URI="https://github.com/rclone/rclone/tarball/86b02e1b9075176a341296c8c729693386f56ede -> rclone-1.68.2-86b02e1.tar.gz
+https://direct.funtoo.org/38/80/84/388084b7cf8dac9cac20fc9f408c7806ed7ad869dd9acc31b1661cb2a2c41acb1fed67f81b9face1ee096ad711d5fa80a7af033237607c17f64bb5bc6a372c84 -> rclone-1.68.2-funtoo-go-bundle-afb4b8243ad93b24ec20fdabeddd5637a7989bdc9d7d0b8ab34e34ce87d065808f8c68a062b88435ff9e95833a2291892b13b83c476197c918dbd55c03b3dee6.tar.gz"
 
 DESCRIPTION="A program to sync files to and from various cloud storage providers"
 HOMEPAGE="https://rclone.org/"

@@ -8,8 +8,8 @@ go-module_set_globals
 
 DESCRIPTION="CoreDNS is a DNS server that chains plugins"
 HOMEPAGE="https://coredns.io/ https://github.com/coredns/coredns"
-SRC_URI="https://github.com/coredns/coredns/tarball/6e11ebddfc13bfca683fcbcae72cc4af6de47dd2 -> coredns-1.11.4-6e11ebd.tar.gz
-https://direct.funtoo.org/3f/22/01/3f220181796ce8b681fb15fd2250932ce80d37b85695f0a015086e76cc3ee8c8eaa210dba1db15516c916f898e11abf9b9318437b2e36dfe43d59d28745dee4a -> coredns-1.11.4-funtoo-go-bundle-7b0dd11379a9e0dd3257d978090051e6412722a2267933d88ce1b00e9e57995099eb0320432e37c97f9ac02a527d7823fbecdff62acbb157babd1627c902ae63.tar.gz"
+SRC_URI="https://github.com/coredns/coredns/tarball/51e11f166ef6c247a78e9e15468647c593b79b9f -> coredns-1.12.0-51e11f1.tar.gz
+https://direct.funtoo.org/30/88/bf/3088bf18dcbbb7dc667042154ab4591e54e837afb78c4edf26b2952b883d5d9bd2e847aabf3361d65c2a5b8cbc4ca1be92ba197024b74cb561ba0a667267f900 -> coredns-1.12.0-funtoo-go-bundle-22a5c9bf6b1fa7fdf6ba493fa57174e1e403ca921d22ab958cd55e8512c5b609c4240c7d98163372f56de57d52c133f43d0f7e2a79022b5f9a3a161e20405776.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -18,12 +18,12 @@ KEYWORDS="*"
 DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=">=dev-lang/go-1.21"
-S="${WORKDIR}/coredns-coredns-6e11ebd"
+S="${WORKDIR}/coredns-coredns-51e11f1"
 
 src_compile() {
 	CGO_ENABLED=0 GOTOOLCHAIN=local \
 	go build -v \
-	-ldflags="-s -w -X github.com/coredns/coredns/coremain.GitCommit=6e11ebd" \
+	-ldflags="-s -w -X github.com/coredns/coredns/coremain.GitCommit=51e11f1" \
 	-o coredns
 }
 
